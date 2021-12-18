@@ -1,0 +1,4220 @@
+0
+00:00:00,000 --> 00:00:02,440
+[MUSIC PLAYING]
+
+1
+00:00:02,440 --> 00:00:17,707
+
+
+2
+00:00:17,707 --> 00:00:18,540
+BRYAN YU: All right.
+
+3
+00:00:18,540 --> 00:00:21,750
+Welcome back, everyone, to Web Programming with Python and JavaScript.
+
+4
+00:00:21,750 --> 00:00:26,340
+So last time, we took a look at two languages, HTML and CSS, both of which
+
+5
+00:00:26,340 --> 00:00:28,090
+can be used to design web pages.
+
+6
+00:00:28,090 --> 00:00:31,440
+HTML, we used in order to describe the structure of web pages,
+
+7
+00:00:31,440 --> 00:00:34,500
+to decide what content we want in the layout of the page,
+
+8
+00:00:34,500 --> 00:00:36,802
+and then CSS, we used to describe the style
+
+9
+00:00:36,802 --> 00:00:39,260
+of the page, what color we wanted things, how much space we
+
+10
+00:00:39,260 --> 00:00:40,847
+wanted to run things as well.
+
+11
+00:00:40,847 --> 00:00:42,930
+Today, we're going to turn our attention to a tool
+
+12
+00:00:42,930 --> 00:00:46,170
+that we can use as we begin to develop these web applications,
+
+13
+00:00:46,170 --> 00:00:49,310
+and in particular, we're going to be looking at a tool called Git;
+
+14
+00:00:49,310 --> 00:00:53,040
+and what Git is is it is a version control tool, not specific to web
+
+15
+00:00:53,040 --> 00:00:54,960
+programs necessarily, but that we're going
+
+16
+00:00:54,960 --> 00:00:58,380
+to use as we begin to develop bigger and more sophisticated
+
+17
+00:00:58,380 --> 00:01:01,330
+web applications over the course of this term.
+
+18
+00:01:01,330 --> 00:01:03,420
+So what is Git going to enable us to do?
+
+19
+00:01:03,420 --> 00:01:05,379
+Well, it's going to do a couple of things.
+
+20
+00:01:05,379 --> 00:01:08,310
+First and foremost, what Git is; it is a command line tool
+
+21
+00:01:08,310 --> 00:01:12,600
+that's going to allow us to, first, keep track of changes that we make to code.
+
+22
+00:01:12,600 --> 00:01:14,520
+So once upon a time, and the first time I
+
+23
+00:01:14,520 --> 00:01:16,380
+was starting to develop web applications,
+
+24
+00:01:16,380 --> 00:01:19,620
+I remember working on a file, and then when I wanted to make changes,
+
+25
+00:01:19,620 --> 00:01:23,010
+I might have wanted to save the old version, so I would duplicate the file
+
+26
+00:01:23,010 --> 00:01:26,098
+and then just make changes to the duplicate, but this quickly gets messy.
+
+27
+00:01:26,098 --> 00:01:28,140
+Especially if you have lots of different versions
+
+28
+00:01:28,140 --> 00:01:31,050
+of your code in various different stages, keeping track of them
+
+29
+00:01:31,050 --> 00:01:32,470
+just starts to become a nightmare.
+
+30
+00:01:32,470 --> 00:01:35,528
+So what Git is going to enable us to do is to keep track of changes
+
+31
+00:01:35,528 --> 00:01:36,570
+that we make to our code.
+
+32
+00:01:36,570 --> 00:01:40,530
+So we might create a file initially, save that version of it, but over time,
+
+33
+00:01:40,530 --> 00:01:43,470
+as we make changes, add to it, remove things from it,
+
+34
+00:01:43,470 --> 00:01:47,040
+we can save snapshots, so to speak, of various different parts
+
+35
+00:01:47,040 --> 00:01:49,500
+of our code at different points in time, such
+
+36
+00:01:49,500 --> 00:01:52,500
+that we can quickly and easily reference all of those changes
+
+37
+00:01:52,500 --> 00:01:54,850
+that we've made to that code.
+
+38
+00:01:54,850 --> 00:01:56,790
+Additionally, Git is going to make it easy
+
+39
+00:01:56,790 --> 00:01:59,550
+for us to synchronize code between different people.
+
+40
+00:01:59,550 --> 00:02:01,560
+In larger scale web applications, it's rarely
+
+41
+00:02:01,560 --> 00:02:04,350
+just one person who's working on the entire application.
+
+42
+00:02:04,350 --> 00:02:07,500
+Usually, you're working with a co-worker or multiple co-workers,
+
+43
+00:02:07,500 --> 00:02:10,289
+all in the same application, and all at the same time.
+
+44
+00:02:10,289 --> 00:02:12,900
+And one definitely tricky part of this process
+
+45
+00:02:12,900 --> 00:02:16,150
+is figuring out how to synchronize your work between different people.
+
+46
+00:02:16,150 --> 00:02:18,630
+If I make a change on my part of the web application,
+
+47
+00:02:18,630 --> 00:02:21,930
+I want to make sure that my colleagues are also able to see those changes
+
+48
+00:02:21,930 --> 00:02:24,267
+and get access to the latest changes that I've made.
+
+49
+00:02:24,267 --> 00:02:26,850
+And then I want to be able to get access to the latest changes
+
+50
+00:02:26,850 --> 00:02:28,808
+that the people I'm working with have made too.
+
+51
+00:02:28,808 --> 00:02:31,380
+So we need some way to keep everything in sync and Git
+
+52
+00:02:31,380 --> 00:02:33,100
+is going to enable us to do that.
+
+53
+00:02:33,100 --> 00:02:36,180
+What we're going to effectively have is one version of the code stored
+
+54
+00:02:36,180 --> 00:02:39,180
+in we're going to call a repository somewhere online,
+
+55
+00:02:39,180 --> 00:02:42,330
+and both I and someone I'm working with-- a partner, for example--
+
+56
+00:02:42,330 --> 00:02:45,900
+might both be able to get access to that exact same repository,
+
+57
+00:02:45,900 --> 00:02:48,570
+the same files in the same state.
+
+58
+00:02:48,570 --> 00:02:51,840
+And if ever I and the other person make changes to those files,
+
+59
+00:02:51,840 --> 00:02:55,920
+we can each make changes to those files, and then synchronize them back up,
+
+60
+00:02:55,920 --> 00:02:58,530
+pushing them back up to the server, so to speak,
+
+61
+00:02:58,530 --> 00:03:02,250
+so that the server will have the most recent, most up-to-date version
+
+62
+00:03:02,250 --> 00:03:03,390
+of this code.
+
+63
+00:03:03,390 --> 00:03:06,690
+Then after that, after we've both pushed our changes up to the server,
+
+64
+00:03:06,690 --> 00:03:09,460
+then we can both pull changes from the server,
+
+65
+00:03:09,460 --> 00:03:12,630
+so to speak, in order to get access to the latest version of the code,
+
+66
+00:03:12,630 --> 00:03:15,630
+so that no matter what, so long as I've been working on the same project
+
+67
+00:03:15,630 --> 00:03:18,510
+that my partner has, we can use Git to synchronize our work,
+
+68
+00:03:18,510 --> 00:03:23,360
+so that I have access to my colleague's most recent changes, and vice versa.
+
+69
+00:03:23,360 --> 00:03:25,960
+Git also enables us to do a number of other things.
+
+70
+00:03:25,960 --> 00:03:29,190
+For example, Git allows us to test changes to our code
+
+71
+00:03:29,190 --> 00:03:31,260
+without removing access to the original.
+
+72
+00:03:31,260 --> 00:03:35,250
+So for example, you might imagine that as I'm working on writing a program,
+
+73
+00:03:35,250 --> 00:03:38,018
+I might want to try making some changes, but I'm not sure
+
+74
+00:03:38,018 --> 00:03:39,310
+if they're quite going to work.
+
+75
+00:03:39,310 --> 00:03:41,190
+So I want to test those changes, but I don't
+
+76
+00:03:41,190 --> 00:03:44,220
+want to lose access to my original working version of the program,
+
+77
+00:03:44,220 --> 00:03:46,120
+just in case something goes wrong.
+
+78
+00:03:46,120 --> 00:03:48,930
+So what Git enables us to do is it lets us make changes
+
+79
+00:03:48,930 --> 00:03:51,840
+to code on a separate branch, so to speak,
+
+80
+00:03:51,840 --> 00:03:54,960
+such that later, once we're happy and satisfied with the changes,
+
+81
+00:03:54,960 --> 00:03:59,010
+we can merge those changes back into the original version of our code,
+
+82
+00:03:59,010 --> 00:04:02,520
+being able to test those changes before we're really sure that they're the ones
+
+83
+00:04:02,520 --> 00:04:03,990
+that we want to make.
+
+84
+00:04:03,990 --> 00:04:06,960
+And finally, one powerful feature that Git gives us access to
+
+85
+00:04:06,960 --> 00:04:09,775
+is the ability to revert back to old versions of our code.
+
+86
+00:04:09,775 --> 00:04:12,900
+So you might imagine in the situation where I've been working on some code,
+
+87
+00:04:12,900 --> 00:04:16,110
+and I realize that actually, what I'm doing right now isn't what I want,
+
+88
+00:04:16,110 --> 00:04:17,820
+Git enables us to say, you know what?
+
+89
+00:04:17,820 --> 00:04:20,339
+This most recent change isn't something that I wanted.
+
+90
+00:04:20,339 --> 00:04:24,470
+I would like to revert back to a previous version of the code instead.
+
+91
+00:04:24,470 --> 00:04:28,390
+And Git makes it very easy to go back to those previous versions.
+
+92
+00:04:28,390 --> 00:04:31,613
+So the goal for today is going to be to learn how to use this tool,
+
+93
+00:04:31,613 --> 00:04:33,780
+to learn the various different and Git commands that
+
+94
+00:04:33,780 --> 00:04:36,090
+will be quite popular and quite common, as you
+
+95
+00:04:36,090 --> 00:04:38,400
+go about working on web applications or really
+
+96
+00:04:38,400 --> 00:04:41,790
+any other code-related project, because version control really
+
+97
+00:04:41,790 --> 00:04:45,240
+allows a number of useful features that are practical as you begin
+
+98
+00:04:45,240 --> 00:04:48,390
+to work on larger and larger projects.
+
+99
+00:04:48,390 --> 00:04:51,090
+But ultimately, as we begin working on these Git projects
+
+100
+00:04:51,090 --> 00:04:53,340
+they need to be stored somewhere online, such
+
+101
+00:04:53,340 --> 00:04:55,500
+that we're able to download them from anywhere,
+
+102
+00:04:55,500 --> 00:04:57,720
+such that me and a partner can both be working
+
+103
+00:04:57,720 --> 00:05:01,450
+on the same files and the same code, and so in order to do that,
+
+104
+00:05:01,450 --> 00:05:03,127
+we need to host our get code somewhere.
+
+105
+00:05:03,127 --> 00:05:05,710
+And there are a number of different websites that can do this,
+
+106
+00:05:05,710 --> 00:05:08,670
+but one of the most popular is a website known as GitHub.
+
+107
+00:05:08,670 --> 00:05:12,030
+GitHub is a website that stores Git repositories, where
+
+108
+00:05:12,030 --> 00:05:14,220
+all the repository is, is you can think of it
+
+109
+00:05:14,220 --> 00:05:18,810
+as a folder that holds a whole bunch of code and files related to our code.
+
+110
+00:05:18,810 --> 00:05:22,350
+So we're going to host this code online on a website called GitHub,
+
+111
+00:05:22,350 --> 00:05:26,640
+and then on our computer, we'll be able to access these GitHub repositories
+
+112
+00:05:26,640 --> 00:05:28,860
+and manipulate those repositories by changing
+
+113
+00:05:28,860 --> 00:05:30,998
+the files that are within them.
+
+114
+00:05:30,998 --> 00:05:32,790
+So let's go ahead and take a look at GitHub
+
+115
+00:05:32,790 --> 00:05:37,118
+and see how we can go ahead and create our very first GitHub repository.
+
+116
+00:05:37,118 --> 00:05:38,910
+If you don't already have a GitHub account,
+
+117
+00:05:38,910 --> 00:05:40,860
+you can create one by going to GitHub.com
+
+118
+00:05:40,860 --> 00:05:42,720
+and signing up for an account for free.
+
+119
+00:05:42,720 --> 00:05:47,060
+And I'll now go to GitHub.com/new.
+
+120
+00:05:47,060 --> 00:05:53,030
+GitHub.com/new is the page I go to if I want to create a new GitHub repository.
+
+121
+00:05:53,030 --> 00:05:57,420
+And so let's take a look at what I need to do in order to create a repository.
+
+122
+00:05:57,420 --> 00:06:00,970
+The first thing I need to do is give my repository a name.
+
+123
+00:06:00,970 --> 00:06:03,970
+So in this case, I'm just going to call the repository hello.
+
+124
+00:06:03,970 --> 00:06:06,262
+You can give it any name you want, so long as that name
+
+125
+00:06:06,262 --> 00:06:09,480
+doesn't collide with other repository names that you already have.
+
+126
+00:06:09,480 --> 00:06:13,050
+GitHub optionally lets me provide a description for this repository.
+
+127
+00:06:13,050 --> 00:06:17,430
+I'll just say, Web Programming with Python and JavaScript.
+
+128
+00:06:17,430 --> 00:06:21,010
+And then GitHub gives me the choice, do I want this to be a public repository,
+
+129
+00:06:21,010 --> 00:06:23,340
+such that anyone can see the repository?
+
+130
+00:06:23,340 --> 00:06:25,950
+Not everyone can necessarily make changes to it,
+
+131
+00:06:25,950 --> 00:06:28,860
+but it's publicly available if anyone wants to download my code
+
+132
+00:06:28,860 --> 00:06:29,850
+and try it out.
+
+133
+00:06:29,850 --> 00:06:31,770
+Public means that anyone can access it.
+
+134
+00:06:31,770 --> 00:06:35,365
+Or private, meaning, by default, only I can see this repository,
+
+135
+00:06:35,365 --> 00:06:38,490
+but I can choose if I would like other people to be able to see it as well,
+
+136
+00:06:38,490 --> 00:06:40,440
+and I can select which individuals.
+
+137
+00:06:40,440 --> 00:06:43,170
+For now, I'll go ahead and make this repository public,
+
+138
+00:06:43,170 --> 00:06:46,440
+and I'll go down here and click on the green Create Repository button
+
+139
+00:06:46,440 --> 00:06:49,920
+in order to make this new repository.
+
+140
+00:06:49,920 --> 00:06:51,920
+So I click the Create Repository button.
+
+141
+00:06:51,920 --> 00:06:52,570
+And here it is.
+
+142
+00:06:52,570 --> 00:06:55,570
+This is the GitHub's repository page, and right now, you'll
+
+143
+00:06:55,570 --> 00:06:57,790
+notice that there's a lot of instructions here,
+
+144
+00:06:57,790 --> 00:06:59,950
+but there are no files, because right now,
+
+145
+00:06:59,950 --> 00:07:02,650
+when I first created my first Git repository I got
+
+146
+00:07:02,650 --> 00:07:05,390
+an empty repository with nothing in it.
+
+147
+00:07:05,390 --> 00:07:08,620
+So what I'd like to do now is somehow download this repository
+
+148
+00:07:08,620 --> 00:07:11,590
+onto my own computer, such that I can add, say,
+
+149
+00:07:11,590 --> 00:07:16,660
+an HTML file that contains some HTML that I want to keep track of using Git.
+
+150
+00:07:16,660 --> 00:07:18,425
+So, how am I going to do that?
+
+151
+00:07:18,425 --> 00:07:21,550
+Well, in order to do that, we're going to take a look at the very first Git
+
+152
+00:07:21,550 --> 00:07:25,840
+command that's going to be involved with Git, which is known as git clone.
+
+153
+00:07:25,840 --> 00:07:28,060
+git clone is a command that we can run in order
+
+154
+00:07:28,060 --> 00:07:32,327
+to take a repository from the internet and download it onto our own computer.
+
+155
+00:07:32,327 --> 00:07:34,660
+So you'll need to have Git installed onto your computer.
+
+156
+00:07:34,660 --> 00:07:38,688
+You can install it on any Mac or PC or Linux machine, and once you do,
+
+157
+00:07:38,688 --> 00:07:41,230
+what you're going to do is, on your computer in the terminal,
+
+158
+00:07:41,230 --> 00:07:46,508
+you'll run it git clone, followed by the URL of the Git repository
+
+159
+00:07:46,508 --> 00:07:47,800
+that you're trying to download.
+
+160
+00:07:47,800 --> 00:07:50,175
+So you might imagine that here's your computer over here,
+
+161
+00:07:50,175 --> 00:07:53,500
+and up here is some server where a Git repository is located.
+
+162
+00:07:53,500 --> 00:07:56,800
+GitHub, for example, is one such server, but there are others as well.
+
+163
+00:07:56,800 --> 00:08:00,010
+And up there is the repository that potentially has files or maybe
+
+164
+00:08:00,010 --> 00:08:04,240
+other folders with other files that contain the contents of the repository
+
+165
+00:08:04,240 --> 00:08:06,040
+that you care about downloading.
+
+166
+00:08:06,040 --> 00:08:09,970
+So if I run git clone followed by the URL of the repository I want,
+
+167
+00:08:09,970 --> 00:08:13,480
+the effect of that is that the repository and all of its contents
+
+168
+00:08:13,480 --> 00:08:17,290
+get downloaded onto my computer, such that I on my computer
+
+169
+00:08:17,290 --> 00:08:20,440
+now have a copy of everything that was originally
+
+170
+00:08:20,440 --> 00:08:23,230
+inside of that Git repository.
+
+171
+00:08:23,230 --> 00:08:26,740
+So now that we know how to clone a repository, let's actually try it.
+
+172
+00:08:26,740 --> 00:08:29,500
+We've just created a repository using GitHub,
+
+173
+00:08:29,500 --> 00:08:31,870
+and now let me go into my terminal and actually tried
+
+174
+00:08:31,870 --> 00:08:36,070
+to clone this repository, so that I have a copy of it on my computer,
+
+175
+00:08:36,070 --> 00:08:39,090
+and I can begin to make some changes to it.
+
+176
+00:08:39,090 --> 00:08:43,960
+So I'll go into my terminal now, and I'll go into my lecture1 directory.
+
+177
+00:08:43,960 --> 00:08:45,710
+And the first thing that I'm going to need
+
+178
+00:08:45,710 --> 00:08:48,990
+is I'm going to need the URL of the repository.
+
+179
+00:08:48,990 --> 00:08:51,710
+So if I go back into GitHub, what you'll notice
+
+180
+00:08:51,710 --> 00:08:57,070
+is that it gives me an HTTPS link in order to download my Git repository.
+
+181
+00:08:57,070 --> 00:09:00,320
+So there are a couple of different ways that I can use to clone my repository,
+
+182
+00:09:00,320 --> 00:09:02,330
+of ways to authenticate myself.
+
+183
+00:09:02,330 --> 00:09:04,103
+One is using HTTPS, which will eventually
+
+184
+00:09:04,103 --> 00:09:06,020
+involve like a username and password that I'll
+
+185
+00:09:06,020 --> 00:09:08,540
+have to type in, in order to prove to Git
+
+186
+00:09:08,540 --> 00:09:10,580
+that these are my GitHub credentials.
+
+187
+00:09:10,580 --> 00:09:12,800
+Alternatively, if you're familiar with SSH,
+
+188
+00:09:12,800 --> 00:09:14,690
+this is another method of authentication.
+
+189
+00:09:14,690 --> 00:09:19,175
+You can give GitHub your public SSH key in order to authenticate as well,
+
+190
+00:09:19,175 --> 00:09:21,050
+but no need to worry about that if you're not
+
+191
+00:09:21,050 --> 00:09:23,420
+as familiar with that technology.
+
+192
+00:09:23,420 --> 00:09:26,440
+The key here is that this URL is the GitHub
+
+193
+00:09:26,440 --> 00:09:28,950
+URL that corresponds to my repository.
+
+194
+00:09:28,950 --> 00:09:32,510
+So I'm going to copy that URL, and then inside of my terminal,
+
+195
+00:09:32,510 --> 00:09:37,100
+I'll type git clone, and then I'll just paste in the URL
+
+196
+00:09:37,100 --> 00:09:39,830
+that I would like to clone that contains that repository.
+
+197
+00:09:39,830 --> 00:09:41,180
+I'll go ahead and press Return.
+
+198
+00:09:41,180 --> 00:09:44,693
+It says I'm cloning into a directory called hello, and then it's saying,
+
+199
+00:09:44,693 --> 00:09:46,610
+you appear to have cloned an empty repository.
+
+200
+00:09:46,610 --> 00:09:48,020
+It's saying that's a warning, but that's OK,
+
+201
+00:09:48,020 --> 00:09:51,270
+because I know that I've cloned an empty repository, because the repository is
+
+202
+00:09:51,270 --> 00:09:52,820
+brand-new.
+
+203
+00:09:52,820 --> 00:09:56,400
+And now I can type the command ls in my terminal.
+
+204
+00:09:56,400 --> 00:09:59,030
+The ls command in the terminal stands for list,
+
+205
+00:09:59,030 --> 00:10:01,250
+and effectively what it's going to do is list
+
+206
+00:10:01,250 --> 00:10:04,972
+all of the files that are currently inside of this directory,
+
+207
+00:10:04,972 --> 00:10:06,680
+all the files and folders that are inside
+
+208
+00:10:06,680 --> 00:10:09,350
+of my lecture1 directory, where directory is just
+
+209
+00:10:09,350 --> 00:10:10,900
+a fancy name for folder.
+
+210
+00:10:10,900 --> 00:10:13,340
+So I'll type ls, and I see that, all right,
+
+211
+00:10:13,340 --> 00:10:17,810
+I now have a folder called hello inside of my lecture1 directory, which
+
+212
+00:10:17,810 --> 00:10:19,100
+I didn't have before.
+
+213
+00:10:19,100 --> 00:10:21,350
+I'll go ahead and move into this hello directory.
+
+214
+00:10:21,350 --> 00:10:25,940
+In order to change into a directory or folder, you can use the cd command.
+
+215
+00:10:25,940 --> 00:10:28,430
+Cd stands for change directory.
+
+216
+00:10:28,430 --> 00:10:34,852
+And so if I type cd hello, I will now move myself into the hello directory.
+
+217
+00:10:34,852 --> 00:10:36,560
+And if I type ls, you'll see that there's
+
+218
+00:10:36,560 --> 00:10:40,220
+nothing inside of this hello directory right now, because again,
+
+219
+00:10:40,220 --> 00:10:41,810
+this repository was empty.
+
+220
+00:10:41,810 --> 00:10:44,070
+I cloned it, and there was nothing in it.
+
+221
+00:10:44,070 --> 00:10:47,270
+So now I'd like to actually put something in this repository.
+
+222
+00:10:47,270 --> 00:10:50,060
+The repository is only useful if I'm keeping track of my code
+
+223
+00:10:50,060 --> 00:10:52,580
+and keeping track of the changes that I make to that code.
+
+224
+00:10:52,580 --> 00:10:57,300
+So I'll go ahead and actually try now to add some code to the repository.
+
+225
+00:10:57,300 --> 00:10:59,480
+The first thing I'll do is create a new file.
+
+226
+00:10:59,480 --> 00:11:02,442
+And we could create a new file just by opening up a text editor,
+
+227
+00:11:02,442 --> 00:11:04,400
+but on the terminal, there's actually a command
+
+228
+00:11:04,400 --> 00:11:06,870
+for creating a new file called touch.
+
+229
+00:11:06,870 --> 00:11:13,130
+So in the terminal, I can type touch hello.html, and what that's going to do
+
+230
+00:11:13,130 --> 00:11:15,830
+is create a new file called hello.html.
+
+231
+00:11:15,830 --> 00:11:20,660
+And if I type ls, I can see that indeed I do have a file called hello.html.
+
+232
+00:11:20,660 --> 00:11:23,990
+Now inside of my hello directory, let me now
+
+233
+00:11:23,990 --> 00:11:29,510
+open up this directory in the hello.html file inside of a text editor.
+
+234
+00:11:29,510 --> 00:11:31,390
+Again, I'm using VS Code.
+
+235
+00:11:31,390 --> 00:11:34,970
+And let me now add just some text to hello.html.
+
+236
+00:11:34,970 --> 00:11:38,920
+I'll just add a simple HTML page, same thing we've seen before,
+
+237
+00:11:38,920 --> 00:11:41,570
+where I give it a header, a title will be hello,
+
+238
+00:11:41,570 --> 00:11:45,080
+and inside the body of the page will be "Hello, world!"
+
+239
+00:11:45,080 --> 00:11:47,240
+Same HTML page we've seen a number of times
+
+240
+00:11:47,240 --> 00:11:51,750
+now, just now inside of this repository.
+
+241
+00:11:51,750 --> 00:11:55,230
+Of course, I haven't yet made any saving to this repository.
+
+242
+00:11:55,230 --> 00:11:58,110
+I haven't said that I want to save these changes to the repository.
+
+243
+00:11:58,110 --> 00:12:02,250
+And the repository isn't keeping track of every single character I write.
+
+244
+00:12:02,250 --> 00:12:06,320
+I need to tell Git that this is a state of my current files
+
+245
+00:12:06,320 --> 00:12:09,320
+that I would like to keep track of, something that I would like to save.
+
+246
+00:12:09,320 --> 00:12:12,810
+And in the world of Git we call those save points commits.
+
+247
+00:12:12,810 --> 00:12:15,000
+When I say, I am making a commit, I mean I
+
+248
+00:12:15,000 --> 00:12:17,670
+would like to save the current state of all of the files
+
+249
+00:12:17,670 --> 00:12:20,700
+and folders and other assets that exist inside of the repository
+
+250
+00:12:20,700 --> 00:12:23,640
+and basically take a snapshot of their current position,
+
+251
+00:12:23,640 --> 00:12:27,040
+such that later I might be able to refer back to them.
+
+252
+00:12:27,040 --> 00:12:30,250
+But in order to do that, there are actually a couple of steps.
+
+253
+00:12:30,250 --> 00:12:32,970
+So the first step we need to follow is an additional command.
+
+254
+00:12:32,970 --> 00:12:35,790
+So we saw that git clone was the command we could use in order
+
+255
+00:12:35,790 --> 00:12:40,650
+to clone a repository, take a repository and download it onto our own computer.
+
+256
+00:12:40,650 --> 00:12:44,370
+The next command we'll take a look at is a command called git add.
+
+257
+00:12:44,370 --> 00:12:46,530
+And what git add is going to do is it's going
+
+258
+00:12:46,530 --> 00:12:50,730
+to let us tell Git that I would like to add a file as one
+
+259
+00:12:50,730 --> 00:12:54,040
+to track the next time I save, the next time
+
+260
+00:12:54,040 --> 00:12:56,040
+I make a commit to say that I would like to take
+
+261
+00:12:56,040 --> 00:13:00,570
+a snapshot of all these files, such that I'm able to refer back to them later.
+
+262
+00:13:00,570 --> 00:13:03,960
+And in order to do that, I need to tell Git what files to keep track of.
+
+263
+00:13:03,960 --> 00:13:06,690
+So if, for example, I am working on this file,
+
+264
+00:13:06,690 --> 00:13:08,910
+and I'd like to tell Git that I'd like to track it,
+
+265
+00:13:08,910 --> 00:13:13,410
+I can run a command like git add, followed by the name of the file like
+
+266
+00:13:13,410 --> 00:13:16,980
+foo.py or .html or whatever file it happens to be.
+
+267
+00:13:16,980 --> 00:13:18,750
+And then Git will display a message saying
+
+268
+00:13:18,750 --> 00:13:21,510
+that right now, we've added foo.py.
+
+269
+00:13:21,510 --> 00:13:26,760
+This is now a file that will be saved the next time I make a commit.
+
+270
+00:13:26,760 --> 00:13:28,438
+So why are these two separate steps?
+
+271
+00:13:28,438 --> 00:13:30,480
+Well, one reason you might imagine is that if I'm
+
+272
+00:13:30,480 --> 00:13:34,350
+working on a lot of different files, say I'm working on 10 different files,
+
+273
+00:13:34,350 --> 00:13:37,710
+and there are only three that I'm happy with, three that I want to save,
+
+274
+00:13:37,710 --> 00:13:41,095
+I don't want to just say save and have everything be saved in a commit.
+
+275
+00:13:41,095 --> 00:13:42,720
+I might want to say that you know what?
+
+276
+00:13:42,720 --> 00:13:46,290
+These are the only three files that I actually want to save right now,
+
+277
+00:13:46,290 --> 00:13:48,270
+and the other ones I'm still working on.
+
+278
+00:13:48,270 --> 00:13:51,300
+So it gives us that ability to have this separation to say,
+
+279
+00:13:51,300 --> 00:13:55,650
+let me explicitly say that I want to track this file the next time I save,
+
+280
+00:13:55,650 --> 00:13:58,140
+the next time I make a commit, and not all
+
+281
+00:13:58,140 --> 00:14:01,200
+of the files, for example, though there are shortcuts we can use if we do
+
+282
+00:14:01,200 --> 00:14:05,530
+want to add all of the files, and we'll see those in a moment as well.
+
+283
+00:14:05,530 --> 00:14:06,940
+So let's go ahead and try that.
+
+284
+00:14:06,940 --> 00:14:11,010
+We'll go back to our repository where I've created this hello.html file,
+
+285
+00:14:11,010 --> 00:14:13,080
+and now what I'd like to do is say that I
+
+286
+00:14:13,080 --> 00:14:17,160
+would like to add the hello.html file to my Git repository.
+
+287
+00:14:17,160 --> 00:14:20,430
+So inside of my terminal, I'll now say--
+
+288
+00:14:20,430 --> 00:14:22,860
+again, I have a hello.html file here--
+
+289
+00:14:22,860 --> 00:14:28,640
+I'll say git add, followed by hello.html.
+
+290
+00:14:28,640 --> 00:14:31,680
+And you'll notice that so far, nothing seems to have happened,
+
+291
+00:14:31,680 --> 00:14:33,720
+because so far, I haven't yet saved anything.
+
+292
+00:14:33,720 --> 00:14:38,070
+I've just said that I would like to add hello.html as a file
+
+293
+00:14:38,070 --> 00:14:42,240
+that the next time I say save, the next time I commit my repository,
+
+294
+00:14:42,240 --> 00:14:46,830
+it is going to keep track of the changes I have now made to hello.html.
+
+295
+00:14:46,830 --> 00:14:48,330
+So how do I actually make a commit?
+
+296
+00:14:48,330 --> 00:14:51,120
+How do I actually say, save the state of these files?
+
+297
+00:14:51,120 --> 00:14:55,050
+Well, that's going to be one more Git command, which is known as git commit.
+
+298
+00:14:55,050 --> 00:14:58,320
+When I say, git commit, I'm going to tell my Git repository that I would
+
+299
+00:14:58,320 --> 00:15:01,830
+like to save a snapshot of the current state of the repository,
+
+300
+00:15:01,830 --> 00:15:04,650
+keeping track of any of the changes that have been made to files
+
+301
+00:15:04,650 --> 00:15:06,780
+that I've added using git add.
+
+302
+00:15:06,780 --> 00:15:11,670
+And the way we run it is by running git commit, followed by -m, and then
+
+303
+00:15:11,670 --> 00:15:13,920
+in quotation marks, a message.
+
+304
+00:15:13,920 --> 00:15:16,230
+And this message is known as a commit message,
+
+305
+00:15:16,230 --> 00:15:18,960
+and what it is is it's a description in English,
+
+306
+00:15:18,960 --> 00:15:21,780
+or whatever your language is, of what changes
+
+307
+00:15:21,780 --> 00:15:25,075
+you've made in this most recent commit, because over time
+
+308
+00:15:25,075 --> 00:15:28,200
+as you work on a big project, you're probably going to make lots of commits
+
+309
+00:15:28,200 --> 00:15:30,150
+as you make lots of changes to your program.
+
+310
+00:15:30,150 --> 00:15:32,400
+You'll commit and commit again after each new addition
+
+311
+00:15:32,400 --> 00:15:33,750
+you make to the project.
+
+312
+00:15:33,750 --> 00:15:36,200
+And you might want to refer back to a previous commit,
+
+313
+00:15:36,200 --> 00:15:37,950
+but it's only valuable to do so if you can
+
+314
+00:15:37,950 --> 00:15:42,130
+identify in which commit you made a particular change, for example.
+
+315
+00:15:42,130 --> 00:15:44,700
+So by providing some English message-- just some note
+
+316
+00:15:44,700 --> 00:15:48,480
+to yourself-- such that later you can refer back to all your commit messages
+
+317
+00:15:48,480 --> 00:15:51,270
+and know that, all right, at this point in time, in this commit,
+
+318
+00:15:51,270 --> 00:15:53,910
+this is the change that I made that can just make it easier
+
+319
+00:15:53,910 --> 00:15:57,570
+to keep track of all the changes that you've made him to a particular Git
+
+320
+00:15:57,570 --> 00:15:58,950
+repository.
+
+321
+00:15:58,950 --> 00:16:02,340
+So when you type git commit followed by -m, you might include a message,
+
+322
+00:16:02,340 --> 00:16:05,230
+something like, "I added a new line," for example.
+
+323
+00:16:05,230 --> 00:16:09,300
+And when you do, Git is going to save a new snapshot of a version of your code
+
+324
+00:16:09,300 --> 00:16:13,320
+right now, keeping track of the old version or old versions
+
+325
+00:16:13,320 --> 00:16:16,990
+that used to exist there inside of the repository.
+
+326
+00:16:16,990 --> 00:16:19,410
+So let's try and actually make a commit now and see
+
+327
+00:16:19,410 --> 00:16:21,070
+how that's actually going to work.
+
+328
+00:16:21,070 --> 00:16:24,000
+So we've already added the file, as by running git add,
+
+329
+00:16:24,000 --> 00:16:26,790
+to say add the hello.html file as one to keep
+
+330
+00:16:26,790 --> 00:16:29,130
+track of, but now when we're happy with it
+
+331
+00:16:29,130 --> 00:16:32,070
+and we can make additional changes to the file if we want to,
+
+332
+00:16:32,070 --> 00:16:38,280
+I can go back into the terminal and now say git commit and then -m,
+
+333
+00:16:38,280 --> 00:16:40,650
+and then I can specify the commit message,
+
+334
+00:16:40,650 --> 00:16:45,060
+some English description of what it is that I did in this most recent commit.
+
+335
+00:16:45,060 --> 00:16:50,840
+And what I did was I added the hello.html file.
+
+336
+00:16:50,840 --> 00:16:53,650
+So I'm just going to say, I added the hello.html file.
+
+337
+00:16:53,650 --> 00:16:56,940
+That was the change I made in this most recent commit.
+
+338
+00:16:56,940 --> 00:16:58,820
+I'll go ahead and press Return.
+
+339
+00:16:58,820 --> 00:17:00,450
+And here's what it's telling me.
+
+340
+00:17:00,450 --> 00:17:04,390
+It's telling me one file has been changed with nine insertions.
+
+341
+00:17:04,390 --> 00:17:07,319
+So Git keeps track of changes in terms of how many lines
+
+342
+00:17:07,319 --> 00:17:09,660
+have been added or inserted, and how many lines
+
+343
+00:17:09,660 --> 00:17:11,380
+have been deleted or removed.
+
+344
+00:17:11,380 --> 00:17:14,910
+And in this case, it's telling me there have been nine insertions to one file,
+
+345
+00:17:14,910 --> 00:17:17,040
+because previously, the file didn't exist,
+
+346
+00:17:17,040 --> 00:17:20,339
+and now a file that has nine lines does exist.
+
+347
+00:17:20,339 --> 00:17:25,329
+And now I have saved hello.html to this Git repository.
+
+348
+00:17:25,329 --> 00:17:29,190
+So now you might imagine if I go back to my Git repository on GitHub's website
+
+349
+00:17:29,190 --> 00:17:32,670
+and refresh it, that maybe I'll see that hello.html file,
+
+350
+00:17:32,670 --> 00:17:36,150
+but I refresh, and nothing happened, nothing changed.
+
+351
+00:17:36,150 --> 00:17:39,422
+I don't see my hello.html file.
+
+352
+00:17:39,422 --> 00:17:41,130
+And that's because there's one final step
+
+353
+00:17:41,130 --> 00:17:44,880
+here I'm missing before my changes are going to be reflected online.
+
+354
+00:17:44,880 --> 00:17:47,850
+Recall that when I ran the git clone step in order
+
+355
+00:17:47,850 --> 00:17:52,110
+to clone the repository from GitHub, GitHub had a version of the repository,
+
+356
+00:17:52,110 --> 00:17:55,680
+and I ran git clone it to download a copy of that repository
+
+357
+00:17:55,680 --> 00:18:00,430
+onto my own computer, and when I ran git add to add the hello.html file,
+
+358
+00:18:00,430 --> 00:18:03,630
+or I ran git commit to say, I would like to save these changes,
+
+359
+00:18:03,630 --> 00:18:08,070
+I was always making those changes only to my local version of the repository.
+
+360
+00:18:08,070 --> 00:18:11,160
+I was never affecting anything that was already on GitHub.
+
+361
+00:18:11,160 --> 00:18:14,670
+The changes I was making were only happening on my own computer.
+
+362
+00:18:14,670 --> 00:18:17,040
+If I want to push those changes up to GitHub,
+
+363
+00:18:17,040 --> 00:18:19,350
+then I'm going to need some additional commands.
+
+364
+00:18:19,350 --> 00:18:22,860
+And in fact, we can see what's currently going on inside of my repository
+
+365
+00:18:22,860 --> 00:18:25,530
+using a command called git status.
+
+366
+00:18:25,530 --> 00:18:28,260
+And what git status will do is, it'll tell us what's currently
+
+367
+00:18:28,260 --> 00:18:30,820
+happening inside of my repository.
+
+368
+00:18:30,820 --> 00:18:33,390
+So, for example, if I were to, in this current state,
+
+369
+00:18:33,390 --> 00:18:36,660
+run the command git status, then Git is going to report back to me
+
+370
+00:18:36,660 --> 00:18:40,530
+and tell me that I'm currently on branch master--
+
+371
+00:18:40,530 --> 00:18:42,310
+more on branches later--
+
+372
+00:18:42,310 --> 00:18:47,700
+but then it's saying, my branch is ahead of origin master by one commit.
+
+373
+00:18:47,700 --> 00:18:50,760
+So this is a long-winded way of saying that my local version
+
+374
+00:18:50,760 --> 00:18:54,240
+of the repository-- the version of the repository on my computer--
+
+375
+00:18:54,240 --> 00:18:57,780
+is ahead of the origin version of the repository,
+
+376
+00:18:57,780 --> 00:19:01,410
+the version of the repository that's up on GitHub by one commit,
+
+377
+00:19:01,410 --> 00:19:05,640
+that I have one commit that the origin GitHub does not have.
+
+378
+00:19:05,640 --> 00:19:08,580
+And it's helpfully telling me I can use the command get
+
+379
+00:19:08,580 --> 00:19:10,980
+push to publish your local commits.
+
+380
+00:19:10,980 --> 00:19:13,470
+get push of the command that I can use in order to say,
+
+381
+00:19:13,470 --> 00:19:17,310
+I would like to take my changes and actually push them up to the server,
+
+382
+00:19:17,310 --> 00:19:20,130
+push them up to GitHub so that they're reflected there.
+
+383
+00:19:20,130 --> 00:19:22,650
+So after we've checked our current status with git status,
+
+384
+00:19:22,650 --> 00:19:26,790
+we can use the command git push to say that now whatever changes that I've
+
+385
+00:19:26,790 --> 00:19:31,800
+made, when I run git push, those changes get pushed up to GitHub,
+
+386
+00:19:31,800 --> 00:19:35,880
+so GitHub has access to all of the commits that I have now made.
+
+387
+00:19:35,880 --> 00:19:38,490
+So let's try those two commands now-- git status,
+
+388
+00:19:38,490 --> 00:19:42,750
+to see what's currently going on inside of my repository, and then git push,
+
+389
+00:19:42,750 --> 00:19:45,630
+to say, I would like to now push those changes to GitHub,
+
+390
+00:19:45,630 --> 00:19:47,850
+so that the online version of the repository
+
+391
+00:19:47,850 --> 00:19:52,020
+has the same contents as the local version on my own computer.
+
+392
+00:19:52,020 --> 00:19:52,520
+All right.
+
+393
+00:19:52,520 --> 00:19:55,410
+So in my terminal now, I can run git status,
+
+394
+00:19:55,410 --> 00:19:57,700
+and I see that I am on branch master, same as before.
+
+395
+00:19:57,700 --> 00:19:59,320
+And it's a slightly different message, because there
+
+396
+00:19:59,320 --> 00:20:01,500
+is nothing currently inside the repository,
+
+397
+00:20:01,500 --> 00:20:04,110
+but the key here is that now I can run the command
+
+398
+00:20:04,110 --> 00:20:06,810
+git push to, say, take all of the changes
+
+399
+00:20:06,810 --> 00:20:11,300
+that I have made to my repository and go ahead and push them up to GitHub.
+
+400
+00:20:11,300 --> 00:20:13,500
+So I'll type git push, and what's going to happen
+
+401
+00:20:13,500 --> 00:20:15,780
+is it's going to compress all the information,
+
+402
+00:20:15,780 --> 00:20:19,410
+and it's going to push it up to GitHub to this URL.
+
+403
+00:20:19,410 --> 00:20:24,360
+And now, if I go back to GitHub's website, GitHub.com/myrepository,
+
+404
+00:20:24,360 --> 00:20:29,020
+and refresh the page, I'll see that I do actually now see something different.
+
+405
+00:20:29,020 --> 00:20:31,980
+And so this is what GitHub's user interface actually looks like.
+
+406
+00:20:31,980 --> 00:20:33,917
+It gives me a few pieces of information.
+
+407
+00:20:33,917 --> 00:20:36,750
+It's telling me, for example, that there's one commit currently made
+
+408
+00:20:36,750 --> 00:20:38,750
+to the repository-- that's the one I just made--
+
+409
+00:20:38,750 --> 00:20:42,610
+that is on one branch, so if I've only created one branch, the default one,
+
+410
+00:20:42,610 --> 00:20:44,640
+but we'll see how to create more branches later.
+
+411
+00:20:44,640 --> 00:20:46,770
+And, in particular, down below, you'll see
+
+412
+00:20:46,770 --> 00:20:49,790
+the files that currently exist inside of this repository,
+
+413
+00:20:49,790 --> 00:20:54,030
+that right now I have this hello.html file, which is the one that I pushed,
+
+414
+00:20:54,030 --> 00:20:57,600
+and, in particular, next to it is the commit message, the message
+
+415
+00:20:57,600 --> 00:21:01,020
+from the most recent time that I touched to this file, which is in particular
+
+416
+00:21:01,020 --> 00:21:05,490
+telling me that I added the hello.html file in the most recent
+
+417
+00:21:05,490 --> 00:21:08,550
+commit that affected hello.html.
+
+418
+00:21:08,550 --> 00:21:11,190
+And if I were now to not click on hello.html
+
+419
+00:21:11,190 --> 00:21:15,510
+to actually see what's inside of it, I would see the same content
+
+420
+00:21:15,510 --> 00:21:17,160
+that I wrote in the file before.
+
+421
+00:21:17,160 --> 00:21:19,380
+I see !DOCTYPE html, and then the "Hello, world!"
+
+422
+00:21:19,380 --> 00:21:22,070
+page that we've seen a couple of times now.
+
+423
+00:21:22,070 --> 00:21:25,680
+So I made the change on my own computer, and I've now pushed them up to GitHub,
+
+424
+00:21:25,680 --> 00:21:27,770
+so they're now inside of this repository.
+
+425
+00:21:27,770 --> 00:21:29,640
+That's now public, such that anyone else,
+
+426
+00:21:29,640 --> 00:21:33,180
+if they wanted to collaborate on this project, could take this URL,
+
+427
+00:21:33,180 --> 00:21:37,990
+clone it to their own computer, and make their own changes locally as well.
+
+428
+00:21:37,990 --> 00:21:41,400
+So now we can explore how we might be able to make additional changes
+
+429
+00:21:41,400 --> 00:21:43,300
+to this web page as well.
+
+430
+00:21:43,300 --> 00:21:47,770
+So if, for example, I wanted to add a heading to this web page, for instance,
+
+431
+00:21:47,770 --> 00:21:52,680
+I might at the top of the body say something like, in an h1 tag,
+
+432
+00:21:52,680 --> 00:21:56,360
+"Welcome to my website!"
+
+433
+00:21:56,360 --> 00:21:58,940
+And now if I, just for good measure, open up hello.html
+
+434
+00:21:58,940 --> 00:22:04,470
+to see what it looks like, this is what my web page now looks like.
+
+435
+00:22:04,470 --> 00:22:07,910
+And now I've made changes to my hello.html file, changes
+
+436
+00:22:07,910 --> 00:22:12,020
+that have not yet been saved, and I can tell that if I run git status.
+
+437
+00:22:12,020 --> 00:22:14,510
+git status is your go-to for telling you what's currently
+
+438
+00:22:14,510 --> 00:22:17,160
+going on inside of your repository.
+
+439
+00:22:17,160 --> 00:22:20,540
+So here we see "Changes not staged for commit,"
+
+440
+00:22:20,540 --> 00:22:23,960
+which is a fancy way of saying, files that have been changed,
+
+441
+00:22:23,960 --> 00:22:27,410
+but I haven't said I would like to keep track of them in the next commit.
+
+442
+00:22:27,410 --> 00:22:30,500
+It's telling me that I've modified hello.html,
+
+443
+00:22:30,500 --> 00:22:32,390
+but it's not something that Git is currently
+
+444
+00:22:32,390 --> 00:22:35,040
+going to keep track of the next time I make a save.
+
+445
+00:22:35,040 --> 00:22:38,780
+So if I want to save hello.html when I commit for the next time,
+
+446
+00:22:38,780 --> 00:22:42,740
+then I'll first need to run git add hello.html,
+
+447
+00:22:42,740 --> 00:22:44,910
+and then I could run git commit.
+
+448
+00:22:44,910 --> 00:22:46,910
+But there's actually a bit of a shorthand here.
+
+449
+00:22:46,910 --> 00:22:49,940
+If you want to add all of the files that have been changed
+
+450
+00:22:49,940 --> 00:22:55,250
+and commit at the same time, the shorthand is git commit -am.
+
+451
+00:22:55,250 --> 00:22:58,640
+Remember, before we just used -m to say, specify a message.
+
+452
+00:22:58,640 --> 00:23:02,750
+-am means git commit all of the files that have been changed--
+
+453
+00:23:02,750 --> 00:23:05,180
+a for all-- and also provide a message.
+
+454
+00:23:05,180 --> 00:23:08,450
+So you can combine the git add step and git commit step
+
+455
+00:23:08,450 --> 00:23:11,600
+into just a single step by saying, I'd like to commit all of the files
+
+456
+00:23:11,600 --> 00:23:13,820
+that I've changed, and then I'll provide a message.
+
+457
+00:23:13,820 --> 00:23:15,620
+What exactly did I change?
+
+458
+00:23:15,620 --> 00:23:19,020
+I added a heading.
+
+459
+00:23:19,020 --> 00:23:20,370
+I'll go ahead and press Return.
+
+460
+00:23:20,370 --> 00:23:22,162
+It's kept track of the fact that I have now
+
+461
+00:23:22,162 --> 00:23:24,480
+changed one file with one insertion.
+
+462
+00:23:24,480 --> 00:23:28,050
+All I did was add one new line to that file.
+
+463
+00:23:28,050 --> 00:23:32,320
+And now if I run git status, it's going to tell me, I'm on branch master,
+
+464
+00:23:32,320 --> 00:23:34,720
+and I am ahead of origin master--
+
+465
+00:23:34,720 --> 00:23:36,820
+origin master being the version on GitHub--
+
+466
+00:23:36,820 --> 00:23:39,400
+by one commit, that I have this "Add a heading"
+
+467
+00:23:39,400 --> 00:23:43,810
+commit, but right now, on GitHub, if I refresh this page,
+
+468
+00:23:43,810 --> 00:23:48,240
+it's still showing the old version of that page.
+
+469
+00:23:48,240 --> 00:23:50,850
+In order to take my changes that I've made on my computer
+
+470
+00:23:50,850 --> 00:23:54,690
+and make sure they're updated on GitHub, I can just run git push to say,
+
+471
+00:23:54,690 --> 00:23:58,260
+push those changes up to GitHub, and once that's done,
+
+472
+00:23:58,260 --> 00:24:00,690
+I can now refresh the page on GitHub, and I'll now
+
+473
+00:24:00,690 --> 00:24:04,470
+see that GitHub now has the latest version of my program as well.
+
+474
+00:24:04,470 --> 00:24:06,080
+It now has this h1.
+
+475
+00:24:06,080 --> 00:24:09,570
+It says, "Welcome to my website!"
+
+476
+00:24:09,570 --> 00:24:12,120
+So that's git push now, the ability for me to say I
+
+477
+00:24:12,120 --> 00:24:16,620
+would like to take the changes that I have made to the my repository
+
+478
+00:24:16,620 --> 00:24:19,920
+and push them up to some remote server, the remote server on GitHub,
+
+479
+00:24:19,920 --> 00:24:20,970
+for example.
+
+480
+00:24:20,970 --> 00:24:23,160
+But we can also go in the opposite way.
+
+481
+00:24:23,160 --> 00:24:26,670
+You might imagine that maybe the version that's up on GitHub
+
+482
+00:24:26,670 --> 00:24:30,390
+is more recent than the version that I have on my computer, and in that case,
+
+483
+00:24:30,390 --> 00:24:33,660
+I would like to download the latest version of the repository that
+
+484
+00:24:33,660 --> 00:24:35,700
+currently exists on GitHub.
+
+485
+00:24:35,700 --> 00:24:39,360
+And in order to do that, we can use a command called git pull.
+
+486
+00:24:39,360 --> 00:24:40,320
+How does that work?
+
+487
+00:24:40,320 --> 00:24:43,020
+Well, when I run git pull, what's going to happen
+
+488
+00:24:43,020 --> 00:24:45,020
+is the opposite of what git push did.
+
+489
+00:24:45,020 --> 00:24:49,500
+While git push took my changes on my computer and pushed them up to GitHub,
+
+490
+00:24:49,500 --> 00:24:53,190
+git pull, we'll say, take the changes that currently exist on GitHub,
+
+491
+00:24:53,190 --> 00:24:56,070
+and go ahead and pull the most recent changes down,
+
+492
+00:24:56,070 --> 00:24:58,650
+so that I and my local version of the repository
+
+493
+00:24:58,650 --> 00:25:02,280
+have access to the latest version of all of the code that is currently
+
+494
+00:25:02,280 --> 00:25:03,390
+on GitHub.
+
+495
+00:25:03,390 --> 00:25:05,560
+And we can demonstrate this, for example,
+
+496
+00:25:05,560 --> 00:25:08,400
+if I go back and take a look at GitHub's website itself,
+
+497
+00:25:08,400 --> 00:25:10,800
+because on GitHub, I actually have the ability
+
+498
+00:25:10,800 --> 00:25:13,840
+to edit files using GitHub's interface.
+
+499
+00:25:13,840 --> 00:25:17,190
+So I'm going to simulate someone else working on this project, for example.
+
+500
+00:25:17,190 --> 00:25:20,190
+Maybe someone else added a second heading,
+
+501
+00:25:20,190 --> 00:25:26,860
+so they add an h2 that says, just hello, for example.
+
+502
+00:25:26,860 --> 00:25:29,760
+And then, they can provide a commit message.
+
+503
+00:25:29,760 --> 00:25:33,420
+This is sort of a graphical equivalent to the -m and then a message
+
+504
+00:25:33,420 --> 00:25:34,830
+that we provided before.
+
+505
+00:25:34,830 --> 00:25:41,730
+They can say, "Added h2," and then commit.
+
+506
+00:25:41,730 --> 00:25:46,560
+So this is another way to edit a Git repository is by literally in editing
+
+507
+00:25:46,560 --> 00:25:48,190
+it inside of GitHub's interface.
+
+508
+00:25:48,190 --> 00:25:50,880
+So GitHub allows you to just edit a file,
+
+509
+00:25:50,880 --> 00:25:54,060
+and then add or modify any of the lines there.
+
+510
+00:25:54,060 --> 00:25:58,110
+So now the version on GitHub is actually different from the version
+
+511
+00:25:58,110 --> 00:26:01,620
+that we have on our computer, that if we look at hello.html
+
+512
+00:26:01,620 --> 00:26:05,340
+here I only see the h1, and I don't see the h2 that
+
+513
+00:26:05,340 --> 00:26:08,370
+was just added, because it's a more recent commit that I don't yet
+
+514
+00:26:08,370 --> 00:26:09,750
+have access to.
+
+515
+00:26:09,750 --> 00:26:13,350
+But if I want to download that commit, then what I can say
+
+516
+00:26:13,350 --> 00:26:18,510
+is inside my terminal, I can say git pull in order to download it,
+
+517
+00:26:18,510 --> 00:26:19,470
+and all right.
+
+518
+00:26:19,470 --> 00:26:21,210
+It's updated one file.
+
+519
+00:26:21,210 --> 00:26:22,630
+It's made some changes.
+
+520
+00:26:22,630 --> 00:26:25,290
+And so now, if I go back to the file, you'll
+
+521
+00:26:25,290 --> 00:26:28,740
+notice that automatically I now have the latest version of the file.
+
+522
+00:26:28,740 --> 00:26:31,170
+I now have this h2 that says "Hello!"
+
+523
+00:26:31,170 --> 00:26:35,460
+because I've pulled the latest version of the file down from GitHub.
+
+524
+00:26:35,460 --> 00:26:38,280
+So via combination of get push and get pull,
+
+525
+00:26:38,280 --> 00:26:41,250
+I can make changes to my code to push them up to GitHub,
+
+526
+00:26:41,250 --> 00:26:44,370
+and also get access to the latest version of code that
+
+527
+00:26:44,370 --> 00:26:46,557
+already is on GitHub.
+
+528
+00:26:46,557 --> 00:26:48,390
+But as we do this, you might imagine that we
+
+529
+00:26:48,390 --> 00:26:50,850
+could run into some sort of problem.
+
+530
+00:26:50,850 --> 00:26:52,830
+In particular, we might run into a problem
+
+531
+00:26:52,830 --> 00:26:56,280
+if I've been making changes to my code, and someone else
+
+532
+00:26:56,280 --> 00:27:00,010
+working on my same project has also been making changes to the code.
+
+533
+00:27:00,010 --> 00:27:04,080
+What happens if we both make changes to the same part of the code
+
+534
+00:27:04,080 --> 00:27:05,850
+and then try to sync up our work together?
+
+535
+00:27:05,850 --> 00:27:07,073
+What's going to happen?
+
+536
+00:27:07,073 --> 00:27:09,240
+Well, we're going to run into some sort of conflict,
+
+537
+00:27:09,240 --> 00:27:11,520
+because I've made changes to the same line
+
+538
+00:27:11,520 --> 00:27:14,910
+that my colleague has been making changes to, and that type of conflict
+
+539
+00:27:14,910 --> 00:27:16,890
+is called a merge conflict, that when trying
+
+540
+00:27:16,890 --> 00:27:20,100
+to merge my changes with the changes that someone else has made,
+
+541
+00:27:20,100 --> 00:27:23,830
+we run into a situation where suddenly Git doesn't know what to do.
+
+542
+00:27:23,830 --> 00:27:25,740
+They're two different sets of changes, and we
+
+543
+00:27:25,740 --> 00:27:28,770
+need to figure out how to resolve them and what to do
+
+544
+00:27:28,770 --> 00:27:30,905
+when we run into this sort of conflict.
+
+545
+00:27:30,905 --> 00:27:32,280
+So here's what's going to happen.
+
+546
+00:27:32,280 --> 00:27:34,820
+If ever we run into this sort of merge conflict,
+
+547
+00:27:34,820 --> 00:27:38,550
+it is generally going to happen if I try and pull in or merge in some changes
+
+548
+00:27:38,550 --> 00:27:39,580
+from elsewhere.
+
+549
+00:27:39,580 --> 00:27:43,080
+So let's say I run git pull, but there's some conflicting commit,
+
+550
+00:27:43,080 --> 00:27:46,380
+something that is online that conflicts with my current version
+
+551
+00:27:46,380 --> 00:27:47,760
+of the repository.
+
+552
+00:27:47,760 --> 00:27:49,920
+What I'll get is a message like this.
+
+553
+00:27:49,920 --> 00:27:53,580
+Some conflict saying, Merge conflicts in some file have failed.
+
+554
+00:27:53,580 --> 00:27:57,630
+You need to fix the conflicts and then commit the results.
+
+555
+00:27:57,630 --> 00:27:59,640
+So what might those conflicts look like?
+
+556
+00:27:59,640 --> 00:28:02,640
+Well, generally, the file is going to look a little something like this.
+
+557
+00:28:02,640 --> 00:28:06,390
+Git is automatically going to add some metadata to the file
+
+558
+00:28:06,390 --> 00:28:08,790
+to describe the things that it can't quite figure out,
+
+559
+00:28:08,790 --> 00:28:10,830
+and it's a lot of cryptic looking information,
+
+560
+00:28:10,830 --> 00:28:13,680
+but we can distill it down into a couple of key parts.
+
+561
+00:28:13,680 --> 00:28:17,730
+Everything in between these arrows at the top and equal signs
+
+562
+00:28:17,730 --> 00:28:20,400
+here are your changes, the changes I have
+
+563
+00:28:20,400 --> 00:28:23,550
+made on my version of the repository that are somehow
+
+564
+00:28:23,550 --> 00:28:25,920
+conflicting with some other changes.
+
+565
+00:28:25,920 --> 00:28:28,740
+Everything between these equal signs and these arrows
+
+566
+00:28:28,740 --> 00:28:32,190
+down here are the remote changes, the changes from GitHub
+
+567
+00:28:32,190 --> 00:28:35,130
+that I'm trying to pull in that somehow are conflicting with what
+
+568
+00:28:35,130 --> 00:28:36,940
+I've currently been working on.
+
+569
+00:28:36,940 --> 00:28:39,000
+And then this sequence of numbers and characters
+
+570
+00:28:39,000 --> 00:28:42,780
+here is the hash of the conflicting commit.
+
+571
+00:28:42,780 --> 00:28:47,490
+So every comment gets a hash, just some sequence of numbers and characters
+
+572
+00:28:47,490 --> 00:28:51,510
+that is likely to be unique that helps to identify any particular commit,
+
+573
+00:28:51,510 --> 00:28:55,200
+and Git will automatically generate a hash every time you make a comment,
+
+574
+00:28:55,200 --> 00:28:59,040
+and we'll see in a moment how you can look at all of those possible commits.
+
+575
+00:28:59,040 --> 00:29:01,170
+But here again, it's just helpfully telling us,
+
+576
+00:29:01,170 --> 00:29:05,850
+this is the commit that is causing the conflict, just for our own reference.
+
+577
+00:29:05,850 --> 00:29:08,790
+In order to address this merge conflict, the way we do it is we
+
+578
+00:29:08,790 --> 00:29:11,610
+first need to remove all of these merge conflict markers that
+
+579
+00:29:11,610 --> 00:29:15,600
+exist in the text file and decide what we
+
+580
+00:29:15,600 --> 00:29:17,400
+want as the resolution of the conflict.
+
+581
+00:29:17,400 --> 00:29:20,010
+So maybe I want to keep my version of the changes;
+
+582
+00:29:20,010 --> 00:29:23,010
+maybe I want to keep the remote version of the changes, the changes that
+
+583
+00:29:23,010 --> 00:29:25,500
+were already on GitHub, for example; or maybe I
+
+584
+00:29:25,500 --> 00:29:27,590
+want to combine them in some intelligent way.
+
+585
+00:29:27,590 --> 00:29:29,430
+I, the programmer get to make that decision.
+
+586
+00:29:29,430 --> 00:29:32,370
+I get to look at my version and the conflicting version
+
+587
+00:29:32,370 --> 00:29:35,610
+and decide how I want to resolve that conflict.
+
+588
+00:29:35,610 --> 00:29:39,000
+I'll remove any of the blank lines and then commit the changes to say,
+
+589
+00:29:39,000 --> 00:29:43,960
+this is what I want the merged version of this program to look like.
+
+590
+00:29:43,960 --> 00:29:47,922
+So let's now take a look at an example of a merge conflict in action,
+
+591
+00:29:47,922 --> 00:29:50,130
+to see how one might arise, and how we might actually
+
+592
+00:29:50,130 --> 00:29:54,340
+go going about dealing with a merge conflict should it happen.
+
+593
+00:29:54,340 --> 00:29:59,760
+So I, on my computer now, I'm going to make a change to this page.
+
+594
+00:29:59,760 --> 00:30:01,980
+I'm going to say, add a second exclamation.
+
+595
+00:30:01,980 --> 00:30:03,810
+One exclamation point wasn't enough.
+
+596
+00:30:03,810 --> 00:30:06,878
+I'll add in a second exclamation point to this h1,
+
+597
+00:30:06,878 --> 00:30:08,670
+and I'll go ahead and commit those changes.
+
+598
+00:30:08,670 --> 00:30:14,438
+I'll say git commit -am "Add exclamation point,"
+
+599
+00:30:14,438 --> 00:30:16,230
+and I'll go ahead and commit those changes.
+
+600
+00:30:16,230 --> 00:30:18,240
+I've saved this new version of the program.
+
+601
+00:30:18,240 --> 00:30:20,340
+But I'm not going to push the code yet.
+
+602
+00:30:20,340 --> 00:30:22,980
+Instead, what I'm going to do is simulating someone else
+
+603
+00:30:22,980 --> 00:30:24,480
+working on the same file.
+
+604
+00:30:24,480 --> 00:30:27,600
+Maybe someone else on GitHub has decided, you know what?
+
+605
+00:30:27,600 --> 00:30:30,150
+For this h1, what we'd really like to do is
+
+606
+00:30:30,150 --> 00:30:33,270
+add some style to it with some inline style by saying,
+
+607
+00:30:33,270 --> 00:30:36,780
+let's give it a color of blue, for example.
+
+608
+00:30:36,780 --> 00:30:39,410
+So they've added some CSS.
+
+609
+00:30:39,410 --> 00:30:41,160
+We'll go ahead and write a commit message.
+
+610
+00:30:41,160 --> 00:30:41,868
+What did they do?
+
+611
+00:30:41,868 --> 00:30:43,530
+They added some style.
+
+612
+00:30:43,530 --> 00:30:46,050
+And we'll commit those changes.
+
+613
+00:30:46,050 --> 00:30:48,170
+And now what we've created is what is going
+
+614
+00:30:48,170 --> 00:30:52,430
+to be a merge conflict, that someone else on GitHub
+
+615
+00:30:52,430 --> 00:30:56,240
+has made a change to this line changing the color to blue
+
+616
+00:30:56,240 --> 00:31:00,050
+of this particular h1 tag, for example, and I meanwhile
+
+617
+00:31:00,050 --> 00:31:03,860
+have also made a change to the same line, adding an exclamation point.
+
+618
+00:31:03,860 --> 00:31:07,610
+And Git entirely operates in terms of adding lines and removing lines.
+
+619
+00:31:07,610 --> 00:31:10,090
+Given that we both made changes to the same line,
+
+620
+00:31:10,090 --> 00:31:12,230
+Git going to have a very hard time figuring out
+
+621
+00:31:12,230 --> 00:31:15,020
+what to do in this scenario.
+
+622
+00:31:15,020 --> 00:31:17,560
+So here in my terminal, I'll go ahead and run git pull,
+
+623
+00:31:17,560 --> 00:31:21,280
+because I want to pull in those latest changes, and when I do,
+
+624
+00:31:21,280 --> 00:31:23,160
+I'll see that, all right, I get this message.
+
+625
+00:31:23,160 --> 00:31:26,950
+CONFLICT: There was a merge conflict in hello.html.
+
+626
+00:31:26,950 --> 00:31:29,440
+The automatic merge failed, because normally, Git we'll
+
+627
+00:31:29,440 --> 00:31:31,690
+try to merge files automatically if I can,
+
+628
+00:31:31,690 --> 00:31:36,310
+but sometimes it can't, so now I need to fix the conflicts
+
+629
+00:31:36,310 --> 00:31:39,360
+and then commit the results.
+
+630
+00:31:39,360 --> 00:31:43,185
+So let's go ahead and look at what's inside of hello.html,
+
+631
+00:31:43,185 --> 00:31:45,560
+and what you'll notice is a whole bunch of these markers,
+
+632
+00:31:45,560 --> 00:31:48,080
+and my text editor just so happens to highlight them for me,
+
+633
+00:31:48,080 --> 00:31:49,955
+so that I can see them a little more clearly,
+
+634
+00:31:49,955 --> 00:31:52,590
+but this is just highlighting provided by the text editor.
+
+635
+00:31:52,590 --> 00:31:54,710
+It's not actually part of the text itself.
+
+636
+00:31:54,710 --> 00:31:58,220
+But you'll notice all of these arrows, and then all of these equal sides,
+
+637
+00:31:58,220 --> 00:32:01,340
+and in between, here is my version of this line
+
+638
+00:32:01,340 --> 00:32:06,480
+of code, the line of code with the extra exclamation point at the end of it.
+
+639
+00:32:06,480 --> 00:32:10,050
+Down below, here is the remote conflicting version
+
+640
+00:32:10,050 --> 00:32:13,140
+of the same code, the version that was modified on GitHub that I am now
+
+641
+00:32:13,140 --> 00:32:14,280
+trying to pull in.
+
+642
+00:32:14,280 --> 00:32:18,570
+This is the version that says, we want style color blue inside
+
+643
+00:32:18,570 --> 00:32:22,148
+of the inline style for this particular h1 element.
+
+644
+00:32:22,148 --> 00:32:23,940
+And now what I need to do is somehow figure
+
+645
+00:32:23,940 --> 00:32:26,650
+out how to merge these two together.
+
+646
+00:32:26,650 --> 00:32:28,990
+How do I want to resolve this conflict?
+
+647
+00:32:28,990 --> 00:32:30,930
+Well, in this particular case, I might like
+
+648
+00:32:30,930 --> 00:32:34,560
+to resolve this conflict by just taking the best of both worlds.
+
+649
+00:32:34,560 --> 00:32:38,730
+If the person on GitHub wanted to add a style attribute to this h1 element,
+
+650
+00:32:38,730 --> 00:32:41,880
+and I wanted the extra exclamation point, I can do both.
+
+651
+00:32:41,880 --> 00:32:45,880
+I can go ahead and just add an extra exclamation point,
+
+652
+00:32:45,880 --> 00:32:50,700
+and then get rid of my version, and then also get rid of these commit markers.
+
+653
+00:32:50,700 --> 00:32:52,590
+So go ahead and remove those.
+
+654
+00:32:52,590 --> 00:32:55,720
+I basically modify the file until I'm satisfied with it
+
+655
+00:32:55,720 --> 00:32:57,720
+until I think that, all right, this is the way I
+
+656
+00:32:57,720 --> 00:32:59,520
+wanted to resolve the conflict.
+
+657
+00:32:59,520 --> 00:33:01,080
+One person added color.
+
+658
+00:33:01,080 --> 00:33:02,970
+One person then added punctuation.
+
+659
+00:33:02,970 --> 00:33:05,580
+The way to resolve it in this case is just use both of them.
+
+660
+00:33:05,580 --> 00:33:07,710
+But here is where some human intuition comes in.
+
+661
+00:33:07,710 --> 00:33:10,860
+The human programmer doesn't need to look at this file and figure out,
+
+662
+00:33:10,860 --> 00:33:13,710
+how exactly do we want to resolve this conflict?
+
+663
+00:33:13,710 --> 00:33:16,650
+How do we want to figure out how to take these different changes
+
+664
+00:33:16,650 --> 00:33:18,960
+and merge them all together?
+
+665
+00:33:18,960 --> 00:33:22,530
+But once we're satisfied with it, we can go ahead and commit the results.
+
+666
+00:33:22,530 --> 00:33:27,090
+I can say git commit -am "Fix merge conflict,"
+
+667
+00:33:27,090 --> 00:33:29,280
+and all right, we fixed the merge conflict.
+
+668
+00:33:29,280 --> 00:33:36,180
+And now, if I push those results back up to GitHub, when that is done
+
+669
+00:33:36,180 --> 00:33:40,920
+and I refresh the page, I now see the updated line of code on GitHub,
+
+670
+00:33:40,920 --> 00:33:45,630
+with the h1 that has both the inline styling and the extra punctuation,
+
+671
+00:33:45,630 --> 00:33:47,550
+because I've resolved the merge conflict,
+
+672
+00:33:47,550 --> 00:33:52,403
+and then I've pushed that information back up to GitHub as well.
+
+673
+00:33:52,403 --> 00:33:55,570
+There are a couple of other Git commands that are just useful to know about.
+
+674
+00:33:55,570 --> 00:33:57,778
+I mean, there are many, but we'll talk about a couple
+
+675
+00:33:57,778 --> 00:33:59,970
+right now, the first of which is git log.
+
+676
+00:33:59,970 --> 00:34:03,162
+git log is useful if you ever need to keep track of all of the changes
+
+677
+00:34:03,162 --> 00:34:05,120
+that you've made to your code, you want to keep
+
+678
+00:34:05,120 --> 00:34:06,870
+track of all of the commits that have been
+
+679
+00:34:06,870 --> 00:34:08,790
+made in this particular repository.
+
+680
+00:34:08,790 --> 00:34:11,460
+All you need to do is run the command git log,
+
+681
+00:34:11,460 --> 00:34:13,440
+and Git will spit out a bunch of messages
+
+682
+00:34:13,440 --> 00:34:16,810
+that look like this, describing each of your comments for each commit.
+
+683
+00:34:16,810 --> 00:34:19,230
+It'll tell you what the commit hash is, such
+
+684
+00:34:19,230 --> 00:34:22,679
+that you can reference it more easily, it'll tell you who made the commit,
+
+685
+00:34:22,679 --> 00:34:25,110
+it will tell you the date on which that commit was made,
+
+686
+00:34:25,110 --> 00:34:27,560
+and it will also tell you the commit message.
+
+687
+00:34:27,560 --> 00:34:31,139
+So if you need to very quickly look back and see on what day with this feature
+
+688
+00:34:31,139 --> 00:34:33,880
+added or who added this part to the web page,
+
+689
+00:34:33,880 --> 00:34:37,239
+you can just look through the git log, find the commit in question,
+
+690
+00:34:37,239 --> 00:34:40,920
+And then you'll know which commit it happened to be.
+
+691
+00:34:40,920 --> 00:34:42,690
+Also helpful is if you realize that you've
+
+692
+00:34:42,690 --> 00:34:44,850
+made a change that you didn't mean to, and you
+
+693
+00:34:44,850 --> 00:34:46,489
+want to go back to a previous commit.
+
+694
+00:34:46,489 --> 00:34:48,489
+Then, in that case, you can use a command called
+
+695
+00:34:48,489 --> 00:34:52,139
+to git reset, which has a number of different possible ways to use it,
+
+696
+00:34:52,139 --> 00:34:55,830
+but git reset in effect will take the current state of the repository
+
+697
+00:34:55,830 --> 00:35:00,040
+and revert it back to an older state of the repository, for example.
+
+698
+00:35:00,040 --> 00:35:02,340
+So a couple of ways you can use it are like this.
+
+699
+00:35:02,340 --> 00:35:08,160
+You can do git reset --hard, meaning hard reset, reset everything, back to--
+
+700
+00:35:08,160 --> 00:35:10,500
+and then you can plug in a commit hash.
+
+701
+00:35:10,500 --> 00:35:12,660
+So git log, as you might recall from before,
+
+702
+00:35:12,660 --> 00:35:16,020
+gave you the commit hashes for each of the various different commits.
+
+703
+00:35:16,020 --> 00:35:20,880
+If I want to go back to one particular commit, I can say git reset --hard
+
+704
+00:35:20,880 --> 00:35:24,390
+and then the commit hash that I want to go back to,
+
+705
+00:35:24,390 --> 00:35:26,100
+and I'll go back to that commit.
+
+706
+00:35:26,100 --> 00:35:31,350
+Alternatively, I could say something like, git reset --hard origin/master.
+
+707
+00:35:31,350 --> 00:35:35,190
+And recall that origin/master is the version of my repository
+
+708
+00:35:35,190 --> 00:35:36,630
+that's currently on GitHub.
+
+709
+00:35:36,630 --> 00:35:39,300
+So if I want to take my current version of the repository
+
+710
+00:35:39,300 --> 00:35:41,490
+and reset it back to whatever is on GitHub,
+
+711
+00:35:41,490 --> 00:35:44,800
+then I can use a command like this in order to do so.
+
+712
+00:35:44,800 --> 00:35:47,310
+So you run git reset, followed by a commit hash,
+
+713
+00:35:47,310 --> 00:35:51,960
+and that will reset the current state of your repository back to whatever state
+
+714
+00:35:51,960 --> 00:35:53,487
+it was in previously.
+
+715
+00:35:53,487 --> 00:35:55,320
+And there are a number of other Git commands
+
+716
+00:35:55,320 --> 00:35:57,028
+as well, that can be quite helpful as you
+
+717
+00:35:57,028 --> 00:35:59,460
+begin working with larger and larger projects,
+
+718
+00:35:59,460 --> 00:36:02,210
+but these are some of the most helpful, and some other ones you'll
+
+719
+00:36:02,210 --> 00:36:05,460
+use the most often are just adding files that you want to keep track of;
+
+720
+00:36:05,460 --> 00:36:07,470
+git commit to say, I would like to make a save,
+
+721
+00:36:07,470 --> 00:36:10,680
+I would like to save the current state of all of these files; push
+
+722
+00:36:10,680 --> 00:36:14,550
+and pull to be able to upload changes and download changes that have been
+
+723
+00:36:14,550 --> 00:36:18,600
+made to your repository; and then some helpful commands like reset and log
+
+724
+00:36:18,600 --> 00:36:19,410
+and status,
+
+725
+00:36:19,410 --> 00:36:21,870
+just to give you information about your repository
+
+726
+00:36:21,870 --> 00:36:26,880
+and get you back to an older state of the repository if you need to.
+
+727
+00:36:26,880 --> 00:36:29,760
+But as we begin to work on more and more projects,
+
+728
+00:36:29,760 --> 00:36:32,550
+especially as we begin to work on more sophisticated projects,
+
+729
+00:36:32,550 --> 00:36:34,350
+you may find that just keeping track of one
+
+730
+00:36:34,350 --> 00:36:38,710
+change after another isn't nearly as powerful as you might like it to be.
+
+731
+00:36:38,710 --> 00:36:41,910
+And so we can explore what might happen in a hypothetical situation
+
+732
+00:36:41,910 --> 00:36:46,120
+where you begin making some changes to a Git repository, for example.
+
+733
+00:36:46,120 --> 00:36:49,020
+So let's imagine you make your first commit, you make some changes,
+
+734
+00:36:49,020 --> 00:36:51,210
+you make some additional changes, and maybe
+
+735
+00:36:51,210 --> 00:36:55,350
+you realize you want to start working on a new feature to this web application
+
+736
+00:36:55,350 --> 00:36:56,560
+that you've been working on.
+
+737
+00:36:56,560 --> 00:36:58,830
+So you start working on a new feature, then
+
+738
+00:36:58,830 --> 00:37:00,840
+you continue working on that new feature,
+
+739
+00:37:00,840 --> 00:37:02,910
+but then you realize suddenly, you know what,
+
+740
+00:37:02,910 --> 00:37:06,720
+there was a bug in the original code that I made way back here,
+
+741
+00:37:06,720 --> 00:37:08,790
+and you want to go back and fix that bug,
+
+742
+00:37:08,790 --> 00:37:11,760
+but now we're sort of in a tricky spot, that we want to fix the bug,
+
+743
+00:37:11,760 --> 00:37:13,930
+but we're in the middle of working on a new feature.
+
+744
+00:37:13,930 --> 00:37:14,638
+So what do we do?
+
+745
+00:37:14,638 --> 00:37:17,340
+We could go back to this and try and fix the bug,
+
+746
+00:37:17,340 --> 00:37:19,470
+but then what happens to the new feature?
+
+747
+00:37:19,470 --> 00:37:23,220
+The problem is that this structure-- just change after change after change--
+
+748
+00:37:23,220 --> 00:37:24,680
+it is very linear.
+
+749
+00:37:24,680 --> 00:37:27,610
+It only goes one after another after another.
+
+750
+00:37:27,610 --> 00:37:29,670
+And oftentimes, when you're working on a project,
+
+751
+00:37:29,670 --> 00:37:32,130
+it's not going to operate in a very linear fashion.
+
+752
+00:37:32,130 --> 00:37:34,620
+You're not always working on one thing that immediately
+
+753
+00:37:34,620 --> 00:37:35,970
+follows the thing before it.
+
+754
+00:37:35,970 --> 00:37:39,780
+You might be fixing multiple bugs while working on multiple new features,
+
+755
+00:37:39,780 --> 00:37:42,690
+and you want some way of being able to work on all of those things
+
+756
+00:37:42,690 --> 00:37:46,830
+simultaneously and to easily be able to switch between them.
+
+757
+00:37:46,830 --> 00:37:49,380
+And so that is where branching comes in handy.
+
+758
+00:37:49,380 --> 00:37:52,290
+Branches are Git's way of working on different parts
+
+759
+00:37:52,290 --> 00:37:55,140
+of the repository at the same time.
+
+760
+00:37:55,140 --> 00:37:58,560
+And so you might imagine a situation unfolding more along these lines.
+
+761
+00:37:58,560 --> 00:38:01,887
+You make your first commit, you start to make changes, you make more changes,
+
+762
+00:38:01,887 --> 00:38:03,720
+and when you decide that you'd like to start
+
+763
+00:38:03,720 --> 00:38:09,150
+working on a new feature, for example, rather than making changes in one
+
+764
+00:38:09,150 --> 00:38:12,750
+after another after another on this same branch, so to speak,
+
+765
+00:38:12,750 --> 00:38:14,340
+I can create a new branch.
+
+766
+00:38:14,340 --> 00:38:16,350
+I can branch off and say, you know what?
+
+767
+00:38:16,350 --> 00:38:19,810
+Let's create a new branch and start working on our new feature there,
+
+768
+00:38:19,810 --> 00:38:22,150
+and then keep working on that new feature there.
+
+769
+00:38:22,150 --> 00:38:24,300
+And if I realize later on down the road that, you
+
+770
+00:38:24,300 --> 00:38:27,270
+know what, there was a bug way back at this commit, then
+
+771
+00:38:27,270 --> 00:38:30,630
+I can go back to this commit and create a new branch, where I go ahead
+
+772
+00:38:30,630 --> 00:38:31,860
+and fix that bug.
+
+773
+00:38:31,860 --> 00:38:35,370
+And now I have two different branches, each of which
+
+774
+00:38:35,370 --> 00:38:38,850
+might have different code on it, one of which I've been fixing a bug,
+
+775
+00:38:38,850 --> 00:38:42,160
+one of which I've been working on a new feature on, for example.
+
+776
+00:38:42,160 --> 00:38:45,270
+Generally, each of those branches is going to have a name.
+
+777
+00:38:45,270 --> 00:38:47,350
+So the master branch is your default branch,
+
+778
+00:38:47,350 --> 00:38:50,850
+which is generally going to contain the up-to-date, stable version
+
+779
+00:38:50,850 --> 00:38:51,830
+of your code.
+
+780
+00:38:51,830 --> 00:38:54,540
+And as you're working on newer things, newer additional features,
+
+781
+00:38:54,540 --> 00:38:56,873
+you might have some feature branch, where you're working
+
+782
+00:38:56,873 --> 00:38:59,310
+on some other feature, for example.
+
+783
+00:38:59,310 --> 00:39:04,530
+And at any given time though, your focus is only on one of these two branches,
+
+784
+00:39:04,530 --> 00:39:07,500
+and where your focus is, what the current state of your repository
+
+785
+00:39:07,500 --> 00:39:11,310
+is, is designated by something we call the head.
+
+786
+00:39:11,310 --> 00:39:13,740
+So if HEAD is pointing to master, that means
+
+787
+00:39:13,740 --> 00:39:17,910
+your repository right now is working on this branch, where you fixed the bug.
+
+788
+00:39:17,910 --> 00:39:19,080
+But you can change the head.
+
+789
+00:39:19,080 --> 00:39:21,452
+You can switch what branch you want to look at,
+
+790
+00:39:21,452 --> 00:39:23,160
+and you can check out the feature branch,
+
+791
+00:39:23,160 --> 00:39:26,440
+and say, let's look at that branch, and begin working on that as well.
+
+792
+00:39:26,440 --> 00:39:28,770
+And you can begin working on these different branches
+
+793
+00:39:28,770 --> 00:39:32,760
+by switching where your head is, switching from one branch to another,
+
+794
+00:39:32,760 --> 00:39:34,110
+and then back again.
+
+795
+00:39:34,110 --> 00:39:37,110
+And only when you're satisfied, that you know what, this bug is fixed,
+
+796
+00:39:37,110 --> 00:39:40,680
+and this feature is in a satisfactory place, then, after all of that,
+
+797
+00:39:40,680 --> 00:39:42,810
+we can merge those changes back together,
+
+798
+00:39:42,810 --> 00:39:46,750
+so that everything comes back onto this unified master branch that
+
+799
+00:39:46,750 --> 00:39:49,640
+now has all of the latest code.
+
+800
+00:39:49,640 --> 00:39:52,080
+And that's the real power of git branch, this ability
+
+801
+00:39:52,080 --> 00:39:55,710
+to say that I would like to be working on multiple things simultaneously
+
+802
+00:39:55,710 --> 00:39:59,190
+and be working on a feature without disrupting the master
+
+803
+00:39:59,190 --> 00:40:01,240
+version of the code.
+
+804
+00:40:01,240 --> 00:40:04,770
+So, let's now take a look at an example of how we might go about doing that.
+
+805
+00:40:04,770 --> 00:40:08,100
+
+
+806
+00:40:08,100 --> 00:40:12,800
+So here in my hello.html file, I've been adding some style to this h1.
+
+807
+00:40:12,800 --> 00:40:14,360
+I added the color of blue.
+
+808
+00:40:14,360 --> 00:40:16,880
+And let's say that I would like to make some changes.
+
+809
+00:40:16,880 --> 00:40:21,590
+I would like to move the styling outside of inline styling,
+
+810
+00:40:21,590 --> 00:40:24,890
+and I'd instead like to move it up into the head section of the web page,
+
+811
+00:40:24,890 --> 00:40:28,220
+because we decided earlier that was slightly better design for a web
+
+812
+00:40:28,220 --> 00:40:30,210
+page like this.
+
+813
+00:40:30,210 --> 00:40:33,210
+I could make those changes immediately, but I can instead,
+
+814
+00:40:33,210 --> 00:40:35,910
+if I expect I might be working on multiple changes,
+
+815
+00:40:35,910 --> 00:40:39,750
+I could move on to a different branch, and branch off into something else
+
+816
+00:40:39,750 --> 00:40:41,650
+in order to work on these new changes.
+
+817
+00:40:41,650 --> 00:40:44,610
+And so here are some of the key commands to know about this.
+
+818
+00:40:44,610 --> 00:40:49,380
+If I type git branch, that will tell me what branch I'm currently on
+
+819
+00:40:49,380 --> 00:40:52,540
+and what branches exist in my repository.
+
+820
+00:40:52,540 --> 00:40:54,660
+So here, for example, I type git branch, and I
+
+821
+00:40:54,660 --> 00:40:57,390
+see that I just have a single branch called master,
+
+822
+00:40:57,390 --> 00:40:59,460
+and the star on the left-hand side tells me
+
+823
+00:40:59,460 --> 00:41:01,620
+that this is the branch that I am currently on,
+
+824
+00:41:01,620 --> 00:41:04,240
+the only branch that there is.
+
+825
+00:41:04,240 --> 00:41:08,830
+If I want to check out a new branch, I can type git checkout,
+
+826
+00:41:08,830 --> 00:41:13,330
+and if it's a new branch, I'll type git checkout -b and then
+
+827
+00:41:13,330 --> 00:41:14,850
+the name of the new branch.
+
+828
+00:41:14,850 --> 00:41:17,050
+And I'll call the new branch style, because I'm
+
+829
+00:41:17,050 --> 00:41:20,690
+going to be making some style changes to the web page, for example.
+
+830
+00:41:20,690 --> 00:41:24,130
+So I typed git checkout -b style, and Git gives me a message.
+
+831
+00:41:24,130 --> 00:41:27,700
+I have switched to a new branch called style.
+
+832
+00:41:27,700 --> 00:41:30,590
+And now, if I type git branch again, you'll
+
+833
+00:41:30,590 --> 00:41:32,540
+see that now I have two branches.
+
+834
+00:41:32,540 --> 00:41:35,720
+I have the master branch, which is the branch, I was originally on,
+
+835
+00:41:35,720 --> 00:41:37,580
+and now I have the style branch, which is
+
+836
+00:41:37,580 --> 00:41:41,210
+this new branch which I am on now, as indicated by the star
+
+837
+00:41:41,210 --> 00:41:43,032
+on the left-hand side.
+
+838
+00:41:43,032 --> 00:41:45,990
+So now that I'm on this new branch, I can feel free to make any changes
+
+839
+00:41:45,990 --> 00:41:48,960
+that I want, and nothing I do is going to mess up
+
+840
+00:41:48,960 --> 00:41:51,960
+what is on the master branch, so long as I stay on this branch.
+
+841
+00:41:51,960 --> 00:41:56,240
+So I can say, all right, let's experiment with removing the style,
+
+842
+00:41:56,240 --> 00:41:58,440
+and let's add a style tag to the top, where
+
+843
+00:41:58,440 --> 00:42:02,960
+I can say that I would like my h1 to have a color of blue, for example.
+
+844
+00:42:02,960 --> 00:42:05,040
+So I've made a whole bunch of changes, and I
+
+845
+00:42:05,040 --> 00:42:07,120
+would like to now commit those changes.
+
+846
+00:42:07,120 --> 00:42:12,590
+I'll say git commit "Move style properties."
+
+847
+00:42:12,590 --> 00:42:14,480
+That's the change that I've made.
+
+848
+00:42:14,480 --> 00:42:18,140
+But I've only made those changes to the style branch.
+
+849
+00:42:18,140 --> 00:42:20,720
+Again, if I run git branch, you'll see that I'm currently
+
+850
+00:42:20,720 --> 00:42:24,440
+on the style branch, where I've moved the style information up
+
+851
+00:42:24,440 --> 00:42:30,110
+here to the top of my page, but I can switch branches by using git checkout.
+
+852
+00:42:30,110 --> 00:42:32,630
+git checkout allows me to switch between branches.
+
+853
+00:42:32,630 --> 00:42:35,210
+We used to git checkout -b to create a new branch,
+
+854
+00:42:35,210 --> 00:42:37,970
+but if you're switching to a branch that already exists,
+
+855
+00:42:37,970 --> 00:42:41,420
+I can just say git checkout master, for example,
+
+856
+00:42:41,420 --> 00:42:45,660
+to switch my current branch from the style branch to the master branch.
+
+857
+00:42:45,660 --> 00:42:47,330
+So I run git checkout master.
+
+858
+00:42:47,330 --> 00:42:49,670
+Now I'm on the master branch.
+
+859
+00:42:49,670 --> 00:42:51,590
+And now you'll see, if I go back to the file,
+
+860
+00:42:51,590 --> 00:42:55,210
+now I'm back to the inline styling without the styling
+
+861
+00:42:55,210 --> 00:42:57,900
+up here in the head section of the page.
+
+862
+00:42:57,900 --> 00:43:01,880
+If I check out the style branch again, then the file immediately goes back.
+
+863
+00:43:01,880 --> 00:43:04,970
+Now I have the style code up here in the style section of the page,
+
+864
+00:43:04,970 --> 00:43:06,720
+and not inline.
+
+865
+00:43:06,720 --> 00:43:10,960
+So these changes have only been made to one part of the page.
+
+866
+00:43:10,960 --> 00:43:14,373
+So now I'll check out master again.
+
+867
+00:43:14,373 --> 00:43:17,040
+And maybe I want to make some other changes on my master branch.
+
+868
+00:43:17,040 --> 00:43:19,997
+Maybe I realized that I want to remove this extra punctuation.
+
+869
+00:43:19,997 --> 00:43:20,580
+You know what?
+
+870
+00:43:20,580 --> 00:43:22,290
+Two exclamation points with too many.
+
+871
+00:43:22,290 --> 00:43:25,130
+We'll remove-- now we just have one.
+
+872
+00:43:25,130 --> 00:43:26,810
+And now we'll commit these changes.
+
+873
+00:43:26,810 --> 00:43:32,420
+I'll say git commit and "Remove punctuation."
+
+874
+00:43:32,420 --> 00:43:37,680
+And now I've removed the punctuation only from the master branch.
+
+875
+00:43:37,680 --> 00:43:41,090
+So this master branch now has just a single exclamation point here,
+
+876
+00:43:41,090 --> 00:43:44,810
+but it still does have the inline styling.
+
+877
+00:43:44,810 --> 00:43:48,170
+So now what I'd like to do is merge in those changes
+
+878
+00:43:48,170 --> 00:43:49,850
+that I made from the other branch.
+
+879
+00:43:49,850 --> 00:43:52,520
+I'd like to take what I was working on in the style branch
+
+880
+00:43:52,520 --> 00:43:57,340
+and merge it into this current version of the repository on my master branch.
+
+881
+00:43:57,340 --> 00:44:01,220
+And in order to do that, the command we'll use is called git merge.
+
+882
+00:44:01,220 --> 00:44:02,750
+So git merge.
+
+883
+00:44:02,750 --> 00:44:06,380
+Notice that I am currently on the master branch, but if I run git
+
+884
+00:44:06,380 --> 00:44:11,750
+merge and then style, that is going to take whatever is on the style branch
+
+885
+00:44:11,750 --> 00:44:15,440
+and attempt to merge it into my current branch.
+
+886
+00:44:15,440 --> 00:44:19,220
+And what we'll find is we're able to get most of the way there,
+
+887
+00:44:19,220 --> 00:44:20,660
+but there's a merge conflict.
+
+888
+00:44:20,660 --> 00:44:22,743
+Now this won't happen all the time when you merge.
+
+889
+00:44:22,743 --> 00:44:24,590
+Sometimes, Git will be smart enough to know
+
+890
+00:44:24,590 --> 00:44:26,780
+that if one change has been made to one part of a file,
+
+891
+00:44:26,780 --> 00:44:29,697
+and one change has been made to another part of a file, when you merge
+
+892
+00:44:29,697 --> 00:44:32,720
+those changes back together, Git will resolve those merge conflicts
+
+893
+00:44:32,720 --> 00:44:33,870
+automatically.
+
+894
+00:44:33,870 --> 00:44:37,460
+But in this case, that wasn't the case, because both my style
+
+895
+00:44:37,460 --> 00:44:42,230
+branch and my master branch made changes to the same line of code,
+
+896
+00:44:42,230 --> 00:44:44,390
+and we'll see why if I go back here.
+
+897
+00:44:44,390 --> 00:44:46,430
+You'll notice that in the merged version,
+
+898
+00:44:46,430 --> 00:44:49,940
+we do see this style tag at the head of the page.
+
+899
+00:44:49,940 --> 00:44:52,550
+No problems, no conflict there, because that was just
+
+900
+00:44:52,550 --> 00:44:56,150
+lines that have been added to this page, so there was no conflict.
+
+901
+00:44:56,150 --> 00:44:58,730
+The conflict comes up here, which is where,
+
+902
+00:44:58,730 --> 00:45:02,660
+in my version on the master branch, I removed this punctuation
+
+903
+00:45:02,660 --> 00:45:05,870
+mark, whereas in the version on the style branch,
+
+904
+00:45:05,870 --> 00:45:11,270
+which we can see here by the word "style," we removed the inline styling.
+
+905
+00:45:11,270 --> 00:45:13,170
+So we need to resolve these somehow.
+
+906
+00:45:13,170 --> 00:45:16,160
+And what I'll ultimately do is just get rid of these style
+
+907
+00:45:16,160 --> 00:45:20,090
+markers or the conflict markers, and say, you know what?
+
+908
+00:45:20,090 --> 00:45:23,000
+I would like for the updated version not to have either,
+
+909
+00:45:23,000 --> 00:45:27,150
+not to have the inline styling, and not to have the additional punctuation.
+
+910
+00:45:27,150 --> 00:45:30,530
+So I have now made those changes, I have resolved the merge conflict,
+
+911
+00:45:30,530 --> 00:45:32,660
+and now I can commit.
+
+912
+00:45:32,660 --> 00:45:36,140
+I fixed the merge conflicts.
+
+913
+00:45:36,140 --> 00:45:41,030
+And that's the general workflow now of how branching in Git ultimately works.
+
+914
+00:45:41,030 --> 00:45:43,090
+When you're working on something new, you
+
+915
+00:45:43,090 --> 00:45:44,840
+might branch off in order to say you would
+
+916
+00:45:44,840 --> 00:45:48,560
+like to work on a different part of this web application.
+
+917
+00:45:48,560 --> 00:45:51,310
+You'll make changes, make commits, add changes to that new branch,
+
+918
+00:45:51,310 --> 00:45:54,268
+and when you're satisfied with those changes, when they're in the state
+
+919
+00:45:54,268 --> 00:45:56,990
+that you want them to be, you can then say merge them back
+
+920
+00:45:56,990 --> 00:45:59,720
+in to the original version of the repository.
+
+921
+00:45:59,720 --> 00:46:03,170
+Sometimes you'll have to deal with merge conflicts, though certainly not always.
+
+922
+00:46:03,170 --> 00:46:05,270
+And if you're careful about where you make changes
+
+923
+00:46:05,270 --> 00:46:09,080
+and trying to be careful not to make modifications to the same line of code
+
+924
+00:46:09,080 --> 00:46:13,040
+in two different places, you can reduce the likelihood of actually getting
+
+925
+00:46:13,040 --> 00:46:15,260
+a merge conflict, because Git ultimately is
+
+926
+00:46:15,260 --> 00:46:20,583
+quite smart about how it tries to deal with these sorts of issues.
+
+927
+00:46:20,583 --> 00:46:23,250
+And finally, we'll take a look at a couple of features of GitHub
+
+928
+00:46:23,250 --> 00:46:25,380
+specifically that can be quite helpful as you
+
+929
+00:46:25,380 --> 00:46:29,070
+begin to work on larger projects that have many different moving
+
+930
+00:46:29,070 --> 00:46:33,850
+pieces, the first of which is forking a GitHub repository.
+
+931
+00:46:33,850 --> 00:46:38,190
+So let's go to a GitHub repository and look at the GitHub repository
+
+932
+00:46:38,190 --> 00:46:40,350
+for Bootstrap, for example.
+
+933
+00:46:40,350 --> 00:46:45,450
+So Bootstrap, which is the CSS library that we took a look at last time,
+
+934
+00:46:45,450 --> 00:46:48,600
+is a library that gives us easy access to a whole bunch of different CSS
+
+935
+00:46:48,600 --> 00:46:51,570
+features, and the entire thing is open-source, meaning
+
+936
+00:46:51,570 --> 00:46:54,690
+all of the code for Bootstrap is publicly available for anyone
+
+937
+00:46:54,690 --> 00:46:57,930
+to look at, and more importantly, for anyone to contribute to,
+
+938
+00:46:57,930 --> 00:47:00,960
+that it's not just one person that's been working on all of Bootstrap,
+
+939
+00:47:00,960 --> 00:47:05,700
+but it's a community-driven repository that many people can be working on,
+
+940
+00:47:05,700 --> 00:47:08,700
+adding new features, and making fixes to Bootstrap's code,
+
+941
+00:47:08,700 --> 00:47:12,790
+and collaborating on them by taking advantage of the features of Git
+
+942
+00:47:12,790 --> 00:47:17,340
+And so if you find a Git repository that you would like to contribute to,
+
+943
+00:47:17,340 --> 00:47:20,490
+or if you want other people to be able to contribute to your repository,
+
+944
+00:47:20,490 --> 00:47:24,210
+one thing you can do is fork that repository, and by forking.
+
+945
+00:47:24,210 --> 00:47:28,050
+We mean making your own copy of the original repository.
+
+946
+00:47:28,050 --> 00:47:31,230
+And so up here in the upper right-hand corner of GitHub page
+
+947
+00:47:31,230 --> 00:47:35,970
+is a button called Fork, and we can see that right now, about 68,000 people
+
+948
+00:47:35,970 --> 00:47:38,400
+have already forked Bootstrap's repository,
+
+949
+00:47:38,400 --> 00:47:43,000
+made a copy of the repository into their own GitHub account.
+
+950
+00:47:43,000 --> 00:47:47,400
+And so we could fork it ourselves just by clicking on this button called Fork
+
+951
+00:47:47,400 --> 00:47:49,950
+and then getting our own version of the repository
+
+952
+00:47:49,950 --> 00:47:53,790
+that we can then clone and push and pull from as well.
+
+953
+00:47:53,790 --> 00:47:56,640
+The reason we might do that is that Bootstrap's repository,
+
+954
+00:47:56,640 --> 00:48:00,030
+while it is public, doesn't allow anyone to just push to it.
+
+955
+00:48:00,030 --> 00:48:02,340
+That would be probably unsafe if anyone in the world
+
+956
+00:48:02,340 --> 00:48:05,520
+could just update Bootstrap's master code, but what you can do
+
+957
+00:48:05,520 --> 00:48:09,240
+is copy the code, make a fork of it, make changes to it on your own,
+
+958
+00:48:09,240 --> 00:48:10,433
+push and pull to it.
+
+959
+00:48:10,433 --> 00:48:13,350
+And then, when you feel like you've made a contribution that you would
+
+960
+00:48:13,350 --> 00:48:15,960
+like to send back to Bootstrap, you can open
+
+961
+00:48:15,960 --> 00:48:19,860
+what's called a pull request, that you are requesting that your code be
+
+962
+00:48:19,860 --> 00:48:22,140
+pulled in to Bootstrap's code.
+
+963
+00:48:22,140 --> 00:48:25,740
+And we can look, for example, at Bootstrap's Pull Request tab.
+
+964
+00:48:25,740 --> 00:48:29,040
+It looks like right now there is 71 open pull requests.
+
+965
+00:48:29,040 --> 00:48:32,640
+There are 71 people that have made some fixes
+
+966
+00:48:32,640 --> 00:48:34,650
+or made some changes to Bootstrap's code,
+
+967
+00:48:34,650 --> 00:48:36,780
+and you can submit a pull request to say that you
+
+968
+00:48:36,780 --> 00:48:41,160
+would like to take those changes and merge them back in with Bootstrap's
+
+969
+00:48:41,160 --> 00:48:43,260
+actual code, and the people that maintain
+
+970
+00:48:43,260 --> 00:48:45,510
+Bootstrap's code in this particular repository
+
+971
+00:48:45,510 --> 00:48:49,440
+can review those pull requests, provide feedback, ask for additional changes,
+
+972
+00:48:49,440 --> 00:48:52,890
+and then when everyone's satisfied, they can merge those changes
+
+973
+00:48:52,890 --> 00:48:54,960
+into Bootstrap's actual code.
+
+974
+00:48:54,960 --> 00:48:57,990
+And this is one of the key benefits of open-source software,
+
+975
+00:48:57,990 --> 00:49:01,920
+the ability for multiple people to be working on the same piece of code,
+
+976
+00:49:01,920 --> 00:49:04,980
+and for a community to be able to collaborate on finding bugs
+
+977
+00:49:04,980 --> 00:49:07,950
+on figuring out what changes to make, on figuring out
+
+978
+00:49:07,950 --> 00:49:11,100
+how to improve upon an existing repository
+
+979
+00:49:11,100 --> 00:49:14,010
+and make it better moving forward.
+
+980
+00:49:14,010 --> 00:49:16,350
+And one final thing worth noting about GitHub
+
+981
+00:49:16,350 --> 00:49:18,930
+is an additional feature known as GitHub Pages.
+
+982
+00:49:18,930 --> 00:49:21,720
+GitHub Pages is a free way that GitHub provides
+
+983
+00:49:21,720 --> 00:49:24,240
+to be able to quickly take a website with HTML,
+
+984
+00:49:24,240 --> 00:49:26,850
+and CSS, and maybe even a little bit of JavaScript,
+
+985
+00:49:26,850 --> 00:49:29,340
+and deploy it to the internet for anyone to look at.
+
+986
+00:49:29,340 --> 00:49:33,420
+And anyone with a GitHub account is allowed to create a GitHub Pages
+
+987
+00:49:33,420 --> 00:49:34,970
+website for free.
+
+988
+00:49:34,970 --> 00:49:36,370
+And in order to do so--
+
+989
+00:49:36,370 --> 00:49:38,340
+we can demonstrate it now--
+
+990
+00:49:38,340 --> 00:49:43,830
+all you need to do in GitHub is let's create a new repository
+
+991
+00:49:43,830 --> 00:49:44,960
+that we'll call--
+
+992
+00:49:44,960 --> 00:49:50,310
+it should generally be your user name, .github.io is the conventional name
+
+993
+00:49:50,310 --> 00:49:53,190
+for your GitHub Pages site, though it can have other names.
+
+994
+00:49:53,190 --> 00:49:56,290
+You'll just have to manually turn on GitHub Pages.
+
+995
+00:49:56,290 --> 00:49:59,440
+And we'll go ahead and create this repository now.
+
+996
+00:49:59,440 --> 00:50:04,110
+If you create a get up repository called your username, .github.io,
+
+997
+00:50:04,110 --> 00:50:07,030
+it will automatically be supporting GitHub Pages,
+
+998
+00:50:07,030 --> 00:50:12,490
+and what that means is that I can take this URL and I can clone it.
+
+999
+00:50:12,490 --> 00:50:17,680
+So I can say git clone, followed by this URL.
+
+1000
+00:50:17,680 --> 00:50:21,940
+I've cloned an empty repository, but I can go into this repository
+
+1001
+00:50:21,940 --> 00:50:23,800
+and add some files to it.
+
+1002
+00:50:23,800 --> 00:50:30,750
+I can say, let's add, by default, it's called an index.html file,
+
+1003
+00:50:30,750 --> 00:50:34,130
+and I'll create an HTML file.
+
+1004
+00:50:34,130 --> 00:50:35,690
+That is my site.
+
+1005
+00:50:35,690 --> 00:50:43,310
+And the body of it will just say, "This is my GitHub Pages website."
+
+1006
+00:50:43,310 --> 00:50:45,960
+So something like that, something simple.
+
+1007
+00:50:45,960 --> 00:50:49,540
+But it can certainly be more complex if you want it to be.
+
+1008
+00:50:49,540 --> 00:50:54,490
+Inside my terminal, I will git add this index.html file,
+
+1009
+00:50:54,490 --> 00:50:55,660
+and I'll make a commit.
+
+1010
+00:50:55,660 --> 00:50:58,327
+And often, the first commit, you'll just, in the commit message,
+
+1011
+00:50:58,327 --> 00:51:01,890
+write "First commit," so that we know it was the first commit,
+
+1012
+00:51:01,890 --> 00:51:04,590
+and then I'll push those changes to GitHub now.
+
+1013
+00:51:04,590 --> 00:51:07,250
+
+
+1014
+00:51:07,250 --> 00:51:10,760
+So if you push your changes to a repository called your username,
+
+1015
+00:51:10,760 --> 00:51:18,060
+.github.io, then if you take a look at the settings and scroll down,
+
+1016
+00:51:18,060 --> 00:51:22,700
+you'll see that GitHub Pages is by default ready to be published.
+
+1017
+00:51:22,700 --> 00:51:27,980
+And now if I click on this URL my username, .github.io,
+
+1018
+00:51:27,980 --> 00:51:31,550
+you'll see deployed to the internet, such that anyone can go to this URL
+
+1019
+00:51:31,550 --> 00:51:32,420
+and see it.
+
+1020
+00:51:32,420 --> 00:51:35,780
+They'll see a big heading that says "This is my GitHub page's website,"
+
+1021
+00:51:35,780 --> 00:51:39,320
+because this is the way the browser is rendering the HTML that I
+
+1022
+00:51:39,320 --> 00:51:41,777
+pushed to my GitHub Pages repository.
+
+1023
+00:51:41,777 --> 00:51:43,610
+And the advantage of doing this is that it's
+
+1024
+00:51:43,610 --> 00:51:46,610
+very easy now to be able to quickly update my website.
+
+1025
+00:51:46,610 --> 00:51:50,300
+All I need to do is if I make a new change, I can commit that change,
+
+1026
+00:51:50,300 --> 00:51:54,140
+push that change to GitHub, and when GitHub detects that I've made a push
+
+1027
+00:51:54,140 --> 00:51:58,460
+to my GitHub Pages repository, then it will update my website that anyone
+
+1028
+00:51:58,460 --> 00:52:02,578
+in the world can access by going to my username, .github.io.
+
+1029
+00:52:02,578 --> 00:52:05,120
+And this allows you to leverage all of these features of Git,
+
+1030
+00:52:05,120 --> 00:52:08,630
+the ability to branch, the ability to work on different features of your web
+
+1031
+00:52:08,630 --> 00:52:13,550
+page at different times, and revert back to different versions of the code
+
+1032
+00:52:13,550 --> 00:52:14,910
+as well.
+
+1033
+00:52:14,910 --> 00:52:18,140
+So all in all, Git has given us a number of very powerful tools
+
+1034
+00:52:18,140 --> 00:52:22,190
+that's given us the ability now to be able to very quickly and very easily
+
+1035
+00:52:22,190 --> 00:52:24,410
+keep track of any changes we make to code,
+
+1036
+00:52:24,410 --> 00:52:27,830
+keep track of when a piece of code is updated, and to quickly revert back
+
+1037
+00:52:27,830 --> 00:52:30,290
+and look at old versions of that code if need be,
+
+1038
+00:52:30,290 --> 00:52:33,950
+and in particular, it's given us the ability to take our code
+
+1039
+00:52:33,950 --> 00:52:36,140
+and work together with other people on it,
+
+1040
+00:52:36,140 --> 00:52:39,080
+such that we can be working on multiple parts of the same project,
+
+1041
+00:52:39,080 --> 00:52:41,270
+and someone else working on the same project
+
+1042
+00:52:41,270 --> 00:52:45,060
+can also be working on multiple parts of the same project on different branches,
+
+1043
+00:52:45,060 --> 00:52:48,720
+and it's very easy then to sync up our changes in order to work together.
+
+1044
+00:52:48,720 --> 00:52:50,870
+And so Git is a very popular tool used, not only in
+
+1045
+00:52:50,870 --> 00:52:53,150
+the world of web programming, but especially whenever
+
+1046
+00:52:53,150 --> 00:52:56,660
+dealing with any kind of larger project, where multiple people might be working
+
+1047
+00:52:56,660 --> 00:52:58,850
+on the same thing simultaneously, Git will
+
+1048
+00:52:58,850 --> 00:53:02,390
+enable us to more easily develop our web applications
+
+1049
+00:53:02,390 --> 00:53:04,280
+over the course of this term.
+
+1050
+00:53:04,280 --> 00:53:07,490
+Next time, we'll take a look at Python, which is one of the first programming
+
+1051
+00:53:07,490 --> 00:53:10,640
+languages that we'll use as we continue on our journey towards building
+
+1052
+00:53:10,640 --> 00:53:12,500
+more sophisticated web applications.
+
+1053
+00:53:12,500 --> 00:53:14,320
+I'll see you then.
+
+1054
+00:53:14,320 --> 00:53:15,000
+
+

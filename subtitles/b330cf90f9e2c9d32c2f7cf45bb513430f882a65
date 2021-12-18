@@ -1,0 +1,7840 @@
+0
+00:00:00,000 --> 00:00:02,435
+[MUSIC PLAYING]
+
+1
+00:00:02,435 --> 00:00:17,837
+
+
+2
+00:00:17,837 --> 00:00:21,170
+BRIAN YU: Welcome back, everyone, to Web Programming with Python and JavaScript.
+
+3
+00:00:21,170 --> 00:00:23,380
+And last time, we took a look at JavaScript--
+
+4
+00:00:23,380 --> 00:00:26,950
+that language that ran inside of a user's web browser, client side,
+
+5
+00:00:26,950 --> 00:00:30,700
+and allowed us to do a number of things to make our web pages more interactive.
+
+6
+00:00:30,700 --> 00:00:33,340
+JavaScript enabled us to display alerts, to be
+
+7
+00:00:33,340 --> 00:00:36,340
+able to manipulate the DOM, the structure of the web page,
+
+8
+00:00:36,340 --> 00:00:39,770
+in order to add content or see what content was already there.
+
+9
+00:00:39,770 --> 00:00:42,100
+And it also let us respond to user events.
+
+10
+00:00:42,100 --> 00:00:45,490
+When a user clicked on a button or submitted a form or typed something
+
+11
+00:00:45,490 --> 00:00:47,980
+into an input field, we could have JavaScript functions
+
+12
+00:00:47,980 --> 00:00:50,410
+run that responded to those events in order
+
+13
+00:00:50,410 --> 00:00:52,570
+to make our web pages more interactive.
+
+14
+00:00:52,570 --> 00:00:55,660
+Today, we're going to continue that conversation, in particular taking
+
+15
+00:00:55,660 --> 00:00:59,290
+a look at user interface design, looking at some common paradigms in terms
+
+16
+00:00:59,290 --> 00:01:02,260
+of user interfaces and how we can leverage JavaScript
+
+17
+00:01:02,260 --> 00:01:06,640
+to be able to achieve those goals to create interactive user interfaces that
+
+18
+00:01:06,640 --> 00:01:10,370
+will be valuable when users are interacting with our applications.
+
+19
+00:01:10,370 --> 00:01:14,080
+So one of the more common paradigms, especially nowadays, in web programming
+
+20
+00:01:14,080 --> 00:01:17,140
+is the idea of single-page applications.
+
+21
+00:01:17,140 --> 00:01:19,630
+Thus far, if we've wanted to create a web application that
+
+22
+00:01:19,630 --> 00:01:22,150
+has multiple different pages, we've generally
+
+23
+00:01:22,150 --> 00:01:25,240
+done that via multiple different routes in our Django web application,
+
+24
+00:01:25,240 --> 00:01:28,510
+for example, where you go to slash something to get one page
+
+25
+00:01:28,510 --> 00:01:31,700
+and slash something else in order to get another page.
+
+26
+00:01:31,700 --> 00:01:34,150
+But commonly, using JavaScript, we have the ability
+
+27
+00:01:34,150 --> 00:01:37,840
+to create single-page applications where the entire web page is really
+
+28
+00:01:37,840 --> 00:01:41,560
+just a single page, and then we use JavaScript to manipulate the DOM,
+
+29
+00:01:41,560 --> 00:01:44,740
+to replace portions of the page with things we want to replace.
+
+30
+00:01:44,740 --> 00:01:47,890
+And this has a number of advantages, one of them being that we only
+
+31
+00:01:47,890 --> 00:01:51,650
+need to make modifications to the part of the page that is actually changing.
+
+32
+00:01:51,650 --> 00:01:53,960
+If, for example, you have five different pages,
+
+33
+00:01:53,960 --> 00:01:55,960
+but the general layout and structure of the page
+
+34
+00:01:55,960 --> 00:01:58,360
+is pretty similar, when you switch between pages
+
+35
+00:01:58,360 --> 00:02:00,640
+rather than load an entirely new page, you
+
+36
+00:02:00,640 --> 00:02:02,870
+can just load the part of the page that is changing.
+
+37
+00:02:02,870 --> 00:02:05,170
+And this is especially helpful for applications
+
+38
+00:02:05,170 --> 00:02:07,010
+that are changing quite frequently.
+
+39
+00:02:07,010 --> 00:02:09,800
+So let's take a look now at how we could implement, for example,
+
+40
+00:02:09,800 --> 00:02:12,800
+a very simple single-page application.
+
+41
+00:02:12,800 --> 00:02:16,660
+So let's imagine, for example, that we want a single-page application that
+
+42
+00:02:16,660 --> 00:02:21,500
+just displays three different pages, but all included in the same page.
+
+43
+00:02:21,500 --> 00:02:26,410
+I'll go ahead and create a new file that I'll call singlepage.html,
+
+44
+00:02:26,410 --> 00:02:29,500
+inside of which we'll include our usual HTML tags.
+
+45
+00:02:29,500 --> 00:02:33,360
+
+
+46
+00:02:33,360 --> 00:02:35,850
+And inside the body of this page now, I'm
+
+47
+00:02:35,850 --> 00:02:38,430
+going to include three different sections of the page
+
+48
+00:02:38,430 --> 00:02:42,430
+to represent the three different pages I might want to display to the user.
+
+49
+00:02:42,430 --> 00:02:46,290
+So I'll have a div whose ID is page1 that maybe just has
+
+50
+00:02:46,290 --> 00:02:47,940
+a heading that says "This is page 1."
+
+51
+00:02:47,940 --> 00:02:50,690
+And you could imagine there's more content on these pages as well.
+
+52
+00:02:50,690 --> 00:02:53,130
+A div whose ID is page2.
+
+53
+00:02:53,130 --> 00:02:55,980
+We'll say, "This is page 2."
+
+54
+00:02:55,980 --> 00:02:59,580
+And then one final div whose ID is page3.
+
+55
+00:02:59,580 --> 00:03:03,180
+It has a heading that says "This is page 3," for example.
+
+56
+00:03:03,180 --> 00:03:07,770
+Now, right now if I were to open up singlepage.html, what we'd see
+
+57
+00:03:07,770 --> 00:03:10,200
+is we see all three pages at the same time.
+
+58
+00:03:10,200 --> 00:03:12,310
+I know that's probably not what we want.
+
+59
+00:03:12,310 --> 00:03:14,970
+What we really want is by default to hide these pages
+
+60
+00:03:14,970 --> 00:03:18,520
+until we want to view the pages one at a time, for example.
+
+61
+00:03:18,520 --> 00:03:22,500
+So one thing I could do is use CSS to be able to toggle whether or not
+
+62
+00:03:22,500 --> 00:03:24,720
+something is visible, adding some style tags
+
+63
+00:03:24,720 --> 00:03:28,650
+to my page to say that by default, all of my divs
+
+64
+00:03:28,650 --> 00:03:32,790
+should have a display property set to none, meaning they're not visible,
+
+65
+00:03:32,790 --> 00:03:35,560
+they're not displayed on the screen.
+
+66
+00:03:35,560 --> 00:03:38,970
+Now, if I refresh the page, I don't actually see any of the three headings
+
+67
+00:03:38,970 --> 00:03:40,470
+that I had there before.
+
+68
+00:03:40,470 --> 00:03:42,370
+But what I'd really like is for some buttons
+
+69
+00:03:42,370 --> 00:03:45,000
+now to allow me to toggle between these three pages.
+
+70
+00:03:45,000 --> 00:03:46,680
+So I'll give myself three buttons--
+
+71
+00:03:46,680 --> 00:03:50,520
+one button that says Page 1, one button that says Page 2,
+
+72
+00:03:50,520 --> 00:03:53,590
+and one button that says Page 3 for example.
+
+73
+00:03:53,590 --> 00:03:55,530
+And I need some mechanism for these buttons
+
+74
+00:03:55,530 --> 00:03:59,290
+to know when you click on this button, what page should be displayed.
+
+75
+00:03:59,290 --> 00:04:01,260
+So I'll go ahead and use data attributes, which
+
+76
+00:04:01,260 --> 00:04:04,980
+we saw last time with JavaScript, to add some additional information
+
+77
+00:04:04,980 --> 00:04:07,530
+to these particular HTML elements, where I'll
+
+78
+00:04:07,530 --> 00:04:12,090
+give the first button a data-page value of page1,
+
+79
+00:04:12,090 --> 00:04:15,330
+the second one a data-page value of page2,
+
+80
+00:04:15,330 --> 00:04:19,050
+and the third one a data-page value of page3.
+
+81
+00:04:19,050 --> 00:04:21,899
+Here, again, just providing information so that later,
+
+82
+00:04:21,899 --> 00:04:24,900
+when I write some JavaScript, I can have the JavaScript code look
+
+83
+00:04:24,900 --> 00:04:28,740
+at the data-page attribute to say that when you click on this button,
+
+84
+00:04:28,740 --> 00:04:32,160
+you should let me see the div whose ID is page1.
+
+85
+00:04:32,160 --> 00:04:35,380
+That's what this is going to allow us to signal.
+
+86
+00:04:35,380 --> 00:04:38,940
+So now let's go ahead and write that JavaScript.
+
+87
+00:04:38,940 --> 00:04:41,370
+What I want to be able to do is to be able to say,
+
+88
+00:04:41,370 --> 00:04:44,940
+I would like to show page 1 and hide the other two, or show page 2
+
+89
+00:04:44,940 --> 00:04:47,620
+and hide the other two, or show page 3, for example.
+
+90
+00:04:47,620 --> 00:04:50,620
+And so to do that, I'll first write a function that will let me do that.
+
+91
+00:04:50,620 --> 00:04:53,130
+I'll write a function called showPage that
+
+92
+00:04:53,130 --> 00:04:56,470
+takes as its argument what page I want to show.
+
+93
+00:04:56,470 --> 00:04:58,660
+And so what should this function do?
+
+94
+00:04:58,660 --> 00:05:02,520
+Well, what we're going to do is we're going to say document.querySelector.
+
+95
+00:05:02,520 --> 00:05:07,110
+And I want to get the thing that has a particular ID the ID of whatever
+
+96
+00:05:07,110 --> 00:05:08,190
+this input happens to be.
+
+97
+00:05:08,190 --> 00:05:12,160
+This page is going to represent the ID of the div that I want to show.
+
+98
+00:05:12,160 --> 00:05:14,550
+So I'll say, get me the thing that has this ID.
+
+99
+00:05:14,550 --> 00:05:16,890
+And then using a template literal, I'll say, all right,
+
+100
+00:05:16,890 --> 00:05:22,450
+get me the ID of page, whatever element has that particular ID.
+
+101
+00:05:22,450 --> 00:05:24,420
+And then I'd like to change its style property.
+
+102
+00:05:24,420 --> 00:05:25,530
+Which part of the style?
+
+103
+00:05:25,530 --> 00:05:27,540
+Well, I want to change its display property.
+
+104
+00:05:27,540 --> 00:05:30,180
+And instead of none, which was the default here,
+
+105
+00:05:30,180 --> 00:05:33,450
+where I said don't show it at all, the other option for a div
+
+106
+00:05:33,450 --> 00:05:36,450
+is block, meaning it shows up as just a block that is
+
+107
+00:05:36,450 --> 00:05:39,480
+on the page that is actually visible.
+
+108
+00:05:39,480 --> 00:05:41,580
+And so now I have this showPage function.
+
+109
+00:05:41,580 --> 00:05:42,910
+And I can test it, in fact.
+
+110
+00:05:42,910 --> 00:05:46,470
+If I go into my browser, refresh the page, I now see three buttons.
+
+111
+00:05:46,470 --> 00:05:48,880
+The buttons don't do anything just yet.
+
+112
+00:05:48,880 --> 00:05:52,050
+But what I can do is in the console, if I actually just try running this,
+
+113
+00:05:52,050 --> 00:05:56,790
+I can run the showPage function and say, like, showPage("page1"), for example,
+
+114
+00:05:56,790 --> 00:05:58,230
+press Return, and all right.
+
+115
+00:05:58,230 --> 00:06:00,390
+Page 1 now appears on my page.
+
+116
+00:06:00,390 --> 00:06:04,833
+And if I [INAUDIBLE] showPage("page2"), then page 2 will become visible.
+
+117
+00:06:04,833 --> 00:06:06,750
+And all right, that did half of what I wanted.
+
+118
+00:06:06,750 --> 00:06:09,810
+Page 2 is now visible, but so is page 1.
+
+119
+00:06:09,810 --> 00:06:12,750
+So I probably want it such that if I ever show a page,
+
+120
+00:06:12,750 --> 00:06:14,310
+I hide the other pages first.
+
+121
+00:06:14,310 --> 00:06:17,970
+Like, hide all the pages and then show page 2, or hide all the pages
+
+122
+00:06:17,970 --> 00:06:19,650
+and then show page 3.
+
+123
+00:06:19,650 --> 00:06:21,760
+So how could I go about doing that?
+
+124
+00:06:21,760 --> 00:06:24,900
+Well, first, I might want to just, when I show a page, first
+
+125
+00:06:24,900 --> 00:06:26,310
+hide all of the other pages.
+
+126
+00:06:26,310 --> 00:06:27,540
+Hide all the pages.
+
+127
+00:06:27,540 --> 00:06:32,310
+So to get all the pages, I'll do document.querySelectorAll.
+
+128
+00:06:32,310 --> 00:06:36,420
+Get all of the divs, which is what I'm using to enclose the pages.
+
+129
+00:06:36,420 --> 00:06:40,170
+And now for each one of those-- again, effectively creating a loop where
+
+130
+00:06:40,170 --> 00:06:42,210
+I'm looping over each of the divs--
+
+131
+00:06:42,210 --> 00:06:46,740
+for each div, let's go ahead and set the div.style.display display
+
+132
+00:06:46,740 --> 00:06:49,870
+property equal to none.
+
+133
+00:06:49,870 --> 00:06:52,140
+And so what this showPage function is now doing
+
+134
+00:06:52,140 --> 00:06:55,260
+is it is first querying for all of the divs, which
+
+135
+00:06:55,260 --> 00:06:58,472
+are simulating my pages inside of this single-page application.
+
+136
+00:06:58,472 --> 00:07:00,180
+And for each one of the divs, we're going
+
+137
+00:07:00,180 --> 00:07:04,378
+to pass it as input into this function, which is the argument to forEach,
+
+138
+00:07:04,378 --> 00:07:07,170
+again using this arrow function notation, which is just a shorthand
+
+139
+00:07:07,170 --> 00:07:09,150
+way of expressing a function.
+
+140
+00:07:09,150 --> 00:07:11,250
+Where I'm here saying that for each of the div,
+
+141
+00:07:11,250 --> 00:07:13,260
+we'll go ahead and modify its style property,
+
+142
+00:07:13,260 --> 00:07:17,520
+setting display equal to none, meaning don't show any of the divs,
+
+143
+00:07:17,520 --> 00:07:21,130
+and then show only the div that was requested.
+
+144
+00:07:21,130 --> 00:07:24,210
+So now this should solve the problem of multiple pages appearing
+
+145
+00:07:24,210 --> 00:07:25,410
+simultaneously.
+
+146
+00:07:25,410 --> 00:07:31,350
+But if I go back to this page and I click or write showPage("page1"),
+
+147
+00:07:31,350 --> 00:07:32,840
+then page 1 appears.
+
+148
+00:07:32,840 --> 00:07:38,900
+But if I run showPage of page 2, then page 2 appears but page 1 disappears.
+
+149
+00:07:38,900 --> 00:07:43,160
+And likewise, when I ShowPage("page3"), that shows page 3,
+
+150
+00:07:43,160 --> 00:07:44,490
+but not the other two.
+
+151
+00:07:44,490 --> 00:07:48,090
+So I can manipulate which page is visible all via the console,
+
+152
+00:07:48,090 --> 00:07:50,840
+but now what I'd like to do is get these buttons to actually work,
+
+153
+00:07:50,840 --> 00:07:53,810
+where if I click on one of the buttons, that has the effect of actually
+
+154
+00:07:53,810 --> 00:07:56,790
+displaying the requested page.
+
+155
+00:07:56,790 --> 00:08:00,110
+So in order to do that, well, I want to attach some event listeners
+
+156
+00:08:00,110 --> 00:08:03,410
+to these buttons, which means I need to wait until those buttons have loaded
+
+157
+00:08:03,410 --> 00:08:04,680
+onto the page.
+
+158
+00:08:04,680 --> 00:08:10,070
+So we'll use document.addEventLis tener('DOMContentLoaded'), again,
+
+159
+00:08:10,070 --> 00:08:13,710
+waiting until all of the content on the page has been loaded.
+
+160
+00:08:13,710 --> 00:08:17,660
+And then and only then will I say, let's go ahead
+
+161
+00:08:17,660 --> 00:08:21,650
+and querySelectorAll for all of the buttons.
+
+162
+00:08:21,650 --> 00:08:25,948
+And for each one of those buttons, let's go ahead and attach an event listener
+
+163
+00:08:25,948 --> 00:08:26,990
+to each of those buttons.
+
+164
+00:08:26,990 --> 00:08:30,650
+So I'm querying for all of the buttons and saying, for each of the buttons,
+
+165
+00:08:30,650 --> 00:08:32,370
+I would like to do this with each button.
+
+166
+00:08:32,370 --> 00:08:35,539
+And what I'd like to do is say button.onClick.
+
+167
+00:08:35,539 --> 00:08:39,450
+When the button is clicked on, go ahead and run this function.
+
+168
+00:08:39,450 --> 00:08:42,620
+I'd like to showPage, and which page do I want to show?
+
+169
+00:08:42,620 --> 00:08:47,990
+Well, I want to show whatever page is in the page part of the buttons data set.
+
+170
+00:08:47,990 --> 00:08:51,110
+And to get it the current button, the button that has been clicked on,
+
+171
+00:08:51,110 --> 00:08:53,330
+recall that when we're inside of an event handler,
+
+172
+00:08:53,330 --> 00:08:55,290
+we can take advantage of the JavaScript keyword
+
+173
+00:08:55,290 --> 00:08:58,670
+this, which refers to whatever element has received the event,
+
+174
+00:08:58,670 --> 00:09:01,360
+so whatever button, in this case, that was clicked on.
+
+175
+00:09:01,360 --> 00:09:06,050
+So I can say this.dataset.page to mean that all right,
+
+176
+00:09:06,050 --> 00:09:09,200
+for each of the buttons, when the button is clicked on-- we're saying
+
+177
+00:09:09,200 --> 00:09:11,540
+button.onClick for each of the buttons--
+
+178
+00:09:11,540 --> 00:09:13,490
+run this function when the button is clicked.
+
+179
+00:09:13,490 --> 00:09:14,870
+We'd like to show a page.
+
+180
+00:09:14,870 --> 00:09:16,370
+Which page do we want to show?
+
+181
+00:09:16,370 --> 00:09:19,730
+We'll take this button, the button that received the event,
+
+182
+00:09:19,730 --> 00:09:23,660
+access its data properties, access its data page attribute,
+
+183
+00:09:23,660 --> 00:09:27,410
+which are down here-- either page1 or page2 or page3--
+
+184
+00:09:27,410 --> 00:09:32,910
+and go ahead and just call the showPage function that we wrote a moment ago.
+
+185
+00:09:32,910 --> 00:09:36,080
+So now that we've done that, we've attached these event handlers
+
+186
+00:09:36,080 --> 00:09:37,260
+to the buttons.
+
+187
+00:09:37,260 --> 00:09:40,460
+So now if I refresh the page, I can click on these buttons
+
+188
+00:09:40,460 --> 00:09:43,940
+and toggle between any of the three pages.
+
+189
+00:09:43,940 --> 00:09:46,490
+And now the interesting thing here is that we now
+
+190
+00:09:46,490 --> 00:09:48,740
+have the ability to just, in a single page,
+
+191
+00:09:48,740 --> 00:09:52,970
+allow myself to simulate the idea of having multiple pages, all enclosed
+
+192
+00:09:52,970 --> 00:09:56,330
+in a single HTML file but not needing to consistently make
+
+193
+00:09:56,330 --> 00:10:00,030
+additional requests to a server in order to get access to that information.
+
+194
+00:10:00,030 --> 00:10:02,810
+Now, sometimes, though, it might be reasonable to want
+
+195
+00:10:02,810 --> 00:10:04,130
+to reach out to a server--
+
+196
+00:10:04,130 --> 00:10:06,600
+when you need new information for a page, for example.
+
+197
+00:10:06,600 --> 00:10:09,770
+You might imagine that each of these pages contains a lot of text.
+
+198
+00:10:09,770 --> 00:10:12,290
+It's going to be inefficient if immediately, we're
+
+199
+00:10:12,290 --> 00:10:15,860
+loading all of that data into HTML and just showing and hiding them
+
+200
+00:10:15,860 --> 00:10:18,080
+when we need to, because maybe we're loading
+
+201
+00:10:18,080 --> 00:10:20,913
+more information than the user is ever going to actually care about,
+
+202
+00:10:20,913 --> 00:10:23,690
+if they're never going to look at page 2 or page 3.
+
+203
+00:10:23,690 --> 00:10:27,440
+So one thing we might imagine doing is loading this data dynamically.
+
+204
+00:10:27,440 --> 00:10:29,510
+Last time when we were talking about JavaScript,
+
+205
+00:10:29,510 --> 00:10:32,060
+we saw how we could use fetch to say go ahead
+
+206
+00:10:32,060 --> 00:10:35,450
+and request some additional information from a web server-- last time,
+
+207
+00:10:35,450 --> 00:10:37,130
+it was currency exchange rates.
+
+208
+00:10:37,130 --> 00:10:39,560
+But then we used that data that came back in order
+
+209
+00:10:39,560 --> 00:10:41,930
+to fill in something onto our page.
+
+210
+00:10:41,930 --> 00:10:44,180
+And likewise, we could do a similar thing here--
+
+211
+00:10:44,180 --> 00:10:47,270
+that if we have the general structure of a single page
+
+212
+00:10:47,270 --> 00:10:50,870
+and we want to load new content, rather than load entirely
+
+213
+00:10:50,870 --> 00:10:53,660
+new HTML content and reload the entire page,
+
+214
+00:10:53,660 --> 00:10:57,710
+we can just ask our own web server for what part of the page
+
+215
+00:10:57,710 --> 00:11:01,887
+needs to change and then just replace that part of the page.
+
+216
+00:11:01,887 --> 00:11:03,720
+And so that's what we'll take a look at now,
+
+217
+00:11:03,720 --> 00:11:07,190
+now combining Django for our server and JavaScript
+
+218
+00:11:07,190 --> 00:11:09,920
+for writing the client-side code to be able to generate
+
+219
+00:11:09,920 --> 00:11:11,880
+a single-page application.
+
+220
+00:11:11,880 --> 00:11:14,130
+And so for this, we'll go ahead and go into an example
+
+221
+00:11:14,130 --> 00:11:17,120
+I had in advance called singlepage1.
+
+222
+00:11:17,120 --> 00:11:20,330
+And inside of singlepage1, this is just a Django application
+
+223
+00:11:20,330 --> 00:11:22,650
+with a single app called singlepage.
+
+224
+00:11:22,650 --> 00:11:25,610
+And what we'll notice is we'll go to the URLs first.
+
+225
+00:11:25,610 --> 00:11:27,170
+There are two URLs--
+
+226
+00:11:27,170 --> 00:11:31,100
+one default URL that just loads the index function, and then a URL
+
+227
+00:11:31,100 --> 00:11:34,730
+for loading different sections of a page that I might want to dynamically load,
+
+228
+00:11:34,730 --> 00:11:35,430
+for example.
+
+229
+00:11:35,430 --> 00:11:38,670
+So I have sections/ some particular number.
+
+230
+00:11:38,670 --> 00:11:41,930
+And if we look at the views for what it is these URLs are actually doing,
+
+231
+00:11:41,930 --> 00:11:45,770
+the index function just returns index.html.
+
+232
+00:11:45,770 --> 00:11:47,930
+And then what the section function does is
+
+233
+00:11:47,930 --> 00:11:50,270
+it first makes sure the number is between 1 and 3,
+
+234
+00:11:50,270 --> 00:11:55,960
+and if so, responds with one of these just strings of text, for example.
+
+235
+00:11:55,960 --> 00:11:57,410
+So how does this actually work?
+
+236
+00:11:57,410 --> 00:12:04,250
+If I go into singlepage1 and run the server,
+
+237
+00:12:04,250 --> 00:12:08,690
+if I go to this URL /sections/1, for example,
+
+238
+00:12:08,690 --> 00:12:11,730
+what I get is this block of text.
+
+239
+00:12:11,730 --> 00:12:15,320
+And if I go to /sections/2, I get that block of text.
+
+240
+00:12:15,320 --> 00:12:18,120
+/sections/3, a different block of text altogether.
+
+241
+00:12:18,120 --> 00:12:23,090
+So just different text, and I'd like to incorporate this text into an existing
+
+242
+00:12:23,090 --> 00:12:25,350
+HTML page, for instance.
+
+243
+00:12:25,350 --> 00:12:28,640
+So here, I'll go into index.html, this template that gets
+
+244
+00:12:28,640 --> 00:12:31,850
+loaded when I go to the default route.
+
+245
+00:12:31,850 --> 00:12:36,740
+And inside of index.html, what we'll see is
+
+246
+00:12:36,740 --> 00:12:39,080
+I have a showSection function that behaves
+
+247
+00:12:39,080 --> 00:12:42,890
+very similar to the showPage function we saw from a moment ago,
+
+248
+00:12:42,890 --> 00:12:45,110
+but instead, what showSection is going to do
+
+249
+00:12:45,110 --> 00:12:47,960
+is it's going to fetch what text I should display
+
+250
+00:12:47,960 --> 00:12:49,970
+on the page from my own web server.
+
+251
+00:12:49,970 --> 00:12:56,840
+I'm fetching from /sections/ fill in a number here, number 1 or 2 or 3.
+
+252
+00:12:56,840 --> 00:12:59,180
+When I get the response, in the past we've
+
+253
+00:12:59,180 --> 00:13:01,460
+seen how we can convert that response into JSON data,
+
+254
+00:13:01,460 --> 00:13:02,870
+if it's unstructured data.
+
+255
+00:13:02,870 --> 00:13:06,350
+We can also just convert the response into plain text.
+
+256
+00:13:06,350 --> 00:13:09,140
+Then I'll take that text, console.log it just
+
+257
+00:13:09,140 --> 00:13:10,910
+so we can see it in the log output.
+
+258
+00:13:10,910 --> 00:13:14,300
+But then go ahead and query select for the content of the page, something
+
+259
+00:13:14,300 --> 00:13:17,630
+that has an ID of content, update its inner HTML,
+
+260
+00:13:17,630 --> 00:13:19,460
+and set it equal to that text.
+
+261
+00:13:19,460 --> 00:13:21,530
+So what this entire function is now doing
+
+262
+00:13:21,530 --> 00:13:23,840
+is it is going to reach out to my server,
+
+263
+00:13:23,840 --> 00:13:26,960
+figure out what text content belongs in the new section,
+
+264
+00:13:26,960 --> 00:13:31,130
+and fill in the part of my page accordingly with the text that
+
+265
+00:13:31,130 --> 00:13:34,220
+comes back from that HTTP request.
+
+266
+00:13:34,220 --> 00:13:36,920
+And then down further below, inside of the page,
+
+267
+00:13:36,920 --> 00:13:40,670
+we'll see that I have a Hello heading, three buttons that
+
+268
+00:13:40,670 --> 00:13:42,590
+toggle between the different sections.
+
+269
+00:13:42,590 --> 00:13:45,380
+Each of them has a data-section attribute this time
+
+270
+00:13:45,380 --> 00:13:47,250
+for which section should be loaded.
+
+271
+00:13:47,250 --> 00:13:52,710
+And then a div that is initially blank just for the content of the page.
+
+272
+00:13:52,710 --> 00:13:56,180
+So putting this all together now, if I go to the default route,
+
+273
+00:13:56,180 --> 00:13:58,340
+I see "Hello!" plus three buttons to give me
+
+274
+00:13:58,340 --> 00:14:00,330
+a choice between three different sections.
+
+275
+00:14:00,330 --> 00:14:03,710
+And if I click Section 1, what's going to happen is JavaScript is going
+
+276
+00:14:03,710 --> 00:14:07,460
+to query /sections/1, ask for the text.
+
+277
+00:14:07,460 --> 00:14:11,270
+It gets that text back, and it's going to fill it in into the page--
+
+278
+00:14:11,270 --> 00:14:14,750
+Section 1, Section 2, and Section 3.
+
+279
+00:14:14,750 --> 00:14:17,670
+So very similar to before, but unlike what we had before,
+
+280
+00:14:17,670 --> 00:14:21,080
+where all of the text was being loaded into the HTML page all at once,
+
+281
+00:14:21,080 --> 00:14:25,160
+now we're using asynchronous JavaScript to only dynamically load
+
+282
+00:14:25,160 --> 00:14:26,540
+information when we need it.
+
+283
+00:14:26,540 --> 00:14:28,462
+When we click on a section, then it's going
+
+284
+00:14:28,462 --> 00:14:30,920
+to make the request for what content needs to be filled in,
+
+285
+00:14:30,920 --> 00:14:32,300
+and it's going to fill it in.
+
+286
+00:14:32,300 --> 00:14:34,160
+And everything else-- these buttons, this
+
+287
+00:14:34,160 --> 00:14:36,590
+heading, and you might imagine in a more complex website,
+
+288
+00:14:36,590 --> 00:14:39,510
+you've got a lot more going on around the edges of this web page--
+
+289
+00:14:39,510 --> 00:14:41,250
+and all of that stays the same.
+
+290
+00:14:41,250 --> 00:14:43,520
+We don't need to reload any of that information.
+
+291
+00:14:43,520 --> 00:14:46,160
+We're only reloading the portion of the page that
+
+292
+00:14:46,160 --> 00:14:50,000
+actually changes as we toggle between these various different section
+
+293
+00:14:50,000 --> 00:14:51,300
+headings.
+
+294
+00:14:51,300 --> 00:14:53,330
+Now, this seems to be an advantage in some ways,
+
+295
+00:14:53,330 --> 00:14:55,640
+that maybe we can be more efficient about how we run
+
+296
+00:14:55,640 --> 00:14:57,710
+our single-page applications like this.
+
+297
+00:14:57,710 --> 00:15:00,200
+One thing we seem to lose, though, is the notion
+
+298
+00:15:00,200 --> 00:15:02,900
+of maintaining state inside of the URL.
+
+299
+00:15:02,900 --> 00:15:06,710
+That generally, the URL gives you an indication for what page you're on.
+
+300
+00:15:06,710 --> 00:15:11,360
+You're on something like /1 if you're on section 1 or /2 if you're on section 2,
+
+301
+00:15:11,360 --> 00:15:12,962
+/3 for section 3.
+
+302
+00:15:12,962 --> 00:15:15,920
+But of course, we're staying on the same page in all of these examples.
+
+303
+00:15:15,920 --> 00:15:17,045
+Whenever I click a button--
+
+304
+00:15:17,045 --> 00:15:18,350
+Section 1 or 2 or 3--
+
+305
+00:15:18,350 --> 00:15:20,180
+the URL is never changing.
+
+306
+00:15:20,180 --> 00:15:21,960
+The URL stays the same.
+
+307
+00:15:21,960 --> 00:15:25,700
+It turns out there's a way in JavaScript to manipulate that URL,
+
+308
+00:15:25,700 --> 00:15:29,390
+taking advantage of what's known as the JavaScript history API, where
+
+309
+00:15:29,390 --> 00:15:33,230
+I can push something to the history, meaning update the URL
+
+310
+00:15:33,230 --> 00:15:36,950
+and actually save that inside the user's browser history so later on,
+
+311
+00:15:36,950 --> 00:15:39,230
+they could potentially go back to that.
+
+312
+00:15:39,230 --> 00:15:44,870
+And to do that, I'll show you yet another example inside of singlepage2,
+
+313
+00:15:44,870 --> 00:15:48,530
+which is very similar, except inside of index.html,
+
+314
+00:15:48,530 --> 00:15:51,210
+I've added a couple of additional things.
+
+315
+00:15:51,210 --> 00:15:53,870
+One is that when I click on a button, meaning
+
+316
+00:15:53,870 --> 00:15:56,930
+when I click on Section 1 or Section 2 or Section 3,
+
+317
+00:15:56,930 --> 00:16:00,830
+I've added this line here, history.pushState.
+
+318
+00:16:00,830 --> 00:16:03,170
+What history.pushState is going to do is it
+
+319
+00:16:03,170 --> 00:16:07,790
+is going to basically add a new element to my browsing history, where I first
+
+320
+00:16:07,790 --> 00:16:10,440
+specify any data associated with the state.
+
+321
+00:16:10,440 --> 00:16:13,100
+So in particular, I'm storing a JavaScript object
+
+322
+00:16:13,100 --> 00:16:16,970
+representing what section number is being represented here.
+
+323
+00:16:16,970 --> 00:16:20,000
+Next is a title parameter that most web browsers actually ignore,
+
+324
+00:16:20,000 --> 00:16:21,800
+so that can generally be the empty string.
+
+325
+00:16:21,800 --> 00:16:24,770
+But the third argument here is what should go in the URL.
+
+326
+00:16:24,770 --> 00:16:26,840
+And what I want to go in the URL, in this case,
+
+327
+00:16:26,840 --> 00:16:29,630
+is something like section followed by the section number.
+
+328
+00:16:29,630 --> 00:16:34,860
+So I can go to /section1 or /section2 or /section3, for instance,
+
+329
+00:16:34,860 --> 00:16:39,842
+and those will appear in the URL bar when I click on a different page.
+
+330
+00:16:39,842 --> 00:16:42,050
+Then what I want to be able to support is the ability
+
+331
+00:16:42,050 --> 00:16:44,210
+to say when I go back through my history,
+
+332
+00:16:44,210 --> 00:16:46,220
+if I click the Back button in my web browser,
+
+333
+00:16:46,220 --> 00:16:49,370
+I'd like to go back from section 3 to section 2,
+
+334
+00:16:49,370 --> 00:16:51,740
+if that was the page I visited previously.
+
+335
+00:16:51,740 --> 00:16:54,800
+And there turns out to be an event handler for that as well--
+
+336
+00:16:54,800 --> 00:16:59,220
+window.onpopstate, meaning when I pop something off of the history,
+
+337
+00:16:59,220 --> 00:17:02,600
+like go back in my history, we have the ability
+
+338
+00:17:02,600 --> 00:17:04,640
+to take some event as an argument.
+
+339
+00:17:04,640 --> 00:17:09,412
+And if you look at event.state.section, which I've run console.log on,
+
+340
+00:17:09,412 --> 00:17:11,329
+so we can take a look at it in a moment, we'll
+
+341
+00:17:11,329 --> 00:17:15,829
+see what state was stored associated with that part of the user's history,
+
+342
+00:17:15,829 --> 00:17:18,960
+and I can go ahead and show that section.
+
+343
+00:17:18,960 --> 00:17:21,050
+So all in all, when I run this web application,
+
+344
+00:17:21,050 --> 00:17:29,570
+going into singlepage2 this time, when I run the server, I see "Hello!",
+
+345
+00:17:29,570 --> 00:17:31,250
+three sections for buttons.
+
+346
+00:17:31,250 --> 00:17:34,520
+When I click on one of those buttons, not only do I see text,
+
+347
+00:17:34,520 --> 00:17:38,240
+but I also see in the URL bar that I'm now on /section1.
+
+348
+00:17:38,240 --> 00:17:40,670
+That has been pushed onto my history, and I've
+
+349
+00:17:40,670 --> 00:17:42,710
+updated the URL to reflect that, too.
+
+350
+00:17:42,710 --> 00:17:43,970
+I click Section 2.
+
+351
+00:17:43,970 --> 00:17:45,320
+That updates the URL as well.
+
+352
+00:17:45,320 --> 00:17:47,390
+Section 3 updates the URL, too.
+
+353
+00:17:47,390 --> 00:17:49,910
+And when I've pushed things onto my history,
+
+354
+00:17:49,910 --> 00:17:54,110
+I've associated some state with them so that I can go back if I ever need to.
+
+355
+00:17:54,110 --> 00:17:58,460
+And in fact, if I open up the JavaScript console now and I go back, for example,
+
+356
+00:17:58,460 --> 00:18:03,980
+back to section 2, what you'll see is that what gets logged is the number 2.
+
+357
+00:18:03,980 --> 00:18:06,200
+When I print out what is the current section that's
+
+358
+00:18:06,200 --> 00:18:08,990
+associated with this URL, it's saving that state,
+
+359
+00:18:08,990 --> 00:18:11,060
+that I should be loading section number 2.
+
+360
+00:18:11,060 --> 00:18:15,000
+And so it does load section number 2 here.
+
+361
+00:18:15,000 --> 00:18:17,780
+So there's certainly nothing wrong with the original paradigm
+
+362
+00:18:17,780 --> 00:18:20,660
+of just loading different pages dynamically using Django,
+
+363
+00:18:20,660 --> 00:18:22,580
+like make a request and get a response.
+
+364
+00:18:22,580 --> 00:18:26,180
+But oftentimes, as you begin to imagine applications where a lot of things are
+
+365
+00:18:26,180 --> 00:18:28,130
+changing on the same page simultaneously--
+
+366
+00:18:28,130 --> 00:18:30,800
+you might imagine social networking websites where a lot of things stay
+
+367
+00:18:30,800 --> 00:18:33,967
+the same, but new posts might be added and you might be looking at different
+
+368
+00:18:33,967 --> 00:18:35,060
+parts of the same page--
+
+369
+00:18:35,060 --> 00:18:37,280
+being able to dynamically load information,
+
+370
+00:18:37,280 --> 00:18:40,520
+request additional information, and then display it on the page
+
+371
+00:18:40,520 --> 00:18:44,300
+can actually be quite powerful and a way to make your web pages a little bit
+
+372
+00:18:44,300 --> 00:18:46,080
+more interactive.
+
+373
+00:18:46,080 --> 00:18:49,400
+So that then is how we might build single-page applications-- taking
+
+374
+00:18:49,400 --> 00:18:52,610
+advantage of JavaScript to asynchronously load new data,
+
+375
+00:18:52,610 --> 00:18:55,160
+and then taking advantage of this history API
+
+376
+00:18:55,160 --> 00:18:58,940
+that let us add things to the URL, add things to the user's browsing history,
+
+377
+00:18:58,940 --> 00:19:03,470
+such that we could go back to them later by listening for window.onpopstate.
+
+378
+00:19:03,470 --> 00:19:06,200
+And it turns out that window object that we get access
+
+379
+00:19:06,200 --> 00:19:08,070
+to in JavaScript is quite powerful.
+
+380
+00:19:08,070 --> 00:19:11,240
+It represents the physical window on the computer screen
+
+381
+00:19:11,240 --> 00:19:13,632
+that displays all of their web content.
+
+382
+00:19:13,632 --> 00:19:15,590
+And there are certain properties of that window
+
+383
+00:19:15,590 --> 00:19:18,972
+we can look at that allow us to enable some interesting features.
+
+384
+00:19:18,972 --> 00:19:20,930
+So for example, your window is really described
+
+385
+00:19:20,930 --> 00:19:25,220
+by what the user actually sees inside of their window in Google Chrome or Safari
+
+386
+00:19:25,220 --> 00:19:27,480
+or whatever web browser they happen to be using.
+
+387
+00:19:27,480 --> 00:19:29,897
+And there are a couple of properties that might be of use.
+
+388
+00:19:29,897 --> 00:19:32,990
+Something like window.innerWidth will represent
+
+389
+00:19:32,990 --> 00:19:35,880
+how wide is the window, which might be useful to know
+
+390
+00:19:35,880 --> 00:19:39,110
+to know the size of the user's screen, for example, to know how many pixels
+
+391
+00:19:39,110 --> 00:19:41,000
+wide the window happens to be.
+
+392
+00:19:41,000 --> 00:19:43,130
+And just as there's a window.innerWidth, there's
+
+393
+00:19:43,130 --> 00:19:47,930
+also a window.innerHeight that represents the height of the window
+
+394
+00:19:47,930 --> 00:19:49,110
+as well.
+
+395
+00:19:49,110 --> 00:19:52,160
+Now, window represents the physical part that they're actually seeing.
+
+396
+00:19:52,160 --> 00:19:55,250
+We've also seen another variable that JavaScript gives us access to,
+
+397
+00:19:55,250 --> 00:19:57,180
+and that is this document object.
+
+398
+00:19:57,180 --> 00:20:00,020
+So what is the difference between the window and the document?
+
+399
+00:20:00,020 --> 00:20:03,660
+Well, the document generally represents the entire web page.
+
+400
+00:20:03,660 --> 00:20:06,500
+But if web pages are long, oftentimes the web page
+
+401
+00:20:06,500 --> 00:20:08,600
+doesn't fit entirely inside of the window--
+
+402
+00:20:08,600 --> 00:20:11,480
+that you generally have to scroll through an entire web page
+
+403
+00:20:11,480 --> 00:20:15,840
+and the window is only showing you one portion of that page at any given time.
+
+404
+00:20:15,840 --> 00:20:19,130
+So you can represent the document as, like, this big vertical section
+
+405
+00:20:19,130 --> 00:20:20,450
+that goes beyond the window.
+
+406
+00:20:20,450 --> 00:20:22,242
+There might be part of the document that is
+
+407
+00:20:22,242 --> 00:20:26,560
+above the window, part of the document that is below the window as well.
+
+408
+00:20:26,560 --> 00:20:31,070
+So window.scrollY is another variable you have access to on the window,
+
+409
+00:20:31,070 --> 00:20:35,810
+and window.scrollY represents how many pixels far down have you scrolled.
+
+410
+00:20:35,810 --> 00:20:38,520
+So if you're at the top of the page, window.scrollY
+
+411
+00:20:38,520 --> 00:20:40,290
+is 0-- you haven't scrolled at all.
+
+412
+00:20:40,290 --> 00:20:43,820
+But as you begin to scroll, if you want to know how far the user has scrolled
+
+413
+00:20:43,820 --> 00:20:46,910
+on a page, you can look at window.scrollY
+
+414
+00:20:46,910 --> 00:20:50,360
+to figure out the number of pixels the user has scrolled in the Y
+
+415
+00:20:50,360 --> 00:20:53,150
+direction, the up and down direction.
+
+416
+00:20:53,150 --> 00:20:56,120
+And the entire height of the page is represented
+
+417
+00:20:56,120 --> 00:20:59,210
+in document.body.offsetHeight.
+
+418
+00:20:59,210 --> 00:21:02,870
+That represents how tall the entire height of the document is.
+
+419
+00:21:02,870 --> 00:21:05,870
+And we talk about all this in addition to things like window.innerHeight
+
+420
+00:21:05,870 --> 00:21:09,690
+and window.innerWidth because using all of these values together,
+
+421
+00:21:09,690 --> 00:21:12,210
+you can begin to do some interesting calculations.
+
+422
+00:21:12,210 --> 00:21:14,810
+So one thing you might want to detect, for example,
+
+423
+00:21:14,810 --> 00:21:18,552
+is has the user scrolled down to the bottom of the page or not?
+
+424
+00:21:18,552 --> 00:21:20,510
+That might be something you care about knowing.
+
+425
+00:21:20,510 --> 00:21:23,580
+And it turns out, there isn't an event listener that does this automatically.
+
+426
+00:21:23,580 --> 00:21:26,150
+But we can calculate it in order to try and figure this out.
+
+427
+00:21:26,150 --> 00:21:29,180
+If innerHeight is the height of the window,
+
+428
+00:21:29,180 --> 00:21:32,720
+scrollY is how far vertically the user has scrolled,
+
+429
+00:21:32,720 --> 00:21:36,860
+and document.body.offsetHeight is the entire height of the document, you
+
+430
+00:21:36,860 --> 00:21:40,220
+can ask yourself, what needs to be true if the user has
+
+431
+00:21:40,220 --> 00:21:42,658
+scrolled to the bottom of the page?
+
+432
+00:21:42,658 --> 00:21:45,200
+And well, if the user has scrolled to the bottom of the page,
+
+433
+00:21:45,200 --> 00:21:49,280
+well, then scrollY plus the innerHeight, meaning
+
+434
+00:21:49,280 --> 00:21:52,490
+the amount that they've scrolled, plus the height of the window, that
+
+435
+00:21:52,490 --> 00:21:56,840
+must be at least or equal to document.body.offsetHeight, meaning
+
+436
+00:21:56,840 --> 00:21:59,540
+the amount that they've scrolled plus the window takes you down
+
+437
+00:21:59,540 --> 00:22:01,820
+to the bottom of the page, to the end of a page, to
+
+438
+00:22:01,820 --> 00:22:04,310
+however tall the document happens to be.
+
+439
+00:22:04,310 --> 00:22:06,950
+And using that mathematical comparison, we
+
+440
+00:22:06,950 --> 00:22:11,030
+can actually detect when the user has reached the bottom of the page
+
+441
+00:22:11,030 --> 00:22:13,405
+and we can actually try and now put that into practice.
+
+442
+00:22:13,405 --> 00:22:19,400
+So I'll go ahead and open up an example that I have here called scroll.html,
+
+443
+00:22:19,400 --> 00:22:23,480
+and all scroll.html has right now is 100 paragraphs.
+
+444
+00:22:23,480 --> 00:22:28,160
+Inside of the body tag I have a p for paragraph, paragraph 1, paragraph 2,
+
+445
+00:22:28,160 --> 00:22:29,270
+so on and so forth.
+
+446
+00:22:29,270 --> 00:22:34,110
+I have 100 paragraphs inside of the body of this HTML page.
+
+447
+00:22:34,110 --> 00:22:36,770
+And that's all that really is there right now, such
+
+448
+00:22:36,770 --> 00:22:42,440
+that now if I go ahead and open scroll.html,
+
+449
+00:22:42,440 --> 00:22:47,000
+I see that I have 100 paragraphs that I can scroll through.
+
+450
+00:22:47,000 --> 00:22:49,220
+And what I might like to do is detect when
+
+451
+00:22:49,220 --> 00:22:52,280
+I've reached the bottom of the page and maybe do something when I do so,
+
+452
+00:22:52,280 --> 00:22:56,430
+something like change the color of the page, for instance.
+
+453
+00:22:56,430 --> 00:22:57,960
+So how might I go about doing that?
+
+454
+00:22:57,960 --> 00:22:59,627
+Well, I'm going to need some JavaScript.
+
+455
+00:22:59,627 --> 00:23:03,140
+So I'm going to add some JavaScript, and I'll add an event listener
+
+456
+00:23:03,140 --> 00:23:05,330
+for window.onscroll.
+
+457
+00:23:05,330 --> 00:23:10,530
+Onscroll is an event that listens for when I'm scrolling through the window.
+
+458
+00:23:10,530 --> 00:23:12,290
+And when I scroll through the window--
+
+459
+00:23:12,290 --> 00:23:13,832
+we'll go ahead and run this function.
+
+460
+00:23:13,832 --> 00:23:16,283
+We'll just use an arrow function as a shorthand here--
+
+461
+00:23:16,283 --> 00:23:17,450
+what do I want to calculate?
+
+462
+00:23:17,450 --> 00:23:21,110
+Well, I want to calculate if window.innerHeight,
+
+463
+00:23:21,110 --> 00:23:25,550
+meaning the height of the window itself, plus window.scrollY,
+
+464
+00:23:25,550 --> 00:23:28,430
+meaning the amount that I've scrolled, if that
+
+465
+00:23:28,430 --> 00:23:34,095
+is at least document.body.offsetHeight, well,
+
+466
+00:23:34,095 --> 00:23:36,470
+that means I must have scrolled to the bottom of the page
+
+467
+00:23:36,470 --> 00:23:38,600
+or maybe even a little bit further, if there's a little wiggle room
+
+468
+00:23:38,600 --> 00:23:40,530
+to scroll past the end of the page.
+
+469
+00:23:40,530 --> 00:23:44,490
+So if this is true, well, then I've reached the end of the page.
+
+470
+00:23:44,490 --> 00:23:49,558
+And then we'll go ahead and say document.querySelector('body').
+
+471
+00:23:49,558 --> 00:23:52,100
+And let's go ahead and change its style, in particular change
+
+472
+00:23:52,100 --> 00:23:56,840
+its background color, and change the background color to green.
+
+473
+00:23:56,840 --> 00:23:59,180
+Otherwise, if we haven't reached the end of the page,
+
+474
+00:23:59,180 --> 00:24:06,600
+then we'll take the body of the page and change its background color to white.
+
+475
+00:24:06,600 --> 00:24:08,600
+So what we're now doing here is taking advantage
+
+476
+00:24:08,600 --> 00:24:11,210
+of the properties we know of this window object,
+
+477
+00:24:11,210 --> 00:24:15,410
+saying when we scroll the window, let's check to see if we add this up
+
+478
+00:24:15,410 --> 00:24:17,570
+and at least the height of the entire document,
+
+479
+00:24:17,570 --> 00:24:19,010
+we've reached the end of the page.
+
+480
+00:24:19,010 --> 00:24:22,340
+Go ahead and change the style of the background of the body accordingly.
+
+481
+00:24:22,340 --> 00:24:24,740
+Otherwise, change the background to white
+
+482
+00:24:24,740 --> 00:24:27,360
+or leave it at white if it already is.
+
+483
+00:24:27,360 --> 00:24:32,330
+So now if I take a look at this actual HTML page and reload scroll.html,
+
+484
+00:24:32,330 --> 00:24:34,520
+we'll see that the background is initially white.
+
+485
+00:24:34,520 --> 00:24:38,120
+But as I scroll down, once I reach the bottom,
+
+486
+00:24:38,120 --> 00:24:40,070
+we'll see that the page changes to green.
+
+487
+00:24:40,070 --> 00:24:42,380
+It's white before I reach the bottom, but as soon
+
+488
+00:24:42,380 --> 00:24:45,120
+as I get to the bottom of the page, it turns to green.
+
+489
+00:24:45,120 --> 00:24:48,260
+And the reason why is because the height of the window, height
+
+490
+00:24:48,260 --> 00:24:50,240
+of the window here, plus however much I've
+
+491
+00:24:50,240 --> 00:24:52,880
+already scrolled from the top of the page up until now,
+
+492
+00:24:52,880 --> 00:24:56,162
+that together is equal to the entire height of the document, which
+
+493
+00:24:56,162 --> 00:24:59,120
+means we're able to detect the fact that I reached the end of the page.
+
+494
+00:24:59,120 --> 00:25:02,880
+And as a result, we can change the color of the background to green.
+
+495
+00:25:02,880 --> 00:25:05,865
+Now, this in itself is not a particularly practical use
+
+496
+00:25:05,865 --> 00:25:08,240
+of detecting when we've scrolled to the end of something.
+
+497
+00:25:08,240 --> 00:25:10,990
+We probably don't usually care about changing the background color
+
+498
+00:25:10,990 --> 00:25:12,480
+when you reach the end of the page.
+
+499
+00:25:12,480 --> 00:25:14,270
+But there actually are real applications,
+
+500
+00:25:14,270 --> 00:25:17,300
+and you might imagine this in the context of websites that
+
+501
+00:25:17,300 --> 00:25:19,190
+allow for things like infinite scroll--
+
+502
+00:25:19,190 --> 00:25:20,750
+that if you're on a social networking website that
+
+503
+00:25:20,750 --> 00:25:23,870
+has a whole bunch of posts, you scroll to the bottom of the list of posts,
+
+504
+00:25:23,870 --> 00:25:26,310
+and then it generates the new set of posts as well.
+
+505
+00:25:26,310 --> 00:25:29,560
+Or you're looking at news articles and you're scrolling through news articles,
+
+506
+00:25:29,560 --> 00:25:32,960
+and once you reach the bottom, it'll load a whole new set of news articles
+
+507
+00:25:32,960 --> 00:25:35,240
+without you having to go to another page.
+
+508
+00:25:35,240 --> 00:25:36,475
+How is it doing that?
+
+509
+00:25:36,475 --> 00:25:38,600
+Well, it's a combination of the same types of ideas
+
+510
+00:25:38,600 --> 00:25:39,850
+that we've been talking about.
+
+511
+00:25:39,850 --> 00:25:43,100
+Number 1, the ability to detect when you've reached the end of the page
+
+512
+00:25:43,100 --> 00:25:46,400
+using JavaScript to detect that you're at the bottom of the page,
+
+513
+00:25:46,400 --> 00:25:50,870
+and number 2, to be able to asynchronously load, using JavaScript,
+
+514
+00:25:50,870 --> 00:25:53,900
+additional content-- fetch some additional page that has some
+
+515
+00:25:53,900 --> 00:25:57,050
+additional content, some additional news articles, some additional posts,
+
+516
+00:25:57,050 --> 00:25:57,870
+and whatnot--
+
+517
+00:25:57,870 --> 00:26:00,800
+and then take that information and manipulate the DOM
+
+518
+00:26:00,800 --> 00:26:03,860
+to add that information to the existing web page.
+
+519
+00:26:03,860 --> 00:26:05,890
+And that, ultimately, is what's going to give us
+
+520
+00:26:05,890 --> 00:26:10,460
+this power to be able to support something like infinite scroll.
+
+521
+00:26:10,460 --> 00:26:13,370
+So let's now go ahead and try and see what it would
+
+522
+00:26:13,370 --> 00:26:16,010
+look like to implement infinite scroll.
+
+523
+00:26:16,010 --> 00:26:18,590
+I've already started to create a sample application
+
+524
+00:26:18,590 --> 00:26:21,050
+inside of this application called scroll,
+
+525
+00:26:21,050 --> 00:26:23,420
+and I've got an app called posts inside of it.
+
+526
+00:26:23,420 --> 00:26:27,560
+And what the posts app does is it's got a couple of URLs.
+
+527
+00:26:27,560 --> 00:26:31,700
+It's got a default URL that just loads an index route, and then a posts route
+
+528
+00:26:31,700 --> 00:26:34,520
+that loads this posts view.
+
+529
+00:26:34,520 --> 00:26:36,740
+And so lets look at what these do.
+
+530
+00:26:36,740 --> 00:26:38,900
+Index, all it does is it's going to load a file
+
+531
+00:26:38,900 --> 00:26:41,730
+called index.html, this template.
+
+532
+00:26:41,730 --> 00:26:46,910
+And if I make a request to /posts, I need to provide two arguments.
+
+533
+00:26:46,910 --> 00:26:50,000
+I need to provide a start for what post I want to start with,
+
+534
+00:26:50,000 --> 00:26:52,370
+an end for what post I want to end with, and then
+
+535
+00:26:52,370 --> 00:26:54,560
+it's just going to generate some sample posts that
+
+536
+00:26:54,560 --> 00:26:57,600
+just say, like, Post number 1, Post number 2, so on and so forth.
+
+537
+00:26:57,600 --> 00:27:01,370
+In practice, you can actually use social network posts in place of this,
+
+538
+00:27:01,370 --> 00:27:04,410
+but this is good just for demonstration purposes.
+
+539
+00:27:04,410 --> 00:27:13,970
+So what this is going to do, if I go into scroll and runserver,
+
+540
+00:27:13,970 --> 00:27:21,470
+is that if I go to /posts and say start=1 and end=10, for example,
+
+541
+00:27:21,470 --> 00:27:24,890
+then I get a JavaScript object that looks like this.
+
+542
+00:27:24,890 --> 00:27:27,650
+Recall that a JavaScript object is just a convenient format
+
+543
+00:27:27,650 --> 00:27:30,810
+for passing information back and forth in JSON format.
+
+544
+00:27:30,810 --> 00:27:33,410
+And what we have here is a JSON object with a key
+
+545
+00:27:33,410 --> 00:27:35,640
+called posts that gives me all of the posts--
+
+546
+00:27:35,640 --> 00:27:38,780
+Post number 1, Post number 2, all the way up to number 10.
+
+547
+00:27:38,780 --> 00:27:42,240
+And it's giving me those posts because I said start at 1, end at 10.
+
+548
+00:27:42,240 --> 00:27:44,630
+But I could have specified other numbers as well.
+
+549
+00:27:44,630 --> 00:27:48,830
+If I had said something like start at 20 and go to 28,
+
+550
+00:27:48,830 --> 00:27:52,040
+then it's going to give me post number 20 through post number 28.
+
+551
+00:27:52,040 --> 00:27:54,750
+I can specify the range of posts that I want.
+
+552
+00:27:54,750 --> 00:27:58,340
+So this now is an API that I have implemented, effectively,
+
+553
+00:27:58,340 --> 00:28:02,300
+that allows someone to get access to a variety of different posts
+
+554
+00:28:02,300 --> 00:28:05,690
+by hitting this particular URL, this endpoint, so to speak,
+
+555
+00:28:05,690 --> 00:28:09,260
+and passing in parameters-- passing in what post they want to start with
+
+556
+00:28:09,260 --> 00:28:10,910
+and what post they want to end with.
+
+557
+00:28:10,910 --> 00:28:14,330
+And then they get all of this data back presented to them
+
+558
+00:28:14,330 --> 00:28:16,880
+in JSON format that can then be used.
+
+559
+00:28:16,880 --> 00:28:20,030
+And what's nice about this is that now when we're loading posts,
+
+560
+00:28:20,030 --> 00:28:22,970
+rather than have to just guess at how many posts we need to load
+
+561
+00:28:22,970 --> 00:28:25,100
+and then require someone to go to another page,
+
+562
+00:28:25,100 --> 00:28:28,220
+we can just do something like load the first 20 posts,
+
+563
+00:28:28,220 --> 00:28:31,490
+and now what we'd like to do is if they reach the end of the page,
+
+564
+00:28:31,490 --> 00:28:35,420
+go ahead and load the next 20 posts by hitting this API endpoint,
+
+565
+00:28:35,420 --> 00:28:40,730
+getting the next 20 posts, and then filling that in into the HTML page.
+
+566
+00:28:40,730 --> 00:28:44,090
+So let's see now how that actually works in practice by taking
+
+567
+00:28:44,090 --> 00:28:48,380
+a look at that template in index.html.
+
+568
+00:28:48,380 --> 00:28:51,290
+So go into templates, index.html.
+
+569
+00:28:51,290 --> 00:28:54,410
+And there's a fair bit of JavaScript here, but look at the body first.
+
+570
+00:28:54,410 --> 00:28:56,960
+The body just has a div for all the posts
+
+571
+00:28:56,960 --> 00:28:59,690
+that initially is going to be empty.
+
+572
+00:28:59,690 --> 00:29:03,180
+Now, here's what the JavaScript is going to do, and we'll walk through it.
+
+573
+00:29:03,180 --> 00:29:05,000
+We start with the first post, so counter is
+
+574
+00:29:05,000 --> 00:29:07,910
+going to keep track of what post we need to load next.
+
+575
+00:29:07,910 --> 00:29:10,852
+By default, we're just going to start by loading post number 1.
+
+576
+00:29:10,852 --> 00:29:12,560
+We have a variable called quantity that's
+
+577
+00:29:12,560 --> 00:29:14,760
+going to tell us how many posts are we going to load at a time.
+
+578
+00:29:14,760 --> 00:29:16,385
+Let's just say load 20 posts at a time.
+
+579
+00:29:16,385 --> 00:29:21,840
+So start with 1 to 20, then 21 to 40, 41 to 60, so on and so forth.
+
+580
+00:29:21,840 --> 00:29:25,280
+And when DOM content has loaded, go ahead and just
+
+581
+00:29:25,280 --> 00:29:28,100
+call this function that's called load.
+
+582
+00:29:28,100 --> 00:29:30,560
+And what the load function does is it figures out
+
+583
+00:29:30,560 --> 00:29:35,570
+what the start and end should be, it fetches all the new posts, and then
+
+584
+00:29:35,570 --> 00:29:39,600
+for each of the posts that comes back, is it figures out what [AUDIO OUT]..
+
+585
+00:29:39,600 --> 00:29:42,140
+So we're asynchronously asking for new posts.
+
+586
+00:29:42,140 --> 00:29:45,500
+And what the add_post function does is it creates a new div,
+
+587
+00:29:45,500 --> 00:29:49,490
+populates the post inside of it, and adds it to the DOM.
+
+588
+00:29:49,490 --> 00:29:51,830
+So now that we have these parts, the ability
+
+589
+00:29:51,830 --> 00:29:54,650
+to load new posts as by fetching from some URL
+
+590
+00:29:54,650 --> 00:29:57,650
+all of the posts that we care about, and then for each of those posts
+
+591
+00:29:57,650 --> 00:30:00,170
+that comes back, add something new to the DOM
+
+592
+00:30:00,170 --> 00:30:04,320
+as by creating a new HTML element and inserting it into the page,
+
+593
+00:30:04,320 --> 00:30:07,670
+we have the ability to dynamically load all of these posts.
+
+594
+00:30:07,670 --> 00:30:12,170
+So if I go not to /posts, but just to this default route,
+
+595
+00:30:12,170 --> 00:30:17,930
+I'll see that we have something like 20 posts that all show up.
+
+596
+00:30:17,930 --> 00:30:19,340
+But just 20 posts.
+
+597
+00:30:19,340 --> 00:30:23,300
+Because every time I call the load function,
+
+598
+00:30:23,300 --> 00:30:26,850
+that is going to load the next set of posts, for example.
+
+599
+00:30:26,850 --> 00:30:31,040
+And so what I can do is in the console, if I try running the load function just
+
+600
+00:30:31,040 --> 00:30:34,670
+by calling it myself, press Return, after a second
+
+601
+00:30:34,670 --> 00:30:36,380
+or so, the next set of posts show up--
+
+602
+00:30:36,380 --> 00:30:38,780
+21 all the way through 40.
+
+603
+00:30:38,780 --> 00:30:40,080
+I call load again.
+
+604
+00:30:40,080 --> 00:30:41,690
+The next set of posts show up--
+
+605
+00:30:41,690 --> 00:30:43,580
+41 through 60.
+
+606
+00:30:43,580 --> 00:30:47,600
+20 posts at a time, all using that asynchronous JavaScript.
+
+607
+00:30:47,600 --> 00:30:50,720
+But now what I'd like to happen is for all of this to happen on its own,
+
+608
+00:30:50,720 --> 00:30:53,930
+without me having to intervene and manually write JavaScript calls.
+
+609
+00:30:53,930 --> 00:30:57,770
+I would just like to say, well, the same type of logic as before--
+
+610
+00:30:57,770 --> 00:30:59,570
+window.onscroll.
+
+611
+00:30:59,570 --> 00:31:04,790
+Lets go ahead and say if window.innerHeight plus window.scrollY
+
+612
+00:31:04,790 --> 00:31:08,540
+is at least document.body.offsetHeight, meaning
+
+613
+00:31:08,540 --> 00:31:11,720
+if I have scrolled to the end of the page, well,
+
+614
+00:31:11,720 --> 00:31:15,505
+then just go ahead and call the load function.
+
+615
+00:31:15,505 --> 00:31:16,880
+That's all these lines are doing.
+
+616
+00:31:16,880 --> 00:31:18,290
+Every time I scroll, we check.
+
+617
+00:31:18,290 --> 00:31:20,040
+Did we scroll to the end of the page?
+
+618
+00:31:20,040 --> 00:31:21,920
+And if we did scroll to the end of the page,
+
+619
+00:31:21,920 --> 00:31:25,750
+then go ahead and load the next set of posts.
+
+620
+00:31:25,750 --> 00:31:32,183
+So now I refresh the page, I see Post #1 all the way up through Post #20.
+
+621
+00:31:32,183 --> 00:31:34,100
+Now watch what happens when I get to Post #20.
+
+622
+00:31:34,100 --> 00:31:38,360
+If I scroll to the bottom, after a second, the next set of posts appears.
+
+623
+00:31:38,360 --> 00:31:40,253
+I scroll to the bottom again, I'm at 40.
+
+624
+00:31:40,253 --> 00:31:42,170
+And then after a second, the next set appears.
+
+625
+00:31:42,170 --> 00:31:45,980
+Every time I scroll to the bottom, more posts are going to load after that,
+
+626
+00:31:45,980 --> 00:31:50,060
+allowing me to effectively implement this idea of infinite scrolling
+
+627
+00:31:50,060 --> 00:31:52,790
+by taking advantage of some JavaScript techniques, where
+
+628
+00:31:52,790 --> 00:31:55,100
+I can check for when I've got to the end of the page
+
+629
+00:31:55,100 --> 00:31:58,940
+and then dynamically do something as a result of that, something like load
+
+630
+00:31:58,940 --> 00:32:01,440
+some additional pages onto the screen.
+
+631
+00:32:01,440 --> 00:32:05,420
+And so here, too, a lot of power to be had inside of JavaScript.
+
+632
+00:32:05,420 --> 00:32:08,300
+And a lot of where the power of user interface comes from
+
+633
+00:32:08,300 --> 00:32:12,140
+is from how it is that the user interface interacts with the user,
+
+634
+00:32:12,140 --> 00:32:14,050
+thinking about what the user is going to do
+
+635
+00:32:14,050 --> 00:32:17,350
+and how the page should interact as a result-- something like user scrolls
+
+636
+00:32:17,350 --> 00:32:21,050
+to the end of the page and they see some new pages show up as well.
+
+637
+00:32:21,050 --> 00:32:25,000
+And one technique we can use for just making HTML elements a little more
+
+638
+00:32:25,000 --> 00:32:26,950
+responsive, a little bit more interesting,
+
+639
+00:32:26,950 --> 00:32:30,280
+is by adding some animation to them as well-- the ability for things
+
+640
+00:32:30,280 --> 00:32:33,400
+to move around and change their properties in some way.
+
+641
+00:32:33,400 --> 00:32:36,610
+And it turns out that CSS has support for animation.
+
+642
+00:32:36,610 --> 00:32:40,030
+CSS has already given us support for things like styling elements,
+
+643
+00:32:40,030 --> 00:32:43,850
+saying we want this element to be of this color and this size, for example.
+
+644
+00:32:43,850 --> 00:32:46,810
+But it also gives us the ability to animate those properties as well,
+
+645
+00:32:46,810 --> 00:32:50,170
+to change the size of something or change the position of something
+
+646
+00:32:50,170 --> 00:32:52,490
+over some amount of time.
+
+647
+00:32:52,490 --> 00:32:55,420
+And so let's now take a look at an example of what that might actually
+
+648
+00:32:55,420 --> 00:32:56,380
+look like.
+
+649
+00:32:56,380 --> 00:33:01,600
+I'll go ahead and create a new file and I'll call it animate.html.
+
+650
+00:33:01,600 --> 00:33:04,510
+And inside of animate.html, I'll go ahead
+
+651
+00:33:04,510 --> 00:33:10,060
+and start by including our usual HTML.
+
+652
+00:33:10,060 --> 00:33:13,840
+Title is Animate.
+
+653
+00:33:13,840 --> 00:33:18,160
+And what I'd like to do is just add a little bit of animation using CSS
+
+654
+00:33:18,160 --> 00:33:19,605
+into this particular page.
+
+655
+00:33:19,605 --> 00:33:22,480
+I'm going to start with just a heading, a heading that says something
+
+656
+00:33:22,480 --> 00:33:25,180
+like "Welcome!", for example.
+
+657
+00:33:25,180 --> 00:33:27,220
+It's just going to display a welcome message.
+
+658
+00:33:27,220 --> 00:33:34,210
+Such that now if I open animate.html, here's what I see--
+
+659
+00:33:34,210 --> 00:33:36,880
+just a message that says "Welcome!"
+
+660
+00:33:36,880 --> 00:33:39,490
+But now let's add some CSS to it.
+
+661
+00:33:39,490 --> 00:33:41,890
+Let's go into the style tag.
+
+662
+00:33:41,890 --> 00:33:47,020
+And for h1, for this heading, I'd like to apply a particular animation to it.
+
+663
+00:33:47,020 --> 00:33:51,520
+And I first need to specify what the animation's name is going to be.
+
+664
+00:33:51,520 --> 00:33:53,410
+And I can pick a name for the animation.
+
+665
+00:33:53,410 --> 00:33:57,080
+I'll say something like "grow," for example.
+
+666
+00:33:57,080 --> 00:34:00,790
+I'll set the animation's duration to be 2 seconds.
+
+667
+00:34:00,790 --> 00:34:02,975
+And then the animation fill-mode is like what
+
+668
+00:34:02,975 --> 00:34:04,600
+direction should the animation move in.
+
+669
+00:34:04,600 --> 00:34:05,410
+Should it go forwards?
+
+670
+00:34:05,410 --> 00:34:06,378
+Should it go backwards?
+
+671
+00:34:06,378 --> 00:34:08,420
+We'll generally want our animation to go forward,
+
+672
+00:34:08,420 --> 00:34:11,650
+so they're making some sort of forward progress according to some rules
+
+673
+00:34:11,650 --> 00:34:13,280
+that we're going to specify.
+
+674
+00:34:13,280 --> 00:34:15,880
+So here I'm saying we're going to animate all of our headings
+
+675
+00:34:15,880 --> 00:34:18,400
+using an animation called grow, and now I
+
+676
+00:34:18,400 --> 00:34:20,980
+need to define what that animation actually does.
+
+677
+00:34:20,980 --> 00:34:26,620
+And to do that, up above in style I'm going to say @keyframes grow.
+
+678
+00:34:26,620 --> 00:34:28,780
+And what this is going to allow me to do is
+
+679
+00:34:28,780 --> 00:34:32,139
+specify some keyframes for this particular element,
+
+680
+00:34:32,139 --> 00:34:35,469
+meaning where should the element start, what should its style properties
+
+681
+00:34:35,469 --> 00:34:38,710
+be, and then at the end, what should its style properties be?
+
+682
+00:34:38,710 --> 00:34:41,830
+And CSS is going to take care of the process of figuring out
+
+683
+00:34:41,830 --> 00:34:44,870
+what needs to happen in all those intermediary fractions of seconds,
+
+684
+00:34:44,870 --> 00:34:46,130
+for example.
+
+685
+00:34:46,130 --> 00:34:49,510
+So what I can say is something like, go ahead and grow from--
+
+686
+00:34:49,510 --> 00:34:51,730
+meaning what should its initial properties be,
+
+687
+00:34:51,730 --> 00:34:55,570
+and maybe initially I want it to have a font size of 20 pixels--
+
+688
+00:34:55,570 --> 00:35:01,520
+and then we'll say to font size of 100 pixels, for example.
+
+689
+00:35:01,520 --> 00:35:03,640
+So all in all, what this is saying is I would
+
+690
+00:35:03,640 --> 00:35:07,790
+like to apply an animation called grow to all of my headings.
+
+691
+00:35:07,790 --> 00:35:10,240
+This animation should last 2 seconds and go forwards.
+
+692
+00:35:10,240 --> 00:35:12,302
+And what is the grow animation going to do?
+
+693
+00:35:12,302 --> 00:35:14,260
+Well, it's going to mean at the start, anything
+
+694
+00:35:14,260 --> 00:35:18,010
+that obeys the grow animation will start with a font size of 20 pixels,
+
+695
+00:35:18,010 --> 00:35:22,240
+and at the end, it will grow to a font size of 100 pixels.
+
+696
+00:35:22,240 --> 00:35:26,500
+And I have now defined what it is that that animation means.
+
+697
+00:35:26,500 --> 00:35:29,170
+So now if I go ahead and refresh this page,
+
+698
+00:35:29,170 --> 00:35:33,070
+animate.html, you'll see that "Welcome!" changes size.
+
+699
+00:35:33,070 --> 00:35:37,010
+Over the course of 2 seconds, it goes from smaller to larger by obeying those
+
+700
+00:35:37,010 --> 00:35:37,510
+keyframes.
+
+701
+00:35:37,510 --> 00:35:41,290
+I told it to obey this particular set of instructions
+
+702
+00:35:41,290 --> 00:35:44,500
+where it goes from a particular font size to another font size,
+
+703
+00:35:44,500 --> 00:35:47,682
+and as a result, we see the effect here on the page.
+
+704
+00:35:47,682 --> 00:35:50,140
+And it turns out you can do more than just manipulate size.
+
+705
+00:35:50,140 --> 00:35:53,510
+You can manipulate just about any CSS property you want.
+
+706
+00:35:53,510 --> 00:35:58,370
+So if I tell the heading that it should have a relative position,
+
+707
+00:35:58,370 --> 00:36:01,750
+meaning its position should be relative to other elements or other things
+
+708
+00:36:01,750 --> 00:36:07,540
+than its parent, I can say you should change your position from being 0%
+
+709
+00:36:07,540 --> 00:36:13,150
+away from the left side of the screen to being 50% of the way
+
+710
+00:36:13,150 --> 00:36:14,525
+from the left side of the screen.
+
+711
+00:36:14,525 --> 00:36:17,650
+And at this point, "grow" is probably not the best name for this animation.
+
+712
+00:36:17,650 --> 00:36:19,160
+I'll call it "move" instead.
+
+713
+00:36:19,160 --> 00:36:20,845
+So animation name is move.
+
+714
+00:36:20,845 --> 00:36:22,720
+And so now what this animation is going to do
+
+715
+00:36:22,720 --> 00:36:24,730
+is it's going to say when you run the animation,
+
+716
+00:36:24,730 --> 00:36:30,400
+go from being right next to the left side of the screen to being about 50
+
+717
+00:36:30,400 --> 00:36:33,260
+away from the left side of the screen.
+
+718
+00:36:33,260 --> 00:36:37,148
+So I can go ahead and rerun this.
+
+719
+00:36:37,148 --> 00:36:39,190
+And we see that's the animation that takes place.
+
+720
+00:36:39,190 --> 00:36:44,380
+It goes from the left all the way back up to about halfway across the screen.
+
+721
+00:36:44,380 --> 00:36:48,050
+Refresh the page and it goes ahead and does the exact same thing.
+
+722
+00:36:48,050 --> 00:36:51,400
+And it turns out, we don't just need to specify a beginning point and an end
+
+723
+00:36:51,400 --> 00:36:52,630
+point for an animation.
+
+724
+00:36:52,630 --> 00:36:56,320
+We can specify various different keyframes for different points
+
+725
+00:36:56,320 --> 00:36:58,510
+within the animation that we would like to capture,
+
+726
+00:36:58,510 --> 00:37:00,552
+something like at the beginning of the animation,
+
+727
+00:37:00,552 --> 00:37:03,670
+have this set of CSS properties, maybe halfway through the animation,
+
+728
+00:37:03,670 --> 00:37:06,670
+have a different set of CSS properties, and then at the very end,
+
+729
+00:37:06,670 --> 00:37:09,050
+have yet another set of CSS properties.
+
+730
+00:37:09,050 --> 00:37:12,040
+So I could say something like, if I want the heading not just to move
+
+731
+00:37:12,040 --> 00:37:16,630
+from left to right but also to move back again, I can say at the beginning,
+
+732
+00:37:16,630 --> 00:37:20,410
+at the 0% point when you're 0% of the way through the animation,
+
+733
+00:37:20,410 --> 00:37:23,350
+you should be 0% away from the left-hand side.
+
+734
+00:37:23,350 --> 00:37:25,810
+When you're 50% of the way through the animation,
+
+735
+00:37:25,810 --> 00:37:28,360
+you should be 50% away from the left-hand side.
+
+736
+00:37:28,360 --> 00:37:31,390
+And then when you're done with the animation, 100% of the way through,
+
+737
+00:37:31,390 --> 00:37:35,410
+let's go back to 0% away from the left-hand side.
+
+738
+00:37:35,410 --> 00:37:38,200
+I now have three keyframes-- beginning of the animation,
+
+739
+00:37:38,200 --> 00:37:41,620
+middle of the animation, back to the beginning of the animation again--
+
+740
+00:37:41,620 --> 00:37:45,257
+and the effect of this is if I refresh the page, we go to the right
+
+741
+00:37:45,257 --> 00:37:46,090
+and then we go back.
+
+742
+00:37:46,090 --> 00:37:49,690
+We're able to move one direction and then move back.
+
+743
+00:37:49,690 --> 00:37:51,640
+And there are other properties we can use
+
+744
+00:37:51,640 --> 00:37:53,450
+to manipulate these animations as well.
+
+745
+00:37:53,450 --> 00:37:56,680
+I can set the animation-iteration-count, for example,
+
+746
+00:37:56,680 --> 00:38:00,850
+to 2, to mean rather than just do the animation once and then stop,
+
+747
+00:38:00,850 --> 00:38:03,680
+do the animation twice and then stop.
+
+748
+00:38:03,680 --> 00:38:06,340
+So I refresh, it goes to the right and then it goes left,
+
+749
+00:38:06,340 --> 00:38:08,197
+and then it repeats that a second time.
+
+750
+00:38:08,197 --> 00:38:10,030
+And it turns out if you really want, you can
+
+751
+00:38:10,030 --> 00:38:14,110
+set this to infinite, to mean never stop performing that animation.
+
+752
+00:38:14,110 --> 00:38:17,230
+It's consistently going to have this heading, move to the right,
+
+753
+00:38:17,230 --> 00:38:20,740
+and then move left, according to those keyframes that I have specified.
+
+754
+00:38:20,740 --> 00:38:22,990
+And so if you ever see things moving around on a page,
+
+755
+00:38:22,990 --> 00:38:25,760
+interactive in some way, there are a number of ways to do it.
+
+756
+00:38:25,760 --> 00:38:28,120
+You can animate things using JavaScript, for example.
+
+757
+00:38:28,120 --> 00:38:31,480
+But there are many cases where CSS alone is pretty good at just
+
+758
+00:38:31,480 --> 00:38:33,700
+creating these types of animations.
+
+759
+00:38:33,700 --> 00:38:36,340
+And while this animation right now is just running forever,
+
+760
+00:38:36,340 --> 00:38:41,180
+we could use JavaScript in order to control that animation as well.
+
+761
+00:38:41,180 --> 00:38:44,170
+So let's see an example of what that would look like.
+
+762
+00:38:44,170 --> 00:38:45,340
+I'll go back here.
+
+763
+00:38:45,340 --> 00:38:47,770
+In the body of the page, in addition to a heading
+
+764
+00:38:47,770 --> 00:38:51,010
+that says "Welcome!", I'll go ahead and add a button that
+
+765
+00:38:51,010 --> 00:38:54,830
+just says "Click Here!", for example.
+
+766
+00:38:54,830 --> 00:38:58,900
+And now what I'll do is add a little bit of JavaScript.
+
+767
+00:38:58,900 --> 00:39:01,490
+I'm going to add some JavaScript so that the button can now
+
+768
+00:39:01,490 --> 00:39:06,520
+control the animation, decide when the animation is going to start and stop.
+
+769
+00:39:06,520 --> 00:39:10,150
+And so what we'll do inside of the script is to first say
+
+770
+00:39:10,150 --> 00:39:14,710
+document.addEventLis tener('DOMContentLoaded'), meaning wait
+
+771
+00:39:14,710 --> 00:39:18,070
+until the DOM is done loading, as we've done before.
+
+772
+00:39:18,070 --> 00:39:20,950
+And let me now get that h1 element--
+
+773
+00:39:20,950 --> 00:39:22,945
+document.querySelector('h1').
+
+774
+00:39:22,945 --> 00:39:26,110
+
+
+775
+00:39:26,110 --> 00:39:31,360
+And initially, I'm going to set its style.animationPlayState
+
+776
+00:39:31,360 --> 00:39:34,810
+equal to paused.
+
+777
+00:39:34,810 --> 00:39:37,780
+So animationPlayState is a property of the style that
+
+778
+00:39:37,780 --> 00:39:40,600
+lets me decide if the animation is playing or paused,
+
+779
+00:39:40,600 --> 00:39:42,400
+and I can control that using JavaScript.
+
+780
+00:39:42,400 --> 00:39:44,620
+Rather than just say run infinitely forever,
+
+781
+00:39:44,620 --> 00:39:49,090
+I can say the animationPlayState should start out as paused, by first getting
+
+782
+00:39:49,090 --> 00:39:53,620
+the h1 element and then modifying the animationPlayState property
+
+783
+00:39:53,620 --> 00:39:56,000
+of that particular element.
+
+784
+00:39:56,000 --> 00:40:00,550
+But now what I'd like to happen is any time someone clicks on the button,
+
+785
+00:40:00,550 --> 00:40:02,840
+I want to change the animation play state.
+
+786
+00:40:02,840 --> 00:40:05,920
+So I'm going to say document.querySelector('button'),
+
+787
+00:40:05,920 --> 00:40:09,890
+meaning get that button, and when someone clicks on the button,
+
+788
+00:40:09,890 --> 00:40:18,080
+let's run this function where if the current animationPlayState is paused,
+
+789
+00:40:18,080 --> 00:40:24,170
+well, then, go ahead and set animationPlayState equal to running.
+
+790
+00:40:24,170 --> 00:40:26,600
+And otherwise, if it's already running, then
+
+791
+00:40:26,600 --> 00:40:32,610
+let's go ahead and set the animationPlayState equal to paused.
+
+792
+00:40:32,610 --> 00:40:34,940
+So all in all, what this function is going to do
+
+793
+00:40:34,940 --> 00:40:37,700
+is it's going to get me the heading, pause this initially,
+
+794
+00:40:37,700 --> 00:40:40,580
+and every time the button is clicked, run this function where
+
+795
+00:40:40,580 --> 00:40:44,060
+the function says if we're paused, go ahead and start running the animation.
+
+796
+00:40:44,060 --> 00:40:46,580
+Otherwise, go ahead and pause the animation
+
+797
+00:40:46,580 --> 00:40:50,790
+by modifying that animationPlayState property of the heading.
+
+798
+00:40:50,790 --> 00:40:54,110
+So now if I refresh this page, right now we have "Welcome!" plus a button
+
+799
+00:40:54,110 --> 00:40:55,140
+that says "Click Here!"
+
+800
+00:40:55,140 --> 00:40:56,640
+And initially, everything is paused.
+
+801
+00:40:56,640 --> 00:40:58,160
+There's no animation happening.
+
+802
+00:40:58,160 --> 00:41:00,920
+But I click here and that begins the animation, which
+
+803
+00:41:00,920 --> 00:41:04,820
+would go on indefinitely until I decide that I want to stop it, at which point
+
+804
+00:41:04,820 --> 00:41:07,370
+I click it again and the animation pauses.
+
+805
+00:41:07,370 --> 00:41:12,450
+And I can control when to start and when to pause that animation as well.
+
+806
+00:41:12,450 --> 00:41:14,360
+And so this can be helpful and nice when you
+
+807
+00:41:14,360 --> 00:41:16,652
+want to create something a little bit more interactive,
+
+808
+00:41:16,652 --> 00:41:18,080
+something animated on the page.
+
+809
+00:41:18,080 --> 00:41:21,470
+But this is especially helpful because it means that you can gradually
+
+810
+00:41:21,470 --> 00:41:23,690
+change CSS properties over time.
+
+811
+00:41:23,690 --> 00:41:25,820
+Rather than just immediately change something,
+
+812
+00:41:25,820 --> 00:41:27,950
+you have the ability to animate something
+
+813
+00:41:27,950 --> 00:41:29,670
+to make it work a little bit better.
+
+814
+00:41:29,670 --> 00:41:31,700
+So let's take a look at an example of how
+
+815
+00:41:31,700 --> 00:41:34,080
+you might put that idea into practice.
+
+816
+00:41:34,080 --> 00:41:38,840
+Let's go back to our posts example, where we had this infinite scrolling
+
+817
+00:41:38,840 --> 00:41:42,530
+list of posts, but imagine now that we want the ability to hide posts
+
+818
+00:41:42,530 --> 00:41:43,950
+when we're done with them.
+
+819
+00:41:43,950 --> 00:41:47,270
+So I've prepared an example called hide, which
+
+820
+00:41:47,270 --> 00:41:50,520
+is very similar to what we had before.
+
+821
+00:41:50,520 --> 00:41:54,140
+But this time, I've just added one extra button and the button
+
+822
+00:41:54,140 --> 00:41:56,598
+says "Hide" on every single div.
+
+823
+00:41:56,598 --> 00:41:58,640
+Right now, clicking the Hide button does nothing.
+
+824
+00:41:58,640 --> 00:42:00,780
+We'll go ahead and implement that in just a moment.
+
+825
+00:42:00,780 --> 00:42:03,380
+But first to see how this worked, if you go into hide,
+
+826
+00:42:03,380 --> 00:42:06,530
+go into the index.html template.
+
+827
+00:42:06,530 --> 00:42:10,490
+The only change that's been made here is what happens when I add a new post.
+
+828
+00:42:10,490 --> 00:42:14,333
+Recall again that what this application does is it loads posts from a server.
+
+829
+00:42:14,333 --> 00:42:16,250
+And then when it gets to those posts, it loops
+
+830
+00:42:16,250 --> 00:42:19,220
+over each of the individual posts, which is just a string of text,
+
+831
+00:42:19,220 --> 00:42:22,400
+and it adds that string of text inside of an element
+
+832
+00:42:22,400 --> 00:42:25,850
+onto the page via this add_post function.
+
+833
+00:42:25,850 --> 00:42:28,040
+And what the add_post function is going to do here
+
+834
+00:42:28,040 --> 00:42:32,328
+is first create a new element, create a div in which to store that post,
+
+835
+00:42:32,328 --> 00:42:35,120
+give it a class name, because that's how we're going to animate it,
+
+836
+00:42:35,120 --> 00:42:39,410
+and then set its inner HTML equal to the contents of the post--
+
+837
+00:42:39,410 --> 00:42:42,560
+something like post number 1, post number 2, post number 3--
+
+838
+00:42:42,560 --> 00:42:45,950
+and then add a button that just says "Hide."
+
+839
+00:42:45,950 --> 00:42:49,138
+And then we're going to go ahead and add that to the DOM as well.
+
+840
+00:42:49,138 --> 00:42:50,930
+So that's what add_post is now going to do.
+
+841
+00:42:50,930 --> 00:42:54,620
+We're sort of generating some HTML using this JavaScript code
+
+842
+00:42:54,620 --> 00:42:56,840
+and then adding that HTML to the page.
+
+843
+00:42:56,840 --> 00:42:59,150
+And now we're adding is a div that has not only
+
+844
+00:42:59,150 --> 00:43:01,550
+the contents in the post as text, but is also
+
+845
+00:43:01,550 --> 00:43:04,850
+going to give us access to a button that ultimately we
+
+846
+00:43:04,850 --> 00:43:08,330
+hope is going to let us hide that post as well.
+
+847
+00:43:08,330 --> 00:43:11,640
+So how do we actually get the hiding of the post to work?
+
+848
+00:43:11,640 --> 00:43:14,150
+Well, what we want to do is somehow detect
+
+849
+00:43:14,150 --> 00:43:17,270
+when the user clicks on one of those Hide buttons.
+
+850
+00:43:17,270 --> 00:43:19,160
+So there's a number of ways we could do this,
+
+851
+00:43:19,160 --> 00:43:25,040
+but one way is just to listen for any time anyone clicks
+
+852
+00:43:25,040 --> 00:43:28,120
+on the document as a whole.
+
+853
+00:43:28,120 --> 00:43:30,500
+Any time anyone clicks on the document, I
+
+854
+00:43:30,500 --> 00:43:34,280
+might like to ask something like, what did they actually click on?
+
+855
+00:43:34,280 --> 00:43:36,500
+And it turns out that with most event listeners,
+
+856
+00:43:36,500 --> 00:43:38,960
+the function the event listener takes in can
+
+857
+00:43:38,960 --> 00:43:42,350
+take as an optional argument the event itself, which
+
+858
+00:43:42,350 --> 00:43:46,370
+is a JavaScript object that contains information about the event that
+
+859
+00:43:46,370 --> 00:43:48,590
+happened, like the click event or the scroll event
+
+860
+00:43:48,590 --> 00:43:51,420
+or the keydown event or the keyup event, for example.
+
+861
+00:43:51,420 --> 00:43:53,450
+And one of the properties you get access to
+
+862
+00:43:53,450 --> 00:43:58,380
+is event.target, which is like what was the target of the event?
+
+863
+00:43:58,380 --> 00:44:01,310
+In this case, what was the thing that was actually clicked on?
+
+864
+00:44:01,310 --> 00:44:05,990
+And I'll go ahead and save event.target inside of a variable called
+
+865
+00:44:05,990 --> 00:44:09,650
+element, where the idea now is that whatever gets clicked on, that is
+
+866
+00:44:09,650 --> 00:44:10,700
+the event's target.
+
+867
+00:44:10,700 --> 00:44:12,650
+We're going to save that inside of element.
+
+868
+00:44:12,650 --> 00:44:16,790
+And what I want to know is is element, is that one of the Hide buttons?
+
+869
+00:44:16,790 --> 00:44:18,290
+I want to know, is it a Hide button.
+
+870
+00:44:18,290 --> 00:44:21,448
+I could have also attached an event listener to each of the Hide buttons.
+
+871
+00:44:21,448 --> 00:44:23,240
+This is just an alternative way of doing it
+
+872
+00:44:23,240 --> 00:44:25,250
+that I'm showing you for sake of demonstration
+
+873
+00:44:25,250 --> 00:44:27,590
+where we say when we click anywhere in the document,
+
+874
+00:44:27,590 --> 00:44:30,920
+figure out what was clicked on and save it inside of this variable.
+
+875
+00:44:30,920 --> 00:44:35,150
+And if it's a Hide button, then it's going to have a class of hide,
+
+876
+00:44:35,150 --> 00:44:39,590
+because I gave every Hide button a class of hide.
+
+877
+00:44:39,590 --> 00:44:47,050
+And so what I can say is if element.className equals hide, well,
+
+878
+00:44:47,050 --> 00:44:50,050
+that means that what was clicked on is something with the class of hide,
+
+879
+00:44:50,050 --> 00:44:52,810
+we can assume that it is in fact a Hide button.
+
+880
+00:44:52,810 --> 00:44:56,920
+And then what I want to do is I can do something like element.remove
+
+881
+00:44:56,920 --> 00:45:00,230
+to say go ahead and get rid of that element.
+
+882
+00:45:00,230 --> 00:45:01,780
+So now what does this do?
+
+883
+00:45:01,780 --> 00:45:03,440
+If I refresh the page--
+
+884
+00:45:03,440 --> 00:45:04,120
+let's try it.
+
+885
+00:45:04,120 --> 00:45:04,840
+Post #1.
+
+886
+00:45:04,840 --> 00:45:07,113
+If I hide it, I want to hide Post #1.
+
+887
+00:45:07,113 --> 00:45:08,530
+All right, that didn't quite work.
+
+888
+00:45:08,530 --> 00:45:10,405
+It was close-- it got rid of the Hide button.
+
+889
+00:45:10,405 --> 00:45:12,405
+But I didn't want to get rid of the Hide button,
+
+890
+00:45:12,405 --> 00:45:14,380
+I wanted to get rid of the whole post.
+
+891
+00:45:14,380 --> 00:45:18,610
+So what's going on here is it seems to be that if the element's class name is
+
+892
+00:45:18,610 --> 00:45:20,860
+hide, meaning I clicked on a Hide button,
+
+893
+00:45:20,860 --> 00:45:23,960
+element.remove just removes that element.
+
+894
+00:45:23,960 --> 00:45:26,410
+It removes the Hide button, but it doesn't
+
+895
+00:45:26,410 --> 00:45:28,420
+remove the post that contains it.
+
+896
+00:45:28,420 --> 00:45:31,750
+And if you think about this in terms of the DOM, the post is a div
+
+897
+00:45:31,750 --> 00:45:35,320
+and its child element is the button, this Hide button.
+
+898
+00:45:35,320 --> 00:45:39,100
+And so you remove the button, but it doesn't also remove the post as well.
+
+899
+00:45:39,100 --> 00:45:41,110
+If you want to remove the post as well, you
+
+900
+00:45:41,110 --> 00:45:44,200
+need to remove not the element, but the element's parent.
+
+901
+00:45:44,200 --> 00:45:46,840
+And in JavaScript, it turns out there's a way to do that, too.
+
+902
+00:45:46,840 --> 00:45:52,630
+Rather than element.remove, I can say element.parentElement.remove to say
+
+903
+00:45:52,630 --> 00:45:56,370
+take the element, get its parent, and remove that.
+
+904
+00:45:56,370 --> 00:45:58,910
+So now I refresh the page.
+
+905
+00:45:58,910 --> 00:46:00,190
+Now I see a Post #1.
+
+906
+00:46:00,190 --> 00:46:01,210
+I want to hide it.
+
+907
+00:46:01,210 --> 00:46:05,800
+I hide Post #1 and all right, now I see Post #2 and Post #1 has gone away.
+
+908
+00:46:05,800 --> 00:46:08,350
+If I want to hide Post #3, I hide Post #3.
+
+909
+00:46:08,350 --> 00:46:09,470
+Now Post #3 is gone.
+
+910
+00:46:09,470 --> 00:46:12,370
+Now I go straight from Post #2 Post #4.
+
+911
+00:46:12,370 --> 00:46:16,930
+So this works, but it's also not immediately obvious what's going on.
+
+912
+00:46:16,930 --> 00:46:19,990
+Because all of the posts are the exact same height, when I get rid
+
+913
+00:46:19,990 --> 00:46:22,780
+of Posts 1 and 3, it's not immediately obvious to the eye
+
+914
+00:46:22,780 --> 00:46:25,510
+that they've gone away because Posts 2 and 4,
+
+915
+00:46:25,510 --> 00:46:26,980
+they look almost exactly the same.
+
+916
+00:46:26,980 --> 00:46:30,160
+You really have to be paying attention to know that the hiding worked.
+
+917
+00:46:30,160 --> 00:46:32,980
+And so this can be a time where animation can actually
+
+918
+00:46:32,980 --> 00:46:34,490
+be quite helpful.
+
+919
+00:46:34,490 --> 00:46:38,140
+So what I can do is say something like, let's go ahead
+
+920
+00:46:38,140 --> 00:46:43,690
+and give this post an animation associated with every post.
+
+921
+00:46:43,690 --> 00:46:46,520
+We'll give it an animation-name called hide,
+
+922
+00:46:46,520 --> 00:46:49,720
+an animation-duration of 2 seconds-- we'll say it'll take you 2 seconds
+
+923
+00:46:49,720 --> 00:46:51,130
+in order to hide--
+
+924
+00:46:51,130 --> 00:46:53,200
+and an animation-fill-mode of forwards, I
+
+925
+00:46:53,200 --> 00:46:55,000
+want to go forwards with the animation.
+
+926
+00:46:55,000 --> 00:47:00,897
+And initially, I'll give the post an animation-play-state of paused, meaning
+
+927
+00:47:00,897 --> 00:47:03,730
+initially, I don't want the animation to be running, because I don't
+
+928
+00:47:03,730 --> 00:47:05,440
+want to hide all the posts immediately.
+
+929
+00:47:05,440 --> 00:47:06,940
+Pause this animation.
+
+930
+00:47:06,940 --> 00:47:09,130
+Later, we'll go ahead and run the animation
+
+931
+00:47:09,130 --> 00:47:12,460
+in order to actually hide the post.
+
+932
+00:47:12,460 --> 00:47:16,720
+Then I need to define, what does it actually mean to hide the post?
+
+933
+00:47:16,720 --> 00:47:19,940
+And I'll say, well, all right, at the 0% mark, what does it mean?
+
+934
+00:47:19,940 --> 00:47:21,940
+Let's give yourselves an opacity of 1.
+
+935
+00:47:21,940 --> 00:47:25,120
+Opacity is a CSS property that just controls how opaque
+
+936
+00:47:25,120 --> 00:47:28,460
+or how transparent an HTML element happens to be.
+
+937
+00:47:28,460 --> 00:47:31,420
+And at the end, 100% of the way done with the animation,
+
+938
+00:47:31,420 --> 00:47:33,670
+we'll set opacity to 0.
+
+939
+00:47:33,670 --> 00:47:35,950
+So initially, we can fully see the element.
+
+940
+00:47:35,950 --> 00:47:38,650
+At the end, the element is totally transparent.
+
+941
+00:47:38,650 --> 00:47:43,360
+And now what I need to do is actually trigger this to happen somehow.
+
+942
+00:47:43,360 --> 00:47:47,080
+So this is probably going to happen inside of my event listener.
+
+943
+00:47:47,080 --> 00:47:50,110
+We're-- instead of removing the element right away,
+
+944
+00:47:50,110 --> 00:47:55,270
+let me just take the parentElement and set its animationPlayState equal
+
+945
+00:47:55,270 --> 00:48:01,030
+to running, for example, meaning when I click the Hide button,
+
+946
+00:48:01,030 --> 00:48:06,340
+go ahead and run the animation that will change the opacity from 1 to 0 over
+
+947
+00:48:06,340 --> 00:48:08,437
+the course of a couple of seconds.
+
+948
+00:48:08,437 --> 00:48:11,020
+And then if I really want to, I can add another event listener
+
+949
+00:48:11,020 --> 00:48:15,430
+to say take the parentElement, addEventListener.
+
+950
+00:48:15,430 --> 00:48:19,210
+There's an event called animationend, which
+
+951
+00:48:19,210 --> 00:48:21,700
+happens when the animation is over.
+
+952
+00:48:21,700 --> 00:48:24,400
+And then I can say, all right, when the animation is over,
+
+953
+00:48:24,400 --> 00:48:29,350
+we'll then go ahead and remove the element.
+
+954
+00:48:29,350 --> 00:48:32,650
+So all in all, rather than just immediately remove the element when I
+
+955
+00:48:32,650 --> 00:48:36,490
+click on the button that says Hide, what I'd like to do is say if you click
+
+956
+00:48:36,490 --> 00:48:39,730
+on a button and the button is Hide, go ahead and get the parent element--
+
+957
+00:48:39,730 --> 00:48:42,280
+not the Hide button, but the post itself--
+
+958
+00:48:42,280 --> 00:48:46,330
+set its animationPlayState to running, meaning run the hide animation,
+
+959
+00:48:46,330 --> 00:48:50,140
+and then add an event listener to the parent, to that post as a whole,
+
+960
+00:48:50,140 --> 00:48:54,340
+to say when the animation is over, go ahead and remove that entire post
+
+961
+00:48:54,340 --> 00:48:56,740
+from the DOM altogether.
+
+962
+00:48:56,740 --> 00:48:59,770
+So what is the effect of all of this now, of having this animation
+
+963
+00:48:59,770 --> 00:49:01,600
+and running it?
+
+964
+00:49:01,600 --> 00:49:04,750
+Well, now if I refresh the page, I see all these posts.
+
+965
+00:49:04,750 --> 00:49:07,660
+If I try and hide, like, Post #2, for example, you'll
+
+966
+00:49:07,660 --> 00:49:11,710
+see that the opacity changes and then it slowly disappears.
+
+967
+00:49:11,710 --> 00:49:13,840
+And then only after it's totally transparent,
+
+968
+00:49:13,840 --> 00:49:15,260
+the post disappears entirely.
+
+969
+00:49:15,260 --> 00:49:19,390
+So I can say hide Post #4, it disappears, and then Post #5
+
+970
+00:49:19,390 --> 00:49:20,742
+jumps up to fill its place.
+
+971
+00:49:20,742 --> 00:49:22,450
+And I can do that for any of these posts,
+
+972
+00:49:22,450 --> 00:49:25,840
+triggering the animation when I click on the Hide button.
+
+973
+00:49:25,840 --> 00:49:28,690
+And so this is part of the value of what animation can do,
+
+974
+00:49:28,690 --> 00:49:31,330
+is to be able to make our user interfaces a little more
+
+975
+00:49:31,330 --> 00:49:33,160
+pleasant from the perspective of the user
+
+976
+00:49:33,160 --> 00:49:36,550
+by not immediately getting rid of a post, but by having a nice fadeout
+
+977
+00:49:36,550 --> 00:49:38,350
+so it disappears nicely.
+
+978
+00:49:38,350 --> 00:49:40,750
+Now, even this is not perfect animation wise.
+
+979
+00:49:40,750 --> 00:49:42,790
+Like, one thing you might notice is that it
+
+980
+00:49:42,790 --> 00:49:44,740
+jumps up as soon as the post is gone.
+
+981
+00:49:44,740 --> 00:49:48,280
+If I hide Post #3, I hide it, it disappears, and Post #5
+
+982
+00:49:48,280 --> 00:49:51,440
+sort of jumps up very abruptly in order to fill its place.
+
+983
+00:49:51,440 --> 00:49:55,150
+What I might like is to be a little bit cleverer, to somehow shrink
+
+984
+00:49:55,150 --> 00:49:59,710
+the size of the post after it's gone so that the post doesn't jump into place
+
+985
+00:49:59,710 --> 00:50:02,292
+but it slides a little bit more naturally into place.
+
+986
+00:50:02,292 --> 00:50:04,750
+And so there's some additional things I can play with here.
+
+987
+00:50:04,750 --> 00:50:09,610
+Maybe I want to say that, all right, let me make this animation a multiple part
+
+988
+00:50:09,610 --> 00:50:10,370
+animation.
+
+989
+00:50:10,370 --> 00:50:15,190
+So here, instead of just from 0% to 100% setting the opacity from 1 to 0,
+
+990
+00:50:15,190 --> 00:50:18,760
+maybe in the first 75% of the animation, that
+
+991
+00:50:18,760 --> 00:50:22,030
+will take care of reducing the opacity, going down from 1 all the way down
+
+992
+00:50:22,030 --> 00:50:22,870
+to 0.
+
+993
+00:50:22,870 --> 00:50:28,930
+But in the last 25% of the animation, we'll still end with an opacity of 0,
+
+994
+00:50:28,930 --> 00:50:33,370
+but anything that creates vertical space, I want to reduce down to 0.
+
+995
+00:50:33,370 --> 00:50:36,650
+So the height should be 0 pixels, the line-height,
+
+996
+00:50:36,650 --> 00:50:39,190
+which is how high the text is, should also be 0 pixels.
+
+997
+00:50:39,190 --> 00:50:41,620
+And any padding I want to go away.
+
+998
+00:50:41,620 --> 00:50:44,290
+It turns out I've added some margin to the bottom of the post--
+
+999
+00:50:44,290 --> 00:50:46,130
+I want to make that go away as well.
+
+1000
+00:50:46,130 --> 00:50:49,780
+So I want to set all of those to 0 from whatever their initial values happen
+
+1001
+00:50:49,780 --> 00:50:53,590
+to be, that initially the height is like 100% of what the height could be.
+
+1002
+00:50:53,590 --> 00:50:56,530
+Likewise for line-height, 100% of the parent.
+
+1003
+00:50:56,530 --> 00:50:58,750
+Initially I have, like, 20 pixels of padding
+
+1004
+00:50:58,750 --> 00:51:01,270
+and a margin at the bottom of 10 pixels.
+
+1005
+00:51:01,270 --> 00:51:07,030
+And I want all of that to still be true 75% of the way through the animation.
+
+1006
+00:51:07,030 --> 00:51:09,945
+But it's only in the last 25% of the animation
+
+1007
+00:51:09,945 --> 00:51:12,820
+that I want to set all of these vertical height properties down to 0.
+
+1008
+00:51:12,820 --> 00:51:14,620
+I want to remove all the height, remove the line-height,
+
+1009
+00:51:14,620 --> 00:51:15,970
+remove all the padding.
+
+1010
+00:51:15,970 --> 00:51:18,550
+And the effect of this is I'll have an animation now where
+
+1011
+00:51:18,550 --> 00:51:23,110
+for the first 75% of the animation, the only thing that changes is the opacity.
+
+1012
+00:51:23,110 --> 00:51:28,000
+The opacity goes from 1, fully visible, to 0, fully transparent.
+
+1013
+00:51:28,000 --> 00:51:30,640
+And then in the last 25% of the animation,
+
+1014
+00:51:30,640 --> 00:51:32,450
+the post is already transparent.
+
+1015
+00:51:32,450 --> 00:51:36,310
+You can't see it, but it's still taking up physical space on the page.
+
+1016
+00:51:36,310 --> 00:51:38,830
+But we're going to now reduce the height of that post
+
+1017
+00:51:38,830 --> 00:51:42,290
+so that now you won't be able to see it at all.
+
+1018
+00:51:42,290 --> 00:51:45,910
+So now if I refresh this page, here again are all the posts.
+
+1019
+00:51:45,910 --> 00:51:48,220
+But now if I click Hide on a particular post,
+
+1020
+00:51:48,220 --> 00:51:50,620
+we'll see that it first fades out, and then its height
+
+1021
+00:51:50,620 --> 00:51:54,200
+shrinks so that the next post slides very nicely into place.
+
+1022
+00:51:54,200 --> 00:51:55,150
+I can do that again.
+
+1023
+00:51:55,150 --> 00:51:58,600
+Hide the post, it's transparent, and then it slides into place.
+
+1024
+00:51:58,600 --> 00:52:02,710
+And this, again, is just an application of this idea of CSS animations,
+
+1025
+00:52:02,710 --> 00:52:06,130
+using properties of animation to make our interfaces a little bit
+
+1026
+00:52:06,130 --> 00:52:09,220
+nicer to use, a little bit clearer visually to the user
+
+1027
+00:52:09,220 --> 00:52:11,620
+that one post has gone away and the rest of the posts
+
+1028
+00:52:11,620 --> 00:52:15,740
+have now scrolled up in order to take their place.
+
+1029
+00:52:15,740 --> 00:52:18,070
+So now we've been able to use JavaScript to create
+
+1030
+00:52:18,070 --> 00:52:19,552
+a lot of nice user interfaces.
+
+1031
+00:52:19,552 --> 00:52:21,760
+We've been able to create a single-page applications,
+
+1032
+00:52:21,760 --> 00:52:25,340
+to create infinite scrolling, to be able to create some animations as well
+
+1033
+00:52:25,340 --> 00:52:27,297
+and use JavaScript to be able to control them.
+
+1034
+00:52:27,297 --> 00:52:29,380
+But one thing you might be realizing at this point
+
+1035
+00:52:29,380 --> 00:52:32,450
+is that our applications are starting to get fairly complicated.
+
+1036
+00:52:32,450 --> 00:52:34,960
+There's a lot of JavaScript code needed to manipulate
+
+1037
+00:52:34,960 --> 00:52:37,510
+a lot of different parts of our application at the same time.
+
+1038
+00:52:37,510 --> 00:52:40,790
+And you can imagine that as web pages start to get more complex
+
+1039
+00:52:40,790 --> 00:52:43,893
+and as you want to start making them more interactive and more dynamic,
+
+1040
+00:52:43,893 --> 00:52:46,810
+there's going to be a lot of JavaScript code required in order to keep
+
+1041
+00:52:46,810 --> 00:52:49,690
+everything in sync, in order to make sure that all of the elements
+
+1042
+00:52:49,690 --> 00:52:52,310
+are updated when they should, so on and so forth.
+
+1043
+00:52:52,310 --> 00:52:55,180
+And it's for that reason that in recent years, a lot of JavaScript
+
+1044
+00:52:55,180 --> 00:52:58,420
+has now turned to some JavaScript libraries or frameworks that
+
+1045
+00:52:58,420 --> 00:53:00,970
+allow to more efficiently and more effectively
+
+1046
+00:53:00,970 --> 00:53:05,020
+create user interfaces that are more interactive and more reactive.
+
+1047
+00:53:05,020 --> 00:53:08,500
+And one of the most popular of these is a framework known as React.
+
+1048
+00:53:08,500 --> 00:53:10,780
+React is a JavaScript library that is going
+
+1049
+00:53:10,780 --> 00:53:14,320
+to enable us to be able to design user interfaces that
+
+1050
+00:53:14,320 --> 00:53:17,380
+are very interactive, where the content of the web page updates
+
+1051
+00:53:17,380 --> 00:53:20,020
+automatically based on some underlying state.
+
+1052
+00:53:20,020 --> 00:53:23,080
+And what we'll do now is take a look at a brief taste of React
+
+1053
+00:53:23,080 --> 00:53:26,260
+to get a sense for how frameworks like it can actually work
+
+1054
+00:53:26,260 --> 00:53:29,740
+and can help us in designing some interactive and useful interfaces
+
+1055
+00:53:29,740 --> 00:53:31,960
+for users to be able to interact with.
+
+1056
+00:53:31,960 --> 00:53:35,860
+React is ultimately based on this idea of declarative programming,
+
+1057
+00:53:35,860 --> 00:53:37,908
+a particular style of programming which is
+
+1058
+00:53:37,908 --> 00:53:39,700
+different from the types of programming you
+
+1059
+00:53:39,700 --> 00:53:43,300
+might be familiar with-- more classical programming styles like imperative
+
+1060
+00:53:43,300 --> 00:53:44,440
+programming.
+
+1061
+00:53:44,440 --> 00:53:47,800
+In imperative programming, you generally give the computer commands,
+
+1062
+00:53:47,800 --> 00:53:49,330
+tell the computer what to do.
+
+1063
+00:53:49,330 --> 00:53:52,490
+For example, if we had that counter program from before
+
+1064
+00:53:52,490 --> 00:53:55,420
+and we wanted to update the counter from one number to another number,
+
+1065
+00:53:55,420 --> 00:53:58,390
+in the view, like the HTML that the user sees,
+
+1066
+00:53:58,390 --> 00:54:00,520
+we would include something like a heading that
+
+1067
+00:54:00,520 --> 00:54:02,500
+just has the number 0 inside of it.
+
+1068
+00:54:02,500 --> 00:54:05,080
+And then the logic in imperative programming
+
+1069
+00:54:05,080 --> 00:54:06,920
+would take something like this form.
+
+1070
+00:54:06,920 --> 00:54:10,900
+It would be like, all right, first document.querySelector("h1") to get
+
+1071
+00:54:10,900 --> 00:54:12,100
+that h1 tag.
+
+1072
+00:54:12,100 --> 00:54:13,840
+Get it, it's in our HTML.
+
+1073
+00:54:13,840 --> 00:54:16,940
+parseInt-- we'll take the string and convert it into an integer,
+
+1074
+00:54:16,940 --> 00:54:20,473
+and we can save that inside of a variable called num, for example.
+
+1075
+00:54:20,473 --> 00:54:22,390
+And then after that, if I want to increase it,
+
+1076
+00:54:22,390 --> 00:54:26,590
+I would take this variable num and just add 1 to it-- num plus equals 1,
+
+1077
+00:54:26,590 --> 00:54:27,550
+add 1 to it.
+
+1078
+00:54:27,550 --> 00:54:30,790
+And then if I want to update this heading in order to replace the 0 with
+
+1079
+00:54:30,790 --> 00:54:33,040
+a 1, for example, well, then I would need to say
+
+1080
+00:54:33,040 --> 00:54:37,840
+document.querySelector("h1"), set the inner HTML equal to that number,
+
+1081
+00:54:37,840 --> 00:54:40,330
+for instance, in order to say, all right, num is now 1.
+
+1082
+00:54:40,330 --> 00:54:43,490
+Go ahead and replace that in the view.
+
+1083
+00:54:43,490 --> 00:54:46,750
+But this is a fair amount of code to do something fairly simple,
+
+1084
+00:54:46,750 --> 00:54:48,325
+just like increase a number by 1.
+
+1085
+00:54:48,325 --> 00:54:50,200
+And the reason why is because we've had to be
+
+1086
+00:54:50,200 --> 00:54:53,710
+very explicit about what instructions we're giving to the web browser.
+
+1087
+00:54:53,710 --> 00:54:57,170
+We're saying first, grab the h1, figure out what number is inside of it,
+
+1088
+00:54:57,170 --> 00:55:01,210
+add 1 to that number, and then replace it inside of this tag.
+
+1089
+00:55:01,210 --> 00:55:03,790
+What declarative programming is going to allow us to do
+
+1090
+00:55:03,790 --> 00:55:07,060
+is it's going to allow us to just describe what state should
+
+1091
+00:55:07,060 --> 00:55:09,190
+be displayed on the page in what form.
+
+1092
+00:55:09,190 --> 00:55:12,810
+In declarative programming, in our view, like the HTML-like code
+
+1093
+00:55:12,810 --> 00:55:14,560
+that we're going to be writing, we're just
+
+1094
+00:55:14,560 --> 00:55:18,790
+going to say something like, h1, and then in curly braces num,
+
+1095
+00:55:18,790 --> 00:55:21,010
+to mean fill in the number here.
+
+1096
+00:55:21,010 --> 00:55:23,650
+And this is what the React syntax is going to look like.
+
+1097
+00:55:23,650 --> 00:55:27,160
+And then the logic code, if we want to increment that number by 1,
+
+1098
+00:55:27,160 --> 00:55:30,250
+is we just need to say num plus equals 1.
+
+1099
+00:55:30,250 --> 00:55:31,780
+Add 1 to the number.
+
+1100
+00:55:31,780 --> 00:55:35,260
+And the effect of that is that since we have declared that inside of this
+
+1101
+00:55:35,260 --> 00:55:37,510
+heading, it should be whatever the value of the number
+
+1102
+00:55:37,510 --> 00:55:40,000
+is, when we increment the value of number,
+
+1103
+00:55:40,000 --> 00:55:43,750
+React is effectively just going to update the view so
+
+1104
+00:55:43,750 --> 00:55:45,773
+that the number updates as well.
+
+1105
+00:55:45,773 --> 00:55:48,190
+And so this will be some of the power that React gives us.
+
+1106
+00:55:48,190 --> 00:55:51,400
+React lets us divide our application into a whole bunch
+
+1107
+00:55:51,400 --> 00:55:54,090
+of different components, where a component is something
+
+1108
+00:55:54,090 --> 00:55:55,840
+like this thing here that is keeping track
+
+1109
+00:55:55,840 --> 00:55:58,507
+of some sort of count, along with a button that might manipulate
+
+1110
+00:55:58,507 --> 00:56:01,840
+it, and then make that component based on some underlying state,
+
+1111
+00:56:01,840 --> 00:56:05,410
+some underlying variables that represent the state of the application--
+
+1112
+00:56:05,410 --> 00:56:07,120
+something like the current number.
+
+1113
+00:56:07,120 --> 00:56:10,390
+And then we can manipulate that state, and when we manipulate the state,
+
+1114
+00:56:10,390 --> 00:56:12,910
+that will have an impact on what the user actually sees,
+
+1115
+00:56:12,910 --> 00:56:17,330
+and React will handle the process of updating that user interface for us.
+
+1116
+00:56:17,330 --> 00:56:20,200
+There are a number of ways to get React working on our web page,
+
+1117
+00:56:20,200 --> 00:56:23,770
+but the simplest is probably just to include these three JavaScript
+
+1118
+00:56:23,770 --> 00:56:27,190
+packages inside of our web page.
+
+1119
+00:56:27,190 --> 00:56:29,065
+So we're first going to include React itself,
+
+1120
+00:56:29,065 --> 00:56:31,857
+which is going to be the library that's going to allow us to define
+
+1121
+00:56:31,857 --> 00:56:33,640
+these components and how they behave.
+
+1122
+00:56:33,640 --> 00:56:36,220
+Then it's ReactDOM, a special package that's
+
+1123
+00:56:36,220 --> 00:56:38,860
+going to allow us to take React components
+
+1124
+00:56:38,860 --> 00:56:41,320
+and insert them into the DOM, the document
+
+1125
+00:56:41,320 --> 00:56:44,660
+object model that represents the structure of the entire page.
+
+1126
+00:56:44,660 --> 00:56:47,050
+And then finally, Babel is going to be a package
+
+1127
+00:56:47,050 --> 00:56:49,570
+that we're going to use in order to translate code
+
+1128
+00:56:49,570 --> 00:56:51,250
+from one language to another.
+
+1129
+00:56:51,250 --> 00:56:53,710
+It turns out that when we're writing React code,
+
+1130
+00:56:53,710 --> 00:56:56,290
+we're not actually going to be writing JavaScript.
+
+1131
+00:56:56,290 --> 00:57:00,490
+We're going to be writing in an extension to JavaScript known as JSX.
+
+1132
+00:57:00,490 --> 00:57:03,220
+And JSX is going to be an extension to JavaScript that
+
+1133
+00:57:03,220 --> 00:57:06,130
+looks a lot like JavaScript, but has some additional features.
+
+1134
+00:57:06,130 --> 00:57:09,190
+In particular, it has the ability to effectively allow
+
+1135
+00:57:09,190 --> 00:57:12,667
+us to represent HTML inside of our JavaScript code
+
+1136
+00:57:12,667 --> 00:57:14,500
+in a way that's much easier to read and it's
+
+1137
+00:57:14,500 --> 00:57:16,750
+going to be convenient for us to deal with.
+
+1138
+00:57:16,750 --> 00:57:20,270
+Browsers, on the other hand, don't understand JSX automatically,
+
+1139
+00:57:20,270 --> 00:57:22,330
+so what we're going to use is a tool like Babel
+
+1140
+00:57:22,330 --> 00:57:25,750
+to convert that code into plain JavaScript
+
+1141
+00:57:25,750 --> 00:57:29,170
+that our web browsers are ultimately going to be able to understand.
+
+1142
+00:57:29,170 --> 00:57:32,420
+The best way to get a feel for this kind of thing is just to see it in action.
+
+1143
+00:57:32,420 --> 00:57:35,307
+So I'll go ahead and create a couple of React applications,
+
+1144
+00:57:35,307 --> 00:57:37,390
+just to get a sense for how it is that you can use
+
+1145
+00:57:37,390 --> 00:57:40,640
+React in your own applications as well.
+
+1146
+00:57:40,640 --> 00:57:43,870
+So let's start by taking a look at react.html.
+
+1147
+00:57:43,870 --> 00:57:47,140
+And what I have here is the beginning of an HTML page.
+
+1148
+00:57:47,140 --> 00:57:48,970
+Inside the head section, what you'll notice
+
+1149
+00:57:48,970 --> 00:57:52,045
+is I've already included these three script tags.
+
+1150
+00:57:52,045 --> 00:57:53,920
+And what these script tags are doing are just
+
+1151
+00:57:53,920 --> 00:57:56,350
+including those three JavaScript libraries
+
+1152
+00:57:56,350 --> 00:57:58,420
+we were talking about a moment ago.
+
+1153
+00:57:58,420 --> 00:58:00,730
+I have a title for the page just called React.
+
+1154
+00:58:00,730 --> 00:58:04,580
+And now let's start to fill in the body of this web page.
+
+1155
+00:58:04,580 --> 00:58:07,510
+I'll begin by adding a div, which I'll give an ID to.
+
+1156
+00:58:07,510 --> 00:58:09,760
+I'll call it app, but I could call it anything.
+
+1157
+00:58:09,760 --> 00:58:12,187
+And this is where our application is going to go.
+
+1158
+00:58:12,187 --> 00:58:14,270
+But right now I'm just going to leave it as empty.
+
+1159
+00:58:14,270 --> 00:58:19,090
+It's going to be React's job to fill in this div with the content of our user
+
+1160
+00:58:19,090 --> 00:58:20,300
+interface.
+
+1161
+00:58:20,300 --> 00:58:23,770
+And now beneath that div, I'll start to write some JavaScript.
+
+1162
+00:58:23,770 --> 00:58:26,860
+But remember, I'm not going to be writing JavaScript, per se, but rather
+
+1163
+00:58:26,860 --> 00:58:29,620
+JSX, that extension to JavaScript.
+
+1164
+00:58:29,620 --> 00:58:34,510
+So in this case, I'll need to add an extra attribute. type="text/babel",
+
+1165
+00:58:34,510 --> 00:58:37,960
+and all this is doing is telling my browser that it's going to need
+
+1166
+00:58:37,960 --> 00:58:41,710
+to translate this JSX code into JavaScript code that the browser is
+
+1167
+00:58:41,710 --> 00:58:45,850
+actually going to be able to understand before it tries to run this code.
+
+1168
+00:58:45,850 --> 00:58:48,370
+In practice, if you were developing a real application, what
+
+1169
+00:58:48,370 --> 00:58:51,537
+you would want to do is you would want to do this translation ahead of time,
+
+1170
+00:58:51,537 --> 00:58:53,380
+prior to deploying the application.
+
+1171
+00:58:53,380 --> 00:58:57,350
+But here we're just going to translate it on the fly.
+
+1172
+00:58:57,350 --> 00:58:59,710
+And so all of our React applications are going
+
+1173
+00:58:59,710 --> 00:59:04,440
+to be composed of components, where a component is just some part of my web
+
+1174
+00:59:04,440 --> 00:59:06,300
+application's user interface.
+
+1175
+00:59:06,300 --> 00:59:10,030
+And to describe a component, I can write a JavaScript function.
+
+1176
+00:59:10,030 --> 00:59:12,600
+So I'll create a function called App, which is
+
+1177
+00:59:12,600 --> 00:59:15,270
+going to represent this app component.
+
+1178
+00:59:15,270 --> 00:59:17,820
+And what's going to go inside of this app component?
+
+1179
+00:59:17,820 --> 00:59:20,610
+Well, it's a function, so it's going to return something.
+
+1180
+00:59:20,610 --> 00:59:25,470
+And what it's going to return is what should appear inside of that component.
+
+1181
+00:59:25,470 --> 00:59:29,100
+And this app component could really just be, for example, a div
+
+1182
+00:59:29,100 --> 00:59:31,860
+that says "Hello!", let's say.
+
+1183
+00:59:31,860 --> 00:59:34,440
+And this is where the power of JSX really
+
+1184
+00:59:34,440 --> 00:59:38,370
+starts to come in, that here I can write HTML-like syntax
+
+1185
+00:59:38,370 --> 00:59:43,540
+inside of my JavaScript code, and JSX is going to be able to understand it.
+
+1186
+00:59:43,540 --> 00:59:45,780
+So this function right here is a function called
+
+1187
+00:59:45,780 --> 00:59:48,540
+App that is representing a React component,
+
+1188
+00:59:48,540 --> 00:59:53,790
+and when this component is rendered onto my web page, it's going to say "Hello!"
+
+1189
+00:59:53,790 --> 00:59:56,970
+So there's one last line I need inside of my JavaScript now,
+
+1190
+00:59:56,970 --> 01:00:00,510
+and that is to actually render this component into the page.
+
+1191
+01:00:00,510 --> 01:00:05,580
+To do that, I'll say ReactDOM.render, and the first argument
+
+1192
+01:00:05,580 --> 01:00:09,720
+to this function, ReactDOM.render, is what component would I like to render?
+
+1193
+01:00:09,720 --> 01:00:13,120
+The component is this app component that I just created.
+
+1194
+01:00:13,120 --> 01:00:17,280
+And so I'll say App, again using this HTML-like syntax.
+
+1195
+01:00:17,280 --> 01:00:20,010
+And then the second argument is, where on the page
+
+1196
+01:00:20,010 --> 01:00:22,020
+would I like to render this component?
+
+1197
+01:00:22,020 --> 01:00:26,160
+And I want to render this component right here on line 10, where
+
+1198
+01:00:26,160 --> 01:00:28,620
+I have a div whose ID is app.
+
+1199
+01:00:28,620 --> 01:00:32,430
+So I'll need to add some JavaScript code to find that particular div.
+
+1200
+01:00:32,430 --> 01:00:39,180
+And to do that, I can just say document.querySelector and then
+
+1201
+01:00:39,180 --> 01:00:44,910
+#app to say find the element with an ID of app,
+
+1202
+01:00:44,910 --> 01:00:48,570
+and that is where I would like to render this app component.
+
+1203
+01:00:48,570 --> 01:00:52,500
+So I first created this empty div, then I defined this function
+
+1204
+01:00:52,500 --> 01:00:54,390
+representing a React component.
+
+1205
+01:00:54,390 --> 01:00:57,000
+And then after that, we're going to render that component
+
+1206
+01:00:57,000 --> 01:01:00,970
+inside of the HTML page itself.
+
+1207
+01:01:00,970 --> 01:01:04,380
+So now if we were to open a browser and see what this page actually
+
+1208
+01:01:04,380 --> 01:01:05,280
+looks like--
+
+1209
+01:01:05,280 --> 01:01:07,060
+I'll make the text a little bit bigger--
+
+1210
+01:01:07,060 --> 01:01:10,290
+you see that we actually do see the word "Hello!"
+
+1211
+01:01:10,290 --> 01:01:13,410
+And if I make a change to the component and refresh the page,
+
+1212
+01:01:13,410 --> 01:01:15,610
+it will change the page as well.
+
+1213
+01:01:15,610 --> 01:01:19,470
+So if the component instead displayed "Hello, world!",
+
+1214
+01:01:19,470 --> 01:01:24,190
+well, then I refresh the page and the page now also says "Hello, world!"
+
+1215
+01:01:24,190 --> 01:01:28,320
+And because this is JavaScript, I can add JavaScript code to the function
+
+1216
+01:01:28,320 --> 01:01:30,960
+just as I could with any function in JavaScript.
+
+1217
+01:01:30,960 --> 01:01:34,230
+Imagine, for example, that I had some variables like--
+
+1218
+01:01:34,230 --> 01:01:36,780
+let's create a variable x, which is equal to 1,
+
+1219
+01:01:36,780 --> 01:01:39,780
+and a variable y, which is equal to 2.
+
+1220
+01:01:39,780 --> 01:01:42,780
+Inside of this div, rather than just render some text,
+
+1221
+01:01:42,780 --> 01:01:46,890
+I can use curly braces to say plug in the value of some JavaScript
+
+1222
+01:01:46,890 --> 01:01:47,880
+expression.
+
+1223
+01:01:47,880 --> 01:01:51,970
+I could plug in the value of x plus y, for example,
+
+1224
+01:01:51,970 --> 01:01:55,110
+and now by including x plus y in these curly braces,
+
+1225
+01:01:55,110 --> 01:01:57,870
+JavaScript is going to evaluate what is x plus y
+
+1226
+01:01:57,870 --> 01:02:01,750
+and display that inside of the div instead.
+
+1227
+01:02:01,750 --> 01:02:03,810
+And so now when I refresh the page, you see
+
+1228
+01:02:03,810 --> 01:02:07,810
+that the page just says 3, for example.
+
+1229
+01:02:07,810 --> 01:02:09,630
+And so that's the basics of React.
+
+1230
+01:02:09,630 --> 01:02:12,960
+We create these components and then render those components,
+
+1231
+01:02:12,960 --> 01:02:15,720
+all using the power of JavaScript.
+
+1232
+01:02:15,720 --> 01:02:17,640
+But where React starts to get more powerful
+
+1233
+01:02:17,640 --> 01:02:19,350
+is when we can reuse components.
+
+1234
+01:02:19,350 --> 01:02:22,440
+The whole idea of a component is it represents some part of the user
+
+1235
+01:02:22,440 --> 01:02:25,050
+interface, and I could reuse that same component
+
+1236
+01:02:25,050 --> 01:02:28,080
+across multiple parts of the interface as well.
+
+1237
+01:02:28,080 --> 01:02:31,470
+Imagine, for example, that inside of my app component,
+
+1238
+01:02:31,470 --> 01:02:37,080
+I was going to render a div that had three headings, each of which
+
+1239
+01:02:37,080 --> 01:02:39,080
+said "Hello!"
+
+1240
+01:02:39,080 --> 01:02:42,000
+So there's one heading, there's another one,
+
+1241
+01:02:42,000 --> 01:02:45,280
+and we'll add a third one there as well.
+
+1242
+01:02:45,280 --> 01:02:48,060
+So I have a div with three headings inside of it,
+
+1243
+01:02:48,060 --> 01:02:49,560
+and we can see what that looks like.
+
+1244
+01:02:49,560 --> 01:02:51,525
+Each one of them says "Hello!"
+
+1245
+01:02:51,525 --> 01:02:52,900
+But there's some repetition here.
+
+1246
+01:02:52,900 --> 01:02:55,770
+I'm having to use this h1 tag three times,
+
+1247
+01:02:55,770 --> 01:02:59,680
+all to create exactly the same UI element on the page.
+
+1248
+01:02:59,680 --> 01:03:02,070
+This is a case where I can create a separate component
+
+1249
+01:03:02,070 --> 01:03:04,620
+and then just reuse that component, rather than have
+
+1250
+01:03:04,620 --> 01:03:07,000
+to repeat myself multiple times.
+
+1251
+01:03:07,000 --> 01:03:08,260
+So how could I do that?
+
+1252
+01:03:08,260 --> 01:03:11,310
+Well, remember that in JavaScript, we can write a function
+
+1253
+01:03:11,310 --> 01:03:13,230
+to represent a React component.
+
+1254
+01:03:13,230 --> 01:03:15,540
+So I'll add another function here and I'll
+
+1255
+01:03:15,540 --> 01:03:18,210
+call that function Hello, because it's going
+
+1256
+01:03:18,210 --> 01:03:20,430
+to represent this hello component.
+
+1257
+01:03:20,430 --> 01:03:23,760
+And this Hello function is also going to return something,
+
+1258
+01:03:23,760 --> 01:03:30,840
+and what it's going to return is a heading, an h1, that just says "Hello!"
+
+1259
+01:03:30,840 --> 01:03:36,510
+And so now inside of my app component, rather than render three separate h1s,
+
+1260
+01:03:36,510 --> 01:03:40,560
+I can simplify this a little bit to just say "Hello."
+
+1261
+01:03:40,560 --> 01:03:43,780
+Here, I'm saying, go ahead and render a hello component here,
+
+1262
+01:03:43,780 --> 01:03:47,670
+render a second one and a third one after that.
+
+1263
+01:03:47,670 --> 01:03:49,770
+Each time I render a hello component, it's
+
+1264
+01:03:49,770 --> 01:03:54,030
+going to display as this heading that just says "Hello."
+
+1265
+01:03:54,030 --> 01:03:56,280
+So I refresh the page and nothing changes.
+
+1266
+01:03:56,280 --> 01:03:59,370
+I still see three headings, each of which says "Hello!"
+
+1267
+01:03:59,370 --> 01:04:02,730
+because inside of my app component, I'm rendering this hello component
+
+1268
+01:04:02,730 --> 01:04:07,860
+three times and each time, it's going to display this h1.
+
+1269
+01:04:07,860 --> 01:04:09,960
+But where components start to get more powerful
+
+1270
+01:04:09,960 --> 01:04:13,440
+is when they're not always displaying the same information every time,
+
+1271
+01:04:13,440 --> 01:04:17,220
+but when we can parameterize those components with properties.
+
+1272
+01:04:17,220 --> 01:04:21,100
+Or as React simplifies them, props, short for properties.
+
+1273
+01:04:21,100 --> 01:04:22,290
+So what would that mean?
+
+1274
+01:04:22,290 --> 01:04:25,140
+We see that HTML elements can take attributes.
+
+1275
+01:04:25,140 --> 01:04:28,860
+Likewise, React components can take properties, where maybe I don't just
+
+1276
+01:04:28,860 --> 01:04:32,580
+want to say hello, but I want to say hello to someone-- hello to Harry
+
+1277
+01:04:32,580 --> 01:04:35,020
+or to Ron or Hermione, for example.
+
+1278
+01:04:35,020 --> 01:04:42,090
+So I could say Hello name="Harry", using syntax much like an HTML attribute,
+
+1279
+01:04:42,090 --> 01:04:49,050
+then here I say Hello name="Ron", and then finally Hello name="Hermione".
+
+1280
+01:04:49,050 --> 01:04:52,620
+And so now my hello component is accepting this prop,
+
+1281
+01:04:52,620 --> 01:04:57,060
+this property called name, which is different for all three
+
+1282
+01:04:57,060 --> 01:04:59,580
+of these components.
+
+1283
+01:04:59,580 --> 01:05:03,390
+And so inside this Hello function now, I would like the Hello function
+
+1284
+01:05:03,390 --> 01:05:06,540
+to take advantage of these properties, of these props.
+
+1285
+01:05:06,540 --> 01:05:09,270
+And so I'm going to add an argument to the Hello function.
+
+1286
+01:05:09,270 --> 01:05:12,540
+That argument is conventionally just called props.
+
+1287
+01:05:12,540 --> 01:05:16,590
+And now, instead of just saying Hello, I'm going to say Hello comma.
+
+1288
+01:05:16,590 --> 01:05:20,700
+And then remember, to plug in a JavaScript value, I use curly braces.
+
+1289
+01:05:20,700 --> 01:05:25,170
+And inside of those curly braces, I can say props dot and then
+
+1290
+01:05:25,170 --> 01:05:27,060
+whatever the name of the property is.
+
+1291
+01:05:27,060 --> 01:05:30,010
+In this case, the name of the property is just name.
+
+1292
+01:05:30,010 --> 01:05:34,740
+So I can say props.name to say whatever the name prop is,
+
+1293
+01:05:34,740 --> 01:05:38,850
+go ahead and plug that in right here inside of the hello component.
+
+1294
+01:05:38,850 --> 01:05:43,510
+So the hello component is going to say Hello comma, and then someone's name.
+
+1295
+01:05:43,510 --> 01:05:46,180
+So I can save that, refresh the page.
+
+1296
+01:05:46,180 --> 01:05:49,440
+And now I see "Hello, Harry!", "Hello, Ron!", and "Hello, Hermione!"--
+
+1297
+01:05:49,440 --> 01:05:51,600
+three different components, each of which
+
+1298
+01:05:51,600 --> 01:05:53,940
+is still just this hello component, but we're
+
+1299
+01:05:53,940 --> 01:05:57,450
+rendering it with different props, one time with the name of Harry,
+
+1300
+01:05:57,450 --> 01:06:01,500
+one time with the name of Ron, and one time with the name Hermione.
+
+1301
+01:06:01,500 --> 01:06:04,500
+And so this is where components can start to get a little bit different.
+
+1302
+01:06:04,500 --> 01:06:07,230
+By passing in different props into those components,
+
+1303
+01:06:07,230 --> 01:06:11,460
+we can decide how that component is ultimately going to render.
+
+1304
+01:06:11,460 --> 01:06:14,790
+But let's add to this a little bit and start to add state
+
+1305
+01:06:14,790 --> 01:06:16,960
+into our React components as well.
+
+1306
+01:06:16,960 --> 01:06:19,410
+And state is going to mean any kind of data
+
+1307
+01:06:19,410 --> 01:06:22,600
+that we want to store inside of the component itself.
+
+1308
+01:06:22,600 --> 01:06:25,950
+And for this, let's try to recreate the counter application
+
+1309
+01:06:25,950 --> 01:06:29,340
+that we created when we first introduced JavaScript, where we were really
+
+1310
+01:06:29,340 --> 01:06:31,620
+just creating a button that allowed you to count,
+
+1311
+01:06:31,620 --> 01:06:35,730
+and it counted up from 0, 1, 2, 3, 4, et cetera.
+
+1312
+01:06:35,730 --> 01:06:37,500
+So to do this, let's create a new file.
+
+1313
+01:06:37,500 --> 01:06:41,250
+I'll create a new file and just call it counter.html.
+
+1314
+01:06:41,250 --> 01:06:45,780
+And we can start just by copying the contents of react.html
+
+1315
+01:06:45,780 --> 01:06:47,805
+into our counter.html file.
+
+1316
+01:06:47,805 --> 01:06:49,680
+We're still going to use the same script tags
+
+1317
+01:06:49,680 --> 01:06:53,700
+and we can still have an app component, but what's
+
+1318
+01:06:53,700 --> 01:06:56,700
+going to be inside this app component is going to be a little different.
+
+1319
+01:06:56,700 --> 01:07:02,410
+I'll change the title of the page to be Counter instead of React.
+
+1320
+01:07:02,410 --> 01:07:04,592
+So what goes inside of the app component?
+
+1321
+01:07:04,592 --> 01:07:06,300
+Well, if we're going to do this counting,
+
+1322
+01:07:06,300 --> 01:07:09,540
+we need a div that's going to display the number that we've currently counted
+
+1323
+01:07:09,540 --> 01:07:12,190
+to, something like 0 to start with.
+
+1324
+01:07:12,190 --> 01:07:14,140
+And we're going to need a button.
+
+1325
+01:07:14,140 --> 01:07:17,100
+This button is just going to be Count, which
+
+1326
+01:07:17,100 --> 01:07:19,980
+will be the label for that button.
+
+1327
+01:07:19,980 --> 01:07:24,870
+So a div that just says 0 and a button that says Count.
+
+1328
+01:07:24,870 --> 01:07:28,430
+And now if I open up counter.html--
+
+1329
+01:07:28,430 --> 01:07:29,790
+I'll make it a little bigger--
+
+1330
+01:07:29,790 --> 01:07:34,140
+you can see that I have this number 0 here and a button that says Count.
+
+1331
+01:07:34,140 --> 01:07:36,060
+Of course, right now, clicking on the button
+
+1332
+01:07:36,060 --> 01:07:38,790
+doesn't do anything because I haven't written any JavaScript
+
+1333
+01:07:38,790 --> 01:07:43,300
+code to say what should happen when this button is actually clicked on.
+
+1334
+01:07:43,300 --> 01:07:48,210
+But before we get there, let's modify this program a little bit.
+
+1335
+01:07:48,210 --> 01:07:51,810
+Right now, I've written the number 0 directly into the div itself,
+
+1336
+01:07:51,810 --> 01:07:53,490
+but it's not always going to be 0.
+
+1337
+01:07:53,490 --> 01:07:56,460
+Eventually, as I start counting by pressing that Count button,
+
+1338
+01:07:56,460 --> 01:07:58,420
+that number is going to change.
+
+1339
+01:07:58,420 --> 01:08:01,380
+So what I'm going to do now is factor this 0 out
+
+1340
+01:08:01,380 --> 01:08:05,260
+into what's known as state inside of my React component.
+
+1341
+01:08:05,260 --> 01:08:08,220
+And here, one way to create state in my React component
+
+1342
+01:08:08,220 --> 01:08:13,860
+is to use a special function inside of React called useState.
+
+1343
+01:08:13,860 --> 01:08:16,470
+This is one example of a React hook that allows
+
+1344
+01:08:16,470 --> 01:08:20,520
+me to add some additional functionality into my React component.
+
+1345
+01:08:20,520 --> 01:08:23,160
+And the argument to React.useState is going
+
+1346
+01:08:23,160 --> 01:08:25,620
+to be the initial value of that state.
+
+1347
+01:08:25,620 --> 01:08:28,979
+I'm going to start counting and I want to start counting from the number 0,
+
+1348
+01:08:28,979 --> 01:08:34,479
+so I'm going to include the number 0 as the argument to this useState function.
+
+1349
+01:08:34,479 --> 01:08:36,270
+So we're going to start counting at 0.
+
+1350
+01:08:36,270 --> 01:08:41,590
+And what this useState function returns is really an array of two things.
+
+1351
+01:08:41,590 --> 01:08:45,359
+It's going to be a variable that I can give a name to--
+
+1352
+01:08:45,359 --> 01:08:46,590
+I'll call it count--
+
+1353
+01:08:46,590 --> 01:08:49,649
+and also a function that I'm going to call setCount.
+
+1354
+01:08:49,649 --> 01:08:53,760
+And that function is going to allow me to set the value for the state,
+
+1355
+01:08:53,760 --> 01:08:57,660
+if ever I need to change the state at some point in the future.
+
+1356
+01:08:57,660 --> 01:09:02,350
+So this useState function accepts 0, the initial state, as its argument.
+
+1357
+01:09:02,350 --> 01:09:04,390
+And then I get two things back.
+
+1358
+01:09:04,390 --> 01:09:07,000
+I get the state variable itself, called count,
+
+1359
+01:09:07,000 --> 01:09:10,850
+and I get a function for changing that state when I need to.
+
+1360
+01:09:10,850 --> 01:09:13,600
+So now instead of rendering a 0 inside of the div
+
+1361
+01:09:13,600 --> 01:09:18,520
+just by writing the number 0, I'm going to instead in curly braces
+
+1362
+01:09:18,520 --> 01:09:21,250
+go ahead and render whatever the value of count is.
+
+1363
+01:09:21,250 --> 01:09:24,609
+Initially, it's going to be 0, but eventually, that number might change,
+
+1364
+01:09:24,609 --> 01:09:29,420
+and I want my UI to reflect the changes in the underlying state.
+
+1365
+01:09:29,420 --> 01:09:32,410
+So right now if I refresh the page, it still says 0,
+
+1366
+01:09:32,410 --> 01:09:35,950
+because the initial state was set to 0, but I could change that.
+
+1367
+01:09:35,950 --> 01:09:39,910
+If initially that initial state was some other value, I could refresh the page
+
+1368
+01:09:39,910 --> 01:09:43,120
+and see a different value appear for the count instead.
+
+1369
+01:09:43,120 --> 01:09:46,300
+Whatever the value of this count variable is in the state,
+
+1370
+01:09:46,300 --> 01:09:48,460
+that's going to be what the user is going
+
+1371
+01:09:48,460 --> 01:09:51,160
+to see when they're looking at my user interface
+
+1372
+01:09:51,160 --> 01:09:54,440
+and when they see my component.
+
+1373
+01:09:54,440 --> 01:09:56,440
+So now let's make this button actually do
+
+1374
+01:09:56,440 --> 01:09:59,440
+something, because right now, the number is never changing.
+
+1375
+01:09:59,440 --> 01:10:02,320
+To do that, I can add an onClick handler.
+
+1376
+01:10:02,320 --> 01:10:05,260
+And notice one difference between onClick in React
+
+1377
+01:10:05,260 --> 01:10:07,870
+and onclick as we traditionally used it in JavaScript--
+
+1378
+01:10:07,870 --> 01:10:11,710
+I'm using this capital C, and that's just a common React convention
+
+1379
+01:10:11,710 --> 01:10:14,170
+when we're defining event handlers.
+
+1380
+01:10:14,170 --> 01:10:17,560
+And here, I'm going to say onClick, and then in curly braces
+
+1381
+01:10:17,560 --> 01:10:20,080
+the name of a function-- a function that I would like
+
+1382
+01:10:20,080 --> 01:10:23,050
+to run when this button is clicked.
+
+1383
+01:10:23,050 --> 01:10:25,300
+And I can call that function whatever I'd like.
+
+1384
+01:10:25,300 --> 01:10:29,270
+I'll call it updateCount, for example.
+
+1385
+01:10:29,270 --> 01:10:34,090
+And now what I need to do is define a function called updateCount.
+
+1386
+01:10:34,090 --> 01:10:38,020
+And I'm going to define that function inside of this React component,
+
+1387
+01:10:38,020 --> 01:10:39,520
+inside of my app function.
+
+1388
+01:10:39,520 --> 01:10:41,980
+It turns out in JavaScript, you can have functions that
+
+1389
+01:10:41,980 --> 01:10:44,660
+are defined inside of other functions.
+
+1390
+01:10:44,660 --> 01:10:48,190
+So I'll define this function, called updateCount,
+
+1391
+01:10:48,190 --> 01:10:51,110
+and what do I want the updateCount function to do?
+
+1392
+01:10:51,110 --> 01:10:53,425
+Well, what I'd like to do is just increase count by 1.
+
+1393
+01:10:53,425 --> 01:10:55,300
+And you might think that I could do that just
+
+1394
+01:10:55,300 --> 01:10:58,510
+by saying count equals count plus 1, but it turns out
+
+1395
+01:10:58,510 --> 01:11:00,820
+you can't quite do that in React.
+
+1396
+01:11:00,820 --> 01:11:03,880
+In React, whenever I'm using this useState,
+
+1397
+01:11:03,880 --> 01:11:07,900
+if I want to change the state, I have to use this function
+
+1398
+01:11:07,900 --> 01:11:10,660
+that useState provides to me for whenever I
+
+1399
+01:11:10,660 --> 01:11:13,160
+want to set the new value of the state.
+
+1400
+01:11:13,160 --> 01:11:18,080
+So rather than count equals count plus 1, I have to use the setCount function,
+
+1401
+01:11:18,080 --> 01:11:22,240
+and the argument to setCount is going to be count plus 1.
+
+1402
+01:11:22,240 --> 01:11:26,440
+So setCount is this function that is going to change the underlying state
+
+1403
+01:11:26,440 --> 01:11:30,670
+inside of my component, and the argument is what should the new state be.
+
+1404
+01:11:30,670 --> 01:11:33,640
+And in this case, it's just going to be count plus 1,
+
+1405
+01:11:33,640 --> 01:11:37,370
+one more than whatever the count was before.
+
+1406
+01:11:37,370 --> 01:11:39,080
+So I can save that.
+
+1407
+01:11:39,080 --> 01:11:40,780
+And I'll go ahead and refresh the page.
+
+1408
+01:11:40,780 --> 01:11:44,540
+It starts at a 0, but every time I click on this Count button,
+
+1409
+01:11:44,540 --> 01:11:48,520
+you'll notice the count increases by one.
+
+1410
+01:11:48,520 --> 01:11:52,540
+And again, I have no code that's saying go into the div and change whatever
+
+1411
+01:11:52,540 --> 01:11:53,590
+is inside of the div.
+
+1412
+01:11:53,590 --> 01:11:57,970
+All I have inside of this div is this reference to this state variable count.
+
+1413
+01:11:57,970 --> 01:12:02,050
+And whenever the state changes, JavaScript and in turn React
+
+1414
+01:12:02,050 --> 01:12:05,590
+knows that what React needs to do is to recreate this component,
+
+1415
+01:12:05,590 --> 01:12:10,195
+rerender the component by displaying the new value of this state variable.
+
+1416
+01:12:10,195 --> 01:12:12,070
+And then when the button is clicked on, we're
+
+1417
+01:12:12,070 --> 01:12:17,060
+able to run this function to change the value of that underlying state.
+
+1418
+01:12:17,060 --> 01:12:19,840
+So by taking advantage of these React components with state,
+
+1419
+01:12:19,840 --> 01:12:22,930
+we can start to represent information inside of our components
+
+1420
+01:12:22,930 --> 01:12:26,020
+and then define what our component is going to display as,
+
+1421
+01:12:26,020 --> 01:12:29,890
+just by representing HTML in terms of that underlying state,
+
+1422
+01:12:29,890 --> 01:12:32,650
+deciding how we should use that state in order
+
+1423
+01:12:32,650 --> 01:12:37,550
+to render an interface that the user is ultimately going to see.
+
+1424
+01:12:37,550 --> 01:12:39,970
+So let's now try and put these pieces together
+
+1425
+01:12:39,970 --> 01:12:43,810
+and create a web application that uses these abilities of React
+
+1426
+01:12:43,810 --> 01:12:47,230
+to define state and to manipulate that state and in turn,
+
+1427
+01:12:47,230 --> 01:12:49,900
+update a user interface based on changes that
+
+1428
+01:12:49,900 --> 01:12:52,090
+are happening to that underlying state.
+
+1429
+01:12:52,090 --> 01:12:54,220
+And we'll create an application that will just
+
+1430
+01:12:54,220 --> 01:12:57,260
+display some simple mathematical questions to the user
+
+1431
+01:12:57,260 --> 01:13:01,190
+and quiz the user on some basic addition facts, for example.
+
+1432
+01:13:01,190 --> 01:13:02,890
+So let's create that application.
+
+1433
+01:13:02,890 --> 01:13:07,420
+I'll create a new file and call it addition.html.
+
+1434
+01:13:07,420 --> 01:13:10,240
+And inside of addition.html, I'll start again
+
+1435
+01:13:10,240 --> 01:13:14,080
+just by copying the contents of this counter.html file,
+
+1436
+01:13:14,080 --> 01:13:18,130
+because the framework, the structure of this page will be similar.
+
+1437
+01:13:18,130 --> 01:13:22,810
+But I'll go ahead and clear out what's inside of my app component,
+
+1438
+01:13:22,810 --> 01:13:24,890
+at least for now.
+
+1439
+01:13:24,890 --> 01:13:28,270
+And so what would I like for my app component to render?
+
+1440
+01:13:28,270 --> 01:13:30,610
+Well, let's go ahead and render a div.
+
+1441
+01:13:30,610 --> 01:13:32,770
+And if I want to create an application that's
+
+1442
+01:13:32,770 --> 01:13:35,740
+going to ask the user some mathematical questions
+
+1443
+01:13:35,740 --> 01:13:38,020
+and then prompt the user to type in an answer,
+
+1444
+01:13:38,020 --> 01:13:41,530
+there are at least two parts of this user interface that I'm going to need.
+
+1445
+01:13:41,530 --> 01:13:45,610
+I'm going to need a place to display the addition fact answer, like what
+
+1446
+01:13:45,610 --> 01:13:47,570
+is 1 plus 2, for example.
+
+1447
+01:13:47,570 --> 01:13:50,950
+And then I'll need an input field where the user can type in their response
+
+1448
+01:13:50,950 --> 01:13:55,340
+to that question and then see if they got the question right or wrong.
+
+1449
+01:13:55,340 --> 01:13:57,700
+So inside the div, I'll start by creating
+
+1450
+01:13:57,700 --> 01:14:02,560
+a div that displays the question itself, something like 1 plus 2.
+
+1451
+01:14:02,560 --> 01:14:05,650
+And then beneath that, I'll just add an input field.
+
+1452
+01:14:05,650 --> 01:14:08,560
+Eventually, we'll add more to this user interface, but for now,
+
+1453
+01:14:08,560 --> 01:14:10,600
+all we really need is a div that displays
+
+1454
+01:14:10,600 --> 01:14:15,410
+the mathematical question and an input for the user to type in their response.
+
+1455
+01:14:15,410 --> 01:14:19,870
+So now if I go ahead and go to addition.html, here's what I see.
+
+1456
+01:14:19,870 --> 01:14:21,310
+I'll make it a little bit bigger.
+
+1457
+01:14:21,310 --> 01:14:25,570
+I see 1 plus 2, and then an input field where the user
+
+1458
+01:14:25,570 --> 01:14:27,740
+could start to type in their response.
+
+1459
+01:14:27,740 --> 01:14:31,630
+But just as we did before, I don't want to literally write the numbers
+
+1460
+01:14:31,630 --> 01:14:34,000
+1 and 2 into what I'm returning.
+
+1461
+01:14:34,000 --> 01:14:38,260
+Instead, I want these 1 and 2 to be based on some underlying state
+
+1462
+01:14:38,260 --> 01:14:39,870
+inside of my application.
+
+1463
+01:14:39,870 --> 01:14:41,620
+The application is going to maintain state
+
+1464
+01:14:41,620 --> 01:14:44,140
+about what two numbers to add together, and then it's
+
+1465
+01:14:44,140 --> 01:14:47,840
+going to display a user interface based on that state.
+
+1466
+01:14:47,840 --> 01:14:49,430
+So what could I do here?
+
+1467
+01:14:49,430 --> 01:14:54,970
+Well, one thing I could do is again use React.useState, start this number off
+
+1468
+01:14:54,970 --> 01:15:01,330
+as 1, and maybe call this num1 and then a function to set number 1.
+
+1469
+01:15:01,330 --> 01:15:02,570
+And then I could do it again.
+
+1470
+01:15:02,570 --> 01:15:07,300
+Let's create num2 and set num2 to be React.useState(2).
+
+1471
+01:15:07,300 --> 01:15:11,440
+And I could have two different pieces of state, num1 and num2, each of which
+
+1472
+01:15:11,440 --> 01:15:14,740
+has a different function, setNum1 and setNum2, that
+
+1473
+01:15:14,740 --> 01:15:16,990
+are each representing the two different numbers that I
+
+1474
+01:15:16,990 --> 01:15:18,580
+would like to add together.
+
+1475
+01:15:18,580 --> 01:15:21,160
+But already this is starting to get messy and over time,
+
+1476
+01:15:21,160 --> 01:15:24,070
+as I add more different pieces of state to the application--
+
+1477
+01:15:24,070 --> 01:15:25,390
+as we'll see in just a moment--
+
+1478
+01:15:25,390 --> 01:15:27,515
+the state might start to get more and more complex,
+
+1479
+01:15:27,515 --> 01:15:29,740
+with more and more different functions and variables.
+
+1480
+01:15:29,740 --> 01:15:32,500
+So it's often helpful, and a common practice in React,
+
+1481
+01:15:32,500 --> 01:15:37,150
+to combine multiple pieces of state just into one JavaScript object that's
+
+1482
+01:15:37,150 --> 01:15:42,890
+maintaining all of the different pieces of state for this particular component.
+
+1483
+01:15:42,890 --> 01:15:46,360
+And to do that, I'll again use React.useState.
+
+1484
+01:15:46,360 --> 01:15:50,560
+But instead of setting the state initially to be a number like 1 or 2,
+
+1485
+01:15:50,560 --> 01:15:53,350
+it's instead going to be a JavaScript object that
+
+1486
+01:15:53,350 --> 01:15:58,630
+has keys and values, where I could say let num1 be the number 1
+
+1487
+01:15:58,630 --> 01:16:01,900
+and let num2 be the number 2.
+
+1488
+01:16:01,900 --> 01:16:04,360
+Much like a dictionary in Python, for example,
+
+1489
+01:16:04,360 --> 01:16:08,410
+where I have multiple different values, num1 and num2, all together
+
+1490
+01:16:08,410 --> 01:16:10,340
+inside of the same object.
+
+1491
+01:16:10,340 --> 01:16:12,760
+And I can call that state and have a variable--
+
+1492
+01:16:12,760 --> 01:16:15,640
+and have a function called setState that is going
+
+1493
+01:16:15,640 --> 01:16:17,720
+to update the value of that state.
+
+1494
+01:16:17,720 --> 01:16:21,460
+And so rather than have to have all of these different variables,
+
+1495
+01:16:21,460 --> 01:16:25,360
+I can simplify a little bit to just state and a function to set the state,
+
+1496
+01:16:25,360 --> 01:16:28,690
+and the state now has these two different pieces, number 1
+
+1497
+01:16:28,690 --> 01:16:31,390
+and number 2.
+
+1498
+01:16:31,390 --> 01:16:34,570
+And so now instead of rendering literally the number 1,
+
+1499
+01:16:34,570 --> 01:16:38,320
+using curly braces I can say state.num1.
+
+1500
+01:16:38,320 --> 01:16:40,810
+And instead of rendering literally the number 2,
+
+1501
+01:16:40,810 --> 01:16:45,730
+I can say state.num2, drawing upon that state
+
+1502
+01:16:45,730 --> 01:16:49,430
+to decide what it is going to appear inside of the user interface.
+
+1503
+01:16:49,430 --> 01:16:51,850
+And so right now, the page appears no different.
+
+1504
+01:16:51,850 --> 01:16:54,340
+But if I were to change those initial values of the state,
+
+1505
+01:16:54,340 --> 01:16:58,540
+maybe make it 2 and 4, for example, and then refresh the page,
+
+1506
+01:16:58,540 --> 01:17:02,630
+well, now it displays as 2 plus 4.
+
+1507
+01:17:02,630 --> 01:17:03,650
+And so that's helpful.
+
+1508
+01:17:03,650 --> 01:17:07,520
+We now have a user interface where the numbers are based on the state.
+
+1509
+01:17:07,520 --> 01:17:10,010
+But now what I'd like to do is add the ability
+
+1510
+01:17:10,010 --> 01:17:13,850
+to keep track of what the user typed in so we can tell if the user correctly
+
+1511
+01:17:13,850 --> 01:17:16,940
+typed in the answer to this mathematical problem.
+
+1512
+01:17:16,940 --> 01:17:18,410
+And how would I do that?
+
+1513
+01:17:18,410 --> 01:17:21,110
+Well, the state represents any information
+
+1514
+01:17:21,110 --> 01:17:24,140
+that we need to keep track of inside of this component.
+
+1515
+01:17:24,140 --> 01:17:27,560
+And so in addition to storing the two numbers inside of the state,
+
+1516
+01:17:27,560 --> 01:17:31,260
+I likely also need to keep track of a third piece of information,
+
+1517
+01:17:31,260 --> 01:17:32,730
+which is the response--
+
+1518
+01:17:32,730 --> 01:17:36,380
+what did the user type in into this text field?
+
+1519
+01:17:36,380 --> 01:17:40,250
+And so we'll add a third part of the state called response that initially
+
+1520
+01:17:40,250 --> 01:17:41,780
+will just be the empty string.
+
+1521
+01:17:41,780 --> 01:17:43,490
+It will just be nothing.
+
+1522
+01:17:43,490 --> 01:17:47,060
+And then this input field, I'm going to give it a value,
+
+1523
+01:17:47,060 --> 01:17:50,750
+and the value is going to be state.response.
+
+1524
+01:17:50,750 --> 01:17:52,760
+Whatever the user typed in as the response,
+
+1525
+01:17:52,760 --> 01:17:54,920
+that's stored inside of the state, and that
+
+1526
+01:17:54,920 --> 01:17:59,053
+is going to be the value of what shows up in the input field.
+
+1527
+01:17:59,053 --> 01:18:01,970
+And so that way, whatever is in the input field will have access to it
+
+1528
+01:18:01,970 --> 01:18:04,640
+inside of this state.response variable.
+
+1529
+01:18:04,640 --> 01:18:07,250
+But there is a problem, and here's the problem.
+
+1530
+01:18:07,250 --> 01:18:09,817
+I'll try refreshing the page, I'll go into this text field.
+
+1531
+01:18:09,817 --> 01:18:11,150
+And let's say I know the answer.
+
+1532
+01:18:11,150 --> 01:18:12,920
+I know 2 plus 4 is equal to 6.
+
+1533
+01:18:12,920 --> 01:18:16,280
+I'm now going to press 6 on my keyboard.
+
+1534
+01:18:16,280 --> 01:18:19,040
+But as I press 6 on the keyboard, nothing's happening.
+
+1535
+01:18:19,040 --> 01:18:21,680
+No 6 is appearing inside of the text field,
+
+1536
+01:18:21,680 --> 01:18:25,080
+even though I am pressing the key on the keyboard.
+
+1537
+01:18:25,080 --> 01:18:25,790
+So why is that?
+
+1538
+01:18:25,790 --> 01:18:28,070
+Why is the text field not updating?
+
+1539
+01:18:28,070 --> 01:18:31,550
+Well, the reason is the value of the input field, whatever
+
+1540
+01:18:31,550 --> 01:18:35,780
+appears in the input field, is this value, state.response,
+
+1541
+01:18:35,780 --> 01:18:38,360
+and state.response is always this empty string
+
+1542
+01:18:38,360 --> 01:18:42,740
+and never changing what state.response is equal to.
+
+1543
+01:18:42,740 --> 01:18:45,200
+And so I need to change this a little bit.
+
+1544
+01:18:45,200 --> 01:18:49,400
+I need to add as an attribute to this input field onChange,
+
+1545
+01:18:49,400 --> 01:18:52,730
+meaning when the input field changes, I need to do something.
+
+1546
+01:18:52,730 --> 01:18:56,930
+And I'll call a function that I can call updateResponse.
+
+1547
+01:18:56,930 --> 01:18:59,660
+But again, I could call that update function whatever I'd like.
+
+1548
+01:18:59,660 --> 01:19:01,410
+It's just the name for the function that's
+
+1549
+01:19:01,410 --> 01:19:04,920
+going to run whenever something changes in the input field.
+
+1550
+01:19:04,920 --> 01:19:07,910
+So let me now define that updateResponse function.
+
+1551
+01:19:07,910 --> 01:19:10,820
+I'll define a function called updateResponse.
+
+1552
+01:19:10,820 --> 01:19:13,860
+And because it's an event handler, it can accept an argument,
+
+1553
+01:19:13,860 --> 01:19:15,200
+which is the event itself--
+
+1554
+01:19:15,200 --> 01:19:19,370
+the fact that something has changed inside of the input field.
+
+1555
+01:19:19,370 --> 01:19:21,488
+And when I have access to this event, it turns out
+
+1556
+01:19:21,488 --> 01:19:24,530
+that if I want to figure out what it is the user has typed into the input
+
+1557
+01:19:24,530 --> 01:19:29,000
+field, I can get at that with event.target.value.
+
+1558
+01:19:29,000 --> 01:19:31,970
+And I'd only know that by looking at it in the documentation.
+
+1559
+01:19:31,970 --> 01:19:35,090
+But what I'd like is for event.target.value
+
+1560
+01:19:35,090 --> 01:19:38,610
+to be the new value for this response.
+
+1561
+01:19:38,610 --> 01:19:42,170
+And so what I'd like to do is do something like this-- setState.
+
+1562
+01:19:42,170 --> 01:19:44,540
+And what should the new value of the state be?
+
+1563
+01:19:44,540 --> 01:19:48,140
+Well, I would like for a response to no longer be the empty string,
+
+1564
+01:19:48,140 --> 01:19:51,980
+but to now be event.target.value.
+
+1565
+01:19:51,980 --> 01:19:55,550
+And that is going to be the new value for response.
+
+1566
+01:19:55,550 --> 01:19:58,940
+But I'm not quite done yet, because state doesn't just
+
+1567
+01:19:58,940 --> 01:20:01,370
+have response as one of the parts of the state.
+
+1568
+01:20:01,370 --> 01:20:05,420
+The state also has num1 and num2, and those two pieces
+
+1569
+01:20:05,420 --> 01:20:06,530
+aren't really changing.
+
+1570
+01:20:06,530 --> 01:20:11,000
+So I could say, all right, num1 is just going to be whatever state.num1 was.
+
+1571
+01:20:11,000 --> 01:20:12,080
+That's not changing.
+
+1572
+01:20:12,080 --> 01:20:14,810
+And num2 is going to be whatever state.num2 was.
+
+1573
+01:20:14,810 --> 01:20:16,020
+That's not changing.
+
+1574
+01:20:16,020 --> 01:20:19,070
+The only thing that's changing is the response.
+
+1575
+01:20:19,070 --> 01:20:21,320
+But this is starting to get a little bit verbose,
+
+1576
+01:20:21,320 --> 01:20:24,710
+and especially if I start adding more and more different pieces to the state,
+
+1577
+01:20:24,710 --> 01:20:27,200
+it's going to become difficult to manage if I constantly
+
+1578
+01:20:27,200 --> 01:20:30,050
+have to repeat myself for all of the parts of the state that
+
+1579
+01:20:30,050 --> 01:20:31,130
+aren't changing.
+
+1580
+01:20:31,130 --> 01:20:33,860
+Ideally, what I'd like to do is just specify
+
+1581
+01:20:33,860 --> 01:20:38,610
+the parts of the state that will change and ignore everything else.
+
+1582
+01:20:38,610 --> 01:20:41,270
+And so one shorthand way to do that in JavaScript
+
+1583
+01:20:41,270 --> 01:20:43,910
+is to use what's known as the spread operator.
+
+1584
+01:20:43,910 --> 01:20:47,850
+And it looks like this-- dot dot dot and then state.
+
+1585
+01:20:47,850 --> 01:20:50,390
+And what this is saying is just use the existing
+
+1586
+01:20:50,390 --> 01:20:53,690
+values of the state for everything else, like num1 and num2.
+
+1587
+01:20:53,690 --> 01:20:58,800
+The only thing to override is the new value for the response.
+
+1588
+01:20:58,800 --> 01:21:01,100
+And so this syntax here is my way of saying,
+
+1589
+01:21:01,100 --> 01:21:02,930
+I would like to update the state.
+
+1590
+01:21:02,930 --> 01:21:06,470
+Everything should stay the same except for response,
+
+1591
+01:21:06,470 --> 01:21:09,720
+which is now going to be event.target.value--
+
+1592
+01:21:09,720 --> 01:21:14,480
+in other words, whatever it is the user typed in into that input field.
+
+1593
+01:21:14,480 --> 01:21:16,470
+And so I'll go ahead and refresh the page,
+
+1594
+01:21:16,470 --> 01:21:19,340
+and now if I type a number, like 6, you actually
+
+1595
+01:21:19,340 --> 01:21:22,755
+see that number appear in the input field.
+
+1596
+01:21:22,755 --> 01:21:25,880
+So that's great we've now displayed a question where the numbers are stored
+
+1597
+01:21:25,880 --> 01:21:30,050
+in the state, and the user can type in a response where that response is also
+
+1598
+01:21:30,050 --> 01:21:31,490
+stored in the state.
+
+1599
+01:21:31,490 --> 01:21:34,100
+Now what I'd like is when the user presses the Enter key
+
+1600
+01:21:34,100 --> 01:21:35,960
+on their keyboard, we check--
+
+1601
+01:21:35,960 --> 01:21:40,350
+did they get the answer right or did they get the answer wrong?
+
+1602
+01:21:40,350 --> 01:21:41,970
+And so how would I do that?
+
+1603
+01:21:41,970 --> 01:21:45,920
+Well, the first thing I need to do is in this input field,
+
+1604
+01:21:45,920 --> 01:21:48,980
+somehow detect when a key is pressed.
+
+1605
+01:21:48,980 --> 01:21:50,840
+When a key is pressed, what I'd like to do
+
+1606
+01:21:50,840 --> 01:21:53,150
+is check to see if it was the Enter key.
+
+1607
+01:21:53,150 --> 01:21:55,580
+And if it was the Enter key, then let's go ahead
+
+1608
+01:21:55,580 --> 01:21:58,670
+and check to see what the actual sum of the two numbers is
+
+1609
+01:21:58,670 --> 01:22:01,750
+and see if the user got that right or wrong.
+
+1610
+01:22:01,750 --> 01:22:03,390
+So let's add an event handler.
+
+1611
+01:22:03,390 --> 01:22:06,810
+onKeyPress is going to be equal to something.
+
+1612
+01:22:06,810 --> 01:22:09,270
+Again, I can name this function whatever I'd like.
+
+1613
+01:22:09,270 --> 01:22:13,410
+I'll call it inputKeyPress, but again, I could name that anything.
+
+1614
+01:22:13,410 --> 01:22:17,320
+And now let's define that inputKeyPress function.
+
+1615
+01:22:17,320 --> 01:22:21,870
+So up above, I'm going to define this function called inputKeyPress.
+
+1616
+01:22:21,870 --> 01:22:24,990
+Again, it takes that event as its argument.
+
+1617
+01:22:24,990 --> 01:22:28,320
+And this event is going to happen any time a key is pressed,
+
+1618
+01:22:28,320 --> 01:22:31,620
+regardless of whether it's a letter or a number or the Enter key.
+
+1619
+01:22:31,620 --> 01:22:35,190
+And so I want to check to make sure that the key is actually the Enter key.
+
+1620
+01:22:35,190 --> 01:22:37,080
+That's the only time that I want to now check
+
+1621
+01:22:37,080 --> 01:22:39,820
+to see if they got the question right or wrong.
+
+1622
+01:22:39,820 --> 01:22:41,070
+So we'll add here a condition.
+
+1623
+01:22:41,070 --> 01:22:44,670
+It's just JavaScript, so I can say if event.key
+
+1624
+01:22:44,670 --> 01:22:48,870
+is equal to Enter, well, then, let's go ahead and check.
+
+1625
+01:22:48,870 --> 01:22:50,890
+And otherwise, we don't have to do anything.
+
+1626
+01:22:50,890 --> 01:22:52,848
+I don't need an else case here, because nothing
+
+1627
+01:22:52,848 --> 01:22:57,810
+should happen unless it's the Enter key that was actually pressed.
+
+1628
+01:22:57,810 --> 01:23:03,240
+And so now how do I check to see if the user got the answer right or wrong?
+
+1629
+01:23:03,240 --> 01:23:08,850
+Well, inside of state.num1 is the first number, and inside of state.num2
+
+1630
+01:23:08,850 --> 01:23:10,360
+is the second number.
+
+1631
+01:23:10,360 --> 01:23:14,760
+So I could have a condition that checked if state.num1 plus state.num2 is
+
+1632
+01:23:14,760 --> 01:23:21,150
+equal to state.response, which is what the user typed in into the input field.
+
+1633
+01:23:21,150 --> 01:23:26,082
+But that doesn't quite work, because state.response, that's a string.
+
+1634
+01:23:26,082 --> 01:23:28,290
+The user doesn't necessarily have to type in numbers.
+
+1635
+01:23:28,290 --> 01:23:31,200
+It's possible the user is going to type in some letters
+
+1636
+01:23:31,200 --> 01:23:34,270
+instead, for example, or other characters instead.
+
+1637
+01:23:34,270 --> 01:23:39,000
+And so what I'm going to do first is convert the response into an integer,
+
+1638
+01:23:39,000 --> 01:23:41,010
+if we're able to do so.
+
+1639
+01:23:41,010 --> 01:23:44,760
+So I'm going to define a variable called answer using the JavaScript function
+
+1640
+01:23:44,760 --> 01:23:49,840
+parseInt that takes a string and tries to convert it into an integer.
+
+1641
+01:23:49,840 --> 01:23:54,450
+So we're going to parse the int state.response.
+
+1642
+01:23:54,450 --> 01:23:55,920
+And now we can check.
+
+1643
+01:23:55,920 --> 01:24:00,450
+If number 1 plus number 2 is equal to the answer,
+
+1644
+01:24:00,450 --> 01:24:05,100
+well, then this means the user got the question right.
+
+1645
+01:24:05,100 --> 01:24:08,010
+And else if the sum is not equal to the answer,
+
+1646
+01:24:08,010 --> 01:24:12,190
+that means the user got the question wrong.
+
+1647
+01:24:12,190 --> 01:24:15,390
+And so now what I could do is handle those two different scenarios.
+
+1648
+01:24:15,390 --> 01:24:19,170
+In one case, the user got the question right and we should do something,
+
+1649
+01:24:19,170 --> 01:24:21,527
+and in another case, the user got the question wrong
+
+1650
+01:24:21,527 --> 01:24:22,860
+and we should do something else.
+
+1651
+01:24:22,860 --> 01:24:25,470
+And we're making that decision by looking
+
+1652
+01:24:25,470 --> 01:24:28,350
+at the state of the application, by looking at what two numbers we're
+
+1653
+01:24:28,350 --> 01:24:30,240
+supposed to be adding and looking at what
+
+1654
+01:24:30,240 --> 01:24:33,600
+the user typed in as their response.
+
+1655
+01:24:33,600 --> 01:24:36,360
+So what should we do when the user gets a question right
+
+1656
+01:24:36,360 --> 01:24:37,770
+or gets a question wrong?
+
+1657
+01:24:37,770 --> 01:24:39,870
+Well, maybe this game is going to keep score
+
+1658
+01:24:39,870 --> 01:24:43,650
+by maintaining a number for how many questions the user has gotten right.
+
+1659
+01:24:43,650 --> 01:24:45,720
+And every time the user gets a question right,
+
+1660
+01:24:45,720 --> 01:24:48,450
+we could increase that score by 1, and any time
+
+1661
+01:24:48,450 --> 01:24:53,030
+the user gets a question wrong, we could decrease that score by 1, for example.
+
+1662
+01:24:53,030 --> 01:24:54,580
+So how would we do that?
+
+1663
+01:24:54,580 --> 01:24:59,130
+Well, the score is some piece of state inside of the application,
+
+1664
+01:24:59,130 --> 01:25:01,530
+and so we're going to need to add to the state.
+
+1665
+01:25:01,530 --> 01:25:04,860
+Right now in the state, we're storing the number 1, a number 2,
+
+1666
+01:25:04,860 --> 01:25:06,690
+and a response.
+
+1667
+01:25:06,690 --> 01:25:12,330
+I'll add to that a score where the score is going to start out as just 0.
+
+1668
+01:25:12,330 --> 01:25:14,950
+And we can render that score on the page.
+
+1669
+01:25:14,950 --> 01:25:18,540
+If I scroll down to where we're returning the div to render,
+
+1670
+01:25:18,540 --> 01:25:23,550
+let's add another div that says the score is,
+
+1671
+01:25:23,550 --> 01:25:29,612
+and then using curly braces, plug in whatever the value of state.score is.
+
+1672
+01:25:29,612 --> 01:25:32,070
+Whatever the score is, let's figure that out from the state
+
+1673
+01:25:32,070 --> 01:25:35,950
+and let's display that in the user interface.
+
+1674
+01:25:35,950 --> 01:25:39,150
+So now this user interface shows not only a question
+
+1675
+01:25:39,150 --> 01:25:41,400
+and an input field, but also a score.
+
+1676
+01:25:41,400 --> 01:25:46,210
+And the score starts out as just the number 0.
+
+1677
+01:25:46,210 --> 01:25:49,510
+So let's now go back to this function.
+
+1678
+01:25:49,510 --> 01:25:52,330
+When a key is pressed, if it's the Enter key,
+
+1679
+01:25:52,330 --> 01:25:54,820
+let's check to see if they got the answer right or wrong.
+
+1680
+01:25:54,820 --> 01:25:58,000
+We check-- did the user actually get the question right?
+
+1681
+01:25:58,000 --> 01:26:00,230
+If so, what should we do?
+
+1682
+01:26:00,230 --> 01:26:02,170
+Well, we should increase the score.
+
+1683
+01:26:02,170 --> 01:26:03,480
+And how do we do that?
+
+1684
+01:26:03,480 --> 01:26:06,220
+We do that by calling the setState function.
+
+1685
+01:26:06,220 --> 01:26:08,710
+All of the state is going to be the same, so using
+
+1686
+01:26:08,710 --> 01:26:11,260
+that dot dot dot state spread operator.
+
+1687
+01:26:11,260 --> 01:26:13,990
+The only thing that's different is the score
+
+1688
+01:26:13,990 --> 01:26:18,030
+is going to be state.score plus 1.
+
+1689
+01:26:18,030 --> 01:26:22,450
+So we're updating the state to increase the score by 1.
+
+1690
+01:26:22,450 --> 01:26:25,690
+And if the user gets the question wrong, let's set the state
+
+1691
+01:26:25,690 --> 01:26:29,200
+to be dot dot dot state, and then the score
+
+1692
+01:26:29,200 --> 01:26:33,880
+is going to be state.score minus 1.
+
+1693
+01:26:33,880 --> 01:26:37,120
+So if the user gets the question right, we increase the score by 1.
+
+1694
+01:26:37,120 --> 01:26:39,878
+Otherwise, we decrease the score by 1.
+
+1695
+01:26:39,878 --> 01:26:41,920
+And let's test that to see what it actually looks
+
+1696
+01:26:41,920 --> 01:26:44,920
+like when we try this in the user interface.
+
+1697
+01:26:44,920 --> 01:26:46,510
+I'll refresh the page--
+
+1698
+01:26:46,510 --> 01:26:47,500
+2 plus 4.
+
+1699
+01:26:47,500 --> 01:26:53,170
+If I type in the correct answer, 6, press Return, the score increases by 1.
+
+1700
+01:26:53,170 --> 01:26:57,100
+If I typed in the wrong answer, let's say 8, press Return,
+
+1701
+01:26:57,100 --> 01:26:59,410
+the score decreases by 1.
+
+1702
+01:26:59,410 --> 01:27:00,520
+So this appears to work.
+
+1703
+01:27:00,520 --> 01:27:03,460
+Depending on whether I get the question right or wrong,
+
+1704
+01:27:03,460 --> 01:27:06,160
+the score is able to update, increasing or decreasing
+
+1705
+01:27:06,160 --> 01:27:08,518
+based on the result of that condition.
+
+1706
+01:27:08,518 --> 01:27:11,560
+Now, this game is pretty easy to get a high score on right now, because I
+
+1707
+01:27:11,560 --> 01:27:14,120
+can just keep pressing return over and over and over,
+
+1708
+01:27:14,120 --> 01:27:16,180
+and the question's never changing.
+
+1709
+01:27:16,180 --> 01:27:17,750
+My response is already there.
+
+1710
+01:27:17,750 --> 01:27:20,630
+And so the score keeps going up and up and up.
+
+1711
+01:27:20,630 --> 01:27:22,970
+So let's make the game a little bit more interesting.
+
+1712
+01:27:22,970 --> 01:27:25,120
+Every time the user gets a question right,
+
+1713
+01:27:25,120 --> 01:27:28,810
+let's display a new question for them to answer.
+
+1714
+01:27:28,810 --> 01:27:30,230
+And how would we do that?
+
+1715
+01:27:30,230 --> 01:27:32,470
+Well, the question that's displayed to the user
+
+1716
+01:27:32,470 --> 01:27:36,820
+is based on two underlying pieces of the state of the component.
+
+1717
+01:27:36,820 --> 01:27:41,950
+It's based on state.num1 and it's based on state.num2.
+
+1718
+01:27:41,950 --> 01:27:45,070
+So if I want to change the question, all I have to do
+
+1719
+01:27:45,070 --> 01:27:47,830
+is when the user gets the question right and I'm
+
+1720
+01:27:47,830 --> 01:27:51,070
+updating the state, instead of only updating the score,
+
+1721
+01:27:51,070 --> 01:27:55,900
+let's also update num1 and num2.
+
+1722
+01:27:55,900 --> 01:27:58,030
+And I could set these to be specific values,
+
+1723
+01:27:58,030 --> 01:28:02,230
+maybe like 5 and 10 for example, but let's make it more interesting
+
+1724
+01:28:02,230 --> 01:28:04,330
+and display a random number every time.
+
+1725
+01:28:04,330 --> 01:28:06,460
+We'll generate a random number, and so the user
+
+1726
+01:28:06,460 --> 01:28:09,670
+will be adding two random numbers together every time they
+
+1727
+01:28:09,670 --> 01:28:11,190
+get a new question right.
+
+1728
+01:28:11,190 --> 01:28:12,850
+How do we generate a random number?
+
+1729
+01:28:12,850 --> 01:28:15,700
+Well, Math.random is a JavaScript function
+
+1730
+01:28:15,700 --> 01:28:18,700
+that generates a random number between 0 and 1.
+
+1731
+01:28:18,700 --> 01:28:22,640
+We can multiply it by 10, so now we're getting a number between 0 and 10.
+
+1732
+01:28:22,640 --> 01:28:25,280
+But we don't want any decimals to appear in the number.
+
+1733
+01:28:25,280 --> 01:28:29,140
+So we'll go ahead and take the ceiling of the number, Math.ceil,
+
+1734
+01:28:29,140 --> 01:28:33,310
+to say if the number was, like, 5.8, we'll just go ahead and round that up
+
+1735
+01:28:33,310 --> 01:28:34,932
+to 6, for example.
+
+1736
+01:28:34,932 --> 01:28:36,640
+And we'll do the same thing for number 2.
+
+1737
+01:28:36,640 --> 01:28:41,290
+We'll take the ceiling of math.random times 10.
+
+1738
+01:28:41,290 --> 01:28:43,720
+So every time the user gets a question right,
+
+1739
+01:28:43,720 --> 01:28:49,600
+we'll update num1 and num2 to be new random numbers generated just
+
+1740
+01:28:49,600 --> 01:28:51,530
+like this.
+
+1741
+01:28:51,530 --> 01:28:54,080
+And so let's go back and try it again.
+
+1742
+01:28:54,080 --> 01:28:55,240
+We see 2 plus 4.
+
+1743
+01:28:55,240 --> 01:28:59,230
+I type in the correct answer, 6, and the question changes.
+
+1744
+01:28:59,230 --> 01:29:00,010
+8 plus 5.
+
+1745
+01:29:00,010 --> 01:29:01,360
+I type in the correct answer.
+
+1746
+01:29:01,360 --> 01:29:02,200
+Press Return.
+
+1747
+01:29:02,200 --> 01:29:05,140
+My score increases, and the question changes again.
+
+1748
+01:29:05,140 --> 01:29:06,910
+This time if I get the answer wrong--
+
+1749
+01:29:06,910 --> 01:29:08,680
+I type in 10, for example--
+
+1750
+01:29:08,680 --> 01:29:10,030
+watch my score decrease.
+
+1751
+01:29:10,030 --> 01:29:12,100
+It went from 2 down to 1.
+
+1752
+01:29:12,100 --> 01:29:13,490
+But the question didn't change.
+
+1753
+01:29:13,490 --> 01:29:16,630
+Now I get another opportunity to try to answer this question.
+
+1754
+01:29:16,630 --> 01:29:21,408
+And when I answer it correctly, the score increases again from 1 to 2.
+
+1755
+01:29:21,408 --> 01:29:23,200
+So this game is starting to come along now.
+
+1756
+01:29:23,200 --> 01:29:26,740
+It's keeping track of my score, it's displaying different questions.
+
+1757
+01:29:26,740 --> 01:29:29,830
+There is at least one user interface quirk right now,
+
+1758
+01:29:29,830 --> 01:29:33,380
+and that is the fact that at the moment, when I get a question right and press
+
+1759
+01:29:33,380 --> 01:29:33,880
+Return--
+
+1760
+01:29:33,880 --> 01:29:35,950
+I type in 6 and press Return--
+
+1761
+01:29:35,950 --> 01:29:37,510
+the 6 still stays there.
+
+1762
+01:29:37,510 --> 01:29:38,950
+Ideally, I get a new question.
+
+1763
+01:29:38,950 --> 01:29:41,530
+I'd like to clear out the response so the user can just
+
+1764
+01:29:41,530 --> 01:29:44,410
+type in whatever the new answer is, rather than have
+
+1765
+01:29:44,410 --> 01:29:48,260
+to delete whatever they typed in before and then type in a new number.
+
+1766
+01:29:48,260 --> 01:29:52,120
+So how could we do that-- reset whatever is inside of the input field?
+
+1767
+01:29:52,120 --> 01:29:55,510
+Well, what's typed into the input field is stored inside
+
+1768
+01:29:55,510 --> 01:29:57,310
+of the state of my component.
+
+1769
+01:29:57,310 --> 01:30:00,680
+It's stored inside of state.response.
+
+1770
+01:30:00,680 --> 01:30:04,510
+And so if I wanted to change that, all I would have to do
+
+1771
+01:30:04,510 --> 01:30:10,290
+is say, let's change the response to be the empty string.
+
+1772
+01:30:10,290 --> 01:30:12,040
+When the user gets a question right, we're
+
+1773
+01:30:12,040 --> 01:30:15,010
+going to update these two numbers, increase the score,
+
+1774
+01:30:15,010 --> 01:30:20,060
+and also clear out the response so that it's just the empty string.
+
+1775
+01:30:20,060 --> 01:30:23,500
+And I can do the same thing if the user gets a question wrong--
+
+1776
+01:30:23,500 --> 01:30:26,650
+decrease the score by 1, but also clear out
+
+1777
+01:30:26,650 --> 01:30:31,070
+that response back to the empty string so that there's nothing there.
+
+1778
+01:30:31,070 --> 01:30:36,070
+And so now we get a question, I type in an answer, press Return,
+
+1779
+01:30:36,070 --> 01:30:39,320
+and the input field clears out, I get a new question,
+
+1780
+01:30:39,320 --> 01:30:41,050
+and the score increases by 1.
+
+1781
+01:30:41,050 --> 01:30:44,590
+Four separate pieces of state all changing at the same time,
+
+1782
+01:30:44,590 --> 01:30:48,950
+and that gets reflected in the user interface that I'm now able to see.
+
+1783
+01:30:48,950 --> 01:30:55,580
+So I type in another value and the score increases and everything updates again.
+
+1784
+01:30:55,580 --> 01:30:57,290
+All right, so that's definitely progress.
+
+1785
+01:30:57,290 --> 01:30:59,450
+One other user interface quirk that I noticed
+
+1786
+01:30:59,450 --> 01:31:03,800
+here is that the input field by default isn't automatically selected
+
+1787
+01:31:03,800 --> 01:31:06,410
+where I would have to go in and click on the input field
+
+1788
+01:31:06,410 --> 01:31:09,680
+in order to highlight it so that I can start typing in my response.
+
+1789
+01:31:09,680 --> 01:31:14,600
+I can fix that pretty easily if I scroll down to where the input field is.
+
+1790
+01:31:14,600 --> 01:31:18,320
+We'll add an autoFocus attribute and just set
+
+1791
+01:31:18,320 --> 01:31:22,130
+that to be true so that the input field automatically focuses when
+
+1792
+01:31:22,130 --> 01:31:25,530
+I load the page for the first time.
+
+1793
+01:31:25,530 --> 01:31:26,810
+So now I refresh the page.
+
+1794
+01:31:26,810 --> 01:31:29,930
+The input field is already highlighted, and immediately I
+
+1795
+01:31:29,930 --> 01:31:32,400
+can start to try to play this game.
+
+1796
+01:31:32,400 --> 01:31:35,630
+So now that we have the basic functionality of this app working,
+
+1797
+01:31:35,630 --> 01:31:39,800
+let's try and improve the CSS so that the game looks a little bit nicer.
+
+1798
+01:31:39,800 --> 01:31:43,880
+I'll scroll up to the top of the page and add a style tag
+
+1799
+01:31:43,880 --> 01:31:46,430
+to the head section of my HTML page.
+
+1800
+01:31:46,430 --> 01:31:49,410
+And I'd like for this entire app to be centered,
+
+1801
+01:31:49,410 --> 01:31:52,580
+so I'll say text-align is going to be center.
+
+1802
+01:31:52,580 --> 01:31:57,230
+And I'm going to set the font-family to be sans-serif, because I prefer
+
+1803
+01:31:57,230 --> 01:32:00,570
+that font for this particular game.
+
+1804
+01:32:00,570 --> 01:32:02,900
+So I refresh the page and now everything is centered,
+
+1805
+01:32:02,900 --> 01:32:05,990
+and the font is different than what the default was.
+
+1806
+01:32:05,990 --> 01:32:08,520
+And what else would I like to have changed?
+
+1807
+01:32:08,520 --> 01:32:11,750
+Well, this problem, 2 plus 4, maybe I'd like for that to be bigger.
+
+1808
+01:32:11,750 --> 01:32:13,880
+I'd like the problem to be big, and the score
+
+1809
+01:32:13,880 --> 01:32:17,970
+beneath that, that can stay the same size that it is right now.
+
+1810
+01:32:17,970 --> 01:32:19,530
+So how would I do that?
+
+1811
+01:32:19,530 --> 01:32:22,002
+Well, if I go back to the HTML here, I'll
+
+1812
+01:32:22,002 --> 01:32:23,960
+go ahead and give this div where I'm displaying
+
+1813
+01:32:23,960 --> 01:32:29,990
+the problem, number 1 plus number 2, I'll give it an ID of problem.
+
+1814
+01:32:29,990 --> 01:32:35,310
+And then if I scroll back up, I'll say for the element with an ID of problem,
+
+1815
+01:32:35,310 --> 01:32:41,692
+let's go ahead and set the font size to be 72 pixels, for example,
+
+1816
+01:32:41,692 --> 01:32:42,650
+just to make it bigger.
+
+1817
+01:32:42,650 --> 01:32:45,590
+And so now I see a big math equation, 2 plus 4,
+
+1818
+01:32:45,590 --> 01:32:50,010
+for example, the input field, and then the smaller score beneath it.
+
+1819
+01:32:50,010 --> 01:32:52,430
+So that's a nice UI enhancement a little bit,
+
+1820
+01:32:52,430 --> 01:32:54,980
+and now I can play the game, get a question right,
+
+1821
+01:32:54,980 --> 01:32:56,390
+and the score increases.
+
+1822
+01:32:56,390 --> 01:32:59,600
+I get a question wrong and I get to try again.
+
+1823
+01:32:59,600 --> 01:33:03,080
+But maybe I'd like to offer more of a visual indication
+
+1824
+01:33:03,080 --> 01:33:04,580
+that the user got a question wrong.
+
+1825
+01:33:04,580 --> 01:33:07,370
+Maybe any time the user gets a question wrong,
+
+1826
+01:33:07,370 --> 01:33:09,840
+I'd like to change the color of this text.
+
+1827
+01:33:09,840 --> 01:33:11,840
+Instead of being black, instead it should be red
+
+1828
+01:33:11,840 --> 01:33:14,400
+when the user gets a question wrong.
+
+1829
+01:33:14,400 --> 01:33:16,320
+And how could I go about doing that?
+
+1830
+01:33:16,320 --> 01:33:19,880
+Well, we can change the color of something just by using CSS.
+
+1831
+01:33:19,880 --> 01:33:23,580
+If we had, like, a class called incorrect, for example.
+
+1832
+01:33:23,580 --> 01:33:29,750
+If I scroll down here and give this div a class name, which
+
+1833
+01:33:29,750 --> 01:33:34,130
+is how you add a class in React, of incorrect,
+
+1834
+01:33:34,130 --> 01:33:39,060
+then I could use this class name to style it as red or not red.
+
+1835
+01:33:39,060 --> 01:33:43,940
+So I could say anything that has a class of incorrect, let's go ahead
+
+1836
+01:33:43,940 --> 01:33:47,960
+and give that a color of red.
+
+1837
+01:33:47,960 --> 01:33:52,220
+And so now, because I gave this problem a class of incorrect
+
+1838
+01:33:52,220 --> 01:33:55,050
+and I said turn all incorrect text to be red,
+
+1839
+01:33:55,050 --> 01:33:57,710
+we now see this text appear as red.
+
+1840
+01:33:57,710 --> 01:33:59,460
+But this, again, is not quite what I want.
+
+1841
+01:33:59,460 --> 01:34:01,220
+I don't want it to be red all of the time.
+
+1842
+01:34:01,220 --> 01:34:05,300
+I only want it to be red when the user has just gotten the question wrong,
+
+1843
+01:34:05,300 --> 01:34:09,080
+when they were just incorrect in answering a mathematical question.
+
+1844
+01:34:09,080 --> 01:34:13,490
+And so how could I represent that information inside of my application?
+
+1845
+01:34:13,490 --> 01:34:15,810
+Well, I'm going to need some additional state.
+
+1846
+01:34:15,810 --> 01:34:17,750
+State, again, is any information that I need
+
+1847
+01:34:17,750 --> 01:34:20,360
+to keep track of inside of my component.
+
+1848
+01:34:20,360 --> 01:34:24,830
+And now it seems that in addition to the response and the score and the numbers,
+
+1849
+01:34:24,830 --> 01:34:29,570
+I also want to keep track of did the user just answer a question incorrectly
+
+1850
+01:34:29,570 --> 01:34:30,840
+or not?
+
+1851
+01:34:30,840 --> 01:34:32,780
+So I'll add another piece to the state.
+
+1852
+01:34:32,780 --> 01:34:34,490
+I'll call it incorrect.
+
+1853
+01:34:34,490 --> 01:34:36,180
+And initially, it will be false.
+
+1854
+01:34:36,180 --> 01:34:39,470
+They didn't just get something incorrect.
+
+1855
+01:34:39,470 --> 01:34:43,910
+And now here, if I scroll down to this className,
+
+1856
+01:34:43,910 --> 01:34:49,740
+rather than have it be incorrect all the time, let me add in curly braces
+
+1857
+01:34:49,740 --> 01:34:50,750
+an expression.
+
+1858
+01:34:50,750 --> 01:34:55,880
+I'll say if state.incorrect is true, using the ternary operator
+
+1859
+01:34:55,880 --> 01:34:59,750
+with a question mark, then the class should be incorrect.
+
+1860
+01:34:59,750 --> 01:35:02,030
+But otherwise, it shouldn't have a class of incorrect.
+
+1861
+01:35:02,030 --> 01:35:03,890
+It'll just be the empty string.
+
+1862
+01:35:03,890 --> 01:35:09,110
+And so this expression here allows me to change the class of an HTML element
+
+1863
+01:35:09,110 --> 01:35:10,970
+based on the underlying state.
+
+1864
+01:35:10,970 --> 01:35:15,650
+If state.incorrect is true, then this div will have a class of incorrect,
+
+1865
+01:35:15,650 --> 01:35:18,330
+and otherwise, it won't.
+
+1866
+01:35:18,330 --> 01:35:23,360
+And so now when I load the page for the first time, the text appears as black.
+
+1867
+01:35:23,360 --> 01:35:26,840
+And what I need to do is when the user gets a question wrong,
+
+1868
+01:35:26,840 --> 01:35:31,670
+I need to change the state to indicate that they just got a question wrong.
+
+1869
+01:35:31,670 --> 01:35:33,510
+How do I do that?
+
+1870
+01:35:33,510 --> 01:35:38,760
+Well, here is the setState call when the user gets a question wrong.
+
+1871
+01:35:38,760 --> 01:35:43,740
+And in that case, I'll go ahead and set incorrect equal to true.
+
+1872
+01:35:43,740 --> 01:35:46,220
+And when the user gets a question right, we'll
+
+1873
+01:35:46,220 --> 01:35:49,310
+go ahead and set incorrect equal to false.
+
+1874
+01:35:49,310 --> 01:35:51,590
+We're modifying this one additional piece of state
+
+1875
+01:35:51,590 --> 01:35:56,040
+based on whether the user got the question right or wrong.
+
+1876
+01:35:56,040 --> 01:35:59,390
+So now if I load the page, answer a question correctly,
+
+1877
+01:35:59,390 --> 01:36:02,060
+the score increases and I get a new question.
+
+1878
+01:36:02,060 --> 01:36:05,390
+But if I answer a question incorrectly and press Return,
+
+1879
+01:36:05,390 --> 01:36:08,600
+you'll notice the score decreases, the input field clears out,
+
+1880
+01:36:08,600 --> 01:36:11,270
+and the text changes color because I changed
+
+1881
+01:36:11,270 --> 01:36:15,500
+the value of that incorrect part of the underlying state and based on that,
+
+1882
+01:36:15,500 --> 01:36:18,260
+we were able to see the text color change as well.
+
+1883
+01:36:18,260 --> 01:36:20,960
+If I now get a question correct, press Return,
+
+1884
+01:36:20,960 --> 01:36:26,120
+the text color changes back to black and the score increases.
+
+1885
+01:36:26,120 --> 01:36:30,380
+And let's now add one final piece of state or one final change to the UI
+
+1886
+01:36:30,380 --> 01:36:31,610
+for this application.
+
+1887
+01:36:31,610 --> 01:36:33,770
+Let's give me a way to win this game.
+
+1888
+01:36:33,770 --> 01:36:38,310
+Maybe once I get to a score of 10 by answering 10 questions correctly,
+
+1889
+01:36:38,310 --> 01:36:40,220
+then we're going to win the game.
+
+1890
+01:36:40,220 --> 01:36:41,870
+And how could I do that?
+
+1891
+01:36:41,870 --> 01:36:46,250
+Well, remember that each React component can just be a JavaScript function.
+
+1892
+01:36:46,250 --> 01:36:49,340
+And this function is just immediately returning this div,
+
+1893
+01:36:49,340 --> 01:36:52,190
+but it's a function, so I can add additional logic to it.
+
+1894
+01:36:52,190 --> 01:36:58,610
+I can say if state.score is equal to 10, for example, then
+
+1895
+01:36:58,610 --> 01:37:04,760
+rather than render the old div, let's return a new div.
+
+1896
+01:37:04,760 --> 01:37:10,970
+This div is just going to display something like "You won!"
+
+1897
+01:37:10,970 --> 01:37:13,820
+And so that I can style it, I'll give it an ID.
+
+1898
+01:37:13,820 --> 01:37:16,730
+The ID will be winner.
+
+1899
+01:37:16,730 --> 01:37:23,610
+And if the ID is winner, let's go ahead and make the font size 72 pixels
+
+1900
+01:37:23,610 --> 01:37:26,450
+and let's make the color green if I win.
+
+1901
+01:37:26,450 --> 01:37:30,410
+So I added some CSS just to style it, but really, the only new logic
+
+1902
+01:37:30,410 --> 01:37:34,910
+is further down below, where I'm here saying check the state.
+
+1903
+01:37:34,910 --> 01:37:37,340
+If the score is 10, well, that means we win,
+
+1904
+01:37:37,340 --> 01:37:39,740
+so instead of returning the new problem, just
+
+1905
+01:37:39,740 --> 01:37:43,950
+return a div that says you won the game.
+
+1906
+01:37:43,950 --> 01:37:45,890
+So let's try that now
+
+1907
+01:37:45,890 --> 01:37:46,910
+I get these questions.
+
+1908
+01:37:46,910 --> 01:37:49,760
+Every time I answer a question, you're noticing that the score
+
+1909
+01:37:49,760 --> 01:37:51,410
+is going to increase by 1.
+
+1910
+01:37:51,410 --> 01:37:53,750
+And every time we're generating new random numbers
+
+1911
+01:37:53,750 --> 01:37:58,670
+to display as what's going to appear in the user interface.
+
+1912
+01:37:58,670 --> 01:38:03,170
+And once I get to question number 10, if I answer it correctly, press Return,
+
+1913
+01:38:03,170 --> 01:38:04,680
+the entire UI changes.
+
+1914
+01:38:04,680 --> 01:38:07,310
+Instead of the problem and an input field and a score,
+
+1915
+01:38:07,310 --> 01:38:11,360
+I just see in green large text that I won.
+
+1916
+01:38:11,360 --> 01:38:15,950
+And again, I was able to do that by looking here at this condition, where
+
+1917
+01:38:15,950 --> 01:38:19,410
+we're looking at the value of the state, and if the state is 10,
+
+1918
+01:38:19,410 --> 01:38:21,230
+we're deciding what to render.
+
+1919
+01:38:21,230 --> 01:38:23,690
+And this, again, is one of the great powers of React,
+
+1920
+01:38:23,690 --> 01:38:26,130
+this ability to use this underlying state
+
+1921
+01:38:26,130 --> 01:38:28,340
+and based on the value of the underlying state,
+
+1922
+01:38:28,340 --> 01:38:32,420
+decide what it is the user should see in their user interface.
+
+1923
+01:38:32,420 --> 01:38:35,870
+And React is just one of many libraries that do this type of thing.
+
+1924
+01:38:35,870 --> 01:38:38,960
+Other popular ones include Angular and Vue, where all of these
+
+1925
+01:38:38,960 --> 01:38:41,270
+are just these web frameworks that make it easier
+
+1926
+01:38:41,270 --> 01:38:44,570
+to be able to create applications that are able to respond
+
+1927
+01:38:44,570 --> 01:38:46,905
+to some underlying state so that you, the programmer,
+
+1928
+01:38:46,905 --> 01:38:49,280
+don't have to worry about constantly having to manipulate
+
+1929
+01:38:49,280 --> 01:38:52,130
+various different parts of the page, especially
+
+1930
+01:38:52,130 --> 01:38:54,378
+as you imagine websites like Facebook or Twitter,
+
+1931
+01:38:54,378 --> 01:38:57,170
+where there are many things happening on the page at the same time.
+
+1932
+01:38:57,170 --> 01:38:59,900
+Every time a new tweet comes in, you might get a notification
+
+1933
+01:38:59,900 --> 01:39:02,880
+and see a new post in your main area of your news feed.
+
+1934
+01:39:02,880 --> 01:39:06,320
+So these are the types of things that you might want the application
+
+1935
+01:39:06,320 --> 01:39:09,350
+to be able to more easily handle for you, where you describe what
+
+1936
+01:39:09,350 --> 01:39:12,380
+the state is, you describe what the page should look like based
+
+1937
+01:39:12,380 --> 01:39:14,670
+on that underlying state, and let the library,
+
+1938
+01:39:14,670 --> 01:39:16,970
+whether it's React or something else, begin to handle
+
+1939
+01:39:16,970 --> 01:39:19,700
+the process of doing that for you.
+
+1940
+01:39:19,700 --> 01:39:22,280
+And the world of user interfaces is changing pretty quickly--
+
+1941
+01:39:22,280 --> 01:39:25,340
+that a lot changes in user interfaces in terms of the technologies
+
+1942
+01:39:25,340 --> 01:39:26,968
+and the tools that are quite popular.
+
+1943
+01:39:26,968 --> 01:39:29,510
+But they're really based on the same set of underlying ideas,
+
+1944
+01:39:29,510 --> 01:39:33,440
+the idea that we can use JavaScript in order to manipulate what it is the user
+
+1945
+01:39:33,440 --> 01:39:35,960
+sees on their page, in order to detect what's
+
+1946
+01:39:35,960 --> 01:39:38,360
+happening based on particular events, like scrolling
+
+1947
+01:39:38,360 --> 01:39:41,450
+to the bottom of the page or typing something into an input field,
+
+1948
+01:39:41,450 --> 01:39:44,060
+and then responding to those particular events
+
+1949
+01:39:44,060 --> 01:39:46,800
+by providing some sort of function that gets called
+
+1950
+01:39:46,800 --> 01:39:48,800
+any time a particular event happens.
+
+1951
+01:39:48,800 --> 01:39:51,380
+By mixing that in with other features, like the ability
+
+1952
+01:39:51,380 --> 01:39:55,820
+to asynchronously request information from an external server or the ability
+
+1953
+01:39:55,820 --> 01:39:59,540
+to do computations based on the values of the state, like we saw within React,
+
+1954
+01:39:59,540 --> 01:40:01,940
+we have the ability to create very interesting,
+
+1955
+01:40:01,940 --> 01:40:05,690
+engaging, dynamic user interfaces very, very quickly, all just
+
+1956
+01:40:05,690 --> 01:40:09,177
+using the power of combining Python and JavaScript.
+
+1957
+01:40:09,177 --> 01:40:11,760
+That was Web Programming with Python and JavaScript for today.
+
+1958
+01:40:11,760 --> 01:40:13,780
+We'll see you next time.
+
+1959
+01:40:13,780 --> 01:40:15,000
+
+

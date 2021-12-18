@@ -1,0 +1,7872 @@
+0
+00:00:00,000 --> 00:00:03,500
+[MUSIC PLAYING]
+
+1
+00:00:03,500 --> 00:00:17,908
+
+
+2
+00:00:17,908 --> 00:00:18,450
+BRIAN YU: OK.
+
+3
+00:00:18,450 --> 00:00:21,508
+Welcome back, everyone, to web programming with Python and JavaScript.
+
+4
+00:00:21,508 --> 00:00:24,300
+And now, at this point, we've seen a number of different techniques
+
+5
+00:00:24,300 --> 00:00:27,510
+and tools that we can use in order to design web applications--
+
+6
+00:00:27,510 --> 00:00:32,340
+HTML and CSS, to describe how it is that our pages look; a programming language,
+
+7
+00:00:32,340 --> 00:00:34,620
+like Python, using a framework like Django,
+
+8
+00:00:34,620 --> 00:00:38,808
+in order to listen for requests, process them and provide some sort of response.
+
+9
+00:00:38,808 --> 00:00:41,850
+And then more recently, we took a look at JavaScript, another programming
+
+10
+00:00:41,850 --> 00:00:44,760
+language that we can use in particular on the client side,
+
+11
+00:00:44,760 --> 00:00:48,330
+running inside of the user's web browser, in order to make our web pages
+
+12
+00:00:48,330 --> 00:00:50,910
+even more interactive and user-friendly.
+
+13
+00:00:50,910 --> 00:00:53,070
+Now what we'll transition to today is taking a look
+
+14
+00:00:53,070 --> 00:00:56,240
+at some of software's best practices, some tools and techniques
+
+15
+00:00:56,240 --> 00:00:59,550
+that developers actually use when they're working on web applications,
+
+16
+00:00:59,550 --> 00:01:02,730
+especially as those web applications start to grow larger.
+
+17
+00:01:02,730 --> 00:01:05,069
+In particular, we'll start by discussing testing,
+
+18
+00:01:05,069 --> 00:01:09,510
+this idea of verifying that our code is correct, and then transition to CI/CD,
+
+19
+00:01:09,510 --> 00:01:12,780
+short for Continuous Integration and Continuous Delivery,
+
+20
+00:01:12,780 --> 00:01:15,222
+some other best practices that are used in making sure
+
+21
+00:01:15,222 --> 00:01:17,430
+that the work that software developers are working on
+
+22
+00:01:17,430 --> 00:01:21,250
+can be tested and deployed readily and very quickly.
+
+23
+00:01:21,250 --> 00:01:23,130
+So we'll begin the conversation with testing.
+
+24
+00:01:23,130 --> 00:01:26,880
+And testing is really about this idea of verifying and making sure
+
+25
+00:01:26,880 --> 00:01:29,770
+that the code that software developers are writing are, in fact,
+
+26
+00:01:29,770 --> 00:01:31,855
+correct, to make sure that the functions work
+
+27
+00:01:31,855 --> 00:01:34,980
+the way they're supposed to, that the web pages behave the way that they're
+
+28
+00:01:34,980 --> 00:01:35,860
+supposed to.
+
+29
+00:01:35,860 --> 00:01:39,120
+And ideally, we'd like some way to be able to efficiently and effectively
+
+30
+00:01:39,120 --> 00:01:42,720
+test our code over time, and as our programs grow more complicated,
+
+31
+00:01:42,720 --> 00:01:45,480
+to allow our tests is to make sure that our program is
+
+32
+00:01:45,480 --> 00:01:47,468
+behaving the way that we want it to.
+
+33
+00:01:47,468 --> 00:01:50,010
+So we'll go ahead and start simple and consider the basic way
+
+34
+00:01:50,010 --> 00:01:53,790
+that we might take a function, for example, written in Python and test
+
+35
+00:01:53,790 --> 00:01:57,580
+and verify to make sure that it works the way we would expect it to.
+
+36
+00:01:57,580 --> 00:02:01,800
+And to do so, we can start with a command in Python known as assert.
+
+37
+00:02:01,800 --> 00:02:05,160
+And what assert does in Python is it asserts or just states
+
+38
+00:02:05,160 --> 00:02:07,140
+that something should be true.
+
+39
+00:02:07,140 --> 00:02:09,990
+And if that something is not true, then the assert
+
+40
+00:02:09,990 --> 00:02:12,450
+is going to throw an exception, some sort of error,
+
+41
+00:02:12,450 --> 00:02:15,090
+so that whoever is running the program or running the command
+
+42
+00:02:15,090 --> 00:02:17,010
+knows that something went wrong.
+
+43
+00:02:17,010 --> 00:02:20,790
+And this can be a very basic way that we can leverage Python's abilities
+
+44
+00:02:20,790 --> 00:02:24,090
+to test a function and verify that that function behaves
+
+45
+00:02:24,090 --> 00:02:25,760
+the way we would want it to.
+
+46
+00:02:25,760 --> 00:02:29,370
+So let's go ahead and try a simple example of writing a Python function
+
+47
+00:02:29,370 --> 00:02:32,250
+and then trying to test to make sure that that function works
+
+48
+00:02:32,250 --> 00:02:34,060
+the way we would want it to.
+
+49
+00:02:34,060 --> 00:02:35,702
+So I'll go ahead and create a new file.
+
+50
+00:02:35,702 --> 00:02:36,660
+I'll call it assert.py.
+
+51
+00:02:36,660 --> 00:02:40,710
+And let me define a new Python function, for example, that is
+
+52
+00:02:40,710 --> 00:02:43,710
+going to take an integer and square it.
+
+53
+00:02:43,710 --> 00:02:46,270
+Just want to take a number and return it square.
+
+54
+00:02:46,270 --> 00:02:50,250
+So I'm going to define a function called square that takes as an input a number,
+
+55
+00:02:50,250 --> 00:02:51,300
+like x.
+
+56
+00:02:51,300 --> 00:02:54,865
+And I want to return x times x.
+
+57
+00:02:54,865 --> 00:02:56,490
+It's a fairly straightforward function.
+
+58
+00:02:56,490 --> 00:02:58,890
+But I would like to now verify that the function works
+
+59
+00:02:58,890 --> 00:03:00,300
+the way I would expect it to.
+
+60
+00:03:00,300 --> 00:03:02,550
+Now there are a number of ways that you could do this.
+
+61
+00:03:02,550 --> 00:03:07,890
+One would be just like let's print out what the square of 10 is, for example,
+
+62
+00:03:07,890 --> 00:03:09,630
+and just see what that's equal to.
+
+63
+00:03:09,630 --> 00:03:13,720
+And then you could run a program, something like python assert.py
+
+64
+00:03:13,720 --> 00:03:15,900
+and just say, all right, the answer is 100.
+
+65
+00:03:15,900 --> 00:03:18,692
+And I could say to myself, OK, that's what I would expect it to be.
+
+66
+00:03:18,692 --> 00:03:21,390
+But I now have to do the mental math of squaring the number 10,
+
+67
+00:03:21,390 --> 00:03:24,330
+making sure that the answer comes out to be the value that I expect.
+
+68
+00:03:24,330 --> 00:03:27,060
+It would be nice if I could automate this process.
+
+69
+00:03:27,060 --> 00:03:32,340
+Well, one thing I could do is print out, does the square of 10 equal 100?
+
+70
+00:03:32,340 --> 00:03:34,620
+I know that I want the square of 10 to equal 100,
+
+71
+00:03:34,620 --> 00:03:38,070
+so I could just print out that value, print out, does square of 10
+
+72
+00:03:38,070 --> 00:03:39,810
+equal the number 100?
+
+73
+00:03:39,810 --> 00:03:41,580
+I go ahead and run the program again.
+
+74
+00:03:41,580 --> 00:03:43,950
+And this time, what I get is, true, for example,
+
+75
+00:03:43,950 --> 00:03:46,450
+because those two things are equal to each other.
+
+76
+00:03:46,450 --> 00:03:49,590
+And if, on the other hand, I had tried to check for something that wasn't
+
+77
+00:03:49,590 --> 00:03:52,492
+true, like does square of 10 equal 101?
+
+78
+00:03:52,492 --> 00:03:53,700
+You run the program, and, OK.
+
+79
+00:03:53,700 --> 00:03:55,790
+Now it's going to be false.
+
+80
+00:03:55,790 --> 00:03:58,720
+So this is nothing new, nothing we haven't seen before.
+
+81
+00:03:58,720 --> 00:04:00,610
+But now what I can do is, instead of this,
+
+82
+00:04:00,610 --> 00:04:07,210
+I can just say, let me assert that the square of 10 is equal to 100.
+
+83
+00:04:07,210 --> 00:04:10,360
+Here I am just asserting that this expression, that the square root of 10
+
+84
+00:04:10,360 --> 00:04:13,900
+is equal to 100 is going to be true.
+
+85
+00:04:13,900 --> 00:04:15,450
+And now I can run the program.
+
+86
+00:04:15,450 --> 00:04:17,760
+And what you'll notice is nothing happens.
+
+87
+00:04:17,760 --> 00:04:21,830
+No output, nothing at all because when an assert statement runs
+
+88
+00:04:21,830 --> 00:04:24,330
+and the expression that it's checking turns out to be true--
+
+89
+00:04:24,330 --> 00:04:26,788
+that the square of 10 does equal 100--
+
+90
+00:04:26,788 --> 00:04:28,830
+it effectively ignores that statement altogether,
+
+91
+00:04:28,830 --> 00:04:32,702
+just continues on to the next thing, no output, no side effect of any sort.
+
+92
+00:04:32,702 --> 00:04:34,410
+And this is helpful because it just means
+
+93
+00:04:34,410 --> 00:04:36,410
+that if I want to assert that something is true,
+
+94
+00:04:36,410 --> 00:04:39,012
+I can assert it and then just continue writing my code.
+
+95
+00:04:39,012 --> 00:04:41,220
+And it's as if I hadn't written that assert statement
+
+96
+00:04:41,220 --> 00:04:45,280
+at all so long as the thing that I am asserting is actually true.
+
+97
+00:04:45,280 --> 00:04:47,580
+But if there were a bug in my code, for example,
+
+98
+00:04:47,580 --> 00:04:51,270
+some sort of mistake, where instead of returning x times x,
+
+99
+00:04:51,270 --> 00:04:53,760
+imagine that I accidentally said, return x
+
+100
+00:04:53,760 --> 00:04:55,950
+plus x to calculate the square instead, something
+
+101
+00:04:55,950 --> 00:04:58,620
+that would be a bug in this case.
+
+102
+00:04:58,620 --> 00:05:03,390
+Well, then when I try to run python assert.py, what I'm going to get
+
+103
+00:05:03,390 --> 00:05:04,470
+is an exception.
+
+104
+00:05:04,470 --> 00:05:07,790
+And the type of exception that I get is something known as an assertion error.
+
+105
+00:05:07,790 --> 00:05:08,790
+And I can see that here.
+
+106
+00:05:08,790 --> 00:05:09,962
+There is an assertion error.
+
+107
+00:05:09,962 --> 00:05:12,420
+And then I see the reason why the assertion error happened.
+
+108
+00:05:12,420 --> 00:05:15,840
+And the assertion error happened on line 4, which is this line here,
+
+109
+00:05:15,840 --> 00:05:20,950
+where I said, I would like to assert that the square of 10 is equal to 100.
+
+110
+00:05:20,950 --> 00:05:23,068
+So one way we can imagine testing our code
+
+111
+00:05:23,068 --> 00:05:25,860
+is just by including a number of these different assert statements.
+
+112
+00:05:25,860 --> 00:05:28,260
+If I want to verify that my code is correct,
+
+113
+00:05:28,260 --> 00:05:30,310
+I can write various different assert statements.
+
+114
+00:05:30,310 --> 00:05:33,660
+And for a function that's fairly simple, like the square function, probably not
+
+115
+00:05:33,660 --> 00:05:35,550
+too many tests that I would need to write.
+
+116
+00:05:35,550 --> 00:05:37,890
+But you can imagine for more complex functions that
+
+117
+00:05:37,890 --> 00:05:40,380
+have multiple different conditional branches, being
+
+118
+00:05:40,380 --> 00:05:43,710
+able to assert that no matter which conditional branch the program
+
+119
+00:05:43,710 --> 00:05:46,410
+chooses to follow that the code will actually be correct
+
+120
+00:05:46,410 --> 00:05:49,030
+can be a valuable thing to be able to say.
+
+121
+00:05:49,030 --> 00:05:52,740
+And this can be helpful too when in working on a larger project,
+
+122
+00:05:52,740 --> 00:05:54,800
+you want to deal with the problem of bugs
+
+123
+00:05:54,800 --> 00:05:56,860
+that might appear inside of a project.
+
+124
+00:05:56,860 --> 00:05:59,070
+And this gets at the idea of test-driven development,
+
+125
+00:05:59,070 --> 00:06:01,902
+developing while keeping this notion of testing in mind.
+
+126
+00:06:01,902 --> 00:06:04,110
+And one of the best practices would be if ever you're
+
+127
+00:06:04,110 --> 00:06:07,970
+working on a program of your own and you encounter some bug in the program,
+
+128
+00:06:07,970 --> 00:06:09,900
+you'll first want to fix the bug.
+
+129
+00:06:09,900 --> 00:06:14,400
+But then you'll want to write a test that verifies that the new behavior is
+
+130
+00:06:14,400 --> 00:06:15,430
+working as expected.
+
+131
+00:06:15,430 --> 00:06:17,430
+And once you've written these tests, these tests
+
+132
+00:06:17,430 --> 00:06:18,840
+can start to grow over time.
+
+133
+00:06:18,840 --> 00:06:20,790
+And as you continue working on your project,
+
+134
+00:06:20,790 --> 00:06:24,420
+you can always run those existing set of tests to make sure that nothing--
+
+135
+00:06:24,420 --> 00:06:27,150
+no new changes that you make to the program down the line,
+
+136
+00:06:27,150 --> 00:06:30,030
+no future features that you add or changes you might make--
+
+137
+00:06:30,030 --> 00:06:32,520
+are going to break anything that was there before.
+
+138
+00:06:32,520 --> 00:06:35,760
+And this is especially valuable, as programs start to get more complex
+
+139
+00:06:35,760 --> 00:06:37,710
+and testing everything by hand would start
+
+140
+00:06:37,710 --> 00:06:40,620
+to become a very tedious process, to be able to just automate
+
+141
+00:06:40,620 --> 00:06:43,620
+the process of just run a whole bunch of tests on all of the things
+
+142
+00:06:43,620 --> 00:06:45,690
+that I know that I would like the program to do
+
+143
+00:06:45,690 --> 00:06:47,400
+and making sure they work as expected.
+
+144
+00:06:47,400 --> 00:06:49,620
+That can be quite helpful.
+
+145
+00:06:49,620 --> 00:06:52,150
+So assert then is one basic way of just saying
+
+146
+00:06:52,150 --> 00:06:54,150
+that I would like for this statement to be true.
+
+147
+00:06:54,150 --> 00:06:57,210
+And if it's not true, go ahead and throw an exception.
+
+148
+00:06:57,210 --> 00:06:59,580
+And using Python, we know we also have the ability
+
+149
+00:06:59,580 --> 00:07:02,632
+to catch those exceptions in order to make sure that we're
+
+150
+00:07:02,632 --> 00:07:04,090
+able to handle those appropriately.
+
+151
+00:07:04,090 --> 00:07:08,670
+So we can display a nice error message for example, if we wanted to do so.
+
+152
+00:07:08,670 --> 00:07:11,880
+But now let's go ahead and try and write a more complex function,
+
+153
+00:07:11,880 --> 00:07:14,610
+something more complex than just taking a number and squaring it,
+
+154
+00:07:14,610 --> 00:07:17,400
+somewhere where there's more room for various different cases
+
+155
+00:07:17,400 --> 00:07:20,310
+that I might want to test and more room where I, the programmer,
+
+156
+00:07:20,310 --> 00:07:22,270
+might make a mistake, for example.
+
+157
+00:07:22,270 --> 00:07:26,500
+So let's imagine writing a new file-- and then I'm going to call prime.py--
+
+158
+00:07:26,500 --> 00:07:30,990
+where here, I'll go ahead and say that I would like prime.py
+
+159
+00:07:30,990 --> 00:07:34,740
+to implement a function called is_prime.
+
+160
+00:07:34,740 --> 00:07:39,000
+And what the is_prime function should do is check to see if a number is prime
+
+161
+00:07:39,000 --> 00:07:39,570
+or not.
+
+162
+00:07:39,570 --> 00:07:42,340
+The prime number only has factors of 1 and itself.
+
+163
+00:07:42,340 --> 00:07:45,260
+And I would like to write a function that verifies that fact.
+
+164
+00:07:45,260 --> 00:07:47,800
+And so how might I go about doing that?
+
+165
+00:07:47,800 --> 00:07:55,530
+Well, if n is less than 2, then it is definitely not prime
+
+166
+00:07:55,530 --> 00:07:57,660
+because we say 0 and 1 are not going to be prime.
+
+167
+00:07:57,660 --> 00:08:00,240
+And we'll only deal with numbers that are 0 or greater.
+
+168
+00:08:00,240 --> 00:08:02,320
+And we'll deal with that for now.
+
+169
+00:08:02,320 --> 00:08:06,635
+But let's start then with other numbers, numbers that are 2 or greater.
+
+170
+00:08:06,635 --> 00:08:07,760
+Well, what do I want to do?
+
+171
+00:08:07,760 --> 00:08:10,050
+I really want to check each of the possible factors.
+
+172
+00:08:10,050 --> 00:08:12,930
+Like if I want to check whether or not 100 is prime or not,
+
+173
+00:08:12,930 --> 00:08:15,570
+then I want to loop over all of the possible numbers that could
+
+174
+00:08:15,570 --> 00:08:18,330
+be factors of 100, like 2, 3, 4, 5, 6.
+
+175
+00:08:18,330 --> 00:08:21,120
+And when I get to a number like 2 or a number like 5 that
+
+176
+00:08:21,120 --> 00:08:25,530
+do go into 100 cleanly, well, then I'll know that the number is not prime.
+
+177
+00:08:25,530 --> 00:08:34,110
+So I could say for i in range from 2 all the way up through n, for example,
+
+178
+00:08:34,110 --> 00:08:41,698
+let me go ahead and say, if n mod i equals 0, then return false.
+
+179
+00:08:41,698 --> 00:08:42,740
+So what am I saying here?
+
+180
+00:08:42,740 --> 00:08:44,750
+I'm saying go ahead and start at 2.
+
+181
+00:08:44,750 --> 00:08:46,760
+Go up through but not including n.
+
+182
+00:08:46,760 --> 00:08:50,040
+So if I'm checking to see if 10 is prime, for example,
+
+183
+00:08:50,040 --> 00:08:53,180
+I'm going to check for i is 2, 3, 4, 5, 6, 7, 8, 9.
+
+184
+00:08:53,180 --> 00:08:57,800
+And for each of those numbers, check if n, my input to this function,
+
+185
+00:08:57,800 --> 00:09:01,820
+mod i, the factor that I would like to check, is equal to 0.
+
+186
+00:09:01,820 --> 00:09:04,280
+This mod operator, this percent, if you don't recall,
+
+187
+00:09:04,280 --> 00:09:07,400
+gives us the remainder when you divide one number by another.
+
+188
+00:09:07,400 --> 00:09:12,830
+And so if n mod i equals 0, that means the remainder when you divide n by i
+
+189
+00:09:12,830 --> 00:09:13,640
+equals 0--
+
+190
+00:09:13,640 --> 00:09:16,880
+meaning i goes into n cleanly with no remainder.
+
+191
+00:09:16,880 --> 00:09:20,000
+And that means that it's not prime because it does have a factor.
+
+192
+00:09:20,000 --> 00:09:22,670
+Whatever i is is going to be that factor.
+
+193
+00:09:22,670 --> 00:09:24,920
+And if I get to the end of this for loop,
+
+194
+00:09:24,920 --> 00:09:27,170
+then I can go ahead and just say, return true.
+
+195
+00:09:27,170 --> 00:09:30,260
+If we weren't able to find a factor for the number other than 1
+
+196
+00:09:30,260 --> 00:09:33,710
+and the number itself, well, then, we can go ahead and say that true,
+
+197
+00:09:33,710 --> 00:09:35,617
+this number is going to be prime.
+
+198
+00:09:35,617 --> 00:09:37,700
+And so this, for example, could be a function that
+
+199
+00:09:37,700 --> 00:09:39,622
+checks to see if a number is prime.
+
+200
+00:09:39,622 --> 00:09:41,330
+But if I'm trying to optimize, I'm trying
+
+201
+00:09:41,330 --> 00:09:43,190
+to make my function more efficient, I might
+
+202
+00:09:43,190 --> 00:09:46,580
+realize that you really don't need to check every number from 2 all
+
+203
+00:09:46,580 --> 00:09:49,070
+the way up to the number and itself.
+
+204
+00:09:49,070 --> 00:09:52,910
+I could really just check up to the square root of that number,
+
+205
+00:09:52,910 --> 00:09:53,790
+for example.
+
+206
+00:09:53,790 --> 00:09:58,340
+That for a number like 25, I want to check 2, 3, 4, 5
+
+207
+00:09:58,340 --> 00:10:00,710
+because 5 squared is going to be 25.
+
+208
+00:10:00,710 --> 00:10:04,340
+But after 5, I don't need to check any more numbers beyond that.
+
+209
+00:10:04,340 --> 00:10:07,730
+That after you get to a number, after a number-- the square root of that number
+
+210
+00:10:07,730 --> 00:10:09,620
+is multiplied by itself, there's never going
+
+211
+00:10:09,620 --> 00:10:12,680
+to be a case where a number bigger than that could be a factor that I
+
+212
+00:10:12,680 --> 00:10:14,013
+won't have already known about.
+
+213
+00:10:14,013 --> 00:10:16,430
+So just thinking about things a little bit mathematically,
+
+214
+00:10:16,430 --> 00:10:19,280
+we might be able to make some sort of optimizations
+
+215
+00:10:19,280 --> 00:10:22,370
+where instead of going from 2 all the way up through n,
+
+216
+00:10:22,370 --> 00:10:27,530
+I might go up to the square root of n.
+
+217
+00:10:27,530 --> 00:10:31,510
+And I'll go ahead and import math to be able to use math dot square root.
+
+218
+00:10:31,510 --> 00:10:33,260
+And I'll convert that number to an integer
+
+219
+00:10:33,260 --> 00:10:37,350
+just in case the square root doesn't already happen to be an integer.
+
+220
+00:10:37,350 --> 00:10:38,510
+So I think this works.
+
+221
+00:10:38,510 --> 00:10:40,218
+I've at least talked myself into thinking
+
+222
+00:10:40,218 --> 00:10:43,400
+that this is a function that might be able to check if a number is prime.
+
+223
+00:10:43,400 --> 00:10:45,560
+So what could I do if I wanted to verify this?
+
+224
+00:10:45,560 --> 00:10:47,360
+Well, I could write some assert statements.
+
+225
+00:10:47,360 --> 00:10:50,300
+Another thing I could do is just use the Python interpreter.
+
+226
+00:10:50,300 --> 00:10:51,390
+I could say, all right.
+
+227
+00:10:51,390 --> 00:10:53,990
+Let me go ahead and type python.
+
+228
+00:10:53,990 --> 00:10:56,060
+And I'm in the Python interpreter.
+
+229
+00:10:56,060 --> 00:11:01,310
+And I can say, from prime, go ahead and import is_prime. prime is
+
+230
+00:11:01,310 --> 00:11:02,570
+the name of that file.
+
+231
+00:11:02,570 --> 00:11:05,750
+is_prime is the function in that file that I would like to test.
+
+232
+00:11:05,750 --> 00:11:08,563
+And let's just try, all right, is_prime(5)?
+
+233
+00:11:08,563 --> 00:11:09,480
+That's a prime number.
+
+234
+00:11:09,480 --> 00:11:11,600
+Hopefully, it'll say true, that it's prime.
+
+235
+00:11:11,600 --> 00:11:12,920
+All right, it does.
+
+236
+00:11:12,920 --> 00:11:15,200
+Let's try is_prime(10)?
+
+237
+00:11:15,200 --> 00:11:16,620
+See if that works.
+
+238
+00:11:16,620 --> 00:11:17,120
+All right.
+
+239
+00:11:17,120 --> 00:11:19,100
+is_prime(10) is false because 10 is not prime.
+
+240
+00:11:19,100 --> 00:11:19,600
+That's good.
+
+241
+00:11:19,600 --> 00:11:21,000
+That seems to be working as well.
+
+242
+00:11:21,000 --> 00:11:24,500
+Let's try is_prime(99)?
+
+243
+00:11:24,500 --> 00:11:27,595
+That's not prime because 3 is a multiple of that, for example.
+
+244
+00:11:27,595 --> 00:11:28,970
+All right, false, so that's good.
+
+245
+00:11:28,970 --> 00:11:30,140
+This seems to be working.
+
+246
+00:11:30,140 --> 00:11:32,450
+And I could, in the interpreter, test this function
+
+247
+00:11:32,450 --> 00:11:35,390
+to make sure that it works the way that I would want it to work.
+
+248
+00:11:35,390 --> 00:11:38,720
+But let's now see some other ways that I might go about testing it.
+
+249
+00:11:38,720 --> 00:11:45,420
+Well, one way is that I could write a file like tests0.py.
+
+250
+00:11:45,420 --> 00:11:48,260
+And what tests0.py is going to do-- instead of using assert,
+
+251
+00:11:48,260 --> 00:11:51,170
+I'm just going to do our Boolean checks like we were doing before.
+
+252
+00:11:51,170 --> 00:11:53,750
+I'm going to import the is_prime function.
+
+253
+00:11:53,750 --> 00:11:56,840
+And I've defined a new function called test_prime,
+
+254
+00:11:56,840 --> 00:12:00,290
+which is going to serve the role of testing to make sure that when
+
+255
+00:12:00,290 --> 00:12:03,890
+you square some number or when you check to see if some number n is prime,
+
+256
+00:12:03,890 --> 00:12:07,310
+that you get some expected value, where that expected value is either true
+
+257
+00:12:07,310 --> 00:12:10,700
+for it is prime or false for it's not prime.
+
+258
+00:12:10,700 --> 00:12:12,290
+What, then, is this function doing?
+
+259
+00:12:12,290 --> 00:12:13,630
+Well, the function is checking.
+
+260
+00:12:13,630 --> 00:12:16,330
+We're calling the is_prime function on this number n
+
+261
+00:12:16,330 --> 00:12:20,420
+and seeing whether or not it is equal to the expected value that we get,
+
+262
+00:12:20,420 --> 00:12:23,160
+where we expect it to be either true or false.
+
+263
+00:12:23,160 --> 00:12:27,850
+And if we run is_prime on n and it is not equal to what we expect,
+
+264
+00:12:27,850 --> 00:12:31,700
+well, then, we print out, OK, there is an error.
+
+265
+00:12:31,700 --> 00:12:34,280
+We expected some value true or false.
+
+266
+00:12:34,280 --> 00:12:37,053
+But it turned out not to be the case.
+
+267
+00:12:37,053 --> 00:12:40,220
+And so now that I have this test_prime function, well, I can say, all right.
+
+268
+00:12:40,220 --> 00:12:42,140
+Let me go back into the Python interpreter.
+
+269
+00:12:42,140 --> 00:12:45,740
+From tests0 import test_prime.
+
+270
+00:12:45,740 --> 00:12:47,960
+And now I can say, all right, let me test_prime.
+
+271
+00:12:47,960 --> 00:12:51,200
+Make sure that 5 is prime.
+
+272
+00:12:51,200 --> 00:12:53,480
+So I'm passing in with my first input the number n,
+
+273
+00:12:53,480 --> 00:12:54,855
+the number I would like to check.
+
+274
+00:12:54,855 --> 00:12:56,380
+I want to check if 5 is prime.
+
+275
+00:12:56,380 --> 00:13:01,580
+And the second input I provide is what I expect it to be-- either true or false.
+
+276
+00:13:01,580 --> 00:13:04,420
+And here, nothing happens, which is a good thing.
+
+277
+00:13:04,420 --> 00:13:06,920
+If there were an error, it would have printed something out.
+
+278
+00:13:06,920 --> 00:13:10,070
+And the fact that I see nothing printed out means that everything was OK.
+
+279
+00:13:10,070 --> 00:13:12,650
+If I test_prime now and say something like, all right,
+
+280
+00:13:12,650 --> 00:13:14,570
+make sure 10 is not prime--
+
+281
+00:13:14,570 --> 00:13:18,590
+make sure that 10 when you pass it into is_prime is going to give us false.
+
+282
+00:13:18,590 --> 00:13:19,820
+Again, nothing happens.
+
+283
+00:13:19,820 --> 00:13:22,340
+Seems to be working just fine.
+
+284
+00:13:22,340 --> 00:13:23,170
+Let me now try--
+
+285
+00:13:23,170 --> 00:13:24,230
+I can try more examples.
+
+286
+00:13:24,230 --> 00:13:26,480
+Maybe I try test_prime 25.
+
+287
+00:13:26,480 --> 00:13:30,630
+I want to make sure that 25 is not prime because 25 is not a prime number.
+
+288
+00:13:30,630 --> 00:13:31,130
+All right.
+
+289
+00:13:31,130 --> 00:13:32,270
+We get some sort of error.
+
+290
+00:13:32,270 --> 00:13:37,340
+There's an error on is_prime(25) where I expected the output to be false.
+
+291
+00:13:37,340 --> 00:13:40,760
+But for some reason, it looks like is_prime returns something
+
+292
+00:13:40,760 --> 00:13:41,480
+other than false.
+
+293
+00:13:41,480 --> 00:13:43,010
+It probably returned true.
+
+294
+00:13:43,010 --> 00:13:45,450
+And so might indicate some sort of bug in my program,
+
+295
+00:13:45,450 --> 00:13:50,100
+that somehow I don't think that 25 should be a prime number.
+
+296
+00:13:50,100 --> 00:13:52,850
+But my program thinks that 25 is a prime number.
+
+297
+00:13:52,850 --> 00:13:55,550
+And that error can be a clue to me as to how to do this.
+
+298
+00:13:55,550 --> 00:13:58,900
+But ultimately, especially as programs start to grow longer, especially
+
+299
+00:13:58,900 --> 00:14:00,650
+as I start to add more and more functions,
+
+300
+00:14:00,650 --> 00:14:04,160
+testing each of those functions by hand is going to start to get tedious.
+
+301
+00:14:04,160 --> 00:14:06,650
+So one thing I could do is write a script
+
+302
+00:14:06,650 --> 00:14:09,810
+to be able to run all these tests for me automatically.
+
+303
+00:14:09,810 --> 00:14:15,440
+And so here what I have a tests0.sh, .sh being like a shell script,
+
+304
+00:14:15,440 --> 00:14:18,170
+some script that I can just run inside my terminal.
+
+305
+00:14:18,170 --> 00:14:22,482
+And what this is doing is it's running Python 3, for Python version 3, dash
+
+306
+00:14:22,482 --> 00:14:24,890
+c, which means I'm just going to give it a command.
+
+307
+00:14:24,890 --> 00:14:26,850
+And it is going to run that command.
+
+308
+00:14:26,850 --> 00:14:28,280
+And so I can just run these.
+
+309
+00:14:28,280 --> 00:14:30,350
+And each of these lines does what?
+
+310
+00:14:30,350 --> 00:14:33,230
+From tests0, it imports my test_prime function,
+
+311
+00:14:33,230 --> 00:14:35,690
+that function that is going to test to make sure
+
+312
+00:14:35,690 --> 00:14:38,970
+that the prime function produces the output that I would expect it to.
+
+313
+00:14:38,970 --> 00:14:41,100
+And each time I'm testing a different number,
+
+314
+00:14:41,100 --> 00:14:44,240
+making sure that 1 is not prime, making sure that 2 is prime,
+
+315
+00:14:44,240 --> 00:14:46,760
+8 is not prime, so on and so forth.
+
+316
+00:14:46,760 --> 00:14:48,980
+And I can just write a whole bunch of these tests.
+
+317
+00:14:48,980 --> 00:14:52,160
+And then rather than have to run each test one at a time, what I can do
+
+318
+00:14:52,160 --> 00:14:55,130
+is I can just run tests0.sh.
+
+319
+00:14:55,130 --> 00:14:59,060
+I can just say that I would like to run ./tests0.sh.
+
+320
+00:14:59,060 --> 00:15:01,895
+
+
+321
+00:15:01,895 --> 00:15:02,520
+And, all right.
+
+322
+00:15:02,520 --> 00:15:03,810
+I see that I get two errors.
+
+323
+00:15:03,810 --> 00:15:07,740
+I get an error on is_prime(8), where I expected it to not be prime.
+
+324
+00:15:07,740 --> 00:15:10,290
+But for some reason, it seems to be prime.
+
+325
+00:15:10,290 --> 00:15:13,530
+And then again, here, exception on is_prime(25),
+
+326
+00:15:13,530 --> 00:15:15,840
+where I expected it to not be prime.
+
+327
+00:15:15,840 --> 00:15:18,518
+But for some reason, my program thinks that it is prime.
+
+328
+00:15:18,518 --> 00:15:21,060
+So a very helpful way for me to know immediately that there's
+
+329
+00:15:21,060 --> 00:15:23,970
+some sort of error that is going on here.
+
+330
+00:15:23,970 --> 00:15:27,420
+But ultimately, rather than have me have to write all this framework for how
+
+331
+00:15:27,420 --> 00:15:29,310
+to go about testing my code on my own, there
+
+332
+00:15:29,310 --> 00:15:31,240
+exists libraries that can help us with this.
+
+333
+00:15:31,240 --> 00:15:35,130
+And one of the most popular in Python is a library known as unittest.
+
+334
+00:15:35,130 --> 00:15:37,340
+And what unittest as a library designed to do
+
+335
+00:15:37,340 --> 00:15:40,177
+is it is going to allow us to very quickly write
+
+336
+00:15:40,177 --> 00:15:43,260
+tests that are able to check whether something is equal to something else.
+
+337
+00:15:43,260 --> 00:15:45,630
+And then unittest is built in with an automated test
+
+338
+00:15:45,630 --> 00:15:49,530
+runner that will run all of the tests for me and verify the output.
+
+339
+00:15:49,530 --> 00:15:53,040
+And unittest gets built in to a lot of other libraries within Python.
+
+340
+00:15:53,040 --> 00:15:55,500
+We'll see how we'll soon be able to apply this sort of idea
+
+341
+00:15:55,500 --> 00:15:57,550
+to our Django applications as well.
+
+342
+00:15:57,550 --> 00:16:00,843
+But let's now translate these tests that we have written ourselves just
+
+343
+00:16:00,843 --> 00:16:03,510
+by writing a function like test whether the prime number is what
+
+344
+00:16:03,510 --> 00:16:07,560
+we expect it to be and now translate it to using this Python unittest
+
+345
+00:16:07,560 --> 00:16:09,673
+library instead.
+
+346
+00:16:09,673 --> 00:16:11,840
+And so just to get a sense for what this looks like,
+
+347
+00:16:11,840 --> 00:16:16,980
+I'll now go ahead and open up tests1.py, where here first thing I'm doing
+
+348
+00:16:16,980 --> 00:16:20,310
+is I'm importing unittest, which we get for free with Python.
+
+349
+00:16:20,310 --> 00:16:23,520
+I'm also importing the function that I would like to test.
+
+350
+00:16:23,520 --> 00:16:27,810
+And now I'm defining a class which will contain all of my tests.
+
+351
+00:16:27,810 --> 00:16:32,850
+This is a class that inherits from or derives from unittest.TestCase, which
+
+352
+00:16:32,850 --> 00:16:34,830
+means that this is going to be a class that
+
+353
+00:16:34,830 --> 00:16:38,940
+is going to define a whole bunch of functions, each of which is something
+
+354
+00:16:38,940 --> 00:16:40,620
+that I would like to test.
+
+355
+00:16:40,620 --> 00:16:43,440
+And so, for example, in this very first test,
+
+356
+00:16:43,440 --> 00:16:47,840
+this is a test that checks to make sure that 1 is not prime.
+
+357
+00:16:47,840 --> 00:16:51,930
+And so the way I do that is by calling self-- this testing object itself.
+
+358
+00:16:51,930 --> 00:16:56,640
+It happens to have a method or function built into it called .assertFalse.
+
+359
+00:16:56,640 --> 00:16:58,385
+There's an equivalent .assertTrue.
+
+360
+00:16:58,385 --> 00:16:59,760
+But I would like to .assertFalse.
+
+361
+00:16:59,760 --> 00:17:01,860
+And what would I like to assert that is false?
+
+362
+00:17:01,860 --> 00:17:03,297
+is_prime(1).
+
+363
+00:17:03,297 --> 00:17:05,339
+So whatever is_prime(1) is, that should be false.
+
+364
+00:17:05,339 --> 00:17:08,960
+And I would like to just assert that it is false.
+
+365
+00:17:08,960 --> 00:17:13,099
+Likewise, for the number 2 now, I want to check that the number 2 is prime.
+
+366
+00:17:13,099 --> 00:17:16,819
+And the way I do that is by calling self.assertTrue.
+
+367
+00:17:16,819 --> 00:17:20,270
+I would like to assert that when I run the is_prime function on the number 2,
+
+368
+00:17:20,270 --> 00:17:24,339
+the output that I get is going to be a true value-- self.assertTrue.
+
+369
+00:17:24,339 --> 00:17:27,020
+And I can translate each of the rest of my tests
+
+370
+00:17:27,020 --> 00:17:31,407
+into one of these self.assertTrues or self.assertFalse.
+
+371
+00:17:31,407 --> 00:17:33,740
+And then I say that if you go ahead and run the program,
+
+372
+00:17:33,740 --> 00:17:39,270
+go ahead and call unittest.main, which will run all of these unit tests.
+
+373
+00:17:39,270 --> 00:17:44,990
+So now, when I run python tests1.py, here's what I get.
+
+374
+00:17:44,990 --> 00:17:46,880
+I get some nice output, where up at the top,
+
+375
+00:17:46,880 --> 00:17:49,430
+I see dots every time a test succeeded and a letter
+
+376
+00:17:49,430 --> 00:17:51,350
+F for a test that happened to fail.
+
+377
+00:17:51,350 --> 00:17:53,120
+It says that it ran six tests.
+
+378
+00:17:53,120 --> 00:17:55,890
+And down in the bottom, I see that there were two failures.
+
+379
+00:17:55,890 --> 00:17:58,430
+So it's immediately going to tell me exactly what failed.
+
+380
+00:17:58,430 --> 00:18:01,130
+And it'll give me some rationale, some reason for why
+
+381
+00:18:01,130 --> 00:18:03,150
+it is that those tests failed as well.
+
+382
+00:18:03,150 --> 00:18:04,192
+So we can see, all right.
+
+383
+00:18:04,192 --> 00:18:04,940
+Here is one test.
+
+384
+00:18:04,940 --> 00:18:06,470
+Here is another test.
+
+385
+00:18:06,470 --> 00:18:10,970
+This test that failed is the test that checked that 25 is not prime.
+
+386
+00:18:10,970 --> 00:18:13,910
+And this sentence here is what I supplied inside
+
+387
+00:18:13,910 --> 00:18:17,960
+of what was known as a Python docstring inside of those triple quotation marks,
+
+388
+00:18:17,960 --> 00:18:20,000
+underneath the declaration of the function.
+
+389
+00:18:20,000 --> 00:18:22,670
+Those triple quotation marks, otherwise known as a docstring,
+
+390
+00:18:22,670 --> 00:18:24,092
+serve a number of purposes.
+
+391
+00:18:24,092 --> 00:18:27,050
+They can serve as just a comment for describing what it is the function
+
+392
+00:18:27,050 --> 00:18:27,680
+does.
+
+393
+00:18:27,680 --> 00:18:30,650
+But they're a special comment insofar as someone
+
+394
+00:18:30,650 --> 00:18:33,740
+who's looking at the function can access that docstring that's
+
+395
+00:18:33,740 --> 00:18:37,610
+usually used for documentation for what it is that the function is doing.
+
+396
+00:18:37,610 --> 00:18:40,350
+And they can use it inside of other places as well.
+
+397
+00:18:40,350 --> 00:18:43,220
+And so what unittest is doing is for every function,
+
+398
+00:18:43,220 --> 00:18:47,630
+it uses that docstring as a description of what the test is testing for,
+
+399
+00:18:47,630 --> 00:18:51,500
+so that if a test fails, then I can see exactly what the name is
+
+400
+00:18:51,500 --> 00:18:55,550
+of the test that failed and what it was tested, where the description describes
+
+401
+00:18:55,550 --> 00:18:56,450
+what was happening.
+
+402
+00:18:56,450 --> 00:18:58,250
+Now in this case, where it's just one function
+
+403
+00:18:58,250 --> 00:19:00,375
+and I'm testing a whole bunch of different numbers,
+
+404
+00:19:00,375 --> 00:19:01,710
+it doesn't seem all that useful.
+
+405
+00:19:01,710 --> 00:19:03,585
+But again, if you imagine projects that start
+
+406
+00:19:03,585 --> 00:19:06,050
+to get more complex, being able to know immediately
+
+407
+00:19:06,050 --> 00:19:08,630
+when you run your tests which parts of the program
+
+408
+00:19:08,630 --> 00:19:11,360
+or which parts of your web application are working the way
+
+409
+00:19:11,360 --> 00:19:14,930
+they are expected to can actually be quite helpful.
+
+410
+00:19:14,930 --> 00:19:18,260
+So test 25, that was the function that triggered an assertion
+
+411
+00:19:18,260 --> 00:19:19,670
+failure in this case.
+
+412
+00:19:19,670 --> 00:19:23,990
+And the line that caused it was self.assertFalse(is_prime(25)).
+
+413
+00:19:23,990 --> 00:19:26,870
+And the reason that it failed is because True,
+
+414
+00:19:26,870 --> 00:19:30,280
+which apparently was the output of this function, is not false.
+
+415
+00:19:30,280 --> 00:19:33,370
+And I expected it to be false instead.
+
+416
+00:19:33,370 --> 00:19:36,240
+And so multiple, different ways of trying to run our tests.
+
+417
+00:19:36,240 --> 00:19:38,540
+This happens to be one quite popular one.
+
+418
+00:19:38,540 --> 00:19:41,210
+But this now tells me that I should go back and try and fix
+
+419
+00:19:41,210 --> 00:19:42,740
+my is_prime function.
+
+420
+00:19:42,740 --> 00:19:47,470
+I can go back into prime.py and say, all right.
+
+421
+00:19:47,470 --> 00:19:49,960
+I would like to figure out why this went wrong.
+
+422
+00:19:49,960 --> 00:19:52,290
+And if you look at this enough and maybe give it a little bit of testing,
+
+423
+00:19:52,290 --> 00:19:54,150
+you might see that I have a slight off by 1
+
+424
+00:19:54,150 --> 00:19:58,200
+error, that I probably need to check one additional number than I actually
+
+425
+00:19:58,200 --> 00:20:02,730
+am because in checking whether or not 25 is prime or not, for example,
+
+426
+00:20:02,730 --> 00:20:05,760
+I might need to go up to and including the number 5
+
+427
+00:20:05,760 --> 00:20:07,950
+to know that 5 is a factor of 25.
+
+428
+00:20:07,950 --> 00:20:12,340
+But before, I was going up to the number 5, but I wasn't including the number 5.
+
+429
+00:20:12,340 --> 00:20:14,912
+So I also need to just check one more number.
+
+430
+00:20:14,912 --> 00:20:17,370
+And now to verify that this is right, I could just manually
+
+431
+00:20:17,370 --> 00:20:18,870
+test the function myself.
+
+432
+00:20:18,870 --> 00:20:23,100
+Or I could just run these tests again, run python tests1.py.
+
+433
+00:20:23,100 --> 00:20:26,520
+And this time, all these dots mean all these tests succeeded.
+
+434
+00:20:26,520 --> 00:20:29,550
+We ran six tests, and everything was OK.
+
+435
+00:20:29,550 --> 00:20:30,700
+No failures.
+
+436
+00:20:30,700 --> 00:20:34,080
+And so this can be a helpful way for me to know immediately
+
+437
+00:20:34,080 --> 00:20:36,480
+that things seem to be working OK.
+
+438
+00:20:36,480 --> 00:20:39,120
+So the takeaways from here are that these tests can definitely
+
+439
+00:20:39,120 --> 00:20:42,100
+help as you begin to write new changes to your program,
+
+440
+00:20:42,100 --> 00:20:44,218
+especially as you begin to optimize functions.
+
+441
+00:20:44,218 --> 00:20:46,260
+You might make a function more efficient but then
+
+442
+00:20:46,260 --> 00:20:49,323
+run your tests to make sure that in making these improvements,
+
+443
+00:20:49,323 --> 00:20:50,490
+you haven't broken anything.
+
+444
+00:20:50,490 --> 00:20:52,943
+You haven't changed any behavior, that the way the program
+
+445
+00:20:52,943 --> 00:20:55,360
+was supposed to behave and now it doesn't behave that way,
+
+446
+00:20:55,360 --> 00:20:58,830
+you are able to verify with much more confidence that that is true.
+
+447
+00:20:58,830 --> 00:21:01,200
+But of course, that only works if your tests
+
+448
+00:21:01,200 --> 00:21:04,890
+have good coverage of all the things that you would want the function to do,
+
+449
+00:21:04,890 --> 00:21:07,563
+and you've covered appropriately all the various different cases
+
+450
+00:21:07,563 --> 00:21:10,230
+for how the function should behave because only if the tests are
+
+451
+00:21:10,230 --> 00:21:12,600
+comprehensive, will they actually be useful to you
+
+452
+00:21:12,600 --> 00:21:15,910
+in indicating that the change that you made isn't going to break anything.
+
+453
+00:21:15,910 --> 00:21:20,550
+And only then can you actually feel confident in those changes themselves.
+
+454
+00:21:20,550 --> 00:21:23,520
+So now let's take this idea of using unittest to be
+
+455
+00:21:23,520 --> 00:21:26,430
+able to write these tests that verify that a function works
+
+456
+00:21:26,430 --> 00:21:28,920
+and apply it to something like a web application--
+
+457
+00:21:28,920 --> 00:21:31,140
+like a web application written in Django that we
+
+458
+00:21:31,140 --> 00:21:33,930
+would like to now use in order to be able to test to make sure
+
+459
+00:21:33,930 --> 00:21:37,200
+that various, different functions inside of our Django web application
+
+460
+00:21:37,200 --> 00:21:39,220
+work as well.
+
+461
+00:21:39,220 --> 00:21:42,553
+So what I'm going to do is actually take a look at the airline program
+
+462
+00:21:42,553 --> 00:21:44,970
+that we wrote back when we were first talking about Django
+
+463
+00:21:44,970 --> 00:21:47,970
+and first talking about storing data inside of databases.
+
+464
+00:21:47,970 --> 00:21:50,910
+And I'm going to open up models.py where you
+
+465
+00:21:50,910 --> 00:21:54,340
+see that I've made one addition to our definition of a flight.
+
+466
+00:21:54,340 --> 00:21:56,340
+And recall from before, when we first introduced
+
+467
+00:21:56,340 --> 00:21:59,190
+this idea of defining a model inside of our application
+
+468
+00:21:59,190 --> 00:22:03,370
+for a flight inside of an airline, we gave that model three properties.
+
+469
+00:22:03,370 --> 00:22:07,360
+It had an origin and a destination, where both origin and destination
+
+470
+00:22:07,360 --> 00:22:10,080
+referenced an airport object, where an airport object was
+
+471
+00:22:10,080 --> 00:22:11,730
+an object we defined separately.
+
+472
+00:22:11,730 --> 00:22:15,120
+But a flight has an origin airport and a destination airport.
+
+473
+00:22:15,120 --> 00:22:18,540
+And in addition to that, every flight has a duration, some number of minutes
+
+474
+00:22:18,540 --> 00:22:21,590
+long that that flight is going to last.
+
+475
+00:22:21,590 --> 00:22:24,150
+And I might like to have some way to validate,
+
+476
+00:22:24,150 --> 00:22:28,770
+to verify that a flight is a valid flight, that there isn't some error
+
+477
+00:22:28,770 --> 00:22:31,418
+somewhere in how the data was entered into the database.
+
+478
+00:22:31,418 --> 00:22:33,960
+I would like to just generally make sure that given a flight,
+
+479
+00:22:33,960 --> 00:22:36,420
+I can check to make sure it's a valid flight.
+
+480
+00:22:36,420 --> 00:22:38,500
+And what does it mean for a flight to be valid?
+
+481
+00:22:38,500 --> 00:22:40,590
+Well, in general, given these particular fields,
+
+482
+00:22:40,590 --> 00:22:44,400
+I'll say there are two things that need to be true for a flight to be valid.
+
+483
+00:22:44,400 --> 00:22:46,683
+The origin and the destination need to be different.
+
+484
+00:22:46,683 --> 00:22:47,850
+That's condition number one.
+
+485
+00:22:47,850 --> 00:22:50,683
+It wouldn't make sense to have a flight whose origin and destination
+
+486
+00:22:50,683 --> 00:22:51,990
+are the same airport.
+
+487
+00:22:51,990 --> 00:22:54,960
+And condition number two, the duration of the flight
+
+488
+00:22:54,960 --> 00:22:57,000
+needs to be greater than 0 minutes.
+
+489
+00:22:57,000 --> 00:22:59,730
+If ever the duration is 0 or the duration is negative,
+
+490
+00:22:59,730 --> 00:23:03,330
+that probably indicates to me that there was some sort of mistake in data entry
+
+491
+00:23:03,330 --> 00:23:05,077
+or some problem that happened with how it
+
+492
+00:23:05,077 --> 00:23:06,660
+is that these flights were configured.
+
+493
+00:23:06,660 --> 00:23:09,990
+So I want to make sure that the duration is greater than 0.
+
+494
+00:23:09,990 --> 00:23:13,530
+And those then are my two conditions for what makes a valid flight.
+
+495
+00:23:13,530 --> 00:23:15,330
+And I've, in fact, written a function here
+
+496
+00:23:15,330 --> 00:23:17,880
+called is_valid_flight that just works on this flight
+
+497
+00:23:17,880 --> 00:23:22,380
+class that simply checks given a flight, make sure that it is, in fact, valid.
+
+498
+00:23:22,380 --> 00:23:25,388
+And the way it's doing that is by checking for these two conditions
+
+499
+00:23:25,388 --> 00:23:26,430
+that I've just described.
+
+500
+00:23:26,430 --> 00:23:30,300
+It's checking to make sure that the origin is not equal to the destination.
+
+501
+00:23:30,300 --> 00:23:32,880
+It's checking to make sure that the duration of the flight
+
+502
+00:23:32,880 --> 00:23:34,130
+is greater than or equal to 0.
+
+503
+00:23:34,130 --> 00:23:36,588
+And maybe I should change that to greater than to make sure
+
+504
+00:23:36,588 --> 00:23:37,900
+it's entirely positive.
+
+505
+00:23:37,900 --> 00:23:41,520
+But this then is my definition for what it means
+
+506
+00:23:41,520 --> 00:23:44,100
+for something to be a valid flight.
+
+507
+00:23:44,100 --> 00:23:47,340
+And what I'd like to do now is test these various, different parts
+
+508
+00:23:47,340 --> 00:23:48,420
+of my application.
+
+509
+00:23:48,420 --> 00:23:51,270
+I have this is_valid_flight function inside a flight
+
+510
+00:23:51,270 --> 00:23:52,960
+that I might like to test as well.
+
+511
+00:23:52,960 --> 00:23:55,012
+But we also have all of these other properties
+
+512
+00:23:55,012 --> 00:23:56,970
+that I would like to test, these relationships,
+
+513
+00:23:56,970 --> 00:23:59,830
+that a flight has an origin and a destination.
+
+514
+00:23:59,830 --> 00:24:02,250
+We have passengers that can be associated with flights.
+
+515
+00:24:02,250 --> 00:24:04,890
+So there's lots of relationships between my data
+
+516
+00:24:04,890 --> 00:24:07,290
+that I would like to test and verify to make sure they
+
+517
+00:24:07,290 --> 00:24:09,580
+work the way we would expect it to.
+
+518
+00:24:09,580 --> 00:24:13,440
+So to do that, whenever we create an application in Django,
+
+519
+00:24:13,440 --> 00:24:18,420
+like this flight's application here, we were also given this tests.py file.
+
+520
+00:24:18,420 --> 00:24:21,690
+And we haven't yet used the tests.py file for anything.
+
+521
+00:24:21,690 --> 00:24:24,060
+But what it's supposed to be used for is for writing
+
+522
+00:24:24,060 --> 00:24:29,070
+these sorts of tests, testing that verifies that our application behaves
+
+523
+00:24:29,070 --> 00:24:31,860
+the way that we want it to behave.
+
+524
+00:24:31,860 --> 00:24:35,180
+So let's go ahead now and open up tests.py
+
+525
+00:24:35,180 --> 00:24:37,130
+and see what happens to be in here.
+
+526
+00:24:37,130 --> 00:24:41,030
+What we can do is we can define a subclass of TestCase,
+
+527
+00:24:41,030 --> 00:24:44,420
+which behaves very similar to unittest and is based on that same idea.
+
+528
+00:24:44,420 --> 00:24:47,030
+I'll define a new class called FlightTestCase
+
+529
+00:24:47,030 --> 00:24:49,520
+that will just define all of the tests that I would
+
+530
+00:24:49,520 --> 00:24:53,100
+like to run on my flight's application.
+
+531
+00:24:53,100 --> 00:24:55,650
+And so things to know about this is that first, I
+
+532
+00:24:55,650 --> 00:24:58,050
+might need to do some initial setup in order
+
+533
+00:24:58,050 --> 00:25:01,993
+to make sure that there's some data that I can actually work with and test with.
+
+534
+00:25:01,993 --> 00:25:04,410
+And what Django will do when I go ahead and run these unit
+
+535
+00:25:04,410 --> 00:25:08,550
+tests is that it will create an entirely separate database for me
+
+536
+00:25:08,550 --> 00:25:11,610
+just for testing purposes, that we have one database that
+
+537
+00:25:11,610 --> 00:25:15,750
+contains all the information that actually pertains to the flights that
+
+538
+00:25:15,750 --> 00:25:18,120
+are actually there on my web server.
+
+539
+00:25:18,120 --> 00:25:21,300
+But we might also like to just test things with some dummy flights
+
+540
+00:25:21,300 --> 00:25:24,810
+and some dummy airports just to make sure that things are working.
+
+541
+00:25:24,810 --> 00:25:26,880
+And then once we're confident things are working,
+
+542
+00:25:26,880 --> 00:25:28,980
+then we can deploy our web application to let
+
+543
+00:25:28,980 --> 00:25:32,400
+actual users begin to use whatever new features we've added to the web
+
+544
+00:25:32,400 --> 00:25:34,110
+application, for example.
+
+545
+00:25:34,110 --> 00:25:37,740
+So inside of this database, I might need to do some initial setup.
+
+546
+00:25:37,740 --> 00:25:42,870
+And I can do so by defining a setup function inside of my test case class.
+
+547
+00:25:42,870 --> 00:25:44,153
+This is a special function.
+
+548
+00:25:44,153 --> 00:25:46,320
+And Django knows that when it's running these tests,
+
+549
+00:25:46,320 --> 00:25:50,670
+it should first do any of the setup steps that we need to do.
+
+550
+00:25:50,670 --> 00:25:52,120
+And so how are we doing this?
+
+551
+00:25:52,120 --> 00:25:54,210
+Well, what we're doing is inside of the setup,
+
+552
+00:25:54,210 --> 00:25:57,570
+we're going to just add some sample data into the test database.
+
+553
+00:25:57,570 --> 00:26:00,510
+Again, this won't touch the database that users actually see
+
+554
+00:26:00,510 --> 00:26:01,710
+and actually interact with.
+
+555
+00:26:01,710 --> 00:26:04,478
+This is just our test one for testing purposes.
+
+556
+00:26:04,478 --> 00:26:07,020
+And we'll start by going ahead and creating some airports, so
+
+557
+00:26:07,020 --> 00:26:10,080
+Airport.objects.create, and then specifying what
+
+558
+00:26:10,080 --> 00:26:12,450
+the values for these fields should be.
+
+559
+00:26:12,450 --> 00:26:15,810
+We'll just have an airport whose code is AAA for city A
+
+560
+00:26:15,810 --> 00:26:20,370
+and an airport whose code is BBB for city B. Just a dummy airport names.
+
+561
+00:26:20,370 --> 00:26:23,530
+They're not real airports but just used for testing purposes.
+
+562
+00:26:23,530 --> 00:26:28,440
+And I'll save those airport objects inside of these values, a1 and a2.
+
+563
+00:26:28,440 --> 00:26:31,560
+And beneath that, what I'm going to do next is go ahead and create
+
+564
+00:26:31,560 --> 00:26:35,250
+some flights where I create using Flight.objects.create
+
+565
+00:26:35,250 --> 00:26:38,100
+three different flights, one that goes from a1 to a2
+
+566
+00:26:38,100 --> 00:26:42,510
+with the duration of 100 minutes; one from a1 to a1 with a duration of 200
+
+567
+00:26:42,510 --> 00:26:46,692
+minutes; one from a1 to a2 with a duration of negative 100 minutes.
+
+568
+00:26:46,692 --> 00:26:49,650
+So I have a whole bunch of these flights now that I would like to test,
+
+569
+00:26:49,650 --> 00:26:55,060
+that I would like to make sure work in some predetermined or expected way.
+
+570
+00:26:55,060 --> 00:26:58,130
+And so now if I scroll down, we can see that I have a whole bunch
+
+571
+00:26:58,130 --> 00:26:59,780
+of these various different tests.
+
+572
+00:26:59,780 --> 00:27:03,380
+Here is one test that just tests the departures count.
+
+573
+00:27:03,380 --> 00:27:06,230
+So every airport has access to a field called
+
+574
+00:27:06,230 --> 00:27:09,367
+departures, which ideally should be how many flights
+
+575
+00:27:09,367 --> 00:27:10,700
+are departing from that airport.
+
+576
+00:27:10,700 --> 00:27:13,400
+And I'd like to make sure that departures_count
+
+577
+00:27:13,400 --> 00:27:15,110
+works the way I expect it to.
+
+578
+00:27:15,110 --> 00:27:20,000
+So here, I go ahead and get the airport whose code is AAA.
+
+579
+00:27:20,000 --> 00:27:25,040
+And now, using unittest-like syntax, I would like to say self.assertEqual.
+
+580
+00:27:25,040 --> 00:27:27,010
+So assertTrue verifies if something is true.
+
+581
+00:27:27,010 --> 00:27:29,510
+assertFalse verifies if something is false.
+
+582
+00:27:29,510 --> 00:27:33,330
+assertEqual verifies that two numbers are equal to each other.
+
+583
+00:27:33,330 --> 00:27:37,220
+And here, I'd like to verify that a.departures.count--
+
+584
+00:27:37,220 --> 00:27:39,500
+if I take airport a and count how many flights
+
+585
+00:27:39,500 --> 00:27:42,880
+are departing from that airport, that that should be 3,
+
+586
+00:27:42,880 --> 00:27:44,750
+so just verifying that works.
+
+587
+00:27:44,750 --> 00:27:46,850
+And then after that, if this test passes, then
+
+588
+00:27:46,850 --> 00:27:50,180
+I can be confident that elsewhere in my program, if I take an airport
+
+589
+00:27:50,180 --> 00:27:52,337
+and call that airport.departures.count, I
+
+590
+00:27:52,337 --> 00:27:54,170
+can feel pretty confident that that is going
+
+591
+00:27:54,170 --> 00:27:56,670
+to work the way I would expect it to.
+
+592
+00:27:56,670 --> 00:27:59,400
+I can do the same thing for arrivals, get the airport,
+
+593
+00:27:59,400 --> 00:28:02,490
+and assert that a.arrivals.count, that that
+
+594
+00:28:02,490 --> 00:28:05,970
+is going to be equal to the number 1 if there's only one flight that
+
+595
+00:28:05,970 --> 00:28:10,080
+arrives at airport a1, for example.
+
+596
+00:28:10,080 --> 00:28:11,940
+So that tests these relationships.
+
+597
+00:28:11,940 --> 00:28:15,800
+And I can also now test the is_valid_flight function as well,
+
+598
+00:28:15,800 --> 00:28:18,840
+that here I get my two airports, a1 and a2.
+
+599
+00:28:18,840 --> 00:28:21,000
+This is the one whose code is AAA.
+
+600
+00:28:21,000 --> 00:28:23,130
+This is the one who's code is BBB.
+
+601
+00:28:23,130 --> 00:28:27,120
+I'll go ahead and get the flight whose origin is a1, whose destination is
+
+602
+00:28:27,120 --> 00:28:28,980
+a2, whose duration is 100.
+
+603
+00:28:28,980 --> 00:28:31,920
+And let me just assertTrue that this flight
+
+604
+00:28:31,920 --> 00:28:35,790
+is going to be a valid flight because this fight is valid.
+
+605
+00:28:35,790 --> 00:28:37,890
+The origin is different from the destination.
+
+606
+00:28:37,890 --> 00:28:40,320
+Its duration is some positive number of minutes.
+
+607
+00:28:40,320 --> 00:28:42,278
+And so I should feel pretty confident that this
+
+608
+00:28:42,278 --> 00:28:46,680
+is going to be a valid flight that I can verify by calling self.assertTrue.
+
+609
+00:28:46,680 --> 00:28:49,410
+I can do the same thing for testing for an invalid flight,
+
+610
+00:28:49,410 --> 00:28:53,310
+testing for an invalid flight because the destination is bad.
+
+611
+00:28:53,310 --> 00:28:57,060
+I can get the flight, airport a1, and get the flight whose
+
+612
+00:28:57,060 --> 00:28:59,640
+origin and destination are both a1.
+
+613
+00:28:59,640 --> 00:29:02,910
+And now let me self.assertFalse, say that this should not
+
+614
+00:29:02,910 --> 00:29:06,535
+be a valid flight because the origin and the destination are the same.
+
+615
+00:29:06,535 --> 00:29:08,410
+What's the other way a flight can be invalid?
+
+616
+00:29:08,410 --> 00:29:10,950
+Well, a flight can be invalid because of its duration.
+
+617
+00:29:10,950 --> 00:29:15,930
+So I could say something like, go ahead and get airports a1 and a2.
+
+618
+00:29:15,930 --> 00:29:19,800
+And get me the flight whose origin is a1, destination is a2,
+
+619
+00:29:19,800 --> 00:29:21,960
+but the duration is negative 100 minutes.
+
+620
+00:29:21,960 --> 00:29:23,595
+That was one of the flights as well.
+
+621
+00:29:23,595 --> 00:29:25,470
+And, well, that should not be a valid flight.
+
+622
+00:29:25,470 --> 00:29:28,140
+So I'll say self.assertFalse is_valid_flight
+
+623
+00:29:28,140 --> 00:29:30,420
+because when I call is_valid_flight on that flight,
+
+624
+00:29:30,420 --> 00:29:35,400
+it shouldn't be valid because the duration makes it an invalid flight.
+
+625
+00:29:35,400 --> 00:29:37,423
+So here now I've defined a whole bunch of tests.
+
+626
+00:29:37,423 --> 00:29:40,590
+And there are more done below that we'll take a look at in a moment as well.
+
+627
+00:29:40,590 --> 00:29:44,430
+But I've defined a whole bunch of these flights now or a bunch of these tests.
+
+628
+00:29:44,430 --> 00:29:45,650
+And now I'd like to run them.
+
+629
+00:29:45,650 --> 00:29:49,860
+And the way that I can run tests in Django is via a manage.py command.
+
+630
+00:29:49,860 --> 00:29:52,710
+manage.py has a whole bunch of different commands that we can run.
+
+631
+00:29:52,710 --> 00:29:55,800
+We've seen makemigrations and migrate and runserver.
+
+632
+00:29:55,800 --> 00:29:59,010
+But one of them as well is if I go into airline0,
+
+633
+00:29:59,010 --> 00:30:06,793
+I can say python manage.py test that's just going to run all of my tests.
+
+634
+00:30:06,793 --> 00:30:07,460
+And we're right.
+
+635
+00:30:07,460 --> 00:30:10,100
+It seems that we ran 10 tests.
+
+636
+00:30:10,100 --> 00:30:11,887
+But two of them failed.
+
+637
+00:30:11,887 --> 00:30:14,220
+So let's go ahead and see, why did those two tests fail?
+
+638
+00:30:14,220 --> 00:30:18,260
+Well, the way to read this is that we get this heading anytime a test failed.
+
+639
+00:30:18,260 --> 00:30:21,260
+And so we failed the test_invalid_flight_destination
+
+640
+00:30:21,260 --> 00:30:22,190
+function.
+
+641
+00:30:22,190 --> 00:30:24,865
+And we failed the test_invalid_flight_duration function.
+
+642
+00:30:24,865 --> 00:30:26,990
+And docstrings could have helped me to know what it
+
+643
+00:30:26,990 --> 00:30:28,940
+is that these tests are exactly doing.
+
+644
+00:30:28,940 --> 00:30:31,850
+But it seems that true is not false.
+
+645
+00:30:31,850 --> 00:30:34,970
+I wanted to assert that this should not be a valid flight, that it
+
+646
+00:30:34,970 --> 00:30:36,050
+should be false.
+
+647
+00:30:36,050 --> 00:30:39,260
+But for some reason, these appear to be valid flights.
+
+648
+00:30:39,260 --> 00:30:41,380
+So something seems wrong with is_valid_flight
+
+649
+00:30:41,380 --> 00:30:45,745
+where it's returning true when it should be returning false.
+
+650
+00:30:45,745 --> 00:30:47,870
+And so this then gives me a place to start looking.
+
+651
+00:30:47,870 --> 00:30:48,745
+I can say, all right.
+
+652
+00:30:48,745 --> 00:30:52,920
+Let me go to is_valid_flight and make sure that function is correct.
+
+653
+00:30:52,920 --> 00:30:54,700
+So I'll go back into models.py.
+
+654
+00:30:54,700 --> 00:30:56,450
+I'll take another look at is_valid_flight.
+
+655
+00:30:56,450 --> 00:30:58,100
+Maybe I'll think through the logic again.
+
+656
+00:30:58,100 --> 00:30:58,600
+All right.
+
+657
+00:30:58,600 --> 00:31:01,250
+I wanted to check that self.origin is not self.destination.
+
+658
+00:31:01,250 --> 00:31:04,790
+I wanted to check that the duration is greater than or equal to 0.
+
+659
+00:31:04,790 --> 00:31:06,290
+I could change this to greater than.
+
+660
+00:31:06,290 --> 00:31:09,870
+But I don't think that's the issue because my duration was negative.
+
+661
+00:31:09,870 --> 00:31:12,050
+And so that already should have been invalid.
+
+662
+00:31:12,050 --> 00:31:14,175
+But the other thing I might realize looking at this
+
+663
+00:31:14,175 --> 00:31:18,290
+now is that, OK, the logical connectives that I have used was not the right one.
+
+664
+00:31:18,290 --> 00:31:20,360
+I want to check that for it to be a valid flight,
+
+665
+00:31:20,360 --> 00:31:22,670
+it needs to satisfy both of the conditions.
+
+666
+00:31:22,670 --> 00:31:25,070
+The origin and the destination need to be different.
+
+667
+00:31:25,070 --> 00:31:29,370
+And the duration of the flight needs to be greater than 0, for example.
+
+668
+00:31:29,370 --> 00:31:31,300
+And here, I've used "or" instead of "and."
+
+669
+00:31:31,300 --> 00:31:32,300
+So I can just change it.
+
+670
+00:31:32,300 --> 00:31:32,800
+All right.
+
+671
+00:31:32,800 --> 00:31:34,970
+And hopefully, that will fix things.
+
+672
+00:31:34,970 --> 00:31:39,200
+And to verify as much, I can rerun python manage.py test.
+
+673
+00:31:39,200 --> 00:31:40,905
+Go ahead, and press Return.
+
+674
+00:31:40,905 --> 00:31:42,030
+It's going to check things.
+
+675
+00:31:42,030 --> 00:31:44,060
+I ran 10 tests.
+
+676
+00:31:44,060 --> 00:31:45,490
+Everything is OK.
+
+677
+00:31:45,490 --> 00:31:50,700
+And all right, it seems that now I have passed all of these tests.
+
+678
+00:31:50,700 --> 00:31:53,640
+I notice here at the top, it created a test database.
+
+679
+00:31:53,640 --> 00:31:55,460
+So it just created a test database for me
+
+680
+00:31:55,460 --> 00:31:57,230
+in order to do all this testing work.
+
+681
+00:31:57,230 --> 00:31:59,870
+And then it destroyed that test database at the end as well.
+
+682
+00:31:59,870 --> 00:32:00,830
+So none of my tests--
+
+683
+00:32:00,830 --> 00:32:02,630
+I'm adding data, removing data.
+
+684
+00:32:02,630 --> 00:32:05,000
+It's not going to touch any of the actual data.
+
+685
+00:32:05,000 --> 00:32:07,220
+Inside of my database for the web application,
+
+686
+00:32:07,220 --> 00:32:10,940
+Django will take care of the process of keeping all of that separate for me
+
+687
+00:32:10,940 --> 00:32:15,260
+by first calling that setup function to make sure that my new test database has
+
+688
+00:32:15,260 --> 00:32:17,557
+everything that it needs to.
+
+689
+00:32:17,557 --> 00:32:18,140
+So, all right.
+
+690
+00:32:18,140 --> 00:32:20,600
+We now have the ability, by using unittest,
+
+691
+00:32:20,600 --> 00:32:23,960
+to be able to test various, different functions inside of our web
+
+692
+00:32:23,960 --> 00:32:24,590
+application.
+
+693
+00:32:24,590 --> 00:32:27,680
+We first saw that we could test a function like the is_prime function,
+
+694
+00:32:27,680 --> 00:32:29,360
+just a Python function that we wrote.
+
+695
+00:32:29,360 --> 00:32:32,240
+But we can also test things like functions on our model,
+
+696
+00:32:32,240 --> 00:32:34,700
+like checking to make sure that a flight is valid,
+
+697
+00:32:34,700 --> 00:32:37,760
+checking to make sure that we can take a flight and access all of the--
+
+698
+00:32:37,760 --> 00:32:41,570
+or take an airport, and access all of its arrivals and all of its departures.
+
+699
+00:32:41,570 --> 00:32:44,720
+But I'd like to do more than that, especially for a web application.
+
+700
+00:32:44,720 --> 00:32:48,230
+I'd like to check that particular web pages work
+
+701
+00:32:48,230 --> 00:32:50,050
+the way that I want them to work.
+
+702
+00:32:50,050 --> 00:32:53,090
+And so to do that, Django lets us simulate
+
+703
+00:32:53,090 --> 00:32:57,460
+trying to make requests and get responses to a web application.
+
+704
+00:32:57,460 --> 00:33:00,620
+And so let's go ahead and look at some of these other tests as well.
+
+705
+00:33:00,620 --> 00:33:03,600
+Here what we have is a function called test_index.
+
+706
+00:33:03,600 --> 00:33:06,020
+And what test_index is going to do is it's just
+
+707
+00:33:06,020 --> 00:33:10,080
+going to test my default flights page to make sure that it works correctly.
+
+708
+00:33:10,080 --> 00:33:12,950
+So we start by creating a client, some client that's
+
+709
+00:33:12,950 --> 00:33:16,430
+going to be interacting request and response style.
+
+710
+00:33:16,430 --> 00:33:19,460
+Then I'm going to call client dot get slash flights.
+
+711
+00:33:19,460 --> 00:33:24,430
+That is the route that gets me the index page for all the flights.
+
+712
+00:33:24,430 --> 00:33:27,230
+And I'm saving that inside of a variable called response.
+
+713
+00:33:27,230 --> 00:33:30,470
+Whatever response I get back from trying to get that page,
+
+714
+00:33:30,470 --> 00:33:34,190
+I would like to save inside of this variable called response.
+
+715
+00:33:34,190 --> 00:33:37,940
+And now, I can have multiple assert statements inside of the same test
+
+716
+00:33:37,940 --> 00:33:38,750
+if I would like to.
+
+717
+00:33:38,750 --> 00:33:40,500
+Sometimes you might want to separate them.
+
+718
+00:33:40,500 --> 00:33:43,190
+But here, I want to check that the index page works.
+
+719
+00:33:43,190 --> 00:33:45,750
+And what that means is a couple of things.
+
+720
+00:33:45,750 --> 00:33:51,130
+It means that response.status_code, well, that should be equal to 200.
+
+721
+00:33:51,130 --> 00:33:52,780
+200, again, meaning, OK.
+
+722
+00:33:52,780 --> 00:33:55,030
+I want to make sure that whatever response I get back,
+
+723
+00:33:55,030 --> 00:33:56,582
+that that is going to be a 200.
+
+724
+00:33:56,582 --> 00:33:59,540
+And if there was some sort of error, like a 404 because the page wasn't
+
+725
+00:33:59,540 --> 00:34:02,630
+found or a 500 because of some internal server error,
+
+726
+00:34:02,630 --> 00:34:03,980
+I would like to know about that.
+
+727
+00:34:03,980 --> 00:34:09,090
+So let me first just assert that the status code should be equal to 200.
+
+728
+00:34:09,090 --> 00:34:14,070
+But then Django also lets me access the context for a response.
+
+729
+00:34:14,070 --> 00:34:15,510
+And what is the context?
+
+730
+00:34:15,510 --> 00:34:18,690
+Well, recall, again, in Django, when we rendered a template, for example,
+
+731
+00:34:18,690 --> 00:34:21,719
+we called return render then provided the request
+
+732
+00:34:21,719 --> 00:34:23,580
+and what page we were going to render.
+
+733
+00:34:23,580 --> 00:34:26,790
+But we could also provide some context, some Python dictionary,
+
+734
+00:34:26,790 --> 00:34:31,080
+describing all of the values that we wanted to pass in to that template.
+
+735
+00:34:31,080 --> 00:34:34,860
+And Django's testing framework gives us access to that context
+
+736
+00:34:34,860 --> 00:34:37,230
+so that we can test to make sure that it contains
+
+737
+00:34:37,230 --> 00:34:38,909
+what we would expect it to contain.
+
+738
+00:34:38,909 --> 00:34:40,980
+And on the index page for all my flights,
+
+739
+00:34:40,980 --> 00:34:44,610
+I would expect that to contain a listing of all of the flights.
+
+740
+00:34:44,610 --> 00:34:48,420
+And we created three sample flights inside of this test database.
+
+741
+00:34:48,420 --> 00:34:51,929
+So I should be able to assert that these two things are equal.
+
+742
+00:34:51,929 --> 00:34:55,020
+response.context flights, that gets me whatever
+
+743
+00:34:55,020 --> 00:34:57,660
+was passed in as flights in the context.
+
+744
+00:34:57,660 --> 00:35:01,200
+Dot count, well, that better be 3 because I
+
+745
+00:35:01,200 --> 00:35:04,530
+want to make sure that there are exactly 3 results that come back
+
+746
+00:35:04,530 --> 00:35:07,080
+when I look at the context and access whatever it happens
+
+747
+00:35:07,080 --> 00:35:10,550
+to be inside of that flight's key.
+
+748
+00:35:10,550 --> 00:35:12,240
+There are other tests I can run as well.
+
+749
+00:35:12,240 --> 00:35:16,190
+So in this case, I've gone ahead and gotten a particular flight,
+
+750
+00:35:16,190 --> 00:35:19,418
+the flight who, in this case, had an origin of a1 and a destination of a1,
+
+751
+00:35:19,418 --> 00:35:20,710
+that it was not a valid flight.
+
+752
+00:35:20,710 --> 00:35:23,910
+But we'll go ahead and get it anyway because it exists in the database.
+
+753
+00:35:23,910 --> 00:35:29,120
+And now I can get slash flights slash that flight's ID
+
+754
+00:35:29,120 --> 00:35:31,280
+because on my flight's page, I would like
+
+755
+00:35:31,280 --> 00:35:35,840
+to be able to go to slash flights slash 1 to get at flight number 1,
+
+756
+00:35:35,840 --> 00:35:39,440
+and go to slash flights slash 2 get at flight number 2.
+
+757
+00:35:39,440 --> 00:35:43,610
+So if I take some valid ID, some ID of an actual flight f
+
+758
+00:35:43,610 --> 00:35:48,770
+and go to slash flights slash dot id, well, that should work.
+
+759
+00:35:48,770 --> 00:35:51,760
+It should have a status code of 200.
+
+760
+00:35:51,760 --> 00:35:55,960
+Meanwhile, though, if I test an invalid flight page,
+
+761
+00:35:55,960 --> 00:35:59,590
+this is a Django command that will get me the maximum value for the ID.
+
+762
+00:35:59,590 --> 00:36:04,600
+This id__max gets me the biggest possible ID out of all of the flights
+
+763
+00:36:04,600 --> 00:36:07,040
+that happen to exist inside of my database.
+
+764
+00:36:07,040 --> 00:36:13,060
+If I go ahead and try and get slash flights slash max_id plus 1--
+
+765
+00:36:13,060 --> 00:36:15,760
+so a number that is 1 greater than any of the flights that
+
+766
+00:36:15,760 --> 00:36:18,850
+were already inside of my database-- well, that shouldn't work.
+
+767
+00:36:18,850 --> 00:36:21,790
+There shouldn't be a page for a flight that doesn't exist.
+
+768
+00:36:21,790 --> 00:36:25,000
+So here then, I can assertEqual that the status code of what
+
+769
+00:36:25,000 --> 00:36:27,910
+comes back, that that is equal to 404 because I
+
+770
+00:36:27,910 --> 00:36:32,220
+would expect that page to return a 404.
+
+771
+00:36:32,220 --> 00:36:34,860
+And finally, I can also check various different contexts
+
+772
+00:36:34,860 --> 00:36:36,670
+for things about the passenger page.
+
+773
+00:36:36,670 --> 00:36:39,840
+So in this case, I've added some sample passengers to the database.
+
+774
+00:36:39,840 --> 00:36:42,450
+So inside of my test, I can manipulate the database as well,
+
+775
+00:36:42,450 --> 00:36:45,030
+adding data into the database and checking
+
+776
+00:36:45,030 --> 00:36:48,510
+to make sure that when you count up the number of passengers on a flight page,
+
+777
+00:36:48,510 --> 00:36:52,012
+that that is going to be like the number 1, for example.
+
+778
+00:36:52,012 --> 00:36:53,970
+So a number of different tests that we can then
+
+779
+00:36:53,970 --> 00:36:58,360
+write in order to verify various different parts of our web application.
+
+780
+00:36:58,360 --> 00:37:01,320
+I would like to verify not only that our database works
+
+781
+00:37:01,320 --> 00:37:04,530
+the way we would expect the database to work in terms of how functions
+
+782
+00:37:04,530 --> 00:37:07,800
+on our models work, in terms of relationships between those models
+
+783
+00:37:07,800 --> 00:37:10,710
+like the relationship between a flight and an airport,
+
+784
+00:37:10,710 --> 00:37:14,940
+but we can also simulate a GET request, simulating the request to a page
+
+785
+00:37:14,940 --> 00:37:17,250
+and verify that the status code that comes back
+
+786
+00:37:17,250 --> 00:37:20,490
+is what we would expect it to be; verify that the contents of the page
+
+787
+00:37:20,490 --> 00:37:24,150
+contain the right contents; verify that the context that was passed
+
+788
+00:37:24,150 --> 00:37:26,890
+into that template is correct as well.
+
+789
+00:37:26,890 --> 00:37:29,600
+And then all of that can then be verified
+
+790
+00:37:29,600 --> 00:37:32,510
+by saying something like python manage.py
+
+791
+00:37:32,510 --> 00:37:36,130
+test then go ahead and running that.
+
+792
+00:37:36,130 --> 00:37:38,980
+And we see that in this case, all of the tests happened to pass,
+
+793
+00:37:38,980 --> 00:37:43,880
+which means that everything seems to be OK, at least for now.
+
+794
+00:37:43,880 --> 00:37:45,898
+So this then, again, very helpful as our web
+
+795
+00:37:45,898 --> 00:37:48,940
+programs start to get more complex, as we have multiple different models,
+
+796
+00:37:48,940 --> 00:37:51,040
+multiple different routes, the ability to test,
+
+797
+00:37:51,040 --> 00:37:53,815
+to make sure that if we change things in one part of the program,
+
+798
+00:37:53,815 --> 00:37:55,690
+that it doesn't break things in another part.
+
+799
+00:37:55,690 --> 00:37:57,390
+That can be quite helpful too.
+
+800
+00:37:57,390 --> 00:37:59,680
+What we haven't yet been able to test though
+
+801
+00:37:59,680 --> 00:38:03,347
+is any interaction that's happening exclusively in the browser.
+
+802
+00:38:03,347 --> 00:38:06,430
+But I've been able to test a lot of things that are happening server-side.
+
+803
+00:38:06,430 --> 00:38:10,630
+And recall that Django is all about working on writing this web server--
+
+804
+00:38:10,630 --> 00:38:14,830
+a Python application that acts as a web server that listens for requests that
+
+805
+00:38:14,830 --> 00:38:18,370
+come in from users, processes those using these various different views
+
+806
+00:38:18,370 --> 00:38:21,880
+and models, and then provides some sort of response back.
+
+807
+00:38:21,880 --> 00:38:24,700
+And we can test the contents of that response, things like,
+
+808
+00:38:24,700 --> 00:38:26,980
+does the status code match what we would expect it to?
+
+809
+00:38:26,980 --> 00:38:29,665
+Does the context match what we would expect it to?
+
+810
+00:38:29,665 --> 00:38:32,290
+But there are some times where we would like to really simulate
+
+811
+00:38:32,290 --> 00:38:36,340
+like a user clicking on buttons and trying things on a page and making sure
+
+812
+00:38:36,340 --> 00:38:39,850
+that page behaves we would like it-- how we would like it to as well
+
+813
+00:38:39,850 --> 00:38:42,490
+even if we're not using Django, or even if we're just
+
+814
+00:38:42,490 --> 00:38:44,700
+dealing with the front end.
+
+815
+00:38:44,700 --> 00:38:47,680
+So let's create a sample JavaScript web page
+
+816
+00:38:47,680 --> 00:38:50,990
+that we might like to test now by using these sorts of ideas--
+
+817
+00:38:50,990 --> 00:38:53,440
+the ability to automate the process of testing
+
+818
+00:38:53,440 --> 00:38:56,350
+various, different parts of our application to verify
+
+819
+00:38:56,350 --> 00:38:58,780
+that they do, in fact, work correctly.
+
+820
+00:38:58,780 --> 00:39:02,650
+What I'm going to do now is we'll get out of the airline directory.
+
+821
+00:39:02,650 --> 00:39:07,330
+And I'm going to create a new file that I'll call counter.html.
+
+822
+00:39:07,330 --> 00:39:10,450
+And recall before, we created a counter application using just
+
+823
+00:39:10,450 --> 00:39:13,120
+JavaScript where what the counter application did
+
+824
+00:39:13,120 --> 00:39:15,610
+is it let me click a button, like an increase or a count
+
+825
+00:39:15,610 --> 00:39:17,500
+button that just incremented a number.
+
+826
+00:39:17,500 --> 00:39:20,380
+It went from 0 to 1 to 2 to 3 to 4 and so forth.
+
+827
+00:39:20,380 --> 00:39:21,950
+I'm going to do the same thing here.
+
+828
+00:39:21,950 --> 00:39:25,033
+We'll add a little more complexity though and give myself both an increase
+
+829
+00:39:25,033 --> 00:39:27,550
+button to add a number and a decrease button
+
+830
+00:39:27,550 --> 00:39:30,350
+to decrease the number by 1 as well.
+
+831
+00:39:30,350 --> 00:39:36,250
+So I go ahead and start with our usual DOCTYPE html and our html tag.
+
+832
+00:39:36,250 --> 00:39:39,250
+I'll give this page a title of Counter.
+
+833
+00:39:39,250 --> 00:39:42,310
+And now, inside of the body of this page,
+
+834
+00:39:42,310 --> 00:39:47,170
+I will go ahead and start with a big heading that just says 0.
+
+835
+00:39:47,170 --> 00:39:49,700
+And then beneath that, I'll create two buttons.
+
+836
+00:39:49,700 --> 00:39:53,770
+I'll have one button which will be the plus symbol and one
+
+837
+00:39:53,770 --> 00:39:57,020
+button which will be the minus symbol.
+
+838
+00:39:57,020 --> 00:39:58,210
+So now no JavaScript yet.
+
+839
+00:39:58,210 --> 00:39:59,570
+This won't actually work.
+
+840
+00:39:59,570 --> 00:40:04,670
+But I can go ahead and go into open counter.html.
+
+841
+00:40:04,670 --> 00:40:09,720
+And I can see that I now have 0, and I have a plus and a minus button,
+
+842
+00:40:09,720 --> 00:40:13,320
+although those Plus and Minus buttons don't actually do anything right now.
+
+843
+00:40:13,320 --> 00:40:15,630
+So let's go ahead and make them do something.
+
+844
+00:40:15,630 --> 00:40:19,050
+Let's give this button an ID called increase
+
+845
+00:40:19,050 --> 00:40:23,400
+so that I can reference it later, and give this button an ID called decrease,
+
+846
+00:40:23,400 --> 00:40:26,880
+again, so that I can reference it inside of my JavaScript.
+
+847
+00:40:26,880 --> 00:40:29,100
+And now, in the head section of my web page,
+
+848
+00:40:29,100 --> 00:40:32,820
+I add a script tag where I want to start running some JavaScript
+
+849
+00:40:32,820 --> 00:40:34,530
+once the page is done loading.
+
+850
+00:40:34,530 --> 00:40:40,240
+And to do that, you'll recall, I can say document.addEventListener c
+
+851
+00:40:40,240 --> 00:40:44,780
+to say, go ahead and run this function once the DOM is loaded,
+
+852
+00:40:44,780 --> 00:40:48,787
+once all the contents of this page have loaded the way I would expect it to.
+
+853
+00:40:48,787 --> 00:40:49,870
+And what am I going to do?
+
+854
+00:40:49,870 --> 00:40:54,730
+Well, I first need a variable, something like let counter equal 0.
+
+855
+00:40:54,730 --> 00:41:00,100
+And then I can say, all right document.querySelector increase.
+
+856
+00:41:00,100 --> 00:41:02,450
+Get me the element whose ID is increase.
+
+857
+00:41:02,450 --> 00:41:04,370
+That's that plus button.
+
+858
+00:41:04,370 --> 00:41:08,440
+And when you are clicked, let's go ahead and add an event handler
+
+859
+00:41:08,440 --> 00:41:11,590
+in the form of this callback function, this function that will be called
+
+860
+00:41:11,590 --> 00:41:13,993
+when the increase button is clicked.
+
+861
+00:41:13,993 --> 00:41:15,160
+And what would I like to do?
+
+862
+00:41:15,160 --> 00:41:16,785
+Well, I'd like to increase the counter.
+
+863
+00:41:16,785 --> 00:41:19,660
+Go ahead and say counter++.
+
+864
+00:41:19,660 --> 00:41:24,220
+And then I'm going to update this h1 that currently contains 0.
+
+865
+00:41:24,220 --> 00:41:27,190
+document.querySelector h1.
+
+866
+00:41:27,190 --> 00:41:29,980
+That gets me the H1 element.
+
+867
+00:41:29,980 --> 00:41:33,010
+I'll go ahead and update its inner.HTML, and go ahead
+
+868
+00:41:33,010 --> 00:41:38,040
+and set that to whatever the value of counter happens to be.
+
+869
+00:41:38,040 --> 00:41:40,430
+And then I'll do the same thing for the decrease button.
+
+870
+00:41:40,430 --> 00:41:43,220
+document.querySelector, get me the element
+
+871
+00:41:43,220 --> 00:41:46,860
+whose ID is decrease-- that's the button that will be the minus button.
+
+872
+00:41:46,860 --> 00:41:50,580
+And when you are clicked, go ahead and run this callback function,
+
+873
+00:41:50,580 --> 00:41:53,200
+which will do the same thing, except we'll first do counter--
+
+874
+00:41:53,200 --> 00:41:59,390
+decrease the value of the counter by 1, and then get me the H1 element,
+
+875
+00:41:59,390 --> 00:42:03,410
+set its innerHTML equal to the counter.
+
+876
+00:42:03,410 --> 00:42:04,480
+I think this should work.
+
+877
+00:42:04,480 --> 00:42:07,780
+And I could verify that by opening up counter.html.
+
+878
+00:42:07,780 --> 00:42:09,280
+I'll refresh the page.
+
+879
+00:42:09,280 --> 00:42:10,730
+And I can test these buttons.
+
+880
+00:42:10,730 --> 00:42:12,030
+Test the plus button.
+
+881
+00:42:12,030 --> 00:42:12,530
+All right.
+
+882
+00:42:12,530 --> 00:42:15,020
+That seems to work, increases the value by 1.
+
+883
+00:42:15,020 --> 00:42:19,010
+I can test the minus button, make sure that that decreases the value by 1.
+
+884
+00:42:19,010 --> 00:42:20,900
+That all seems to work just fine.
+
+885
+00:42:20,900 --> 00:42:24,590
+But, of course, this requires me having to interact with this page.
+
+886
+00:42:24,590 --> 00:42:26,180
+I have to open up the page.
+
+887
+00:42:26,180 --> 00:42:27,770
+I have to click on these buttons.
+
+888
+00:42:27,770 --> 00:42:30,140
+And it's not the type of thing where I'm simulating
+
+889
+00:42:30,140 --> 00:42:32,330
+like a GET request or a POST request.
+
+890
+00:42:32,330 --> 00:42:35,300
+There is no server that I'm sending a request to and getting back
+
+891
+00:42:35,300 --> 00:42:37,580
+a response of 1, 2, 3, 4 from.
+
+892
+00:42:37,580 --> 00:42:40,087
+This is all happening in the browser.
+
+893
+00:42:40,087 --> 00:42:42,170
+And so what I might like to have the ability to do
+
+894
+00:42:42,170 --> 00:42:44,057
+is some sort of browser testing.
+
+895
+00:42:44,057 --> 00:42:46,640
+And there are a number of different frameworks for doing this.
+
+896
+00:42:46,640 --> 00:42:49,400
+One of the most popular is Selenium.
+
+897
+00:42:49,400 --> 00:42:51,530
+And what this is going to allow me to do is
+
+898
+00:42:51,530 --> 00:42:55,820
+I can define a test file that using unittest or a similar library
+
+899
+00:42:55,820 --> 00:42:58,610
+can effectively simulate a web browser--
+
+900
+00:42:58,610 --> 00:43:02,000
+can simulate a web browser and simulate a user interacting
+
+901
+00:43:02,000 --> 00:43:05,300
+with that web browser using something that we call a WebDriver that's
+
+902
+00:43:05,300 --> 00:43:08,510
+going to allow me to, using code, control
+
+903
+00:43:08,510 --> 00:43:12,920
+what it is that the browser is doing and how it is that the user is interacting
+
+904
+00:43:12,920 --> 00:43:15,120
+with this program.
+
+905
+00:43:15,120 --> 00:43:16,620
+So how is this going to work?
+
+906
+00:43:16,620 --> 00:43:18,680
+Well, I'm going to go ahead, and just as a test,
+
+907
+00:43:18,680 --> 00:43:21,590
+let me open up the Python interpreter.
+
+908
+00:43:21,590 --> 00:43:25,930
+And let me import from tests import star.
+
+909
+00:43:25,930 --> 00:43:29,118
+And that's going to give me access to a couple of different things.
+
+910
+00:43:29,118 --> 00:43:31,160
+But the first thing you'll notice that it's doing
+
+911
+00:43:31,160 --> 00:43:35,987
+is because I'm using this WebDriver, it's going to give me a web browser.
+
+912
+00:43:35,987 --> 00:43:37,070
+And here I'm using Chrome.
+
+913
+00:43:37,070 --> 00:43:38,562
+But you could use another browser.
+
+914
+00:43:38,562 --> 00:43:40,520
+But notice it here, Chrome is telling me Chrome
+
+915
+00:43:40,520 --> 00:43:45,410
+is being controlled by automated test software, that Chrome has the ability
+
+916
+00:43:45,410 --> 00:43:47,450
+to allow me, using automated test software,
+
+917
+00:43:47,450 --> 00:43:53,230
+using Python code, control what it is the web browser is doing.
+
+918
+00:43:53,230 --> 00:43:55,970
+And so what I can do here is the first thing I need to do
+
+919
+00:43:55,970 --> 00:43:58,790
+is tell Chrome to open up my web page.
+
+920
+00:43:58,790 --> 00:44:00,950
+And it turns out that in order to do so, I
+
+921
+00:44:00,950 --> 00:44:05,960
+need to get that page's URI or Uniform Resource Identifier, just some string
+
+922
+00:44:05,960 --> 00:44:07,730
+that will identify that page.
+
+923
+00:44:07,730 --> 00:44:11,120
+And I've defined a function called file_uri
+
+924
+00:44:11,120 --> 00:44:14,060
+that gets me the URI of a particular file in this directory.
+
+925
+00:44:14,060 --> 00:44:17,150
+So I'm going to say I want open up counter.html.
+
+926
+00:44:17,150 --> 00:44:19,580
+And I need to get it's URI.
+
+927
+00:44:19,580 --> 00:44:25,250
+But now what I can say is driver.get(uri),
+
+928
+00:44:25,250 --> 00:44:28,460
+meaning tell this web driver, this Python--
+
+929
+00:44:28,460 --> 00:44:31,910
+part of the Python program that is controlling the web browser that I
+
+930
+00:44:31,910 --> 00:44:36,590
+would like to get this web page as if the user had gone to the web page
+
+931
+00:44:36,590 --> 00:44:38,990
+and pressed Return after typing in the URL.
+
+932
+00:44:38,990 --> 00:44:41,240
+So I say driver.get(uri).
+
+933
+00:44:41,240 --> 00:44:43,057
+I go ahead and press that.
+
+934
+00:44:43,057 --> 00:44:45,140
+And what you'll notice on the right-hand side here
+
+935
+00:44:45,140 --> 00:44:47,660
+is that Chrome has loaded this page.
+
+936
+00:44:47,660 --> 00:44:52,850
+I am effectively controlling this web browser window using my Python program.
+
+937
+00:44:52,850 --> 00:44:57,470
+I said driver.get(uri), meaning go ahead and open up the counter.html page.
+
+938
+00:44:57,470 --> 00:45:01,340
+And then, inside of this test window, Chrome has opened that up.
+
+939
+00:45:01,340 --> 00:45:04,880
+And inside my Python program now, using this web driver,
+
+940
+00:45:04,880 --> 00:45:08,660
+I have the ability to see the same things that the user sees
+
+941
+00:45:08,660 --> 00:45:09,720
+when they open the page.
+
+942
+00:45:09,720 --> 00:45:11,720
+So what does a user see when they open the page?
+
+943
+00:45:11,720 --> 00:45:14,660
+Well, they see, for example, the title of the page.
+
+944
+00:45:14,660 --> 00:45:20,390
+So I could say driver.title and see that, all right, the title of this page
+
+945
+00:45:20,390 --> 00:45:21,020
+is Counter.
+
+946
+00:45:21,020 --> 00:45:22,850
+That was, in fact, the title of the page.
+
+947
+00:45:22,850 --> 00:45:25,370
+But I could verify that inside my Python program
+
+948
+00:45:25,370 --> 00:45:28,942
+that by checking that driver.title, by taking my WebDriver,
+
+949
+00:45:28,942 --> 00:45:31,400
+getting the title of the current page that it's looking at,
+
+950
+00:45:31,400 --> 00:45:33,860
+making sure that that is Counter.
+
+951
+00:45:33,860 --> 00:45:38,210
+And likewise, if I looked at driver.page_source, press Return,
+
+952
+00:45:38,210 --> 00:45:40,170
+what I see there in string format--
+
+953
+00:45:40,170 --> 00:45:41,420
+so it's a little bit messy--
+
+954
+00:45:41,420 --> 00:45:45,290
+is the content, the HTML content of this page.
+
+955
+00:45:45,290 --> 00:45:47,450
+And you'll notice things like DomContentLoaded,
+
+956
+00:45:47,450 --> 00:45:49,100
+here are my onclick handlers.
+
+957
+00:45:49,100 --> 00:45:50,840
+Here's my h1 that says 0.
+
+958
+00:45:50,840 --> 00:45:54,170
+It's very messy because it's being represented as a Python string.
+
+959
+00:45:54,170 --> 00:45:57,950
+And these backslash n's refer to new lines where there's a line break.
+
+960
+00:45:57,950 --> 00:45:59,130
+But this is the content.
+
+961
+00:45:59,130 --> 00:46:00,830
+And this is really all the browser gets.
+
+962
+00:46:00,830 --> 00:46:03,530
+The browser takes this information and just knows
+
+963
+00:46:03,530 --> 00:46:06,680
+how to render it in some nice, more graphical representation
+
+964
+00:46:06,680 --> 00:46:10,220
+that's easier for a user to look at and, therefore, be able to understand.
+
+965
+00:46:10,220 --> 00:46:14,090
+But this is fundamentally all that my web browser is actually getting back
+
+966
+00:46:14,090 --> 00:46:17,005
+when it tries to load a web page.
+
+967
+00:46:17,005 --> 00:46:18,130
+So what can I do from here?
+
+968
+00:46:18,130 --> 00:46:22,360
+Well, I would like to simulate a user's behavior on this page that assures
+
+969
+00:46:22,360 --> 00:46:23,950
+I can get a page and see the title.
+
+970
+00:46:23,950 --> 00:46:27,860
+But I want to simulate like clicking on the plus button, for example.
+
+971
+00:46:27,860 --> 00:46:29,860
+So in order to do that, first thing I need to do
+
+972
+00:46:29,860 --> 00:46:32,260
+is actually get the Plus button.
+
+973
+00:46:32,260 --> 00:46:37,210
+And to do that, I could say something like driver.find_element_by_id.
+
+974
+00:46:37,210 --> 00:46:40,330
+
+
+975
+00:46:40,330 --> 00:46:43,420
+There are a number of ways that I could try and find an HTML element.
+
+976
+00:46:43,420 --> 00:46:46,510
+But I would like to find an HTML element by its ID.
+
+977
+00:46:46,510 --> 00:46:49,660
+And I know that the Plus button-- the Increase button--
+
+978
+00:46:49,660 --> 00:46:52,860
+has an ID of increase, for example.
+
+979
+00:46:52,860 --> 00:47:00,255
+And so if I find element by ID, let me find the element whose ID is increase.
+
+980
+00:47:00,255 --> 00:47:00,880
+And, all right.
+
+981
+00:47:00,880 --> 00:47:08,320
+It seems here, that I've gotten some web element object back from my web driver.
+
+982
+00:47:08,320 --> 00:47:12,890
+And I'll go ahead and save that inside of a variable called increase.
+
+983
+00:47:12,890 --> 00:47:14,980
+So what I now have is a variable called increase
+
+984
+00:47:14,980 --> 00:47:19,550
+that represents the Increase button that my WebDriver has found on the web page.
+
+985
+00:47:19,550 --> 00:47:22,750
+It's effectively the same thing as you, the human,
+
+986
+00:47:22,750 --> 00:47:25,252
+going through the page looking for the Increase button.
+
+987
+00:47:25,252 --> 00:47:27,460
+The WebDriver is doing the same thing, except instead
+
+988
+00:47:27,460 --> 00:47:29,710
+of looking for the button based on what it looks like,
+
+989
+00:47:29,710 --> 00:47:31,518
+it looks for the button based on its ID.
+
+990
+00:47:31,518 --> 00:47:33,310
+And so this, again, another reason why it's
+
+991
+00:47:33,310 --> 00:47:36,190
+helpful to give your HTML elements IDs.
+
+992
+00:47:36,190 --> 00:47:38,710
+In case you ever need to be able to find that element,
+
+993
+00:47:38,710 --> 00:47:42,730
+it's very useful to be able to reference that element by its name.
+
+994
+00:47:42,730 --> 00:47:46,450
+But now that I have a button, I can simulate user interaction
+
+995
+00:47:46,450 --> 00:47:47,230
+with that button.
+
+996
+00:47:47,230 --> 00:47:50,800
+I can say something like increase.click to say
+
+997
+00:47:50,800 --> 00:47:55,090
+I would like to take the Increase button and simulate a user clicking
+
+998
+00:47:55,090 --> 00:47:58,990
+on that button in order to see whatever it is that the user would get back
+
+999
+00:47:58,990 --> 00:48:00,310
+when they click on that button.
+
+1000
+00:48:00,310 --> 00:48:02,920
+So increase.click, I press Return.
+
+1001
+00:48:02,920 --> 00:48:06,280
+And what you'll notice happens is that the number increases-- increases
+
+1002
+00:48:06,280 --> 00:48:07,160
+from 0 to 1.
+
+1003
+00:48:07,160 --> 00:48:10,450
+It's as if I, the user, had actually clicked on the Plus button,
+
+1004
+00:48:10,450 --> 00:48:15,070
+except all I did was say increase.click to say, go ahead and press
+
+1005
+00:48:15,070 --> 00:48:17,410
+the Increase button and let the browser do
+
+1006
+00:48:17,410 --> 00:48:19,060
+what it would normally do in response.
+
+1007
+00:48:19,060 --> 00:48:21,820
+And what it would do in response is get that JavaScript event
+
+1008
+00:48:21,820 --> 00:48:25,030
+handler, that onclick handler, and run that callback
+
+1009
+00:48:25,030 --> 00:48:28,980
+function that increases the value of counter and updates the h1.
+
+1010
+00:48:28,980 --> 00:48:35,245
+So I can say increase.click to simulate increasing the value of that variable.
+
+1011
+00:48:35,245 --> 00:48:37,120
+But this is just a function call, which means
+
+1012
+00:48:37,120 --> 00:48:40,470
+I can include it in any other Python constructs that I want,
+
+1013
+00:48:40,470 --> 00:48:43,270
+that if I want to repeat something like 25 times, for example,
+
+1014
+00:48:43,270 --> 00:48:49,360
+and press the button 25 times, I can say for i in range 25,
+
+1015
+00:48:49,360 --> 00:48:51,880
+go ahead and click the Increase button.
+
+1016
+00:48:51,880 --> 00:48:55,660
+And now, very quickly, 25 times, it's going to click the Increase button.
+
+1017
+00:48:55,660 --> 00:48:58,490
+And I'm going to see the result of all of that interaction.
+
+1018
+00:48:58,490 --> 00:49:03,525
+So I can simulate user interaction just by using the Python interpreter.
+
+1019
+00:49:03,525 --> 00:49:05,900
+Likewise, if instead of increasing, I wanted to decrease,
+
+1020
+00:49:05,900 --> 00:49:07,692
+well, then, I'm going to do the same thing.
+
+1021
+00:49:07,692 --> 00:49:12,620
+I'm going to say decrease equals driver.find_element_by_id.
+
+1022
+00:49:12,620 --> 00:49:16,540
+Let me get the decrease element, the element whose ID is decrease.
+
+1023
+00:49:16,540 --> 00:49:19,850
+And now say, decrease.click.
+
+1024
+00:49:19,850 --> 00:49:22,610
+And that will simulate me pressing the Decrease button.
+
+1025
+00:49:22,610 --> 00:49:23,660
+Press it again.
+
+1026
+00:49:23,660 --> 00:49:27,480
+And the more I press it, every time, it's just going to decrease by 1.
+
+1027
+00:49:27,480 --> 00:49:29,760
+And if I want to decrease it all the way back to 0,
+
+1028
+00:49:29,760 --> 00:49:31,302
+well, then, I'll just do it 20 times.
+
+1029
+00:49:31,302 --> 00:49:35,172
+For i in range 20, go ahead and decrease.click.
+
+1030
+00:49:35,172 --> 00:49:38,130
+And that's going to go ahead and reduce the count all the way back to 0
+
+1031
+00:49:38,130 --> 00:49:40,922
+by simulating the user pressing a button 20 times.
+
+1032
+00:49:40,922 --> 00:49:43,380
+And what you'll notice is that it happened remarkably fast.
+
+1033
+00:49:43,380 --> 00:49:46,620
+Like I can simulate 100 presses of the Increase button
+
+1034
+00:49:46,620 --> 00:49:51,120
+by saying for i in range 100, increase.click.
+
+1035
+00:49:51,120 --> 00:49:55,470
+And very quickly, you'll see that number 100 times go ahead
+
+1036
+00:49:55,470 --> 00:49:58,440
+and go up to 100 faster than a human could ever have clicked
+
+1037
+00:49:58,440 --> 00:50:00,520
+that Plus button over and over again.
+
+1038
+00:50:00,520 --> 00:50:02,550
+And so these tests cannot only be automated,
+
+1039
+00:50:02,550 --> 00:50:06,240
+but they can be much faster than any human could ever be in order to test
+
+1040
+00:50:06,240 --> 00:50:07,810
+this behavior.
+
+1041
+00:50:07,810 --> 00:50:11,070
+So how then can we incorporate this idea into actual tests
+
+1042
+00:50:11,070 --> 00:50:13,410
+that we write, into like a unit testing framework that
+
+1043
+00:50:13,410 --> 00:50:16,590
+allows me to define all of these various different functions
+
+1044
+00:50:16,590 --> 00:50:20,010
+that test different parts of my web application's behavior?
+
+1045
+00:50:20,010 --> 00:50:25,860
+Well, to do that, let's go ahead and take another look at tests.py.
+
+1046
+00:50:25,860 --> 00:50:29,580
+Inside of tests.py, here, again, is that file_uri function,
+
+1047
+00:50:29,580 --> 00:50:33,540
+where that function has the sole purpose of taking a file and getting its URI,
+
+1048
+00:50:33,540 --> 00:50:36,720
+and we need the URI to be able to open it up.
+
+1049
+00:50:36,720 --> 00:50:38,950
+Then we go ahead and get the Chrome WebDriver,
+
+1050
+00:50:38,950 --> 00:50:42,390
+which is going to be what's going to allow us to run
+
+1051
+00:50:42,390 --> 00:50:44,258
+and simulate interaction with Chrome.
+
+1052
+00:50:44,258 --> 00:50:46,050
+And in order to get Chrome's WebDriver, you
+
+1053
+00:50:46,050 --> 00:50:47,460
+do have to get ChromeDriver separately.
+
+1054
+00:50:47,460 --> 00:50:49,168
+It is separate from Google Chrome itself.
+
+1055
+00:50:49,168 --> 00:50:50,610
+But Google does make it available.
+
+1056
+00:50:50,610 --> 00:50:53,610
+And other web browsers make equivalent web drivers available
+
+1057
+00:50:53,610 --> 00:50:56,970
+as well if you'd like to test how things would work in other browsers
+
+1058
+00:50:56,970 --> 00:50:59,508
+because different browsers might behave differently.
+
+1059
+00:50:59,508 --> 00:51:02,550
+And it might be useful to be able to test to make sure that not only does
+
+1060
+00:51:02,550 --> 00:51:04,508
+everything work in Google Chrome, but it's also
+
+1061
+00:51:04,508 --> 00:51:06,810
+going to work in other browsers that you might expect
+
+1062
+00:51:06,810 --> 00:51:10,260
+users to be working with as well.
+
+1063
+00:51:10,260 --> 00:51:14,460
+Here, then, I've defined a class that, again, inherits from unittest.TestCase
+
+1064
+00:51:14,460 --> 00:51:18,120
+that is going to define all of the tests that I would like to run on this web
+
+1065
+00:51:18,120 --> 00:51:22,320
+page, that here I have a function called test_title that's going to go ahead
+
+1066
+00:51:22,320 --> 00:51:24,060
+and first get counter.html.
+
+1067
+00:51:24,060 --> 00:51:25,650
+It's going to open up that page.
+
+1068
+00:51:25,650 --> 00:51:29,670
+And then just assertEqual, let's make sure the title of the page
+
+1069
+00:51:29,670 --> 00:51:30,660
+is actually Counter.
+
+1070
+00:51:30,660 --> 00:51:32,230
+That's what I would expect it to be.
+
+1071
+00:51:32,230 --> 00:51:36,120
+So I can write a test in order to test for that case as well.
+
+1072
+00:51:36,120 --> 00:51:39,300
+Here, I test the Increase button by finding the element whose
+
+1073
+00:51:39,300 --> 00:51:41,850
+ID is increase and clicking on that button
+
+1074
+00:51:41,850 --> 00:51:44,670
+to simulate a user pressing the Plus button in order
+
+1075
+00:51:44,670 --> 00:51:46,950
+to increase the value of the counter.
+
+1076
+00:51:46,950 --> 00:51:49,230
+And then, what do I want to check?
+
+1077
+00:51:49,230 --> 00:51:52,590
+Well, I want to check that when you find element by tag name,
+
+1078
+00:51:52,590 --> 00:51:56,790
+h1, and so find_element_by_tag_name, similar to find_element_by_id,
+
+1079
+00:51:56,790 --> 00:51:58,878
+except instead of finding something by its ID,
+
+1080
+00:51:58,878 --> 00:52:00,420
+it's going to look at what's the tag.
+
+1081
+00:52:00,420 --> 00:52:02,880
+And there is only one element that is in h1.
+
+1082
+00:52:02,880 --> 00:52:06,000
+And so here I'm saying, go ahead and get me the H1 element
+
+1083
+00:52:06,000 --> 00:52:09,030
+and access its text property, meaning whatever
+
+1084
+00:52:09,030 --> 00:52:12,780
+it is that is contained inside of those two H1 tags,
+
+1085
+00:52:12,780 --> 00:52:15,500
+I would expect that to be the number 1.
+
+1086
+00:52:15,500 --> 00:52:18,570
+And I would assert that this is equal to 1.
+
+1087
+00:52:18,570 --> 00:52:21,510
+And likewise, I can do the same thing for the Decrease button--
+
+1088
+00:52:21,510 --> 00:52:25,980
+finding the element whose ID is decrease, clicking on that button,
+
+1089
+00:52:25,980 --> 00:52:29,130
+and then asserting equal, find me the H1 element
+
+1090
+00:52:29,130 --> 00:52:31,350
+and make sure that the contents of it are
+
+1091
+00:52:31,350 --> 00:52:34,050
+equal to the number negative 1, for instance.
+
+1092
+00:52:34,050 --> 00:52:37,840
+And this final test, just test things multiple times, that three times I'm
+
+1093
+00:52:37,840 --> 00:52:39,840
+going to press the Increase button and make sure
+
+1094
+00:52:39,840 --> 00:52:43,590
+that after I press the Increase button three times, when I check the h1,
+
+1095
+00:52:43,590 --> 00:52:48,640
+check what's inside of its text, that the answer should, in fact, be 3.
+
+1096
+00:52:48,640 --> 00:52:54,440
+So now I should be able to go ahead and test
+
+1097
+00:52:54,440 --> 00:52:58,940
+this code by running python tests.py.
+
+1098
+00:52:58,940 --> 00:53:03,097
+And what that is going to do is it's going to open up a web browser.
+
+1099
+00:53:03,097 --> 00:53:05,930
+And what you're going to see, very quickly flashed across my screen,
+
+1100
+00:53:05,930 --> 00:53:07,250
+were all of those tests.
+
+1101
+00:53:07,250 --> 00:53:08,930
+We tested the increase by 1.
+
+1102
+00:53:08,930 --> 00:53:10,610
+We tested decreased by 1.
+
+1103
+00:53:10,610 --> 00:53:13,160
+And then we tested like increase 3 times after we had checked
+
+1104
+00:53:13,160 --> 00:53:15,050
+to make sure the title was correct.
+
+1105
+00:53:15,050 --> 00:53:16,910
+And then we can see here is the output.
+
+1106
+00:53:16,910 --> 00:53:19,880
+We ran four tests in this amount of time,
+
+1107
+00:53:19,880 --> 00:53:21,560
+and everything turned out to be OK.
+
+1108
+00:53:21,560 --> 00:53:23,210
+None of the tests failed.
+
+1109
+00:53:23,210 --> 00:53:26,527
+But if one of the tests had failed, well, then,
+
+1110
+00:53:26,527 --> 00:53:27,860
+we would see a different output.
+
+1111
+00:53:27,860 --> 00:53:32,250
+So let's imagine, for example, that I had had a bug in my decrease function,
+
+1112
+00:53:32,250 --> 00:53:35,750
+for example, where the decrease function wasn't actually working.
+
+1113
+00:53:35,750 --> 00:53:37,070
+What would that bug look like?
+
+1114
+00:53:37,070 --> 00:53:40,280
+Maybe I forgot to say counter minus minus.
+
+1115
+00:53:40,280 --> 00:53:44,690
+Or maybe, perhaps more likely, what might have happened is I wanted to--
+
+1116
+00:53:44,690 --> 00:53:46,677
+I already had written the increase function,
+
+1117
+00:53:46,677 --> 00:53:49,010
+and I decided to very quickly add the decrease function,
+
+1118
+00:53:49,010 --> 00:53:49,927
+and I thought I just--
+
+1119
+00:53:49,927 --> 00:53:52,710
+like Copy/Paste, like copy the increase event handler.
+
+1120
+00:53:52,710 --> 00:53:55,130
+The decrease event handler is basically the same thing
+
+1121
+00:53:55,130 --> 00:53:57,540
+except I need to query for decrease instead.
+
+1122
+00:53:57,540 --> 00:54:00,830
+And maybe I just did that and forgot to change plus
+
+1123
+00:54:00,830 --> 00:54:03,950
+plus to minus minus, a bug that might happen
+
+1124
+00:54:03,950 --> 00:54:07,460
+if you're not too careful about how you copy and paste code from one place
+
+1125
+00:54:07,460 --> 00:54:09,290
+to another.
+
+1126
+00:54:09,290 --> 00:54:15,320
+Now when I run these tests, python tests.py, we'll see the simulation.
+
+1127
+00:54:15,320 --> 00:54:17,153
+A whole bunch get simulated.
+
+1128
+00:54:17,153 --> 00:54:19,320
+And when I go back and check the output of my tests,
+
+1129
+00:54:19,320 --> 00:54:21,750
+see what actually happened, I see that we do
+
+1130
+00:54:21,750 --> 00:54:24,180
+seem to have an assertion error here.
+
+1131
+00:54:24,180 --> 00:54:27,960
+The assertion fail was on the test decrease function.
+
+1132
+00:54:27,960 --> 00:54:31,590
+And it happened when I tried to assert that what was inside of the H1 element
+
+1133
+00:54:31,590 --> 00:54:35,775
+was negative 1 because 1 is not equal to negative 1.
+
+1134
+00:54:35,775 --> 00:54:38,920
+So this is the value of this assertion error as well.
+
+1135
+00:54:38,920 --> 00:54:41,250
+And this is helpful, an advantage over just assert.
+
+1136
+00:54:41,250 --> 00:54:44,220
+Assert just tells you there is an assertion error.
+
+1137
+00:54:44,220 --> 00:54:46,920
+But here, in unittest, we actually get to see
+
+1138
+00:54:46,920 --> 00:54:50,260
+if I asserted that two things are equal, it tells me what both of those things
+
+1139
+00:54:50,260 --> 00:54:50,760
+are.
+
+1140
+00:54:50,760 --> 00:54:54,600
+It tells me the actual output of h1's text.
+
+1141
+00:54:54,600 --> 00:54:56,140
+It was 1.
+
+1142
+00:54:56,140 --> 00:54:58,950
+But what I expected it to be was negative 1.
+
+1143
+00:54:58,950 --> 00:55:01,320
+So it tells me exactly what the discrepancy is.
+
+1144
+00:55:01,320 --> 00:55:04,380
+I know that for some reason, it was 1 instead of negative 1.
+
+1145
+00:55:04,380 --> 00:55:06,870
+And that can be a clue to me, a hint to me,
+
+1146
+00:55:06,870 --> 00:55:10,430
+as to how I can go about trying to solve this problem.
+
+1147
+00:55:10,430 --> 00:55:13,488
+And I can solve the problem by going into my decrease event handler,
+
+1148
+00:55:13,488 --> 00:55:15,780
+seeing that, all right, this was increasing the counter
+
+1149
+00:55:15,780 --> 00:55:17,280
+instead of decreasing it.
+
+1150
+00:55:17,280 --> 00:55:21,120
+Change plus plus to minus minus, and now rerun my tests
+
+1151
+00:55:21,120 --> 00:55:27,680
+and see all of the test simulated inside of my Chrome Driver.
+
+1152
+00:55:27,680 --> 00:55:29,330
+And we ran four tests.
+
+1153
+00:55:29,330 --> 00:55:31,310
+And this time, everything was OK.
+
+1154
+00:55:31,310 --> 00:55:34,730
+So all of my tests appear to have passed this time.
+
+1155
+00:55:34,730 --> 00:55:38,640
+So those, then, are some possibilities for being able to test our code,
+
+1156
+00:55:38,640 --> 00:55:41,660
+especially taking advantage of unittest, this library that we
+
+1157
+00:55:41,660 --> 00:55:45,260
+can use in Python in order to make various types of assertions
+
+1158
+00:55:45,260 --> 00:55:48,200
+about what we would like to be true or false about our code.
+
+1159
+00:55:48,200 --> 00:55:50,540
+And unittest contains a number of helpful methods
+
+1160
+00:55:50,540 --> 00:55:52,970
+for being able to perform these sorts of assertions.
+
+1161
+00:55:52,970 --> 00:55:54,067
+Some of them are here.
+
+1162
+00:55:54,067 --> 00:55:56,900
+So we can say things like I would like to assert that two things are
+
+1163
+00:55:56,900 --> 00:55:58,710
+equal to each other, which we've seen.
+
+1164
+00:55:58,710 --> 00:56:01,940
+There's a counterpart to that, assertNotEqual for making sure the two
+
+1165
+00:56:01,940 --> 00:56:03,710
+things are not equal to one another.
+
+1166
+00:56:03,710 --> 00:56:05,780
+assertTrue and False, we've seen as well.
+
+1167
+00:56:05,780 --> 00:56:09,380
+There are others as well though, things like assertIn or assertNotIn,
+
+1168
+00:56:09,380 --> 00:56:12,770
+if I would like to assert, for example, that some element is in some list,
+
+1169
+00:56:12,770 --> 00:56:16,280
+for example, or that some element is not in some list.
+
+1170
+00:56:16,280 --> 00:56:19,070
+There are other assert methods as well that we can use in order
+
+1171
+00:56:19,070 --> 00:56:23,300
+to verify that a part of our program or a part of our web application
+
+1172
+00:56:23,300 --> 00:56:25,700
+does, in fact, behave the way we would want to behave.
+
+1173
+00:56:25,700 --> 00:56:28,110
+And we can integrate this type of idea into a number
+
+1174
+00:56:28,110 --> 00:56:29,360
+of different types of testing.
+
+1175
+00:56:29,360 --> 00:56:33,170
+We saw integrating it into Django itself, using Django as unit testing
+
+1176
+00:56:33,170 --> 00:56:36,380
+in order to verify that our database works the way we expected it to,
+
+1177
+00:56:36,380 --> 00:56:39,440
+and that our views works the way that we expected them to and provided
+
+1178
+00:56:39,440 --> 00:56:43,580
+the right context back to the user after the user makes a request to our web
+
+1179
+00:56:43,580 --> 00:56:44,550
+application.
+
+1180
+00:56:44,550 --> 00:56:46,550
+And there are also applications of unit testing,
+
+1181
+00:56:46,550 --> 00:56:49,550
+whether using the framework or not, to browser-based testing,
+
+1182
+00:56:49,550 --> 00:56:52,250
+when I want to test inside of the user's web browser.
+
+1183
+00:56:52,250 --> 00:56:55,210
+Does it actually work when a user clicks on this button,
+
+1184
+00:56:55,210 --> 00:56:58,500
+that the JavaScript behaves the way that I would expect it to.
+
+1185
+00:56:58,500 --> 00:57:01,610
+And I don't need to especially use JavaScript in order to do those tests.
+
+1186
+00:57:01,610 --> 00:57:05,420
+I didn't write those tests using Python, using unittest,
+
+1187
+00:57:05,420 --> 00:57:08,390
+to be able to say, click on the button that has this ID
+
+1188
+00:57:08,390 --> 00:57:13,320
+and verify that the result that we get back is what we would expect it to be.
+
+1189
+00:57:13,320 --> 00:57:15,050
+So that then was testing.
+
+1190
+00:57:15,050 --> 00:57:17,870
+And now we'll go ahead and take a look at CI/CD--
+
+1191
+00:57:17,870 --> 00:57:20,840
+Continuous Integration and Continuous Delivery
+
+1192
+00:57:20,840 --> 00:57:24,290
+which refer to two best practices in the software development world
+
+1193
+00:57:24,290 --> 00:57:26,660
+that has to do with how it is that code is written,
+
+1194
+00:57:26,660 --> 00:57:30,050
+especially by groups or teams of people; how it all works together,
+
+1195
+00:57:30,050 --> 00:57:32,930
+and how that code is eventually delivered and deployed
+
+1196
+00:57:32,930 --> 00:57:35,580
+to users who are using those applications.
+
+1197
+00:57:35,580 --> 00:57:38,750
+So CI, which refers to Continuous Integration,
+
+1198
+00:57:38,750 --> 00:57:42,590
+involves frequent merges to a main branch of some repository,
+
+1199
+00:57:42,590 --> 00:57:45,290
+like a Git repository, and then automatically running
+
+1200
+00:57:45,290 --> 00:57:48,740
+unit tests when that code is pushed.
+
+1201
+00:57:48,740 --> 00:57:50,180
+So what does that generally mean?
+
+1202
+00:57:50,180 --> 00:57:53,390
+Well, in the past, you might imagine that if multiple people are working
+
+1203
+00:57:53,390 --> 00:57:56,390
+on some project at the same time and multiple people are each
+
+1204
+00:57:56,390 --> 00:57:59,450
+working on different features or different parts of that project,
+
+1205
+00:57:59,450 --> 00:58:01,700
+then after everyone's done working on those features
+
+1206
+00:58:01,700 --> 00:58:04,850
+and we're ready to ship some new version of a web application
+
+1207
+00:58:04,850 --> 00:58:07,580
+or ship some new version of a software product, well, then,
+
+1208
+00:58:07,580 --> 00:58:10,520
+everyone's going to have to take all these various different features
+
+1209
+00:58:10,520 --> 00:58:12,950
+and combined them all together at the end
+
+1210
+00:58:12,950 --> 00:58:17,150
+and figure out how to then try and deliver that program to users.
+
+1211
+00:58:17,150 --> 00:58:19,020
+And this has a tendency to cause problems,
+
+1212
+00:58:19,020 --> 00:58:22,100
+especially if people have been working on different big changes
+
+1213
+00:58:22,100 --> 00:58:23,227
+all simultaneously.
+
+1214
+00:58:23,227 --> 00:58:25,310
+They might not all be compatible with one another.
+
+1215
+00:58:25,310 --> 00:58:27,893
+There might be conflicts between the various different changes
+
+1216
+00:58:27,893 --> 00:58:28,740
+that have been made.
+
+1217
+00:58:28,740 --> 00:58:31,430
+So waiting until everyone is done working on a feature
+
+1218
+00:58:31,430 --> 00:58:34,070
+to merge them all back together and then deliver it
+
+1219
+00:58:34,070 --> 00:58:36,320
+is not necessarily the best practice, which
+
+1220
+00:58:36,320 --> 00:58:38,840
+is why increasingly, many more teams are beginning
+
+1221
+00:58:38,840 --> 00:58:41,800
+to adopt a system of continuous integration,
+
+1222
+00:58:41,800 --> 00:58:44,060
+that there is one repository somewhere online
+
+1223
+00:58:44,060 --> 00:58:46,555
+that's keeping the official version of the code.
+
+1224
+00:58:46,555 --> 00:58:49,680
+Everyone works on their own version of the code, maybe on their own branch,
+
+1225
+00:58:49,680 --> 00:58:50,960
+for example.
+
+1226
+00:58:50,960 --> 00:58:53,420
+But very frequently, all of these changes
+
+1227
+00:58:53,420 --> 00:58:56,550
+are merged back together into the same branch
+
+1228
+00:58:56,550 --> 00:59:00,030
+to make sure that these incremental changes can be happening such
+
+1229
+00:59:00,030 --> 00:59:03,500
+that it's less likely that there's two really divergent paths that the program
+
+1230
+00:59:03,500 --> 00:59:05,510
+has gone under, and as a result, it's much more
+
+1231
+00:59:05,510 --> 00:59:08,930
+difficult to merge those two paths back together.
+
+1232
+00:59:08,930 --> 00:59:11,630
+In addition to frequently merging to its own main branch,
+
+1233
+00:59:11,630 --> 00:59:14,120
+another key idea of continuous integration
+
+1234
+00:59:14,120 --> 00:59:17,760
+is this idea of automated unit testing, where unit testing, again,
+
+1235
+00:59:17,760 --> 00:59:20,060
+refers to this idea of on our program, we
+
+1236
+00:59:20,060 --> 00:59:24,290
+run a big series of tests that verify each little part of our program
+
+1237
+00:59:24,290 --> 00:59:27,710
+to make sure that the web application behaves the way it is supposed to.
+
+1238
+00:59:27,710 --> 00:59:31,700
+And unit tests generally refer to testing particular small components
+
+1239
+00:59:31,700 --> 00:59:35,065
+of our program, making sure that each component works as expected.
+
+1240
+00:59:35,065 --> 00:59:37,940
+There are also bigger scale tests-- tests like integration tests that
+
+1241
+00:59:37,940 --> 00:59:40,910
+make sure that the entire pathway from user request
+
+1242
+00:59:40,910 --> 00:59:44,600
+and response, that everything along a certain pipeline works as well.
+
+1243
+00:59:44,600 --> 00:59:46,650
+But there are various different types of testing.
+
+1244
+00:59:46,650 --> 00:59:49,160
+And the important thing is making sure that anytime
+
+1245
+00:59:49,160 --> 00:59:52,310
+some new change is merged into the main branch or someone
+
+1246
+00:59:52,310 --> 00:59:55,190
+wants to merge their changes into the main branch,
+
+1247
+00:59:55,190 --> 00:59:58,190
+that these tests are run to make sure that nobody ever
+
+1248
+00:59:58,190 --> 01:00:00,470
+makes a change to one part of a program that
+
+1249
+01:00:00,470 --> 01:00:02,368
+breaks some other part of the program.
+
+1250
+01:00:02,368 --> 01:00:04,160
+And in a large enough code base, it's going
+
+1251
+01:00:04,160 --> 01:00:06,350
+to be impossible for any one person to know
+
+1252
+01:00:06,350 --> 01:00:08,540
+exactly what the effect of one particular change
+
+1253
+01:00:08,540 --> 01:00:11,060
+is going to be on every other part of the program.
+
+1254
+01:00:11,060 --> 01:00:13,850
+There are going to be unforeseen consequences that the one
+
+1255
+01:00:13,850 --> 01:00:16,420
+programmer may or may not know about.
+
+1256
+01:00:16,420 --> 01:00:18,338
+And so the advantage of unit testing, assuming
+
+1257
+01:00:18,338 --> 01:00:21,380
+they're comprehensive and cover all of these various different components
+
+1258
+01:00:21,380 --> 01:00:24,610
+of the program, is that any time someone makes a change
+
+1259
+01:00:24,610 --> 01:00:27,100
+and attempts to merge that change into the main branch
+
+1260
+01:00:27,100 --> 01:00:30,280
+according to the practice of continuous integration, the fact
+
+1261
+01:00:30,280 --> 01:00:33,007
+that it doesn't pass a test, we'll know about that immediately.
+
+1262
+01:00:33,007 --> 01:00:34,840
+And as a result, that programmer can go back
+
+1263
+01:00:34,840 --> 01:00:38,200
+and try to fix it as opposed to waiting until everything is done,
+
+1264
+01:00:38,200 --> 01:00:40,180
+merging everything together, and then running
+
+1265
+01:00:40,180 --> 01:00:42,490
+the tests, realizing something doesn't work,
+
+1266
+01:00:42,490 --> 01:00:44,810
+and then being unsure of where to begin.
+
+1267
+01:00:44,810 --> 01:00:47,980
+We don't know where the bug is, which change happened to cause the bug.
+
+1268
+01:00:47,980 --> 01:00:50,110
+If everything is merged more incrementally,
+
+1269
+01:00:50,110 --> 01:00:52,570
+it's easier to spot those bugs, assuming there's
+
+1270
+01:00:52,570 --> 01:00:54,550
+good coverage of tests to make sure that we're
+
+1271
+01:00:54,550 --> 01:00:57,500
+accounting for these various different possibilities.
+
+1272
+01:00:57,500 --> 01:01:00,100
+So continuous integration refers to that idea--
+
+1273
+01:01:00,100 --> 01:01:03,100
+frequently and more incrementally updating the main branch
+
+1274
+01:01:03,100 --> 01:01:05,890
+and making sure that the tests are, in fact, passing.
+
+1275
+01:01:05,890 --> 01:01:10,150
+And it's closely tied to a related idea of continuous delivery, which
+
+1276
+01:01:10,150 --> 01:01:13,150
+is about the process of how it is that the software is actually
+
+1277
+01:01:13,150 --> 01:01:16,980
+released to users, how the web application actually gets deployed.
+
+1278
+01:01:16,980 --> 01:01:18,730
+And there are a couple of models you might
+
+1279
+01:01:18,730 --> 01:01:22,450
+go about thinking with regards to how it is that some program or web
+
+1280
+01:01:22,450 --> 01:01:24,098
+application gets deployed.
+
+1281
+01:01:24,098 --> 01:01:26,640
+You might imagine that the release cycle might be quite long,
+
+1282
+01:01:26,640 --> 01:01:29,500
+and the people spend months working on various different features
+
+1283
+01:01:29,500 --> 01:01:31,090
+on some software development team.
+
+1284
+01:01:31,090 --> 01:01:33,160
+And after they're happy with all the new changes,
+
+1285
+01:01:33,160 --> 01:01:36,160
+they've released some new version of the web application.
+
+1286
+01:01:36,160 --> 01:01:38,050
+But especially, with web applications that
+
+1287
+01:01:38,050 --> 01:01:40,090
+are undergoing constant change, that have
+
+1288
+01:01:40,090 --> 01:01:43,750
+lots of users, that are moving very quickly, one thing that's quite popular
+
+1289
+01:01:43,750 --> 01:01:46,420
+is this notion of continuous delivery, which refers
+
+1290
+01:01:46,420 --> 01:01:48,550
+to having shorter release schedules.
+
+1291
+01:01:48,550 --> 01:01:51,010
+Instead of immediately releasing something
+
+1292
+01:01:51,010 --> 01:01:54,370
+at the end of some long cycle, you can in shorter cycles
+
+1293
+01:01:54,370 --> 01:01:56,860
+make releases every day, every week, or so
+
+1294
+01:01:56,860 --> 01:02:00,460
+in order to say that let's just go ahead and incrementally make those changes.
+
+1295
+01:02:00,460 --> 01:02:03,770
+Whatever new changes happen to have merged to the main branch,
+
+1296
+01:02:03,770 --> 01:02:07,420
+let's go ahead and release those as opposed to waiting much longer in order
+
+1297
+01:02:07,420 --> 01:02:09,350
+to perform those releases.
+
+1298
+01:02:09,350 --> 01:02:11,830
+And that, again, lends itself to certain benefits,
+
+1299
+01:02:11,830 --> 01:02:14,350
+the benefit of being able to just incrementally make
+
+1300
+01:02:14,350 --> 01:02:16,270
+changes, such as something goes wrong, you
+
+1301
+01:02:16,270 --> 01:02:18,430
+know more immediately what went wrong as opposed
+
+1302
+01:02:18,430 --> 01:02:21,830
+to making a lot of changes at once, where if something goes wrong,
+
+1303
+01:02:21,830 --> 01:02:24,250
+it's not necessarily clear what went wrong.
+
+1304
+01:02:24,250 --> 01:02:27,890
+And it also allows new features to get out to users much more quickly.
+
+1305
+01:02:27,890 --> 01:02:31,060
+So especially in a competitive market where many different web applications
+
+1306
+01:02:31,060 --> 01:02:34,000
+are competing with one another, being able to take a new feature
+
+1307
+01:02:34,000 --> 01:02:36,550
+and release it very quickly can be quite helpful.
+
+1308
+01:02:36,550 --> 01:02:40,450
+So continuous delivery is all about that idea of short release cycles.
+
+1309
+01:02:40,450 --> 01:02:43,780
+Rather than wait a long time for a new version to be released,
+
+1310
+01:02:43,780 --> 01:02:48,220
+release versions incrementally as new features begin to come in.
+
+1311
+01:02:48,220 --> 01:02:51,780
+It's closely related to the idea of Continuous Deployment, which
+
+1312
+01:02:51,780 --> 01:02:53,950
+CD will sometimes also represent.
+
+1313
+01:02:53,950 --> 01:02:57,387
+Continuous deployment is similar in spirit to continuous delivery.
+
+1314
+01:02:57,387 --> 01:02:59,095
+But the deployments happen automatically.
+
+1315
+01:02:59,095 --> 01:03:01,720
+So rather than a human having to say, all right,
+
+1316
+01:03:01,720 --> 01:03:03,040
+we've made a couple of changes.
+
+1317
+01:03:03,040 --> 01:03:04,840
+Let's go ahead and deploy those changes.
+
+1318
+01:03:04,840 --> 01:03:08,110
+In continuous deployment, any time these changes are made,
+
+1319
+01:03:08,110 --> 01:03:10,870
+the pipeline of deploying the application to users
+
+1320
+01:03:10,870 --> 01:03:14,170
+will automatically take place as well, just removing one thing for humans
+
+1321
+01:03:14,170 --> 01:03:16,600
+to have to think about and allowing for these deployments
+
+1322
+01:03:16,600 --> 01:03:19,850
+to happen even more quickly as well.
+
+1323
+01:03:19,850 --> 01:03:22,180
+So the question then is, what tools can allow
+
+1324
+01:03:22,180 --> 01:03:25,127
+us to make continuous integration and continuous delivery
+
+1325
+01:03:25,127 --> 01:03:25,960
+a little bit easier?
+
+1326
+01:03:25,960 --> 01:03:28,240
+What techniques can we use in order to do so?
+
+1327
+01:03:28,240 --> 01:03:31,440
+And there are a number of different continuous integration tools.
+
+1328
+01:03:31,440 --> 01:03:35,890
+But one of them produced by GitHub more recently is known as GitHub Actions.
+
+1329
+01:03:35,890 --> 01:03:39,880
+And what GitHub Actions allows us to do is to create these workflows where
+
+1330
+01:03:39,880 --> 01:03:44,740
+we can say that anytime, for example, someone pushes to a Git repository,
+
+1331
+01:03:44,740 --> 01:03:47,530
+I would like for certain steps to take place,
+
+1332
+01:03:47,530 --> 01:03:51,040
+certain steps that might be checking to make sure that the code is styled well.
+
+1333
+01:03:51,040 --> 01:03:54,550
+That if a company has some style guide that it expects all of its programmers
+
+1334
+01:03:54,550 --> 01:03:56,860
+to adhere to when working on a particular product,
+
+1335
+01:03:56,860 --> 01:04:02,050
+you could have a GitHub Action such that anytime someone pushes to a repository,
+
+1336
+01:04:02,050 --> 01:04:03,940
+you have an action that automatically checks
+
+1337
+01:04:03,940 --> 01:04:06,580
+that code against the style guide to make sure
+
+1338
+01:04:06,580 --> 01:04:10,240
+that it is well-styled, well-commented, documented, and so forth.
+
+1339
+01:04:10,240 --> 01:04:13,150
+You might also, for instance, have a GitHub action that
+
+1340
+01:04:13,150 --> 01:04:17,320
+tests our code to make sure that anytime anyone pushes code to a GitHub
+
+1341
+01:04:17,320 --> 01:04:19,930
+repository, we automatically run whatever
+
+1342
+01:04:19,930 --> 01:04:22,990
+tests we would like to run on that particular code base.
+
+1343
+01:04:22,990 --> 01:04:27,340
+And GitHub Actions can allow us to do that as well by defining some workflow
+
+1344
+01:04:27,340 --> 01:04:28,205
+to be able to do so.
+
+1345
+01:04:28,205 --> 01:04:30,580
+And so that's what we'll take a look at in just a moment,
+
+1346
+01:04:30,580 --> 01:04:34,448
+using GitHub Actions to automate the process of running tests so that
+
+1347
+01:04:34,448 --> 01:04:37,240
+the human-- though it would be a good thing for the programmer when
+
+1348
+01:04:37,240 --> 01:04:40,365
+they're done writing their code to test their code and make sure it works--
+
+1349
+01:04:40,365 --> 01:04:44,710
+we can enforce that by making sure that every time anyone pushes to a GitHub
+
+1350
+01:04:44,710 --> 01:04:47,170
+repository, we'll automatically run some GitHub
+
+1351
+01:04:47,170 --> 01:04:50,350
+action that is going to take care of the process of running tests
+
+1352
+01:04:50,350 --> 01:04:51,220
+on that program.
+
+1353
+01:04:51,220 --> 01:04:53,200
+And we'll know immediately as via an email
+
+1354
+01:04:53,200 --> 01:04:57,160
+that GitHub might send to you to say that this particular test failed.
+
+1355
+01:04:57,160 --> 01:05:00,850
+And you'll know every time you push to that repository.
+
+1356
+01:05:00,850 --> 01:05:02,640
+So how do these workflows get structured?
+
+1357
+01:05:02,640 --> 01:05:04,220
+What is the syntax of them?
+
+1358
+01:05:04,220 --> 01:05:07,238
+Well they use a particular type of syntax known as YAML,
+
+1359
+01:05:07,238 --> 01:05:09,280
+which is some language, a configuration language,
+
+1360
+01:05:09,280 --> 01:05:11,740
+that can be used in order to describe--
+
+1361
+01:05:11,740 --> 01:05:15,060
+often described for configuration of various different tools and software.
+
+1362
+01:05:15,060 --> 01:05:16,750
+GitHub Actions happens to use it.
+
+1363
+01:05:16,750 --> 01:05:18,670
+Other technologies use it as well.
+
+1364
+01:05:18,670 --> 01:05:22,820
+And YAML is a file format that structures its data sort of like this,
+
+1365
+01:05:22,820 --> 01:05:25,360
+in terms of key value pairs, much in the same way
+
+1366
+01:05:25,360 --> 01:05:28,130
+that a JSON object or a Python dictionary might,
+
+1367
+01:05:28,130 --> 01:05:30,340
+where we'll have the name of a key followed
+
+1368
+01:05:30,340 --> 01:05:32,650
+by a colon followed by its value--
+
+1369
+01:05:32,650 --> 01:05:35,140
+name of a key, followed by a colon, followed by a value.
+
+1370
+01:05:35,140 --> 01:05:38,930
+And the value doesn't necessarily need to be just a single value.
+
+1371
+01:05:38,930 --> 01:05:41,988
+It could be a sequence of values, like a list of values, for example.
+
+1372
+01:05:41,988 --> 01:05:44,530
+And those are generated this way, by like a hyphen indicating
+
+1373
+01:05:44,530 --> 01:05:47,710
+a list-- item 1, item 2, item 3.
+
+1374
+01:05:47,710 --> 01:05:49,720
+And in addition to just having single values
+
+1375
+01:05:49,720 --> 01:05:51,850
+and lists of items, these ideas--
+
+1376
+01:05:51,850 --> 01:05:54,100
+these lists, these sequences, these values--
+
+1377
+01:05:54,100 --> 01:05:55,990
+can be nested within one another, that you
+
+1378
+01:05:55,990 --> 01:05:58,660
+might have one key that leads to another set of keys
+
+1379
+01:05:58,660 --> 01:06:01,330
+that are associated with values that leads to other sets
+
+1380
+01:06:01,330 --> 01:06:03,760
+of keys associated with values as well.
+
+1381
+01:06:03,760 --> 01:06:06,760
+Much in the same way, that a JSON object,
+
+1382
+01:06:06,760 --> 01:06:09,370
+like a representation of keys and values,
+
+1383
+01:06:09,370 --> 01:06:12,610
+can also have nested JSON objects within a JSON object.
+
+1384
+01:06:12,610 --> 01:06:15,670
+Likewise, too, we can have nested key value pairs
+
+1385
+01:06:15,670 --> 01:06:18,707
+as the value for a particular key too.
+
+1386
+01:06:18,707 --> 01:06:21,040
+So we'll take a look at an example of what that actually
+
+1387
+01:06:21,040 --> 01:06:25,000
+looks like in the context of creating some GitHub workflow that
+
+1388
+01:06:25,000 --> 01:06:27,880
+will run some get GitHub Actions.
+
+1389
+01:06:27,880 --> 01:06:29,180
+So what will that look like?
+
+1390
+01:06:29,180 --> 01:06:33,730
+Let's go back into airline0, where here, I've defined inside of a .github
+
+1391
+01:06:33,730 --> 01:06:39,520
+directory a directory called workflows, inside of which I have a ci.yml file.
+
+1392
+01:06:39,520 --> 01:06:41,110
+It can be any name .yml.
+
+1393
+01:06:41,110 --> 01:06:47,080
+.yml or .yaml are the conventional file extensions for a YAML file.
+
+1394
+01:06:47,080 --> 01:06:50,710
+And here, I'll open up ci.yml.
+
+1395
+01:06:50,710 --> 01:06:56,170
+And this now is the configuration for how this workflow ought to behave.
+
+1396
+01:06:56,170 --> 01:06:57,383
+I give the workflow a name.
+
+1397
+01:06:57,383 --> 01:06:59,800
+It's called Testing because what I want the workflow to do
+
+1398
+01:06:59,800 --> 01:07:02,380
+is test my airline application.
+
+1399
+01:07:02,380 --> 01:07:08,110
+Then I specify an on key to mean when should this workflow run.
+
+1400
+01:07:08,110 --> 01:07:11,230
+And here, I have said on push, meaning anytime
+
+1401
+01:07:11,230 --> 01:07:15,910
+someone pushes their code to GitHub, we would like to run this workflow.
+
+1402
+01:07:15,910 --> 01:07:18,198
+Every workflow consists of some jobs.
+
+1403
+01:07:18,198 --> 01:07:19,240
+And so what are the jobs?
+
+1404
+01:07:19,240 --> 01:07:24,940
+What tasks should happen anytime that I try and push to this repository?
+
+1405
+01:07:24,940 --> 01:07:26,968
+Well, I've defined a job called test_project.
+
+1406
+01:07:26,968 --> 01:07:28,760
+And this is a name that I chose for myself.
+
+1407
+01:07:28,760 --> 01:07:31,180
+You can choose any name for a job that you would like.
+
+1408
+01:07:31,180 --> 01:07:35,380
+And now I need to specify two things for what happens on a job.
+
+1409
+01:07:35,380 --> 01:07:39,400
+One thing I need to specify is what sort of machine is it going to run on?
+
+1410
+01:07:39,400 --> 01:07:43,090
+That GitHub has its own virtual machines, otherwise known as VMs,
+
+1411
+01:07:43,090 --> 01:07:46,582
+and I would like to run this job on one of those virtual machines.
+
+1412
+01:07:46,582 --> 01:07:49,540
+And there are virtual machines for various different operating systems.
+
+1413
+01:07:49,540 --> 01:07:53,830
+Here I'm just saying, go ahead, and run on the latest version of Ubuntu,
+
+1414
+01:07:53,830 --> 01:07:58,450
+which is a later version of Linux that I would like for this test to run on.
+
+1415
+01:07:58,450 --> 01:08:01,630
+And then for the job, I specify what steps
+
+1416
+01:08:01,630 --> 01:08:04,030
+should happen where I can now specify what
+
+1417
+01:08:04,030 --> 01:08:08,230
+actions should happen when someone tries test a project when I try and run
+
+1418
+01:08:08,230 --> 01:08:09,310
+this job.
+
+1419
+01:08:09,310 --> 01:08:12,290
+And here I'm using a particular GitHub action.
+
+1420
+01:08:12,290 --> 01:08:16,229
+And this is a GitHub action written by GitHub called actions/checkout.
+
+1421
+01:08:16,229 --> 01:08:18,189
+And what this is going to do is it's going
+
+1422
+01:08:18,189 --> 01:08:21,010
+to check out my code in the Git repository
+
+1423
+01:08:21,010 --> 01:08:24,630
+and allow me to run programs that operate on that code.
+
+1424
+01:08:24,630 --> 01:08:27,130
+And you can write your own GitHub actions if you would like.
+
+1425
+01:08:27,130 --> 01:08:30,970
+But here, all we really need to do is go ahead and check out the code,
+
+1426
+01:08:30,970 --> 01:08:33,970
+as by looking at what's on the branch that I just pushed to.
+
+1427
+01:08:33,970 --> 01:08:36,140
+And then I'm going to run Django unit tests.
+
+1428
+01:08:36,140 --> 01:08:38,140
+This is just a description for me to know what's
+
+1429
+01:08:38,140 --> 01:08:40,569
+going on in this particular step.
+
+1430
+01:08:40,569 --> 01:08:42,620
+And here is what I would like to run.
+
+1431
+01:08:42,620 --> 01:08:45,408
+I'm going to first go ahead and install Django
+
+1432
+01:08:45,408 --> 01:08:47,200
+because I'm going to need to install Django
+
+1433
+01:08:47,200 --> 01:08:49,069
+to be able to run all of these tests.
+
+1434
+01:08:49,069 --> 01:08:51,069
+But after-- and if there are other requirements,
+
+1435
+01:08:51,069 --> 01:08:53,560
+I might need to install those requirements as well.
+
+1436
+01:08:53,560 --> 01:08:55,340
+But the airline program is fairly simple.
+
+1437
+01:08:55,340 --> 01:08:58,210
+All we really need in order to run the tests is just Django.
+
+1438
+01:08:58,210 --> 01:09:00,399
+So I'll go ahead and install Django.
+
+1439
+01:09:00,399 --> 01:09:05,050
+And then I'll run python3 manage.py test.
+
+1440
+01:09:05,050 --> 01:09:06,189
+I would like to test--
+
+1441
+01:09:06,189 --> 01:09:07,390
+run all of the tests.
+
+1442
+01:09:07,390 --> 01:09:10,660
+And the way I can do that is just by providing this manage.py command
+
+1443
+01:09:10,660 --> 01:09:12,970
+to say that I would like to run all of the tests
+
+1444
+01:09:12,970 --> 01:09:15,800
+on this particular application.
+
+1445
+01:09:15,800 --> 01:09:18,250
+So this configuration file altogether now
+
+1446
+01:09:18,250 --> 01:09:21,340
+is going to specify a particular workflow, the workflow that
+
+1447
+01:09:21,340 --> 01:09:24,316
+says that every time I push to the GitHub repository,
+
+1448
+01:09:24,316 --> 01:09:26,649
+what I would like to happen is I would like to check out
+
+1449
+01:09:26,649 --> 01:09:28,779
+my code inside of the Git repository.
+
+1450
+01:09:28,779 --> 01:09:32,890
+So on some Ubuntu VM, GitHub is going to check out my code,
+
+1451
+01:09:32,890 --> 01:09:35,020
+and it's going to run these commands.
+
+1452
+01:09:35,020 --> 01:09:36,640
+It's going to install Django.
+
+1453
+01:09:36,640 --> 01:09:38,500
+And then it's going to test my code.
+
+1454
+01:09:38,500 --> 01:09:43,399
+And it will then give back to me what the response is after I do that.
+
+1455
+01:09:43,399 --> 01:09:44,800
+So let's go ahead and test this.
+
+1456
+01:09:44,800 --> 01:09:47,710
+And in particular, let's run it on a program where
+
+1457
+01:09:47,710 --> 01:09:49,640
+the tests are going to fail.
+
+1458
+01:09:49,640 --> 01:09:54,490
+So I might say, for example, let's go into flights and models.py.
+
+1459
+01:09:54,490 --> 01:09:57,490
+And let's go to my is_valid_flight function from before
+
+1460
+01:09:57,490 --> 01:09:59,710
+and change it back to that version that didn't work.
+
+1461
+01:09:59,710 --> 01:10:02,170
+That before it was something and something.
+
+1462
+01:10:02,170 --> 01:10:04,270
+I'll change it to something or something.
+
+1463
+01:10:04,270 --> 01:10:07,705
+That as long as the origin is not the destination or the duration
+
+1464
+01:10:07,705 --> 01:10:09,580
+is greater than 0, we'll count that as valid.
+
+1465
+01:10:09,580 --> 01:10:10,830
+But we know that that's wrong.
+
+1466
+01:10:10,830 --> 01:10:12,670
+That should not work.
+
+1467
+01:10:12,670 --> 01:10:14,160
+So here's what I'll do.
+
+1468
+01:10:14,160 --> 01:10:17,217
+I'll go ahead and first say git status, see, all right, what's changed?
+
+1469
+01:10:17,217 --> 01:10:19,050
+And it seems that, all right, I've changed--
+
+1470
+01:10:19,050 --> 01:10:22,620
+I've modified models.py, which makes sense.
+
+1471
+01:10:22,620 --> 01:10:24,930
+I'll go ahead and git add.
+
+1472
+01:10:24,930 --> 01:10:25,620
+I'll add dot.
+
+1473
+01:10:25,620 --> 01:10:28,170
+We'll just add all of the files that I might have modified.
+
+1474
+01:10:28,170 --> 01:10:29,270
+I'll commit my changes.
+
+1475
+01:10:29,270 --> 01:10:37,190
+Say go ahead and use wrong valid flight function.
+
+1476
+01:10:37,190 --> 01:10:38,830
+That's what I'm going to do.
+
+1477
+01:10:38,830 --> 01:10:41,750
+And now I'm going to push my code to GitHub.
+
+1478
+01:10:41,750 --> 01:10:42,450
+I added it.
+
+1479
+01:10:42,450 --> 01:10:43,170
+I committed it.
+
+1480
+01:10:43,170 --> 01:10:44,610
+I pushed it.
+
+1481
+01:10:44,610 --> 01:10:48,360
+That now then pushes my code to GitHub into a repository called airline
+
+1482
+01:10:48,360 --> 01:10:49,560
+that I already have.
+
+1483
+01:10:49,560 --> 01:10:54,750
+And now, if I go ahead and go to GitHub, and I go to my airline
+
+1484
+01:10:54,750 --> 01:10:58,050
+repository, what you'll notice is that we've mostly
+
+1485
+01:10:58,050 --> 01:10:59,880
+been dealing with this Code tab.
+
+1486
+01:10:59,880 --> 01:11:01,890
+But GitHub gives us other tabs as well that
+
+1487
+01:11:01,890 --> 01:11:04,200
+are quite useful as you begin to think about working
+
+1488
+01:11:04,200 --> 01:11:05,910
+on a project in larger team.
+
+1489
+01:11:05,910 --> 01:11:08,655
+So in addition to looking at the code, we have issues.
+
+1490
+01:11:08,655 --> 01:11:11,280
+Issues are ways for people to just report that something is not
+
+1491
+01:11:11,280 --> 01:11:13,030
+quite right, or there is a feature request
+
+1492
+01:11:13,030 --> 01:11:15,180
+that we have for this particular code base.
+
+1493
+01:11:15,180 --> 01:11:18,000
+So the issues might maintain a list of all of the pending action
+
+1494
+01:11:18,000 --> 01:11:21,780
+items for a particular repository, things that we still need to deal with.
+
+1495
+01:11:21,780 --> 01:11:24,840
+And once those issues are dealt with, the issues can be closed.
+
+1496
+01:11:24,840 --> 01:11:27,110
+So I have no issues here as well.
+
+1497
+01:11:27,110 --> 01:11:30,350
+Pull requests are people that are trying to merge some part of the code
+
+1498
+01:11:30,350 --> 01:11:32,480
+from one branch into another branch.
+
+1499
+01:11:32,480 --> 01:11:34,430
+So you might imagine on a larger project,
+
+1500
+01:11:34,430 --> 01:11:37,520
+you don't want everyone merging things into master all at the same time.
+
+1501
+01:11:37,520 --> 01:11:40,340
+You might have people working on their own separate branches.
+
+1502
+01:11:40,340 --> 01:11:42,860
+And then when they feel confident and happy with their code,
+
+1503
+01:11:42,860 --> 01:11:46,730
+then they can propose a pull request to merge their code into the master
+
+1504
+01:11:46,730 --> 01:11:47,580
+branch.
+
+1505
+01:11:47,580 --> 01:11:49,400
+And that allows for various other features,
+
+1506
+01:11:49,400 --> 01:11:52,100
+like the ability for someone to offer a code review--
+
+1507
+01:11:52,100 --> 01:11:55,400
+to be able to review the code, write comments, and propose suggestions
+
+1508
+01:11:55,400 --> 01:11:58,400
+for what changes should be made to a particular part of the code
+
+1509
+01:11:58,400 --> 01:12:00,930
+before it gets merged into the master branch.
+
+1510
+01:12:00,930 --> 01:12:03,110
+And that's another common practice with regards
+
+1511
+01:12:03,110 --> 01:12:07,280
+to working on a GitHub repository or any other larger project
+
+1512
+01:12:07,280 --> 01:12:10,640
+that you're controlling using source control is this idea of code reviews,
+
+1513
+01:12:10,640 --> 01:12:13,730
+that oftentimes, you don't want just one person making the changes
+
+1514
+01:12:13,730 --> 01:12:15,560
+without anyone's eyes on that code.
+
+1515
+01:12:15,560 --> 01:12:18,530
+But you want a second pair of eyes to be able to look things over, make
+
+1516
+01:12:18,530 --> 01:12:20,630
+sure the code is correct, make sure it's efficient,
+
+1517
+01:12:20,630 --> 01:12:22,340
+make sure it's in line with the practices
+
+1518
+01:12:22,340 --> 01:12:24,270
+that the application is using.
+
+1519
+01:12:24,270 --> 01:12:26,450
+And so pull requests can be quite helpful for that.
+
+1520
+01:12:26,450 --> 01:12:29,990
+And then this fourth tab over here represents GitHub Actions.
+
+1521
+01:12:29,990 --> 01:12:32,480
+These are the various different actions or workflows
+
+1522
+01:12:32,480 --> 01:12:35,750
+that I might want to run on this particular repository.
+
+1523
+01:12:35,750 --> 01:12:42,040
+And what we'll see here is that if I go to the Actions tab now, what I'll see
+
+1524
+01:12:42,040 --> 01:12:44,203
+is here is my most recent testing actions.
+
+1525
+01:12:44,203 --> 01:12:46,120
+So anytime I push, I get a new testing action.
+
+1526
+01:12:46,120 --> 01:12:48,430
+This one was from 29 seconds ago.
+
+1527
+01:12:48,430 --> 01:12:51,380
+I'll go ahead and click on it and see what's within it.
+
+1528
+01:12:51,380 --> 01:12:51,880
+All right.
+
+1529
+01:12:51,880 --> 01:12:54,280
+Here was the job that I ran, test_project.
+
+1530
+01:12:54,280 --> 01:12:55,930
+I see that on the left-hand side.
+
+1531
+01:12:55,930 --> 01:12:59,130
+You'll notice this big red X in the left-hand side of this workflow.
+
+1532
+01:12:59,130 --> 01:13:00,400
+Means something went wrong.
+
+1533
+01:13:00,400 --> 01:13:02,710
+So I'd like to know what it is that went wrong.
+
+1534
+01:13:02,710 --> 01:13:05,100
+I'll go ahead and click on test_project.
+
+1535
+01:13:05,100 --> 01:13:09,760
+And here within it, these are all of the steps, the things that happened when
+
+1536
+01:13:09,760 --> 01:13:11,530
+we actually ran this particular job.
+
+1537
+01:13:11,530 --> 01:13:13,000
+First the job sets up.
+
+1538
+01:13:13,000 --> 01:13:15,610
+Then the checkout action goes ahead and checks out my code
+
+1539
+01:13:15,610 --> 01:13:18,310
+because we need access to my code to be able to run it.
+
+1540
+01:13:18,310 --> 01:13:20,080
+Here was the step I defined--
+
+1541
+01:13:20,080 --> 01:13:25,240
+run Django unit tests, which was going to install Django and run those tests.
+
+1542
+01:13:25,240 --> 01:13:27,880
+It has an X next to it, indicating something went wrong.
+
+1543
+01:13:27,880 --> 01:13:29,860
+And I see down below, annotations, 1 failure.
+
+1544
+01:13:29,860 --> 01:13:33,190
+So all over the place, GitHub's trying to tell me that something went wrong.
+
+1545
+01:13:33,190 --> 01:13:35,320
+It failed two minutes ago here.
+
+1546
+01:13:35,320 --> 01:13:37,830
+I'll go ahead and open this up.
+
+1547
+01:13:37,830 --> 01:13:41,480
+And what I'll see is the first thing that happened is we installed Django.
+
+1548
+01:13:41,480 --> 01:13:43,370
+And that seems to have worked OK.
+
+1549
+01:13:43,370 --> 01:13:48,680
+But down below, what you'll see is the output of running these unit tests,
+
+1550
+01:13:48,680 --> 01:13:50,930
+that we see FAILED (failures-2).
+
+1551
+01:13:50,930 --> 01:13:54,440
+And now I can see, here are the unit tests that failed.
+
+1552
+01:13:54,440 --> 01:13:57,080
+We failed the invalid flight destination test.
+
+1553
+01:13:57,080 --> 01:13:59,360
+We failed the invalid flight duration test.
+
+1554
+01:13:59,360 --> 01:14:02,377
+And as before, I can see in GitHub's user interface
+
+1555
+01:14:02,377 --> 01:14:03,710
+what those assertion errors are.
+
+1556
+01:14:03,710 --> 01:14:05,180
+I can see a true is not false.
+
+1557
+01:14:05,180 --> 01:14:07,610
+True is not false, those were the problems
+
+1558
+01:14:07,610 --> 01:14:10,840
+that happened when I tried to run this particular test suite.
+
+1559
+01:14:10,840 --> 01:14:13,580
+And now others who are also working on this repository
+
+1560
+01:14:13,580 --> 01:14:15,770
+can see as well what the results of these tests
+
+1561
+01:14:15,770 --> 01:14:17,900
+are and can offer suggestions, can offer ways
+
+1562
+01:14:17,900 --> 01:14:20,900
+that I might be able to fix the code in order to deal with that problem.
+
+1563
+01:14:20,900 --> 01:14:25,030
+But now I know that this particular test failed.
+
+1564
+01:14:25,030 --> 01:14:29,050
+And if I go back to the main code page for this GitHub repository,
+
+1565
+01:14:29,050 --> 01:14:34,210
+I'll see that next to this commit, there is a little x symbol.
+
+1566
+01:14:34,210 --> 01:14:36,190
+And that little x symbol next to the commit
+
+1567
+01:14:36,190 --> 01:14:38,860
+just tells me that the most recent time I tried to commit,
+
+1568
+01:14:38,860 --> 01:14:39,880
+something went wrong.
+
+1569
+01:14:39,880 --> 01:14:41,890
+They ran the workflow, and there was an error.
+
+1570
+01:14:41,890 --> 01:14:43,600
+And so I'll immediately see for this commit--
+
+1571
+01:14:43,600 --> 01:14:45,767
+and I can go back and look at the history of commits
+
+1572
+01:14:45,767 --> 01:14:48,820
+and see which ones were OK and which ones had a tendency
+
+1573
+01:14:48,820 --> 01:14:51,620
+to cause some sort of problem.
+
+1574
+01:14:51,620 --> 01:14:53,680
+So this one, it appears caused a problem.
+
+1575
+01:14:53,680 --> 01:14:54,520
+And we know why.
+
+1576
+01:14:54,520 --> 01:14:58,260
+It caused a problem because of this condition, something or something else.
+
+1577
+01:14:58,260 --> 01:14:59,290
+So I can fix it.
+
+1578
+01:14:59,290 --> 01:15:01,540
+I'll change the or to an and.
+
+1579
+01:15:01,540 --> 01:15:03,634
+I'll go ahead and git add dot.
+
+1580
+01:15:03,634 --> 01:15:04,840
+git commit.
+
+1581
+01:15:04,840 --> 01:15:10,870
+Say I will fix valid flight check.
+
+1582
+01:15:10,870 --> 01:15:13,960
+If I do git status just to check out what's going on right now,
+
+1583
+01:15:13,960 --> 01:15:15,850
+I'm ahead of the master branch by 1 commit.
+
+1584
+01:15:15,850 --> 01:15:17,750
+That's exactly what I would expect.
+
+1585
+01:15:17,750 --> 01:15:21,460
+And now I'll go ahead and push my code to GitHub by running git push,
+
+1586
+01:15:21,460 --> 01:15:23,380
+saying, all right, let's push this update.
+
+1587
+01:15:23,380 --> 01:15:27,297
+And now, hopefully, we're going to pass the workflow now.
+
+1588
+01:15:27,297 --> 01:15:28,630
+Now I go back to the repository.
+
+1589
+01:15:28,630 --> 01:15:31,030
+I refresh the page.
+
+1590
+01:15:31,030 --> 01:15:33,610
+Here's my latest commit-- fix valid flight check.
+
+1591
+01:15:33,610 --> 01:15:37,473
+You notice here, there's an orange dot instead of the red x as before.
+
+1592
+01:15:37,473 --> 01:15:39,640
+This dot just means the tests are currently pending.
+
+1593
+01:15:39,640 --> 01:15:43,120
+The workflow is in progress because it takes some time for GitHub
+
+1594
+01:15:43,120 --> 01:15:45,820
+to be able to start up the VM, to be able to initialize the job,
+
+1595
+01:15:45,820 --> 01:15:47,850
+to check out my code, to run all those tests.
+
+1596
+01:15:47,850 --> 01:15:49,340
+It does take some time.
+
+1597
+01:15:49,340 --> 01:15:52,060
+But if I go back to the Actions tab, I'll see that, all right.
+
+1598
+01:15:52,060 --> 01:15:55,270
+This time, for testing, we get a green check mark.
+
+1599
+01:15:55,270 --> 01:15:57,070
+Everything seems to be OK.
+
+1600
+01:15:57,070 --> 01:15:58,930
+I go to test_project just to see it.
+
+1601
+01:15:58,930 --> 01:16:01,930
+And now I notice the green check mark next to Run Django unit tests
+
+1602
+01:16:01,930 --> 01:16:05,080
+means that the unit tests have passed as well.
+
+1603
+01:16:05,080 --> 01:16:07,570
+If I open those up, now I see at the bottom
+
+1604
+01:16:07,570 --> 01:16:10,480
+the same output that I saw before when I was running those unit
+
+1605
+01:16:10,480 --> 01:16:11,710
+tests on my own machine.
+
+1606
+01:16:11,710 --> 01:16:14,620
+We ran 10 tests, and everything was OK.
+
+1607
+01:16:14,620 --> 01:16:17,430
+And that tells me that these tests have passed.
+
+1608
+01:16:17,430 --> 01:16:21,200
+So GitHub Actions have the ability to allow for certain jobs to happen,
+
+1609
+01:16:21,200 --> 01:16:25,720
+certain work to happen anytime you push code, anytime you submit a pull request
+
+1610
+01:16:25,720 --> 01:16:29,380
+or on various different actions that might happen on a GitHub repository.
+
+1611
+01:16:29,380 --> 01:16:31,570
+And they're very helpful for being able to implement
+
+1612
+01:16:31,570 --> 01:16:35,350
+this idea of continuous integration because it means you can make sure
+
+1613
+01:16:35,350 --> 01:16:39,760
+that when you're merging code from some developer's branch into the main branch
+
+1614
+01:16:39,760 --> 01:16:41,710
+that everyone's merging their code into, you
+
+1615
+01:16:41,710 --> 01:16:43,780
+can verify that those tests can pass.
+
+1616
+01:16:43,780 --> 01:16:45,640
+And you can add rules to say that you don't
+
+1617
+01:16:45,640 --> 01:16:49,270
+want to allow anyone to merge code into the branch if the tests don't pass,
+
+1618
+01:16:49,270 --> 01:16:52,210
+to guarantee that any code that does get merged
+
+1619
+01:16:52,210 --> 01:16:56,270
+is going to pass all of those tests as well.
+
+1620
+01:16:56,270 --> 01:16:58,840
+And so that can definitely help the development cycle,
+
+1621
+01:16:58,840 --> 01:17:01,990
+make it easier to ensure that changes can be made quickly.
+
+1622
+01:17:01,990 --> 01:17:04,050
+But as we make those changes quickly, we're
+
+1623
+01:17:04,050 --> 01:17:06,400
+not going to lose accuracy and validity within our code,
+
+1624
+01:17:06,400 --> 01:17:08,230
+that we can make sure that our code still
+
+1625
+01:17:08,230 --> 01:17:11,380
+passes those tests by automating the process of running
+
+1626
+01:17:11,380 --> 01:17:14,540
+those tests altogether.
+
+1627
+01:17:14,540 --> 01:17:16,540
+So other than continuous integration then,
+
+1628
+01:17:16,540 --> 01:17:19,475
+we now talk about this idea of continuous delivery,
+
+1629
+01:17:19,475 --> 01:17:21,350
+these short application cycles where we would
+
+1630
+01:17:21,350 --> 01:17:25,370
+like to very quickly be able to deploy our application onto some sort of web
+
+1631
+01:17:25,370 --> 01:17:26,240
+server.
+
+1632
+01:17:26,240 --> 01:17:28,490
+And when we're deploying applications to a web server,
+
+1633
+01:17:28,490 --> 01:17:29,870
+there are things that we need to think about.
+
+1634
+01:17:29,870 --> 01:17:31,880
+We need to think about getting our program that
+
+1635
+01:17:31,880 --> 01:17:35,760
+was running fine on our computer working on a web server as well.
+
+1636
+01:17:35,760 --> 01:17:37,610
+And this can just be fraught with headaches
+
+1637
+01:17:37,610 --> 01:17:39,950
+and all sorts of configuration problems because you
+
+1638
+01:17:39,950 --> 01:17:42,650
+might imagine that the computer that you are using
+
+1639
+01:17:42,650 --> 01:17:47,420
+is not necessarily going to be the same as the computer that on the cloud,
+
+1640
+01:17:47,420 --> 01:17:50,600
+the computer in the server where your web application is actually running.
+
+1641
+01:17:50,600 --> 01:17:52,670
+It might be running a different operating system.
+
+1642
+01:17:52,670 --> 01:17:54,920
+It might have a different version of Python installed.
+
+1643
+01:17:54,920 --> 01:17:57,480
+If you have certain packages working on your own computer,
+
+1644
+01:17:57,480 --> 01:18:00,470
+those same packages might not be installed on the server.
+
+1645
+01:18:00,470 --> 01:18:03,770
+So we run into all sorts of various different configuration problems
+
+1646
+01:18:03,770 --> 01:18:06,380
+where you can be developing, deploy your code,
+
+1647
+01:18:06,380 --> 01:18:08,630
+and realize that it doesn't work on the server because
+
+1648
+01:18:08,630 --> 01:18:11,690
+of some sort of difference between what's happening on your computer
+
+1649
+01:18:11,690 --> 01:18:13,530
+and what's happening on the server.
+
+1650
+01:18:13,530 --> 01:18:17,060
+And this becomes even more problematic if you're working on a larger team, you
+
+1651
+01:18:17,060 --> 01:18:19,820
+and multiple other people working on a software project,
+
+1652
+01:18:19,820 --> 01:18:23,180
+but you each have different versions of various different packages or libraries
+
+1653
+01:18:23,180 --> 01:18:26,510
+installed, and those different versions have different features
+
+1654
+01:18:26,510 --> 01:18:29,340
+and might not all work and cooperate with one another.
+
+1655
+01:18:29,340 --> 01:18:32,690
+And so we need some way in order to be able to deploy applications
+
+1656
+01:18:32,690 --> 01:18:36,320
+efficiently and effectively to be able to standardize on just one
+
+1657
+01:18:36,320 --> 01:18:39,230
+version of the environment, one version of all these packages,
+
+1658
+01:18:39,230 --> 01:18:41,960
+to make sure that every developer is working
+
+1659
+01:18:41,960 --> 01:18:43,950
+on the project in the same environment.
+
+1660
+01:18:43,950 --> 01:18:46,280
+And once we deploy the application, it's going
+
+1661
+01:18:46,280 --> 01:18:48,560
+to be working in the same environment as well.
+
+1662
+01:18:48,560 --> 01:18:51,365
+And the solution to this comes in a number of possible options.
+
+1663
+01:18:51,365 --> 01:18:53,240
+But one option is to take advantage of a tool
+
+1664
+01:18:53,240 --> 01:18:57,080
+like Docker, which is some sort of containerization software.
+
+1665
+01:18:57,080 --> 01:18:59,660
+And by containerization software, what we're talking about
+
+1666
+01:18:59,660 --> 01:19:03,440
+is the idea that when we're running an application, instead of just running it
+
+1667
+01:19:03,440 --> 01:19:07,640
+on your computer, we're going to run it inside of a container on your computer.
+
+1668
+01:19:07,640 --> 01:19:11,070
+And each container is going to contain its own configuration.
+
+1669
+01:19:11,070 --> 01:19:13,970
+It's going to have certain packages installed.
+
+1670
+01:19:13,970 --> 01:19:16,740
+It's going to have certain versions of certain pieces of software.
+
+1671
+01:19:16,740 --> 01:19:19,530
+It's going to be configured in exactly the same way.
+
+1672
+01:19:19,530 --> 01:19:21,650
+And by leveraging a tool like Docker, you
+
+1673
+01:19:21,650 --> 01:19:25,430
+can make sure that so long as you provide the right instructions for how
+
+1674
+01:19:25,430 --> 01:19:28,220
+to start up and set up these containers, then
+
+1675
+01:19:28,220 --> 01:19:31,550
+if you are working on the application and someone you're working with,
+
+1676
+01:19:31,550 --> 01:19:34,010
+some colleague that's also working on the same project,
+
+1677
+01:19:34,010 --> 01:19:37,460
+so long as you're using the same instructions for how to set up a Docker
+
+1678
+01:19:37,460 --> 01:19:41,000
+container, you're going to be working in the identical environments,
+
+1679
+01:19:41,000 --> 01:19:44,360
+that if a package is installed on your computer, in your container,
+
+1680
+01:19:44,360 --> 01:19:47,780
+it's going to be installed in your colleague's container as well.
+
+1681
+01:19:47,780 --> 01:19:51,230
+And the advantage of this too works with this idea of continuous delivery.
+
+1682
+01:19:51,230 --> 01:19:54,320
+When you want to deliver and deploy your application to the internet,
+
+1683
+01:19:54,320 --> 01:19:58,190
+you can run your application inside of that exact same container, set up
+
+1684
+01:19:58,190 --> 01:20:00,122
+using the exact same set of instructions,
+
+1685
+01:20:00,122 --> 01:20:03,080
+so that you don't have to worry about the nightmare headaches of trying
+
+1686
+01:20:03,080 --> 01:20:06,140
+to make sure that all the right packages and all the right versions
+
+1687
+01:20:06,140 --> 01:20:08,890
+are, in fact, installed on the server.
+
+1688
+01:20:08,890 --> 01:20:12,680
+Docker might remind you of the idea of a virtual machine or a VM
+
+1689
+01:20:12,680 --> 01:20:14,240
+if you're familiar with that concept.
+
+1690
+01:20:14,240 --> 01:20:17,360
+GitHub uses VMs, for instance, when running its GitHub Actions.
+
+1691
+01:20:17,360 --> 01:20:18,870
+They are, in fact, different.
+
+1692
+01:20:18,870 --> 01:20:22,430
+A VM is effectively running an entire virtual computer
+
+1693
+01:20:22,430 --> 01:20:25,520
+with its own virtual operating system and libraries and application
+
+1694
+01:20:25,520 --> 01:20:29,160
+running on top of that all inside of your own computer.
+
+1695
+01:20:29,160 --> 01:20:32,090
+So a virtual machine ends up taking up a lot of memory, taking up
+
+1696
+01:20:32,090 --> 01:20:33,200
+a lot of space.
+
+1697
+01:20:33,200 --> 01:20:36,158
+Docker containers, meanwhile, are a bit lighter-weight.
+
+1698
+01:20:36,158 --> 01:20:37,950
+They don't have their own operating system.
+
+1699
+01:20:37,950 --> 01:20:41,510
+They're all running still on top of the host operating system.
+
+1700
+01:20:41,510 --> 01:20:43,940
+But there is this Docker layer in-between
+
+1701
+01:20:43,940 --> 01:20:46,820
+that keeps track of all of these various different containers
+
+1702
+01:20:46,820 --> 01:20:49,010
+and keeps track of for each container such
+
+1703
+01:20:49,010 --> 01:20:51,780
+that every container can have its own separate set of libraries,
+
+1704
+01:20:51,780 --> 01:20:55,910
+separate set of binaries, and an application running on top of that.
+
+1705
+01:20:55,910 --> 01:20:57,938
+So the advantage then of containerization
+
+1706
+01:20:57,938 --> 01:21:00,230
+is that these containers are lighter-weight than having
+
+1707
+01:21:00,230 --> 01:21:02,090
+an entire virtual machine.
+
+1708
+01:21:02,090 --> 01:21:05,810
+But they can still keep their own environment consistent such
+
+1709
+01:21:05,810 --> 01:21:09,290
+that you can feel confident that if the application is working in a Docker
+
+1710
+01:21:09,290 --> 01:21:12,500
+container, you can have that Docker container running on your computer,
+
+1711
+01:21:12,500 --> 01:21:14,468
+on someone else's computer, on the server
+
+1712
+01:21:14,468 --> 01:21:17,510
+to guarantee that the application is going to work the way that you would
+
+1713
+01:21:17,510 --> 01:21:19,370
+actually expect it to.
+
+1714
+01:21:19,370 --> 01:21:23,670
+And so how exactly do we configure these various different Docker containers?
+
+1715
+01:21:23,670 --> 01:21:27,580
+Well, in order to do so, we're going to write what's called a Docker file.
+
+1716
+01:21:27,580 --> 01:21:31,490
+So to do this, I'll go ahead and go into airline1.
+
+1717
+01:21:31,490 --> 01:21:34,130
+And I'll open up this Docker file.
+
+1718
+01:21:34,130 --> 01:21:37,340
+And the Docker file describes the instructions
+
+1719
+01:21:37,340 --> 01:21:41,570
+for creating a Docker image where the Docker image represents
+
+1720
+01:21:41,570 --> 01:21:44,030
+all of the libraries and other installed items
+
+1721
+01:21:44,030 --> 01:21:46,290
+that we might want to have inside of the container.
+
+1722
+01:21:46,290 --> 01:21:49,130
+And based on that image, we're able to create
+
+1723
+01:21:49,130 --> 01:21:51,170
+a whole bunch of different containers that
+
+1724
+01:21:51,170 --> 01:21:55,250
+are all based on that same image, where each container has its own files
+
+1725
+01:21:55,250 --> 01:21:57,800
+and can run the web application inside of it.
+
+1726
+01:21:57,800 --> 01:22:00,230
+So this Docker file, for example, describes
+
+1727
+01:22:00,230 --> 01:22:06,440
+how I might create a container that is going to run my Django web application.
+
+1728
+01:22:06,440 --> 01:22:09,950
+So first, I say FROM python:3.
+
+1729
+01:22:09,950 --> 01:22:13,070
+This happens to be another Docker image on which I'm
+
+1730
+01:22:13,070 --> 01:22:15,690
+going to base these instructions, that this
+
+1731
+01:22:15,690 --> 01:22:18,360
+is going to be a Docker image that already contains instructions
+
+1732
+01:22:18,360 --> 01:22:21,810
+for installing Python 3, installing other related packages that
+
+1733
+01:22:21,810 --> 01:22:22,800
+might be helpful.
+
+1734
+01:22:22,800 --> 01:22:24,810
+Oftentimes, when you're writing a Docker file,
+
+1735
+01:22:24,810 --> 01:22:28,180
+you'll base it on some existing Docker file that already exists.
+
+1736
+01:22:28,180 --> 01:22:31,560
+So here I'm saying go ahead and use Python 3.
+
+1737
+01:22:31,560 --> 01:22:35,040
+And now what do I want to do in order to set up this container?
+
+1738
+01:22:35,040 --> 01:22:40,110
+Well, I want to copy anything in dot, in my current directory,
+
+1739
+01:22:40,110 --> 01:22:41,417
+into the container.
+
+1740
+01:22:41,417 --> 01:22:44,250
+And I have to decide, where in the container am I going to store it?
+
+1741
+01:22:44,250 --> 01:22:46,650
+Well, there-- I could choose to store it anywhere.
+
+1742
+01:22:46,650 --> 01:22:52,050
+But I'll just store it in /usr/src/app, just some particular path that will
+
+1743
+01:22:52,050 --> 01:22:55,450
+take me to a directory where I am going to store the application.
+
+1744
+01:22:55,450 --> 01:22:58,332
+But you could choose something else entirely.
+
+1745
+01:22:58,332 --> 01:23:00,790
+So I copy all of the current files in my current directory.
+
+1746
+01:23:00,790 --> 01:23:04,270
+So that will include things like my requirements file, my manage.py file,
+
+1747
+01:23:04,270 --> 01:23:07,070
+my applications files, all my settings files.
+
+1748
+01:23:07,070 --> 01:23:11,770
+Everything inside of the directory, I would like to copy into the container.
+
+1749
+01:23:11,770 --> 01:23:16,060
+Then I'm saying WORKDIR, meaning change my working directory, effectively
+
+1750
+01:23:16,060 --> 01:23:18,520
+the same thing as something like CD on your terminal
+
+1751
+01:23:18,520 --> 01:23:20,350
+to move into some directory.
+
+1752
+01:23:20,350 --> 01:23:24,130
+I would like to set my working directory equal to that same application
+
+1753
+01:23:24,130 --> 01:23:27,820
+directory, the application directory inside of the container that
+
+1754
+01:23:27,820 --> 01:23:30,610
+now contains all of the files from my application
+
+1755
+01:23:30,610 --> 01:23:35,020
+because I copied all of those files into the container.
+
+1756
+01:23:35,020 --> 01:23:38,910
+Now once I'm inside of this directory, I need to install all of my requirements.
+
+1757
+01:23:38,910 --> 01:23:42,240
+So assuming I've put all my requirements like Django and any other packages
+
+1758
+01:23:42,240 --> 01:23:45,720
+that I need inside of a file called requirements.txt,
+
+1759
+01:23:45,720 --> 01:23:50,550
+I can just run the command, pip install requirements.txt.
+
+1760
+01:23:50,550 --> 01:23:54,700
+And then, finally, inside the Docker file, I specify a command.
+
+1761
+01:23:54,700 --> 01:23:58,040
+And this is the command that should run when I start up the container.
+
+1762
+01:23:58,040 --> 01:24:00,540
+Everything else is going to happen initially when we're just
+
+1763
+01:24:00,540 --> 01:24:01,865
+setting up this Docker image.
+
+1764
+01:24:01,865 --> 01:24:03,990
+But when I start up the container and actually want
+
+1765
+01:24:03,990 --> 01:24:07,110
+to run my web application, here is the command that should run.
+
+1766
+01:24:07,110 --> 01:24:09,630
+And I provide it-- effectively it's like a Python list where
+
+1767
+01:24:09,630 --> 01:24:12,720
+each word in the command is separated by a comma, where here I'm
+
+1768
+01:24:12,720 --> 01:24:16,320
+saying the command that I would like to run, when you start up this container
+
+1769
+01:24:16,320 --> 01:24:19,620
+is python, manage.py, runserver.
+
+1770
+01:24:19,620 --> 01:24:22,562
+And here I'm just specifying on what address and what port
+
+1771
+01:24:22,562 --> 01:24:23,520
+I would like it to run.
+
+1772
+01:24:23,520 --> 01:24:25,920
+And I'm running it on port 8000, for example.
+
+1773
+01:24:25,920 --> 01:24:29,950
+But I could choose another port that I would like to run instead.
+
+1774
+01:24:29,950 --> 01:24:34,530
+So what's going to happen then is that when I start up this Docker container,
+
+1775
+01:24:34,530 --> 01:24:37,380
+it's going to, if it needs to, go through these instructions
+
+1776
+01:24:37,380 --> 01:24:39,720
+and make sure that it sets up the container according
+
+1777
+01:24:39,720 --> 01:24:41,512
+to these instructions, make sure that we've
+
+1778
+01:24:41,512 --> 01:24:43,590
+installed all of the necessary requirements,
+
+1779
+01:24:43,590 --> 01:24:45,450
+make sure that we're using Python 3.
+
+1780
+01:24:45,450 --> 01:24:47,940
+And anyone using the same Docker file can
+
+1781
+01:24:47,940 --> 01:24:51,420
+generate a container that has all the same configuration on it.
+
+1782
+01:24:51,420 --> 01:24:54,780
+So we don't have to worry about configuration differences between me
+
+1783
+01:24:54,780 --> 01:24:58,680
+and someone else who might not have the exact same computer setup that I do.
+
+1784
+01:24:58,680 --> 01:25:01,990
+And the nice thing about this is that it can run on Mac and Windows and Linux.
+
+1785
+01:25:01,990 --> 01:25:04,650
+So even people running on different operating systems
+
+1786
+01:25:04,650 --> 01:25:08,070
+can still have containers that all have the same configuration,
+
+1787
+01:25:08,070 --> 01:25:12,090
+that all work in the same way just to speed up that process.
+
+1788
+01:25:12,090 --> 01:25:15,090
+Now so far, when we've been building Django applications,
+
+1789
+01:25:15,090 --> 01:25:17,250
+we've been using a SQLite database.
+
+1790
+01:25:17,250 --> 01:25:21,660
+SQLite database just being a file that is stored inside of our application.
+
+1791
+01:25:21,660 --> 01:25:25,590
+And this file-based database allows us to create tables, insert rows into it,
+
+1792
+01:25:25,590 --> 01:25:26,970
+delete rows from it.
+
+1793
+01:25:26,970 --> 01:25:30,360
+In most production environments, in most real web applications
+
+1794
+01:25:30,360 --> 01:25:32,580
+that are working with many, many users, SQLite
+
+1795
+01:25:32,580 --> 01:25:34,630
+is not actually the database that is used.
+
+1796
+01:25:34,630 --> 01:25:37,470
+It doesn't scale nearly as well when there are many users all trying
+
+1797
+01:25:37,470 --> 01:25:39,000
+to access it concurrently.
+
+1798
+01:25:39,000 --> 01:25:41,040
+Oftentimes, in those sorts of situations,
+
+1799
+01:25:41,040 --> 01:25:44,700
+you want your database hosted elsewhere on some separate server
+
+1800
+01:25:44,700 --> 01:25:48,060
+to be able to handle its own incoming requests and connections.
+
+1801
+01:25:48,060 --> 01:25:50,190
+And we talked about a couple of possible databases
+
+1802
+01:25:50,190 --> 01:25:55,050
+we could use instead of SQLite, things like MySQL, things like Postgres,
+
+1803
+01:25:55,050 --> 01:25:58,050
+or various different SQL-based databases.
+
+1804
+01:25:58,050 --> 01:26:00,960
+So imagine now I want to deploy my application.
+
+1805
+01:26:00,960 --> 01:26:05,070
+But instead of using SQLite, I would like to use Postgres, for example,
+
+1806
+01:26:05,070 --> 01:26:07,740
+as the database server that I would like to run.
+
+1807
+01:26:07,740 --> 01:26:11,040
+Well, that would seem to be pretty complicated for me to test on my own
+
+1808
+01:26:11,040 --> 01:26:14,970
+because now in addition to running my web application in one server,
+
+1809
+01:26:14,970 --> 01:26:19,660
+effectively, I also need another server that's running Postgres, for example,
+
+1810
+01:26:19,660 --> 01:26:23,105
+such that I can communicate with that Postgres database instead.
+
+1811
+01:26:23,105 --> 01:26:25,230
+And that's going to be even harder for other people
+
+1812
+01:26:25,230 --> 01:26:26,480
+to be able to work on as well.
+
+1813
+01:26:26,480 --> 01:26:29,850
+Potentially, it might be difficult to get the server to work in that way too.
+
+1814
+01:26:29,850 --> 01:26:32,010
+But the nice thing about Docker is that I
+
+1815
+01:26:32,010 --> 01:26:35,910
+can run each of these processes in a different container effectively.
+
+1816
+01:26:35,910 --> 01:26:39,780
+I can have one container that's running my web application using this Docker
+
+1817
+01:26:39,780 --> 01:26:40,950
+file right here.
+
+1818
+01:26:40,950 --> 01:26:44,400
+And I can have another container that's just going to run Postgres.
+
+1819
+01:26:44,400 --> 01:26:47,010
+And as long as other people also have access
+
+1820
+01:26:47,010 --> 01:26:49,170
+to that same container for running Postgres,
+
+1821
+01:26:49,170 --> 01:26:52,200
+they can be working in an identical environment to the one
+
+1822
+01:26:52,200 --> 01:26:54,630
+that I am working in as well.
+
+1823
+01:26:54,630 --> 01:26:57,600
+And so there's also a feature of Docker known as Docker Compose.
+
+1824
+01:26:57,600 --> 01:26:59,940
+And what Docker Compose lets us do is allow
+
+1825
+01:26:59,940 --> 01:27:02,980
+us to compose multiple different services together,
+
+1826
+01:27:02,980 --> 01:27:06,690
+that I would like to run my web application in one container,
+
+1827
+01:27:06,690 --> 01:27:09,780
+and I would like to run a Postgres database in another container.
+
+1828
+01:27:09,780 --> 01:27:12,990
+But I would like for those containers to be able to talk to each other,
+
+1829
+01:27:12,990 --> 01:27:16,590
+to be able to work together whenever I start up the application.
+
+1830
+01:27:16,590 --> 01:27:20,430
+So if I'd like to do that, in order to run this application on my computer
+
+1831
+01:27:20,430 --> 01:27:23,970
+and have both the web application and Postgres installed,
+
+1832
+01:27:23,970 --> 01:27:27,810
+I can create a Docker Compose file which looks like this.
+
+1833
+01:27:27,810 --> 01:27:31,140
+Here I'm specifying using version 3 of Docker Compose.
+
+1834
+01:27:31,140 --> 01:27:33,810
+Here I specify, again, using a YAML file.
+
+1835
+01:27:33,810 --> 01:27:36,510
+Much as in my GitHub workflows were formatted in YAML just
+
+1836
+01:27:36,510 --> 01:27:40,710
+as a configuration file, docker-compose.yml is a YAML file that
+
+1837
+01:27:40,710 --> 01:27:44,610
+describes all of the various different services that I want to be part
+
+1838
+01:27:44,610 --> 01:27:48,390
+of my application, where each service is going to be its own container that
+
+1839
+01:27:48,390 --> 01:27:51,710
+could be based on a different Docker image.
+
+1840
+01:27:51,710 --> 01:27:56,120
+Here I'm saying that I have two services, one called db for database,
+
+1841
+01:27:56,120 --> 01:27:58,550
+one called web for my web application.
+
+1842
+01:27:58,550 --> 01:28:01,940
+The database is going to be based on the Postgres Docker image, image
+
+1843
+01:28:01,940 --> 01:28:04,250
+that Postgres wrote that I don't have to worry about.
+
+1844
+01:28:04,250 --> 01:28:06,500
+Someone else has written the Docker file for how
+
+1845
+01:28:06,500 --> 01:28:08,780
+to start up a Postgres container.
+
+1846
+01:28:08,780 --> 01:28:10,968
+Here, though, for the web application, that's
+
+1847
+01:28:10,968 --> 01:28:13,760
+going to be built based on the Docker file in my current directory,
+
+1848
+01:28:13,760 --> 01:28:15,960
+the Docker file that I have written.
+
+1849
+01:28:15,960 --> 01:28:18,710
+And then down below, I've just specified that my current directory
+
+1850
+01:28:18,710 --> 01:28:20,900
+should correspond to the app directory.
+
+1851
+01:28:20,900 --> 01:28:24,410
+And then I've specified when I'm running this on my own computer,
+
+1852
+01:28:24,410 --> 01:28:27,830
+I would like port 8000 on the container to correspond
+
+1853
+01:28:27,830 --> 01:28:30,410
+to port 8000 on my own computer just so that I
+
+1854
+01:28:30,410 --> 01:28:34,940
+can access port 8000 in my browser and access port 8000 inside the container.
+
+1855
+01:28:34,940 --> 01:28:37,880
+It just lets my computer actually talk to the container
+
+1856
+01:28:37,880 --> 01:28:41,300
+so I can open up the web application in my web browser, for example,
+
+1857
+01:28:41,300 --> 01:28:44,360
+and actually see the results of all of this.
+
+1858
+01:28:44,360 --> 01:28:48,440
+So here, then, I've created two services, a database and web.
+
+1859
+01:28:48,440 --> 01:28:51,290
+So now let's actually try starting up these containers.
+
+1860
+01:28:51,290 --> 01:28:54,230
+I'm going to first go into my airline1 directory.
+
+1861
+01:28:54,230 --> 01:28:57,650
+And I'm going to say docker-compose up to mean go ahead
+
+1862
+01:28:57,650 --> 01:28:59,410
+and start up these services.
+
+1863
+01:28:59,410 --> 01:29:00,163
+I'll press Return.
+
+1864
+01:29:00,163 --> 01:29:03,080
+And what you'll see is we're going ahead and starting up two services.
+
+1865
+01:29:03,080 --> 01:29:05,240
+I'm starting up the database service.
+
+1866
+01:29:05,240 --> 01:29:07,740
+And I'm starting up the web service.
+
+1867
+01:29:07,740 --> 01:29:11,490
+And now as a result of all of this, I've started up the application.
+
+1868
+01:29:11,490 --> 01:29:13,420
+And I started it on port 8000.
+
+1869
+01:29:13,420 --> 01:29:20,150
+So if I go to 0.0.0.0 slash 8000 or colon 8000 slash flights,
+
+1870
+01:29:20,150 --> 01:29:22,610
+that's going to take me to the Flights page.
+
+1871
+01:29:22,610 --> 01:29:25,490
+And now this is running, not just on my own computer,
+
+1872
+01:29:25,490 --> 01:29:27,260
+but inside of a Docker container.
+
+1873
+01:29:27,260 --> 01:29:29,510
+Now, of course, right now, there are no flights inside
+
+1874
+01:29:29,510 --> 01:29:33,170
+of this page because I haven't actually added anything to the database yet.
+
+1875
+01:29:33,170 --> 01:29:35,180
+So I could do that if I wanted to.
+
+1876
+01:29:35,180 --> 01:29:36,060
+But how do I do that?
+
+1877
+01:29:36,060 --> 01:29:39,800
+Well, I needed to go into slash admin to say, like, let me log in
+
+1878
+01:29:39,800 --> 01:29:41,810
+and go ahead and create some sample flights.
+
+1879
+01:29:41,810 --> 01:29:45,590
+But I don't have a log in yet because I need to create a superuser account.
+
+1880
+01:29:45,590 --> 01:29:48,860
+And I can't just like inside of my airline1 directory
+
+1881
+01:29:48,860 --> 01:29:52,490
+say, python manage.py createsuperuser the way
+
+1882
+01:29:52,490 --> 01:29:57,140
+that I used to because this is running in my terminal on my computer.
+
+1883
+01:29:57,140 --> 01:30:01,580
+Whereas, what I really want to do is go into the Docker container
+
+1884
+01:30:01,580 --> 01:30:04,430
+and run this command there, inside of the container.
+
+1885
+01:30:04,430 --> 01:30:05,622
+So how can I do that?
+
+1886
+01:30:05,622 --> 01:30:08,330
+Well, there are various different Docker commands that I can use.
+
+1887
+01:30:08,330 --> 01:30:13,315
+docker ps will show me all of the Docker containers that are currently running.
+
+1888
+01:30:13,315 --> 01:30:15,440
+So I'll go ahead and shrink this down a little bit.
+
+1889
+01:30:15,440 --> 01:30:19,370
+I see two rows, one for each container, one for my Postgres container
+
+1890
+01:30:19,370 --> 01:30:22,700
+that's running the database, one for just my web application
+
+1891
+01:30:22,700 --> 01:30:24,440
+that's running as well.
+
+1892
+01:30:24,440 --> 01:30:26,480
+Each one has a container ID.
+
+1893
+01:30:26,480 --> 01:30:30,710
+So I want to go into my web application container
+
+1894
+01:30:30,710 --> 01:30:33,550
+in order to run some commands inside of that container.
+
+1895
+01:30:33,550 --> 01:30:38,180
+So I'm going to copy its container ID and say, docker exec--
+
+1896
+01:30:38,180 --> 01:30:41,930
+meaning go ahead and execute a command on the container-- dash
+
+1897
+01:30:41,930 --> 01:30:43,670
+it will make this interactive.
+
+1898
+01:30:43,670 --> 01:30:46,610
+Here's the container ID that I would like to execute a command on.
+
+1899
+01:30:46,610 --> 01:30:50,390
+And the command I want to execute is bash, passing the dash l flag,
+
+1900
+01:30:50,390 --> 01:30:54,500
+but bash to say, I want to run a bash prompt.
+
+1901
+01:30:54,500 --> 01:30:56,750
+I want to be able to interact with a shell
+
+1902
+01:30:56,750 --> 01:31:00,440
+so that I can run commands inside of this container.
+
+1903
+01:31:00,440 --> 01:31:01,970
+So I press Return.
+
+1904
+01:31:01,970 --> 01:31:04,580
+And now what you'll notice is that I am inside
+
+1905
+01:31:04,580 --> 01:31:08,360
+of my container in the user source app directory,
+
+1906
+01:31:08,360 --> 01:31:13,100
+that directory that contained all of the information about this web application.
+
+1907
+01:31:13,100 --> 01:31:14,270
+I type ls.
+
+1908
+01:31:14,270 --> 01:31:18,050
+And what I'll see is here, all the files inside of this container now.
+
+1909
+01:31:18,050 --> 01:31:23,070
+And now I can say something like python manage.py createsuperuser.
+
+1910
+01:31:23,070 --> 01:31:25,070
+And now it's going to let me create a superuser.
+
+1911
+01:31:25,070 --> 01:31:28,990
+So I'll create a user inside of my web application called Brian.
+
+1912
+01:31:28,990 --> 01:31:30,865
+I'll give it my email address.
+
+1913
+01:31:30,865 --> 01:31:34,430
+I'll type in a password.
+
+1914
+01:31:34,430 --> 01:31:36,340
+And now we've created a superuser.
+
+1915
+01:31:36,340 --> 01:31:37,840
+And you can run other commands here.
+
+1916
+01:31:37,840 --> 01:31:39,700
+If you wanted to migrate all of your migrations,
+
+1917
+01:31:39,700 --> 01:31:41,380
+I could say python manage.py migrate.
+
+1918
+01:31:41,380 --> 01:31:43,922
+And it turns out I've already done that, so I didn't actually
+
+1919
+01:31:43,922 --> 01:31:44,950
+have to do it again.
+
+1920
+01:31:44,950 --> 01:31:47,800
+But you can run any commands that you can run them on your computer.
+
+1921
+01:31:47,800 --> 01:31:50,990
+But now you can run them inside of the Docker container instead.
+
+1922
+01:31:50,990 --> 01:31:54,490
+I'm going to press Control D just to log out, get out of the container
+
+1923
+01:31:54,490 --> 01:31:56,380
+and get back to my computer.
+
+1924
+01:31:56,380 --> 01:31:58,420
+But now I've created a superuser, so I could
+
+1925
+01:31:58,420 --> 01:32:01,180
+go ahead and sign in to Django's admin.
+
+1926
+01:32:01,180 --> 01:32:03,850
+And now I can begin to manipulate this database, which
+
+1927
+01:32:03,850 --> 01:32:06,963
+is a Postgres database running in a separate container.
+
+1928
+01:32:06,963 --> 01:32:09,130
+But the nice thing about it is that I can start them
+
+1929
+01:32:09,130 --> 01:32:12,680
+both up together just by running something like docker-compose
+
+1930
+01:32:12,680 --> 01:32:14,400
+up, for example.
+
+1931
+01:32:14,400 --> 01:32:19,568
+So Docker can be quite a powerful tool for allowing us to very quickly ensure
+
+1932
+01:32:19,568 --> 01:32:21,610
+that an application is running in the environment
+
+1933
+01:32:21,610 --> 01:32:24,760
+that we expect it to be running, to make sure that all of the right libraries
+
+1934
+01:32:24,760 --> 01:32:27,885
+are installed, make sure that all the right packages are installed as well,
+
+1935
+01:32:27,885 --> 01:32:30,490
+that the configuration between my development environment
+
+1936
+01:32:30,490 --> 01:32:34,550
+and the environment that's running on the server are the same as well.
+
+1937
+01:32:34,550 --> 01:32:37,090
+So those then were just some of the best practices
+
+1938
+01:32:37,090 --> 01:32:39,357
+for how you can go about developing a program now
+
+1939
+01:32:39,357 --> 01:32:40,690
+that we have the tools to do so.
+
+1940
+01:32:40,690 --> 01:32:43,870
+We have a lot of tools for being able to develop these web applications.
+
+1941
+01:32:43,870 --> 01:32:45,950
+But as our programs start to get more complex,
+
+1942
+01:32:45,950 --> 01:32:48,730
+it will be increasingly important to test them, make sure
+
+1943
+01:32:48,730 --> 01:32:51,790
+that each various different component of our web application
+
+1944
+01:32:51,790 --> 01:32:55,370
+behaves the way that it is expected to behave, and then taking advantage,
+
+1945
+01:32:55,370 --> 01:32:59,620
+especially in bigger teams, of CI/CD, Continuous Integration, Continuous
+
+1946
+01:32:59,620 --> 01:33:02,530
+Delivery to make incremental changes, and make
+
+1947
+01:33:02,530 --> 01:33:06,430
+sure each of those incremental changes, in fact, works on the web application.
+
+1948
+01:33:06,430 --> 01:33:11,200
+And then CD, Continuous Delivery, to say that rather than wait and then deploy
+
+1949
+01:33:11,200 --> 01:33:14,620
+everything all at once, let's deploy things incrementally as well.
+
+1950
+01:33:14,620 --> 01:33:17,470
+Let users more quickly get access to the latest features
+
+1951
+01:33:17,470 --> 01:33:19,780
+and more quickly find out if something went wrong.
+
+1952
+01:33:19,780 --> 01:33:22,450
+We can better identify what it is that went wrong
+
+1953
+01:33:22,450 --> 01:33:25,360
+if we've deployed things incrementally rather than waiting
+
+1954
+01:33:25,360 --> 01:33:27,350
+a long time in order to do so as well.
+
+1955
+01:33:27,350 --> 01:33:30,610
+So these are some of the best practices in modern software application
+
+1956
+01:33:30,610 --> 01:33:33,550
+development, not only for web applications but for software
+
+1957
+01:33:33,550 --> 01:33:34,630
+more generally.
+
+1958
+01:33:34,630 --> 01:33:36,580
+Next time, we'll consider other challenges
+
+1959
+01:33:36,580 --> 01:33:39,610
+that might arise as we go about trying to make web applications that
+
+1960
+01:33:39,610 --> 01:33:42,140
+are used by more and more users, in particular,
+
+1961
+01:33:42,140 --> 01:33:44,980
+taking a look at challenges that will arise in terms of scalability
+
+1962
+01:33:44,980 --> 01:33:48,010
+as the programs get bigger and also security of what security
+
+1963
+01:33:48,010 --> 01:33:50,740
+vulnerabilities open themselves up as we begin
+
+1964
+01:33:50,740 --> 01:33:54,040
+to design our web applications using Python and JavaScript.
+
+1965
+01:33:54,040 --> 01:33:55,300
+So more on that next time.
+
+1966
+01:33:55,300 --> 01:33:57,270
+And we'll see you then.
+
+1967
+01:33:57,270 --> 01:33:58,000
+
+
